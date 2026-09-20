@@ -1,11 +1,10 @@
 import { BlinkEngine, deriveCalibration } from "./blink-engine.js";
 import {
+  BLINK_WINDOW_MS,
   BlinkBurstBuffer,
   CHARACTER_BANKS,
-  COMMAND_TOKENS,
   RouletteScanner,
   applyToken,
-  getItemLabel,
   removeLastGrapheme,
 } from "./interaction.js";
 
@@ -13,13 +12,11 @@ const MEDIAPIPE_VERSION = "1.0.1";
 const MEDIAPIPE_MODULE = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${MEDIAPIPE_VERSION}/+esm`;
 const MEDIAPIPE_WASM = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${MEDIAPIPE_VERSION}/wasm`;
 const FACE_MODEL = "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task";
-const STORAGE_KEY = "blink-to-speak-settings-v1";
+const STORAGE_KEY = "blink-to-speak-settings-v2";
+const LONG_CLOSE_MS = 5_000;
 
 const DEFAULT_SETTINGS = Object.freeze({
   scanSpeed: 1_350,
-  blinkCount: 2,
-  burstWindow: 1_300,
-  longClose: 10,
   openThreshold: 0.34,
   closedThreshold: 0.58,
 });
@@ -53,20 +50,12 @@ const elements = {
   bankTabs: $("#bankTabs"),
   characterGrid: $("#characterGrid"),
   burstProgress: $("#burstProgress"),
-  switchBlinkLabel: $("#switchBlinkLabel"),
-  longCloseLabel: $("#longCloseLabel"),
   settingsButton: $("#settingsButton"),
   settingsPanel: $("#settingsPanel"),
   closeSettings: $("#closeSettings"),
   settingsBackdrop: $("#settingsBackdrop"),
   scanSpeed: $("#scanSpeed"),
   scanSpeedOutput: $("#scanSpeedOutput"),
-  blinkCount: $("#blinkCount"),
-  blinkCountOutput: $("#blinkCountOutput"),
-  burstWindow: $("#burstWindow"),
-  burstWindowOutput: $("#burstWindowOutput"),
-  longClose: $("#longClose"),
-  longCloseOutput: $("#longCloseOutput"),
   thresholdValue: $("#thresholdValue"),
   resetSettings: $("#resetSettings"),
   calibrationModal: $("#calibrationModal"),
@@ -90,14 +79,11 @@ function loadSettings() {
 
 let settings = loadSettings();
 const scanner = new RouletteScanner({ intervalMs: settings.scanSpeed });
-const burstBuffer = new BlinkBurstBuffer({
-  switchBlinkCount: settings.blinkCount,
-  burstWindowMs: settings.burstWindow,
-});
+const burstBuffer = new BlinkBurstBuffer({ burstWindowMs: BLINK_WINDOW_MS });
 const blinkEngine = new BlinkEngine({
   openThreshold: settings.openThreshold,
   closedThreshold: settings.closedThreshold,
-  longCloseMs: settings.longClose * 1_000,
+  longCloseMs: LONG_CLOSE_MS,
 });
 
 let faceLandmarker = null;
@@ -107,11 +93,9 @@ let lastVideoTime = -1;
 let message = "";
 let scanRequested = false;
 let faceIsPresent = false;
-let closureCandidate = null;
 let resumeScanAt = 0;
 let calibration = null;
 let lastRawEyeScore = 0;
-let clearConfirmationDeadline = 0;
 
 function saveSettings() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
@@ -161,7 +145,7 @@ function renderBanks() {
     button.textContent = bank.label;
     button.addEventListener("click", () => {
       burstBuffer.cancel();
-      clearConfirmationDeadline = 0;
+      elements.burstProgress.hidden = true;
       scanner.setBank(bank.id, performance.now());
       renderBanks();
       renderCharacterGrid();
@@ -173,17 +157,13 @@ function renderBanks() {
 
 function renderCharacterGrid() {
   elements.characterGrid.replaceChildren();
-  elements.characterGrid.classList.toggle(
-    "is-phrases",
-    scanner.bank.id === "quick" || scanner.bank.id === "commands",
-  );
+  elements.characterGrid.classList.toggle("is-phrases", scanner.bank.id === "quick");
   scanner.bank.items.forEach((item, index) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `character-key${index === scanner.itemIndex ? " is-active" : ""}`;
-    const label = getItemLabel(item);
-    button.textContent = label;
-    button.setAttribute("aria-label", `เลือก ${label}`);
+    button.textContent = item;
+    button.setAttribute("aria-label", `เลือก ${item}`);
     button.addEventListener("click", () => {
       burstBuffer.cancel();
       elements.burstProgress.hidden = true;
@@ -197,15 +177,7 @@ function renderCharacterGrid() {
 }
 
 function renderCurrentChoice() {
-  if (clearConfirmationDeadline > performance.now()) {
-    const seconds = Math.ceil((clearConfirmationDeadline - performance.now()) / 1_000);
-    elements.currentChoice.textContent = "ยืนยันล้าง?";
-    elements.currentChoice.classList.add("is-phrase");
-    elements.choiceHint.textContent = `กระพริบ 1 ครั้งอีกครั้ง • รอ ${seconds} วิ เพื่อยกเลิก`;
-    return;
-  }
-
-  const display = getItemLabel(scanner.item);
+  const display = scanner.item;
   elements.currentChoice.textContent = display;
   elements.currentChoice.classList.toggle("is-phrase", display.length > 2);
   elements.choiceHint.textContent = !mediaStream
@@ -225,71 +197,45 @@ function updateActiveKey() {
 }
 
 function applySelection(token) {
-  const now = performance.now();
-  const label = getItemLabel(token);
-
-  if (token === COMMAND_TOKENS.SPEAK) {
-    speakMessage();
-    setSignal("อ่านออกเสียงแล้ว", "เลือกคำสั่งอื่นหรือสลับกลับไปยังตัวอักษรได้", "🔊");
-    return;
-  }
-
-  if (token === COMMAND_TOKENS.FINISH) {
-    finalizePhrase();
-    return;
-  }
-
-  if (token === COMMAND_TOKENS.CLEAR) {
-    if (clearConfirmationDeadline > now) {
-      message = "";
-      clearConfirmationDeadline = 0;
-      renderMessage();
-      setSignal("ล้างข้อความแล้ว", "วงล้อจะทำงานต่อในอีกสักครู่", "✓");
-      toast("ล้างข้อความแล้ว");
-    } else {
-      clearConfirmationDeadline = now + 8_000;
-      const armedDeadline = clearConfirmationDeadline;
-      scanner.pause();
-      setSignal("ยืนยันการล้างข้อความ", "กระพริบ 1 ครั้งอีกครั้ง หรือรอ 8 วินาทีเพื่อยกเลิก", "?");
-      toast("กระพริบอีกครั้งเพื่อยืนยันล้างข้อความ");
-      window.setTimeout(() => {
-        if (clearConfirmationDeadline !== armedDeadline) return;
-        clearConfirmationDeadline = 0;
-        resumeScanAt = performance.now() + 350;
-        setSignal("ยกเลิกการล้างข้อความ", "ไม่มีข้อความถูกลบ", "↩");
-        renderCurrentChoice();
-      }, 8_050);
-    }
-    renderCurrentChoice();
-    return;
-  }
-
   message = applyToken(message, token);
   renderMessage();
-  setSignal(`เลือก “${label}” แล้ว`, "วงล้อจะทำงานต่อเมื่อพร้อม", "✓");
+  setSignal(`เลือก “${token}” แล้ว`, "วงล้อจะทำงานต่อเมื่อพร้อม", "✓");
 }
 
 function speakMessage() {
-  if (!message.trim() || !("speechSynthesis" in window)) return;
+  if (!message.trim()) return false;
+  if (!("speechSynthesis" in window)) {
+    toast("อุปกรณ์นี้ไม่รองรับการอ่านออกเสียง", "error");
+    return false;
+  }
   speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(message.trim());
+  // Force the Thai language pipeline even when the device has no named Thai voice.
   utterance.lang = "th-TH";
   utterance.rate = 0.85;
-  const thaiVoice = speechSynthesis.getVoices().find((voice) => voice.lang.toLowerCase().startsWith("th"));
+  const thaiVoice = speechSynthesis
+    .getVoices()
+    .find((voice) => voice.lang.toLowerCase().replace("_", "-").startsWith("th"));
   if (thaiVoice) utterance.voice = thaiVoice;
   speechSynthesis.speak(utterance);
+  return true;
 }
 
-function finalizePhrase() {
+function stopAndSpeakPhrase(reason) {
   burstBuffer.cancel();
-  clearConfirmationDeadline = 0;
   elements.burstProgress.hidden = true;
+  scanner.pause();
+  scanRequested = false;
+  updateScanButton();
+  renderCurrentChoice();
   if (!message.trim()) {
-    toast("ยังไม่มีข้อความให้จบประโยค");
+    setSignal("หยุดวงล้อแล้ว", "ยังไม่มีข้อความให้อ่านออกเสียง", "Ⅱ");
+    toast("หยุดแล้ว แต่ยังไม่มีข้อความให้อ่าน");
     return;
   }
-  setSignal("จบประโยคแล้ว", "ข้อความพร้อมสื่อสารและอ่านออกเสียง", "✓");
-  toast("จบประโยคแล้ว");
+  const title = reason === "long-close" ? "หยุดวงล้อแล้ว" : "จบประโยคแล้ว";
+  setSignal(title, "กำลังอ่านประโยคด้วยเสียงภาษาไทย", "🔊");
+  toast(`${title} — กำลังอ่านออกเสียง`);
   speakMessage();
 }
 
@@ -300,10 +246,22 @@ function updateScanButton() {
 }
 
 function resumeScannerWhenReady(timestamp) {
-  if (clearConfirmationDeadline > timestamp) return;
-  if (scanRequested && faceIsPresent && !calibration && timestamp >= resumeScanAt && burstBuffer.count === 0) {
+  if (
+    scanRequested &&
+    faceIsPresent &&
+    !calibration &&
+    timestamp >= resumeScanAt &&
+    burstBuffer.deadline === null
+  ) {
     if (scanner.paused) scanner.start(timestamp);
   }
+}
+
+function renderBurstProgress(count) {
+  elements.burstProgress.hidden = false;
+  elements.burstProgress.querySelectorAll("span").forEach((dot, index) => {
+    dot.classList.toggle("is-detected", index < Math.min(count, 3));
+  });
 }
 
 function processBlinkEvents(events, timestamp) {
@@ -319,7 +277,6 @@ function processBlinkEvents(events, timestamp) {
         break;
       case "tracking-lost":
         faceIsPresent = false;
-        clearConfirmationDeadline = 0;
         scanner.pause();
         burstBuffer.cancel();
         elements.burstProgress.hidden = true;
@@ -328,35 +285,31 @@ function processBlinkEvents(events, timestamp) {
         renderCurrentChoice();
         break;
       case "eyes-closed":
-        closureCandidate = scanner.item;
         scanner.pause();
+        if (burstBuffer.begin(timestamp, scanner.item)) {
+          renderBurstProgress(0);
+          elements.choiceHint.textContent = "หยุดวงล้อแล้ว — กำลังนับ 1.35 วินาที";
+        }
         break;
       case "blink": {
-        const action = burstBuffer.addBlink(timestamp, closureCandidate ?? scanner.item);
-        closureCandidate = null;
+        const action = burstBuffer.addBlink(timestamp);
         if (action.type === "pending") {
-          elements.burstProgress.hidden = false;
-          elements.choiceHint.textContent = `ตรวจพบ ${action.count} ครั้ง — กระพริบต่อเพื่อสลับหมวด`;
-        } else if (action.type === "switch-bank") {
-          clearConfirmationDeadline = 0;
-          elements.burstProgress.hidden = true;
-          scanner.nextBank(timestamp);
-          renderBanks();
-          renderCharacterGrid();
-          renderCurrentChoice();
-          setSignal(`เปลี่ยนเป็นหมวด “${scanner.bank.label}”`, "วงล้อจะเริ่มต่อในอีกสักครู่", "↻");
-          resumeScanAt = timestamp + 650;
+          renderBurstProgress(action.count);
+          const hints = {
+            1: "ตรวจพบ 1 ครั้ง — รอเลือกตัวนี้",
+            2: "ตรวจพบ 2 ครั้ง — รอสลับหมวด",
+            3: "ตรวจพบ 3 ครั้ง — รอจบประโยค",
+          };
+          elements.choiceHint.textContent = hints[Math.min(action.count, 3)];
         }
         break;
       }
       case "long-close":
-        closureCandidate = null;
         scanner.pause();
-        finalizePhrase();
+        stopAndSpeakPhrase("long-close");
         break;
       case "long-close-ended":
       case "closure-rejected":
-        closureCandidate = null;
         resumeScanAt = timestamp + 500;
         break;
       default:
@@ -366,23 +319,21 @@ function processBlinkEvents(events, timestamp) {
 }
 
 function processBurstTimeout(timestamp) {
+  if (blinkEngine.getTelemetry(timestamp).state === "closed") return;
   const action = burstBuffer.flush(timestamp);
   if (!action) return;
   elements.burstProgress.hidden = true;
-  if (action.type === "select") applySelection(action.candidate);
-  resumeScanAt = timestamp + 550;
-  renderCurrentChoice();
-}
-
-function updateClearConfirmation(timestamp) {
-  if (!clearConfirmationDeadline) return;
-  if (timestamp >= clearConfirmationDeadline) {
-    clearConfirmationDeadline = 0;
-    resumeScanAt = timestamp + 350;
-    setSignal("ยกเลิกการล้างข้อความ", "ไม่มีข้อความถูกลบ", "↩");
-    renderCurrentChoice();
-    return;
+  if (action.type === "select") {
+    applySelection(action.candidate);
+  } else if (action.type === "switch-bank") {
+    scanner.nextBank(timestamp);
+    renderBanks();
+    renderCharacterGrid();
+    setSignal(`เปลี่ยนเป็นหมวด “${scanner.bank.label}”`, "วงล้อจะเริ่มต่อในอีกสักครู่", "↻");
+  } else if (action.type === "finish") {
+    stopAndSpeakPhrase("triple-blink");
   }
+  resumeScanAt = timestamp + 550;
   renderCurrentChoice();
 }
 
@@ -433,7 +384,7 @@ function updateTelemetry(timestamp) {
   const showLongClose = telemetry.state === "closed" && telemetry.closedForMs > 1_000;
   elements.longCloseOverlay.hidden = !showLongClose;
   if (showLongClose) {
-    const remaining = Math.max(0, settings.longClose - telemetry.closedForMs / 1_000);
+    const remaining = Math.max(0, LONG_CLOSE_MS / 1_000 - telemetry.closedForMs / 1_000);
     elements.longCloseCountdown.textContent = remaining.toFixed(1);
   }
 }
@@ -496,7 +447,6 @@ async function predictionLoop(timestamp) {
   }
 
   processBurstTimeout(timestamp);
-  updateClearConfirmation(timestamp);
   resumeScannerWhenReady(timestamp);
   if (scanner.tick(timestamp)) {
     renderCurrentChoice();
@@ -569,6 +519,7 @@ function stopCamera() {
   faceIsPresent = false;
   scanner.pause();
   burstBuffer.cancel();
+  elements.burstProgress.hidden = true;
   blinkEngine.reset();
   drawEyeContours(null);
   setTrackingStatus("idle", "ยังไม่เริ่ม");
@@ -665,26 +616,13 @@ function cancelCalibration() {
 function renderSettings() {
   elements.scanSpeed.value = settings.scanSpeed;
   elements.scanSpeedOutput.textContent = `${(settings.scanSpeed / 1_000).toFixed(2)} วิ`;
-  elements.blinkCount.value = settings.blinkCount;
-  elements.blinkCountOutput.textContent = `${settings.blinkCount} ครั้ง`;
-  elements.burstWindow.value = settings.burstWindow;
-  elements.burstWindowOutput.textContent = `${(settings.burstWindow / 1_000).toFixed(1)} วิ`;
-  elements.longClose.value = settings.longClose;
-  elements.longCloseOutput.textContent = `${settings.longClose} วิ`;
   elements.thresholdValue.textContent = `${Math.round(settings.closedThreshold * 100)}%`;
   elements.eyeThresholdMark.style.left = `${settings.closedThreshold * 100}%`;
-  elements.switchBlinkLabel.textContent = settings.blinkCount;
-  elements.longCloseLabel.textContent = settings.longClose;
 }
 
 function applySettingsFromControls() {
   settings.scanSpeed = Number(elements.scanSpeed.value);
-  settings.blinkCount = Number(elements.blinkCount.value);
-  settings.burstWindow = Number(elements.burstWindow.value);
-  settings.longClose = Number(elements.longClose.value);
   scanner.setInterval(settings.scanSpeed);
-  burstBuffer.configure({ switchBlinkCount: settings.blinkCount, burstWindowMs: settings.burstWindow });
-  blinkEngine.configure({ longCloseMs: settings.longClose * 1_000 });
   saveSettings();
   renderSettings();
 }
@@ -701,20 +639,21 @@ elements.cameraButton.addEventListener("click", () => (mediaStream ? stopCamera(
 elements.calibrateButton.addEventListener("click", startCalibration);
 elements.cancelCalibration.addEventListener("click", cancelCalibration);
 elements.scanToggle.addEventListener("click", () => {
-  scanRequested = !scanRequested;
-  if (scanRequested && faceIsPresent) scanner.start(performance.now());
-  else scanner.pause();
+  if (scanRequested) {
+    stopAndSpeakPhrase("manual-stop");
+    return;
+  }
+  scanRequested = true;
+  if (faceIsPresent) scanner.start(performance.now());
   updateScanButton();
   renderCurrentChoice();
 });
 elements.speakButton.addEventListener("click", speakMessage);
 elements.undoButton.addEventListener("click", () => {
-  clearConfirmationDeadline = 0;
   message = removeLastGrapheme(message);
   renderMessage();
 });
 elements.clearButton.addEventListener("click", () => {
-  clearConfirmationDeadline = 0;
   message = "";
   renderMessage();
   toast("ล้างข้อความแล้ว");
@@ -722,17 +661,16 @@ elements.clearButton.addEventListener("click", () => {
 elements.settingsButton.addEventListener("click", () => setSettingsOpen(true));
 elements.closeSettings.addEventListener("click", () => setSettingsOpen(false));
 elements.settingsBackdrop.addEventListener("click", () => setSettingsOpen(false));
-for (const input of [elements.scanSpeed, elements.blinkCount, elements.burstWindow, elements.longClose]) {
+for (const input of [elements.scanSpeed]) {
   input.addEventListener("input", applySettingsFromControls);
 }
 elements.resetSettings.addEventListener("click", () => {
   settings = { ...DEFAULT_SETTINGS };
   scanner.setInterval(settings.scanSpeed);
-  burstBuffer.configure({ switchBlinkCount: settings.blinkCount, burstWindowMs: settings.burstWindow });
   blinkEngine.configure({
     openThreshold: settings.openThreshold,
     closedThreshold: settings.closedThreshold,
-    longCloseMs: settings.longClose * 1_000,
+    longCloseMs: LONG_CLOSE_MS,
   });
   blinkEngine.reset();
   saveSettings();

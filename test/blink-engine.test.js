@@ -41,6 +41,18 @@ test("long closure fires once and never becomes a blink", () => {
   assert.equal(events.at(-1).type, "long-close-ended");
 });
 
+test("default long closure threshold is five seconds", () => {
+  const engine = new BlinkEngine({ smoothing: 1 });
+  const events = feed(engine, [
+    { timestamp: 0, leftScore: 0.1, rightScore: 0.1 },
+    { timestamp: 100, leftScore: 0.9, rightScore: 0.9 },
+    { timestamp: 5_099, leftScore: 0.9, rightScore: 0.9 },
+    { timestamp: 5_100, leftScore: 0.9, rightScore: 0.9 },
+  ]);
+  assert.equal(events.filter((event) => event.type === "long-close").length, 1);
+  assert.equal(events.at(-1).duration, 5_000);
+});
+
 test("tracking loss resets a partial closure", () => {
   const engine = new BlinkEngine({ smoothing: 1 });
   const events = feed(engine, [
@@ -60,4 +72,3 @@ test("calibration uses robust medians and rejects poor separation", () => {
   const poor = deriveCalibration([0.3, 0.31], [0.39, 0.4]);
   assert.deepEqual(poor.reason, "low-separation");
 });
-

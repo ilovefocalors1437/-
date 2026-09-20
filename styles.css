@@ -287,8 +287,8 @@ button:disabled { cursor: not-allowed; opacity: .46; }
 .current-choice > span:last-of-type { color: var(--muted); font-size: .72rem; }
 
 .burst-progress { display: flex; gap: .35rem; margin-top: .45rem; }
-.burst-progress span { width: .48rem; height: .48rem; border-radius: 50%; background: var(--mint); animation: pulse .75s infinite alternate; }
-.burst-progress span:last-child { animation-delay: .2s; }
+.burst-progress span { width: .48rem; height: .48rem; border-radius: 50%; background: #d5dfda; transition: background .15s, transform .15s; }
+.burst-progress span.is-detected { background: var(--teal); transform: scale(1.2); }
 
 .character-grid { display: grid; grid-template-columns: repeat(11, minmax(2.2rem, 1fr)); gap: .35rem; margin-top: .8rem; max-height: 14rem; overflow-y: auto; padding: .15rem; }
 .character-key { min-height: 2.35rem; border: 1px solid var(--line); border-radius: .52rem; background: white; font-weight: 650; cursor: pointer; }
@@ -296,7 +296,7 @@ button:disabled { cursor: not-allowed; opacity: .46; }
 .character-key.is-active { transform: translateY(-1px); border-color: var(--teal); background: var(--teal-soft); color: var(--teal-dark); box-shadow: 0 3px 0 var(--teal); }
 .character-grid.is-phrases { grid-template-columns: repeat(4, minmax(7rem, 1fr)); }
 
-.gesture-guide { display: grid; grid-template-columns: repeat(3, 1fr); gap: .55rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.gesture-guide { display: grid; grid-template-columns: repeat(4, 1fr); gap: .55rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
 .gesture-guide > div { display: flex; gap: .55rem; align-items: center; }
 .gesture-mark { min-width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: .58rem; background: var(--teal-soft); color: var(--teal); font-size: .67rem; letter-spacing: -.15em; }
 .gesture-mark.hold { letter-spacing: normal; }

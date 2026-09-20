@@ -1,18 +1,4 @@
-export const COMMAND_TOKENS = Object.freeze({
-  SPACE: "__command_space__",
-  BACKSPACE: "__command_backspace__",
-  SPEAK: "__command_speak__",
-  FINISH: "__command_finish__",
-  CLEAR: "__command_clear__",
-});
-
-const COMMAND_LABELS = Object.freeze({
-  [COMMAND_TOKENS.SPACE]: "เว้นวรรค",
-  [COMMAND_TOKENS.BACKSPACE]: "⌫ ลบตัวล่าสุด",
-  [COMMAND_TOKENS.SPEAK]: "🔊 อ่านออกเสียง",
-  [COMMAND_TOKENS.FINISH]: "✓ จบประโยค",
-  [COMMAND_TOKENS.CLEAR]: "✕ ล้างข้อความ",
-});
+export const BLINK_WINDOW_MS = 1_350;
 
 export const CHARACTER_BANKS = Object.freeze([
   {
@@ -33,27 +19,7 @@ export const CHARACTER_BANKS = Object.freeze([
     shortLabel: "คำด่วน",
     items: ["ใช่", "ไม่", "หิว", "น้ำ", "เจ็บ", "ช่วยด้วย", "ขอบคุณ", "ห้องน้ำ", "ร้อน", "หนาว", "พักก่อน", "เรียกคนดูแล"],
   },
-  {
-    id: "commands",
-    label: "คำสั่ง",
-    shortLabel: "คำสั่ง",
-    items: [
-      COMMAND_TOKENS.SPACE,
-      COMMAND_TOKENS.BACKSPACE,
-      COMMAND_TOKENS.SPEAK,
-      COMMAND_TOKENS.FINISH,
-      COMMAND_TOKENS.CLEAR,
-    ],
-  },
 ]);
-
-export function getItemLabel(token) {
-  return COMMAND_LABELS[token] ?? token;
-}
-
-export function isCommandToken(token) {
-  return Object.values(COMMAND_TOKENS).includes(token);
-}
 
 export class RouletteScanner {
   constructor({ banks = CHARACTER_BANKS, intervalMs = 1_350 } = {}) {
@@ -124,14 +90,9 @@ export class RouletteScanner {
 }
 
 export class BlinkBurstBuffer {
-  constructor({ switchBlinkCount = 2, burstWindowMs = 1_300 } = {}) {
-    this.configure({ switchBlinkCount, burstWindowMs });
+  constructor({ burstWindowMs = BLINK_WINDOW_MS } = {}) {
+    this.burstWindowMs = burstWindowMs;
     this.reset();
-  }
-
-  configure({ switchBlinkCount = this.switchBlinkCount, burstWindowMs = this.burstWindowMs } = {}) {
-    this.switchBlinkCount = Math.max(2, Math.round(Number(switchBlinkCount) || 2));
-    this.burstWindowMs = Math.max(500, Number(burstWindowMs) || 1_300);
   }
 
   reset() {
@@ -140,18 +101,16 @@ export class BlinkBurstBuffer {
     this.candidate = null;
   }
 
-  addBlink(timestamp, candidate) {
-    if (this.count === 0) {
-      this.candidate = candidate;
-      this.deadline = timestamp + this.burstWindowMs;
-    }
-    this.count += 1;
+  begin(timestamp, candidate) {
+    if (this.deadline !== null) return false;
+    this.candidate = candidate;
+    this.deadline = timestamp + this.burstWindowMs;
+    return true;
+  }
 
-    if (this.count >= this.switchBlinkCount) {
-      const count = this.count;
-      this.reset();
-      return { type: "switch-bank", count };
-    }
+  addBlink(timestamp) {
+    if (this.deadline === null) return { type: "ignored", count: 0 };
+    this.count += 1;
     return { type: "pending", count: this.count, deadline: this.deadline };
   }
 
@@ -160,9 +119,10 @@ export class BlinkBurstBuffer {
     const count = this.count;
     const candidate = this.candidate;
     this.reset();
-    return count === 1
-      ? { type: "select", candidate }
-      : { type: "cancel", count };
+    if (count === 1) return { type: "select", candidate };
+    if (count === 2) return { type: "switch-bank", count };
+    if (count >= 3) return { type: "finish", count };
+    return { type: "cancel", count };
   }
 
   cancel() {
@@ -173,9 +133,6 @@ export class BlinkBurstBuffer {
 }
 
 export function applyToken(text, token) {
-  if (token === COMMAND_TOKENS.BACKSPACE) return removeLastGrapheme(text);
-  if (token === COMMAND_TOKENS.SPACE) return `${text} `;
-  if (isCommandToken(token)) return text;
   const quickPhrases = new Set(CHARACTER_BANKS.find((bank) => bank.id === "quick").items);
   if (quickPhrases.has(token)) {
     const spacer = text && !text.endsWith(" ") ? " " : "";

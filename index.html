@@ -55,8 +55,8 @@
             <span>วิดีโอจะถูกประมวลผลในเบราว์เซอร์เท่านั้น</span>
           </div>
           <div id="longCloseOverlay" class="long-close-overlay" hidden>
-            <span>หลับตาค้างเพื่อจบประโยค</span>
-            <strong id="longCloseCountdown">10.0</strong>
+            <span>หลับตาค้างเพื่อหยุดและอ่านประโยค</span>
+            <strong id="longCloseCountdown">5.0</strong>
           </div>
         </div>
 
@@ -117,7 +117,7 @@
           <div class="section-heading roulette-heading">
             <div>
               <span class="section-kicker">วงล้ออักษร</span>
-              <h2 id="rouletteTitle">กระพริบ 1 ครั้งเพื่อเลือก</h2>
+              <h2 id="rouletteTitle">1 เลือก · 2 สลับ · 3 จบประโยค</h2>
             </div>
             <button id="scanToggle" class="scan-toggle" type="button" aria-pressed="false" disabled>
               <span class="play-icon" aria-hidden="true">▶</span>
@@ -132,7 +132,7 @@
             <strong id="currentChoice">ก</strong>
             <span id="choiceHint">รอเปิดกล้อง</span>
             <div id="burstProgress" class="burst-progress" hidden>
-              <span></span><span></span>
+              <span></span><span></span><span></span>
             </div>
           </div>
 
@@ -145,11 +145,15 @@
             </div>
             <div>
               <span class="gesture-mark double" aria-hidden="true">◉◉</span>
-              <p><strong><span id="switchBlinkLabel">2</span> ครั้งติดกัน</strong><br />สลับหมวดตัวเลือก</p>
+              <p><strong>กระพริบ 2 ครั้ง</strong><br />สลับหมวดตัวเลือก</p>
+            </div>
+            <div>
+              <span class="gesture-mark triple" aria-hidden="true">•••</span>
+              <p><strong>กระพริบ 3 ครั้ง</strong><br />จบและอ่านประโยค</p>
             </div>
             <div>
               <span class="gesture-mark hold" aria-hidden="true">━</span>
-              <p><strong>หลับตาค้าง <span id="longCloseLabel">10</span> วิ</strong><br />จบและอ่านประโยค</p>
+              <p><strong>หลับตาค้าง 5 วิ</strong><br />หยุดวงล้อและอ่าน</p>
             </div>
           </div>
         </section>
@@ -170,18 +174,11 @@
           <input id="scanSpeed" type="range" min="700" max="2500" step="50" value="1350" />
           <small>ช้าลงเมื่อผู้ใช้ต้องใช้เวลามองตัวเลือก</small>
         </label>
-        <label class="range-field">
-          <span><b>จำนวนกระพริบเพื่อสลับหมวด</b><output id="blinkCountOutput">2 ครั้ง</output></span>
-          <input id="blinkCount" type="range" min="2" max="4" step="1" value="2" />
-        </label>
-        <label class="range-field">
-          <span><b>ช่วงเวลานับกระพริบติดกัน</b><output id="burstWindowOutput">1.3 วิ</output></span>
-          <input id="burstWindow" type="range" min="700" max="2200" step="100" value="1300" />
-        </label>
-        <label class="range-field">
-          <span><b>เวลาหลับตาเพื่อจบประโยค</b><output id="longCloseOutput">10 วิ</output></span>
-          <input id="longClose" type="range" min="5" max="15" step="1" value="10" />
-        </label>
+        <div class="threshold-card">
+          <span>เวลาควบคุมแบบคงที่</span>
+          <strong>1.35 วิ / 5 วิ</strong>
+          <small>วงล้อหยุดทันทีเมื่อเริ่มปิดตา: นับ burst 1.35 วินาที หรือหลับตาค้าง 5 วินาทีเพื่อหยุดและอ่าน</small>
+        </div>
         <div class="threshold-card">
           <span>ค่า threshold จากการปรับเทียบ</span>
           <strong id="thresholdValue">58%</strong>

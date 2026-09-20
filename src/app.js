@@ -1,7 +1,7 @@
 import { BlinkEngine, deriveCalibration } from "./blink-engine.js";
 import {
   BLINK_WINDOW_MS,
-  BlinkBurstBuffer,
+  BlinkWindowCounter,
   CHARACTER_BANKS,
   RouletteScanner,
   applyToken,
@@ -12,11 +12,10 @@ const MEDIAPIPE_VERSION = "1.0.1";
 const MEDIAPIPE_MODULE = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${MEDIAPIPE_VERSION}/+esm`;
 const MEDIAPIPE_WASM = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${MEDIAPIPE_VERSION}/wasm`;
 const FACE_MODEL = "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task";
-const STORAGE_KEY = "blink-to-speak-settings-v2";
+const STORAGE_KEY = "blink-to-speak-profile-v3";
 const LONG_CLOSE_MS = 5_000;
 
 const DEFAULT_SETTINGS = Object.freeze({
-  scanSpeed: 1_350,
   openThreshold: 0.34,
   closedThreshold: 0.58,
 });
@@ -40,7 +39,6 @@ const elements = {
   longCloseCountdown: $("#longCloseCountdown"),
   messageOutput: $("#messageOutput"),
   characterCount: $("#characterCount"),
-  speakButton: $("#speakButton"),
   undoButton: $("#undoButton"),
   clearButton: $("#clearButton"),
   scanToggle: $("#scanToggle"),
@@ -54,10 +52,7 @@ const elements = {
   settingsPanel: $("#settingsPanel"),
   closeSettings: $("#closeSettings"),
   settingsBackdrop: $("#settingsBackdrop"),
-  scanSpeed: $("#scanSpeed"),
-  scanSpeedOutput: $("#scanSpeedOutput"),
   thresholdValue: $("#thresholdValue"),
-  resetSettings: $("#resetSettings"),
   calibrationModal: $("#calibrationModal"),
   calibrationVisual: $("#calibrationVisual"),
   calibrationTitle: $("#calibrationTitle"),
@@ -78,8 +73,8 @@ function loadSettings() {
 }
 
 let settings = loadSettings();
-const scanner = new RouletteScanner({ intervalMs: settings.scanSpeed });
-const burstBuffer = new BlinkBurstBuffer({ burstWindowMs: BLINK_WINDOW_MS });
+const scanner = new RouletteScanner({ intervalMs: BLINK_WINDOW_MS });
+const blinkWindow = new BlinkWindowCounter({ windowMs: BLINK_WINDOW_MS });
 const blinkEngine = new BlinkEngine({
   openThreshold: settings.openThreshold,
   closedThreshold: settings.closedThreshold,
@@ -93,7 +88,7 @@ let lastVideoTime = -1;
 let message = "";
 let scanRequested = false;
 let faceIsPresent = false;
-let resumeScanAt = 0;
+let restingEyes = false;
 let calibration = null;
 let lastRawEyeScore = 0;
 
@@ -128,7 +123,6 @@ function renderMessage() {
   }
   const count = Array.from(message).length;
   elements.characterCount.textContent = `${count} ตัวอักษร`;
-  elements.speakButton.disabled = !message.trim();
   elements.undoButton.disabled = !message;
   elements.clearButton.disabled = !message;
 }
@@ -144,9 +138,10 @@ function renderBanks() {
     button.setAttribute("aria-selected", String(bank.id === scanner.bank.id));
     button.textContent = bank.label;
     button.addEventListener("click", () => {
-      burstBuffer.cancel();
+      blinkWindow.cancel();
       elements.burstProgress.hidden = true;
       scanner.setBank(bank.id, performance.now());
+      restartScanWindow(performance.now());
       renderBanks();
       renderCharacterGrid();
       renderCurrentChoice();
@@ -165,10 +160,12 @@ function renderCharacterGrid() {
     button.textContent = item;
     button.setAttribute("aria-label", `เลือก ${item}`);
     button.addEventListener("click", () => {
-      burstBuffer.cancel();
+      blinkWindow.cancel();
       elements.burstProgress.hidden = true;
       scanner.selectIndex(index, performance.now());
       applySelection(item);
+      scanner.advance(performance.now());
+      restartScanWindow(performance.now());
       renderCharacterGrid();
       renderCurrentChoice();
     });
@@ -184,6 +181,8 @@ function renderCurrentChoice() {
     ? "รอเปิดกล้อง"
     : !faceIsPresent
       ? "กำลังค้นหาใบหน้า"
+      : restingEyes
+        ? "พักสายตาได้ — ลืมตาก่อน 5 วิ เพื่อทำต่อ"
       : scanRequested
         ? "กระพริบตาเพื่อเลือก"
         : "วงล้อหยุดอยู่";
@@ -202,41 +201,16 @@ function applySelection(token) {
   setSignal(`เลือก “${token}” แล้ว`, "วงล้อจะทำงานต่อเมื่อพร้อม", "✓");
 }
 
-function speakMessage() {
-  if (!message.trim()) return false;
-  if (!("speechSynthesis" in window)) {
-    toast("อุปกรณ์นี้ไม่รองรับการอ่านออกเสียง", "error");
-    return false;
-  }
-  speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(message.trim());
-  // Force the Thai language pipeline even when the device has no named Thai voice.
-  utterance.lang = "th-TH";
-  utterance.rate = 0.85;
-  const thaiVoice = speechSynthesis
-    .getVoices()
-    .find((voice) => voice.lang.toLowerCase().replace("_", "-").startsWith("th"));
-  if (thaiVoice) utterance.voice = thaiVoice;
-  speechSynthesis.speak(utterance);
-  return true;
-}
-
-function stopAndSpeakPhrase(reason) {
-  burstBuffer.cancel();
+function stopSelection() {
+  blinkWindow.cancel();
   elements.burstProgress.hidden = true;
   scanner.pause();
   scanRequested = false;
+  restingEyes = false;
   updateScanButton();
   renderCurrentChoice();
-  if (!message.trim()) {
-    setSignal("หยุดวงล้อแล้ว", "ยังไม่มีข้อความให้อ่านออกเสียง", "Ⅱ");
-    toast("หยุดแล้ว แต่ยังไม่มีข้อความให้อ่าน");
-    return;
-  }
-  const title = reason === "long-close" ? "หยุดวงล้อแล้ว" : "จบประโยคแล้ว";
-  setSignal(title, "กำลังอ่านประโยคด้วยเสียงภาษาไทย", "🔊");
-  toast(`${title} — กำลังอ่านออกเสียง`);
-  speakMessage();
+  setSignal("หยุดระบบเลือกแล้ว", "กดเริ่มวงล้อเมื่อต้องการใช้งานต่อ", "Ⅱ");
+  toast("หยุดระบบเลือกแล้ว");
 }
 
 function updateScanButton() {
@@ -245,22 +219,20 @@ function updateScanButton() {
   elements.scanToggle.querySelector(".play-icon").textContent = scanRequested ? "Ⅱ" : "▶";
 }
 
-function resumeScannerWhenReady(timestamp) {
-  if (
-    scanRequested &&
-    faceIsPresent &&
-    !calibration &&
-    timestamp >= resumeScanAt &&
-    burstBuffer.deadline === null
-  ) {
-    if (scanner.paused) scanner.start(timestamp);
-  }
+function restartScanWindow(timestamp) {
+  blinkWindow.cancel();
+  elements.burstProgress.hidden = true;
+  if (!scanRequested || !faceIsPresent || calibration) return;
+  restingEyes = false;
+  scanner.start(timestamp);
+  blinkWindow.start(timestamp, scanner.item);
+  renderCurrentChoice();
 }
 
-function renderBurstProgress(count) {
+function renderBlinkProgress(count) {
   elements.burstProgress.hidden = false;
   elements.burstProgress.querySelectorAll("span").forEach((dot, index) => {
-    dot.classList.toggle("is-detected", index < Math.min(count, 3));
+    dot.classList.toggle("is-detected", index < Math.min(count, 2));
   });
 }
 
@@ -272,45 +244,44 @@ function processBlinkEvents(events, timestamp) {
         faceIsPresent = true;
         setTrackingStatus("ready", "พบใบหน้า");
         setSignal("ตรวจจับดวงตาแล้ว", "กระพริบตามธรรมชาติเพื่อเลือกตัวอักษร", "✓");
-        resumeScanAt = timestamp + 350;
+        restartScanWindow(timestamp);
         renderCurrentChoice();
         break;
       case "tracking-lost":
         faceIsPresent = false;
         scanner.pause();
-        burstBuffer.cancel();
+        blinkWindow.cancel();
         elements.burstProgress.hidden = true;
         setTrackingStatus("searching", "หาใบหน้า");
         setSignal("ไม่พบใบหน้า", "จัดใบหน้าให้อยู่กลางภาพก่อน ระบบจะหยุดรับคำสั่งชั่วคราว", "!");
         renderCurrentChoice();
         break;
       case "eyes-closed":
-        scanner.pause();
-        if (burstBuffer.begin(timestamp, scanner.item)) {
-          renderBurstProgress(0);
-          elements.choiceHint.textContent = "หยุดวงล้อแล้ว — กำลังนับ 1.35 วินาที";
-        }
+        if (!scanRequested) break;
+        elements.choiceHint.textContent = "กำลังตรวจการกระพริบตา…";
         break;
       case "blink": {
-        const action = burstBuffer.addBlink(timestamp);
+        if (!scanRequested) break;
+        const action = blinkWindow.recordBlink();
         if (action.type === "pending") {
-          renderBurstProgress(action.count);
-          const hints = {
-            1: "ตรวจพบ 1 ครั้ง — รอเลือกตัวนี้",
-            2: "ตรวจพบ 2 ครั้ง — รอสลับหมวด",
-            3: "ตรวจพบ 3 ครั้ง — รอจบประโยค",
-          };
-          elements.choiceHint.textContent = hints[Math.min(action.count, 3)];
+          renderBlinkProgress(action.count);
+          elements.choiceHint.textContent = action.count === 1
+            ? "ตรวจพบ 1 ครั้ง — จะเลือกเมื่อครบ 1.35 วิ"
+            : "ตรวจพบ 2 ครั้ง — จะสลับหมวดเมื่อครบ 1.35 วิ";
         }
         break;
       }
       case "long-close":
-        scanner.pause();
-        stopAndSpeakPhrase("long-close");
+        if (!scanRequested) break;
+        stopCamera("long-close");
+        break;
+      case "closure-rejected":
+        if (scanRequested) {
+          restartScanWindow(timestamp);
+          setSignal("พักสายตาแล้ว", "เริ่มนับรอบใหม่จากตัวเดิม", "↻");
+        }
         break;
       case "long-close-ended":
-      case "closure-rejected":
-        resumeScanAt = timestamp + 500;
         break;
       default:
         break;
@@ -318,23 +289,41 @@ function processBlinkEvents(events, timestamp) {
   }
 }
 
-function processBurstTimeout(timestamp) {
-  if (blinkEngine.getTelemetry(timestamp).state === "closed") return;
-  const action = burstBuffer.flush(timestamp);
-  if (!action) return;
+function processScanWindow(timestamp) {
+  if (!scanRequested || !faceIsPresent || calibration) return;
+  if (blinkWindow.deadline === null) {
+    restartScanWindow(timestamp);
+    return;
+  }
+
+  const eyesClosed = blinkEngine.getTelemetry(timestamp).state === "closed";
+  const action = blinkWindow.resolve(timestamp, { eyesClosed });
+  if (!action) {
+    if (eyesClosed && timestamp >= blinkWindow.deadline) {
+      restingEyes = true;
+      scanner.pause();
+      elements.choiceHint.textContent = "พักสายตาได้ — ลืมตาก่อน 5 วิ เพื่อทำต่อ";
+    }
+    return;
+  }
+
+  restingEyes = false;
   elements.burstProgress.hidden = true;
-  if (action.type === "select") {
+  if (action.type === "pass") {
+    scanner.advance(timestamp);
+  } else if (action.type === "select") {
     applySelection(action.candidate);
+    scanner.advance(timestamp);
   } else if (action.type === "switch-bank") {
     scanner.nextBank(timestamp);
     renderBanks();
     renderCharacterGrid();
-    setSignal(`เปลี่ยนเป็นหมวด “${scanner.bank.label}”`, "วงล้อจะเริ่มต่อในอีกสักครู่", "↻");
-  } else if (action.type === "finish") {
-    stopAndSpeakPhrase("triple-blink");
+    setSignal(`เปลี่ยนเป็นหมวด “${scanner.bank.label}”`, "เริ่มรอบใหม่ 1.35 วินาที", "↻");
   }
-  resumeScanAt = timestamp + 550;
+  renderCharacterGrid();
   renderCurrentChoice();
+  updateActiveKey();
+  restartScanWindow(timestamp);
 }
 
 function drawEyeContours(landmarks) {
@@ -381,7 +370,7 @@ function updateTelemetry(timestamp) {
   elements.eyeMeterFill.style.width = `${percent}%`;
   elements.eyeScoreText.textContent = `${percent}%`;
 
-  const showLongClose = telemetry.state === "closed" && telemetry.closedForMs > 1_000;
+  const showLongClose = telemetry.state === "closed" && telemetry.closedForMs >= BLINK_WINDOW_MS;
   elements.longCloseOverlay.hidden = !showLongClose;
   if (showLongClose) {
     const remaining = Math.max(0, LONG_CLOSE_MS / 1_000 - telemetry.closedForMs / 1_000);
@@ -446,12 +435,7 @@ async function predictionLoop(timestamp) {
     }
   }
 
-  processBurstTimeout(timestamp);
-  resumeScannerWhenReady(timestamp);
-  if (scanner.tick(timestamp)) {
-    renderCurrentChoice();
-    updateActiveKey();
-  }
+  processScanWindow(timestamp);
   updateTelemetry(timestamp);
   animationFrame = requestAnimationFrame(predictionLoop);
 }
@@ -505,7 +489,7 @@ async function startCamera() {
   }
 }
 
-function stopCamera() {
+function stopCamera(reason = "manual") {
   if (animationFrame) cancelAnimationFrame(animationFrame);
   animationFrame = null;
   mediaStream?.getTracks().forEach((track) => track.stop());
@@ -517,13 +501,19 @@ function stopCamera() {
   elements.scanToggle.disabled = true;
   scanRequested = false;
   faceIsPresent = false;
+  restingEyes = false;
   scanner.pause();
-  burstBuffer.cancel();
+  blinkWindow.cancel();
   elements.burstProgress.hidden = true;
   blinkEngine.reset();
   drawEyeContours(null);
-  setTrackingStatus("idle", "ยังไม่เริ่ม");
-  setSignal("พร้อมเริ่มต้น", "จัดใบหน้าให้อยู่กลางภาพและมีแสงสว่างเพียงพอ", "○");
+  setTrackingStatus("idle", reason === "long-close" ? "หยุดแล้ว" : "ยังไม่เริ่ม");
+  if (reason === "long-close") {
+    setSignal("หยุดทั้งหมดแล้ว", "หลับตาครบ 5 วินาที กล้องและวงล้อถูกปิด", "Ⅱ");
+    toast("หยุดกล้องและวงล้อแล้ว");
+  } else {
+    setSignal("พร้อมเริ่มต้น", "จัดใบหน้าให้อยู่กลางภาพและมีแสงสว่างเพียงพอ", "○");
+  }
   updateScanButton();
   renderCurrentChoice();
 }
@@ -541,7 +531,7 @@ function startCalibration() {
     return;
   }
   scanner.pause();
-  burstBuffer.cancel();
+  blinkWindow.cancel();
   blinkEngine.reset();
   calibration = {
     phaseIndex: 0,
@@ -588,7 +578,7 @@ function finishCalibration() {
   if (!result.ok) {
     toast("ปรับเทียบไม่สำเร็จ ลองเพิ่มแสงและมองตรงกล้อง", "error");
     blinkEngine.reset();
-    resumeScanAt = performance.now() + 700;
+    window.setTimeout(() => restartScanWindow(performance.now()), 700);
     return;
   }
 
@@ -600,34 +590,25 @@ function finishCalibration() {
   });
   blinkEngine.reset();
   saveSettings();
-  renderSettings();
+  renderGuide();
   setSignal("ปรับเทียบสำเร็จ", `ช่วงสัญญาณต่างกัน ${Math.round(result.separation * 100)}%`, "✓");
   toast("บันทึกค่าดวงตาสำหรับอุปกรณ์นี้แล้ว");
-  resumeScanAt = performance.now() + 700;
+  window.setTimeout(() => restartScanWindow(performance.now()), 700);
 }
 
 function cancelCalibration() {
   calibration = null;
   elements.calibrationModal.hidden = true;
   blinkEngine.reset();
-  resumeScanAt = performance.now() + 500;
+  window.setTimeout(() => restartScanWindow(performance.now()), 500);
 }
 
-function renderSettings() {
-  elements.scanSpeed.value = settings.scanSpeed;
-  elements.scanSpeedOutput.textContent = `${(settings.scanSpeed / 1_000).toFixed(2)} วิ`;
+function renderGuide() {
   elements.thresholdValue.textContent = `${Math.round(settings.closedThreshold * 100)}%`;
   elements.eyeThresholdMark.style.left = `${settings.closedThreshold * 100}%`;
 }
 
-function applySettingsFromControls() {
-  settings.scanSpeed = Number(elements.scanSpeed.value);
-  scanner.setInterval(settings.scanSpeed);
-  saveSettings();
-  renderSettings();
-}
-
-function setSettingsOpen(open) {
+function setGuideOpen(open) {
   elements.settingsPanel.classList.toggle("is-open", open);
   elements.settingsPanel.setAttribute("aria-hidden", String(!open));
   elements.settingsBackdrop.hidden = !open;
@@ -635,20 +616,19 @@ function setSettingsOpen(open) {
   if (open) elements.closeSettings.focus();
 }
 
-elements.cameraButton.addEventListener("click", () => (mediaStream ? stopCamera() : startCamera()));
+elements.cameraButton.addEventListener("click", () => (mediaStream ? stopCamera("manual") : startCamera()));
 elements.calibrateButton.addEventListener("click", startCalibration);
 elements.cancelCalibration.addEventListener("click", cancelCalibration);
 elements.scanToggle.addEventListener("click", () => {
   if (scanRequested) {
-    stopAndSpeakPhrase("manual-stop");
+    stopSelection();
     return;
   }
   scanRequested = true;
-  if (faceIsPresent) scanner.start(performance.now());
+  restartScanWindow(performance.now());
   updateScanButton();
   renderCurrentChoice();
 });
-elements.speakButton.addEventListener("click", speakMessage);
 elements.undoButton.addEventListener("click", () => {
   message = removeLastGrapheme(message);
   renderMessage();
@@ -658,35 +638,21 @@ elements.clearButton.addEventListener("click", () => {
   renderMessage();
   toast("ล้างข้อความแล้ว");
 });
-elements.settingsButton.addEventListener("click", () => setSettingsOpen(true));
-elements.closeSettings.addEventListener("click", () => setSettingsOpen(false));
-elements.settingsBackdrop.addEventListener("click", () => setSettingsOpen(false));
-for (const input of [elements.scanSpeed]) {
-  input.addEventListener("input", applySettingsFromControls);
-}
-elements.resetSettings.addEventListener("click", () => {
-  settings = { ...DEFAULT_SETTINGS };
-  scanner.setInterval(settings.scanSpeed);
-  blinkEngine.configure({
-    openThreshold: settings.openThreshold,
-    closedThreshold: settings.closedThreshold,
-    longCloseMs: LONG_CLOSE_MS,
-  });
-  blinkEngine.reset();
-  saveSettings();
-  renderSettings();
-  toast("คืนค่าเริ่มต้นแล้ว");
-});
+elements.settingsButton.addEventListener("click", () => setGuideOpen(true));
+elements.closeSettings.addEventListener("click", () => setGuideOpen(false));
+elements.settingsBackdrop.addEventListener("click", () => setGuideOpen(false));
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     if (calibration) cancelCalibration();
-    setSettingsOpen(false);
+    setGuideOpen(false);
   }
   // Space is a caregiver/testing fallback when focus is not on a control.
   if (event.code === "Space" && event.target === document.body) {
     event.preventDefault();
     applySelection(scanner.item);
+    scanner.advance(performance.now());
+    restartScanWindow(performance.now());
   }
 });
 window.addEventListener("beforeunload", stopCamera);
@@ -695,5 +661,5 @@ renderMessage();
 renderBanks();
 renderCharacterGrid();
 renderCurrentChoice();
-renderSettings();
+renderGuide();
 updateScanButton();

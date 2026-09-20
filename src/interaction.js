@@ -43,6 +43,12 @@ export class RouletteScanner {
     this.intervalMs = Math.max(450, Number(intervalMs) || 1_350);
   }
 
+  advance(timestamp = performance.now()) {
+    this.itemIndex = (this.itemIndex + 1) % this.bank.items.length;
+    this.lastAdvancedAt = timestamp;
+    return this.item;
+  }
+
   start(timestamp = performance.now()) {
     this.paused = false;
     this.lastAdvancedAt = timestamp;
@@ -89,40 +95,41 @@ export class RouletteScanner {
   }
 }
 
-export class BlinkBurstBuffer {
-  constructor({ burstWindowMs = BLINK_WINDOW_MS } = {}) {
-    this.burstWindowMs = burstWindowMs;
+export class BlinkWindowCounter {
+  constructor({ windowMs = BLINK_WINDOW_MS } = {}) {
+    this.windowMs = windowMs;
     this.reset();
   }
 
   reset() {
     this.count = 0;
+    this.startedAt = null;
     this.deadline = null;
     this.candidate = null;
   }
 
-  begin(timestamp, candidate) {
+  start(timestamp, candidate) {
     if (this.deadline !== null) return false;
     this.candidate = candidate;
-    this.deadline = timestamp + this.burstWindowMs;
+    this.startedAt = timestamp;
+    this.deadline = timestamp + this.windowMs;
     return true;
   }
 
-  addBlink(timestamp) {
+  recordBlink() {
     if (this.deadline === null) return { type: "ignored", count: 0 };
     this.count += 1;
     return { type: "pending", count: this.count, deadline: this.deadline };
   }
 
-  flush(timestamp) {
-    if (!this.count || timestamp < this.deadline) return null;
+  resolve(timestamp, { eyesClosed = false } = {}) {
+    if (this.deadline === null || timestamp < this.deadline || eyesClosed) return null;
     const count = this.count;
     const candidate = this.candidate;
     this.reset();
+    if (count === 0) return { type: "pass", candidate };
     if (count === 1) return { type: "select", candidate };
-    if (count === 2) return { type: "switch-bank", count };
-    if (count >= 3) return { type: "finish", count };
-    return { type: "cancel", count };
+    return { type: "switch-bank", count };
   }
 
   cancel() {

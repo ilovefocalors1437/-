@@ -25,8 +25,8 @@
           <span class="privacy-dot" aria-hidden="true"></span>
           ประมวลผลบนเครื่อง
         </div>
-        <button id="settingsButton" class="icon-button" type="button" aria-label="เปิดการตั้งค่า" aria-expanded="false">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.5 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6h.08A1.65 1.65 0 0 0 10 3.09V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.12.6.59 1.05 1.18 1.08h.5a2 2 0 1 1 0 4h-.09A1.65 1.65 0 0 0 19.4 15Z"/></svg>
+        <button id="settingsButton" class="icon-button" type="button" aria-label="เปิดคู่มือการใช้งาน" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/><path d="M8 7h8M8 11h7"/></svg>
         </button>
       </div>
     </header>
@@ -55,7 +55,7 @@
             <span>วิดีโอจะถูกประมวลผลในเบราว์เซอร์เท่านั้น</span>
           </div>
           <div id="longCloseOverlay" class="long-close-overlay" hidden>
-            <span>หลับตาค้างเพื่อหยุดและอ่านประโยค</span>
+            <span>กำลังพักสายตา • ลืมตาก่อน 5 วิ เพื่อทำต่อ</span>
             <strong id="longCloseCountdown">5.0</strong>
           </div>
         </div>
@@ -104,10 +104,6 @@
             <span class="empty-message">ข้อความที่เลือกจะแสดงตรงนี้…</span>
           </div>
           <div class="message-actions">
-            <button id="speakButton" class="text-button" type="button" disabled>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Zm4.5 3.5a5 5 0 0 1 0 7m2.5-10a9 9 0 0 1 0 13"/></svg>
-              อ่านออกเสียง
-            </button>
             <button id="undoButton" class="text-button" type="button" disabled>ลบตัวล่าสุด</button>
             <button id="clearButton" class="text-button danger" type="button" disabled>ล้างข้อความ</button>
           </div>
@@ -117,7 +113,7 @@
           <div class="section-heading roulette-heading">
             <div>
               <span class="section-kicker">วงล้ออักษร</span>
-              <h2 id="rouletteTitle">1 เลือก · 2 สลับ · 3 จบประโยค</h2>
+              <h2 id="rouletteTitle">0 ผ่าน · 1 เลือก · 2 สลับหมวด</h2>
             </div>
             <button id="scanToggle" class="scan-toggle" type="button" aria-pressed="false" disabled>
               <span class="play-icon" aria-hidden="true">▶</span>
@@ -132,13 +128,17 @@
             <strong id="currentChoice">ก</strong>
             <span id="choiceHint">รอเปิดกล้อง</span>
             <div id="burstProgress" class="burst-progress" hidden>
-              <span></span><span></span><span></span>
+              <span></span><span></span>
             </div>
           </div>
 
           <div id="characterGrid" class="character-grid" role="tabpanel" aria-label="รายการตัวอักษร"></div>
 
           <div class="gesture-guide">
+            <div>
+              <span class="gesture-mark" aria-hidden="true">0</span>
+              <p><strong>ไม่กระพริบ</strong><br />ผ่านไปตัวถัดไป</p>
+            </div>
             <div>
               <span class="gesture-mark single" aria-hidden="true">◉</span>
               <p><strong>กระพริบ 1 ครั้ง</strong><br />เลือกตัวที่กำลังแสดง</p>
@@ -148,12 +148,8 @@
               <p><strong>กระพริบ 2 ครั้ง</strong><br />สลับหมวดตัวเลือก</p>
             </div>
             <div>
-              <span class="gesture-mark triple" aria-hidden="true">•••</span>
-              <p><strong>กระพริบ 3 ครั้ง</strong><br />จบและอ่านประโยค</p>
-            </div>
-            <div>
               <span class="gesture-mark hold" aria-hidden="true">━</span>
-              <p><strong>หลับตาค้าง 5 วิ</strong><br />หยุดวงล้อและอ่าน</p>
+              <p><strong>หลับตาค้าง</strong><br />1–4 วิพัก · 5 วิหยุด</p>
             </div>
           </div>
         </section>
@@ -163,28 +159,33 @@
     <aside id="settingsPanel" class="settings-panel" aria-hidden="true" aria-labelledby="settingsTitle">
       <div class="settings-header">
         <div>
-          <span class="section-kicker">ตั้งค่าผู้ใช้</span>
-          <h2 id="settingsTitle">ปรับการควบคุม</h2>
+          <span class="section-kicker">อ่านก่อนเริ่ม</span>
+          <h2 id="settingsTitle">คู่มือการใช้งาน</h2>
         </div>
-        <button id="closeSettings" class="icon-button" type="button" aria-label="ปิดการตั้งค่า">×</button>
+        <button id="closeSettings" class="icon-button" type="button" aria-label="ปิดคู่มือ">×</button>
       </div>
-      <div class="settings-body">
-        <label class="range-field">
-          <span><b>ความเร็ววงล้อ</b><output id="scanSpeedOutput">1.35 วิ</output></span>
-          <input id="scanSpeed" type="range" min="700" max="2500" step="50" value="1350" />
-          <small>ช้าลงเมื่อผู้ใช้ต้องใช้เวลามองตัวเลือก</small>
-        </label>
-        <div class="threshold-card">
-          <span>เวลาควบคุมแบบคงที่</span>
-          <strong>1.35 วิ / 5 วิ</strong>
-          <small>วงล้อหยุดทันทีเมื่อเริ่มปิดตา: นับ burst 1.35 วินาที หรือหลับตาค้าง 5 วินาทีเพื่อหยุดและอ่าน</small>
+      <div class="settings-body guide-body">
+        <div class="guide-window">
+          <span>หนึ่งตัวอักษร = หนึ่งรอบ</span>
+          <strong>1.35 วินาที</strong>
+          <p>ระบบรวมจำนวนการกระพริบตาตลอดทั้งรอบ แล้วทำคำสั่งเมื่อรอบสิ้นสุด</p>
+        </div>
+        <ol class="guide-list">
+          <li><b>ไม่กระพริบตา</b><span>ระบบข้ามตัวปัจจุบันและไปตัวถัดไป</span></li>
+          <li><b>กระพริบ 1 ครั้ง</b><span>เมื่อครบ 1.35 วินาที ระบบจะเลือกตัวนั้น</span></li>
+          <li><b>กระพริบ 2 ครั้ง</b><span>เมื่อครบ 1.35 วินาที ระบบจะสลับ พยัญชนะ → สระ → ข้อความด่วน</span></li>
+          <li><b>หลับตาค้างประมาณ 1–4 วินาที</b><span>วงล้อจะ freeze ให้พักสายตา เมื่อลืมตาจะเริ่มรอบใหม่จากตัวเดิม</span></li>
+          <li><b>หลับตาครบ 5 วินาที</b><span>หยุดกล้องและระบบเลือกทันที กด “เปิดกล้อง” เพื่อใช้งานต่อ</span></li>
+        </ol>
+        <div class="guide-note">
+          <b>ก่อนใช้งานจริง</b>
+          <p>จัดหน้าให้อยู่กลางภาพ มีแสงพอ และกด “ปรับเทียบดวงตา” ทุกครั้งที่แสงหรือมุมกล้องเปลี่ยนมาก</p>
         </div>
         <div class="threshold-card">
-          <span>ค่า threshold จากการปรับเทียบ</span>
+          <span>ค่า threshold ปัจจุบัน (ปรับอัตโนมัติ)</span>
           <strong id="thresholdValue">58%</strong>
           <small>ระบบใช้ทั้งสองตาและ hysteresis เพื่อลดการตรวจจับผิด</small>
         </div>
-        <button id="resetSettings" class="secondary-button full-width" type="button">คืนค่าเริ่มต้น</button>
       </div>
     </aside>
     <div id="settingsBackdrop" class="settings-backdrop" hidden></div>

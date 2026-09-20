@@ -321,6 +321,19 @@ button:disabled { cursor: not-allowed; opacity: .46; }
 .settings-panel.is-open { transform: none; }
 .settings-header { display: flex; align-items: center; justify-content: space-between; padding: 1.4rem; border-bottom: 1px solid var(--line); }
 .settings-body { padding: 1.35rem; overflow-y: auto; }
+.guide-body { display: grid; gap: 1rem; align-content: start; }
+.guide-window { padding: 1.1rem; border-radius: .95rem; background: var(--teal-dark); color: white; }
+.guide-window > span { display: block; font-size: .7rem; opacity: .76; }
+.guide-window strong { display: block; margin: .15rem 0; font-size: 2rem; }
+.guide-window p { font-size: .72rem; line-height: 1.5; opacity: .86; }
+.guide-list { display: grid; gap: .7rem; margin: 0; padding: 0; list-style: none; counter-reset: guide; }
+.guide-list li { position: relative; min-height: 3.5rem; padding: .75rem .8rem .75rem 3.15rem; border: 1px solid var(--line); border-radius: .8rem; background: white; counter-increment: guide; }
+.guide-list li::before { content: counter(guide); position: absolute; left: .8rem; top: .75rem; width: 1.7rem; height: 1.7rem; display: grid; place-items: center; border-radius: 50%; background: var(--teal-soft); color: var(--teal-dark); font-size: .72rem; font-weight: 800; }
+.guide-list b { display: block; margin-bottom: .15rem; font-size: .76rem; }
+.guide-list span { display: block; color: var(--muted); font-size: .68rem; line-height: 1.45; }
+.guide-note { padding: .95rem; border-radius: .85rem; background: var(--cream); }
+.guide-note b { font-size: .76rem; }
+.guide-note p { margin-top: .2rem; color: var(--muted); font-size: .68rem; line-height: 1.5; }
 .range-field { display: block; margin-bottom: 1.6rem; }
 .range-field > span { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: .65rem; font-size: .78rem; }
 .range-field output { color: var(--teal); font-weight: 800; }

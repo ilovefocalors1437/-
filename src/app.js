@@ -2,8 +2,11 @@ import { BlinkEngine, deriveCalibration } from "./blink-engine.js";
 import {
   BlinkBurstBuffer,
   CHARACTER_BANKS,
+  COMMAND_TOKENS,
   RouletteScanner,
   applyToken,
+  getItemLabel,
+  removeLastGrapheme,
 } from "./interaction.js";
 
 const MEDIAPIPE_VERSION = "1.0.1";
@@ -108,6 +111,7 @@ let closureCandidate = null;
 let resumeScanAt = 0;
 let calibration = null;
 let lastRawEyeScore = 0;
+let clearConfirmationDeadline = 0;
 
 function saveSettings() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
@@ -157,6 +161,7 @@ function renderBanks() {
     button.textContent = bank.label;
     button.addEventListener("click", () => {
       burstBuffer.cancel();
+      clearConfirmationDeadline = 0;
       scanner.setBank(bank.id, performance.now());
       renderBanks();
       renderCharacterGrid();
@@ -168,13 +173,17 @@ function renderBanks() {
 
 function renderCharacterGrid() {
   elements.characterGrid.replaceChildren();
-  elements.characterGrid.classList.toggle("is-phrases", scanner.bank.id === "quick");
+  elements.characterGrid.classList.toggle(
+    "is-phrases",
+    scanner.bank.id === "quick" || scanner.bank.id === "commands",
+  );
   scanner.bank.items.forEach((item, index) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `character-key${index === scanner.itemIndex ? " is-active" : ""}`;
-    button.textContent = item === " " ? "เว้นวรรค" : item;
-    button.setAttribute("aria-label", item === " " ? "เว้นวรรค" : `เลือก ${item}`);
+    const label = getItemLabel(item);
+    button.textContent = label;
+    button.setAttribute("aria-label", `เลือก ${label}`);
     button.addEventListener("click", () => {
       burstBuffer.cancel();
       elements.burstProgress.hidden = true;
@@ -188,7 +197,15 @@ function renderCharacterGrid() {
 }
 
 function renderCurrentChoice() {
-  const display = scanner.item === " " ? "เว้นวรรค" : scanner.item;
+  if (clearConfirmationDeadline > performance.now()) {
+    const seconds = Math.ceil((clearConfirmationDeadline - performance.now()) / 1_000);
+    elements.currentChoice.textContent = "ยืนยันล้าง?";
+    elements.currentChoice.classList.add("is-phrase");
+    elements.choiceHint.textContent = `กระพริบ 1 ครั้งอีกครั้ง • รอ ${seconds} วิ เพื่อยกเลิก`;
+    return;
+  }
+
+  const display = getItemLabel(scanner.item);
   elements.currentChoice.textContent = display;
   elements.currentChoice.classList.toggle("is-phrase", display.length > 2);
   elements.choiceHint.textContent = !mediaStream
@@ -208,10 +225,48 @@ function updateActiveKey() {
 }
 
 function applySelection(token) {
+  const now = performance.now();
+  const label = getItemLabel(token);
+
+  if (token === COMMAND_TOKENS.SPEAK) {
+    speakMessage();
+    setSignal("อ่านออกเสียงแล้ว", "เลือกคำสั่งอื่นหรือสลับกลับไปยังตัวอักษรได้", "🔊");
+    return;
+  }
+
+  if (token === COMMAND_TOKENS.FINISH) {
+    finalizePhrase();
+    return;
+  }
+
+  if (token === COMMAND_TOKENS.CLEAR) {
+    if (clearConfirmationDeadline > now) {
+      message = "";
+      clearConfirmationDeadline = 0;
+      renderMessage();
+      setSignal("ล้างข้อความแล้ว", "วงล้อจะทำงานต่อในอีกสักครู่", "✓");
+      toast("ล้างข้อความแล้ว");
+    } else {
+      clearConfirmationDeadline = now + 8_000;
+      const armedDeadline = clearConfirmationDeadline;
+      scanner.pause();
+      setSignal("ยืนยันการล้างข้อความ", "กระพริบ 1 ครั้งอีกครั้ง หรือรอ 8 วินาทีเพื่อยกเลิก", "?");
+      toast("กระพริบอีกครั้งเพื่อยืนยันล้างข้อความ");
+      window.setTimeout(() => {
+        if (clearConfirmationDeadline !== armedDeadline) return;
+        clearConfirmationDeadline = 0;
+        resumeScanAt = performance.now() + 350;
+        setSignal("ยกเลิกการล้างข้อความ", "ไม่มีข้อความถูกลบ", "↩");
+        renderCurrentChoice();
+      }, 8_050);
+    }
+    renderCurrentChoice();
+    return;
+  }
+
   message = applyToken(message, token);
   renderMessage();
-  const spoken = token === " " ? "เว้นวรรค" : token === "⌫" ? "ลบ" : token;
-  setSignal(`เลือก “${spoken}” แล้ว`, "วงล้อจะทำงานต่อเมื่อพร้อม", "✓");
+  setSignal(`เลือก “${label}” แล้ว`, "วงล้อจะทำงานต่อเมื่อพร้อม", "✓");
 }
 
 function speakMessage() {
@@ -227,6 +282,7 @@ function speakMessage() {
 
 function finalizePhrase() {
   burstBuffer.cancel();
+  clearConfirmationDeadline = 0;
   elements.burstProgress.hidden = true;
   if (!message.trim()) {
     toast("ยังไม่มีข้อความให้จบประโยค");
@@ -244,6 +300,7 @@ function updateScanButton() {
 }
 
 function resumeScannerWhenReady(timestamp) {
+  if (clearConfirmationDeadline > timestamp) return;
   if (scanRequested && faceIsPresent && !calibration && timestamp >= resumeScanAt && burstBuffer.count === 0) {
     if (scanner.paused) scanner.start(timestamp);
   }
@@ -262,6 +319,7 @@ function processBlinkEvents(events, timestamp) {
         break;
       case "tracking-lost":
         faceIsPresent = false;
+        clearConfirmationDeadline = 0;
         scanner.pause();
         burstBuffer.cancel();
         elements.burstProgress.hidden = true;
@@ -280,6 +338,7 @@ function processBlinkEvents(events, timestamp) {
           elements.burstProgress.hidden = false;
           elements.choiceHint.textContent = `ตรวจพบ ${action.count} ครั้ง — กระพริบต่อเพื่อสลับหมวด`;
         } else if (action.type === "switch-bank") {
+          clearConfirmationDeadline = 0;
           elements.burstProgress.hidden = true;
           scanner.nextBank(timestamp);
           renderBanks();
@@ -312,6 +371,18 @@ function processBurstTimeout(timestamp) {
   elements.burstProgress.hidden = true;
   if (action.type === "select") applySelection(action.candidate);
   resumeScanAt = timestamp + 550;
+  renderCurrentChoice();
+}
+
+function updateClearConfirmation(timestamp) {
+  if (!clearConfirmationDeadline) return;
+  if (timestamp >= clearConfirmationDeadline) {
+    clearConfirmationDeadline = 0;
+    resumeScanAt = timestamp + 350;
+    setSignal("ยกเลิกการล้างข้อความ", "ไม่มีข้อความถูกลบ", "↩");
+    renderCurrentChoice();
+    return;
+  }
   renderCurrentChoice();
 }
 
@@ -425,6 +496,7 @@ async function predictionLoop(timestamp) {
   }
 
   processBurstTimeout(timestamp);
+  updateClearConfirmation(timestamp);
   resumeScannerWhenReady(timestamp);
   if (scanner.tick(timestamp)) {
     renderCurrentChoice();
@@ -637,10 +709,12 @@ elements.scanToggle.addEventListener("click", () => {
 });
 elements.speakButton.addEventListener("click", speakMessage);
 elements.undoButton.addEventListener("click", () => {
-  message = Array.from(message).slice(0, -1).join("");
+  clearConfirmationDeadline = 0;
+  message = removeLastGrapheme(message);
   renderMessage();
 });
 elements.clearButton.addEventListener("click", () => {
+  clearConfirmationDeadline = 0;
   message = "";
   renderMessage();
   toast("ล้างข้อความแล้ว");

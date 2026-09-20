@@ -1,3 +1,19 @@
+export const COMMAND_TOKENS = Object.freeze({
+  SPACE: "__command_space__",
+  BACKSPACE: "__command_backspace__",
+  SPEAK: "__command_speak__",
+  FINISH: "__command_finish__",
+  CLEAR: "__command_clear__",
+});
+
+const COMMAND_LABELS = Object.freeze({
+  [COMMAND_TOKENS.SPACE]: "เว้นวรรค",
+  [COMMAND_TOKENS.BACKSPACE]: "⌫ ลบตัวล่าสุด",
+  [COMMAND_TOKENS.SPEAK]: "🔊 อ่านออกเสียง",
+  [COMMAND_TOKENS.FINISH]: "✓ จบประโยค",
+  [COMMAND_TOKENS.CLEAR]: "✕ ล้างข้อความ",
+});
+
 export const CHARACTER_BANKS = Object.freeze([
   {
     id: "consonants",
@@ -9,7 +25,7 @@ export const CHARACTER_BANKS = Object.freeze([
     id: "vowels",
     label: "สระและวรรณยุกต์",
     shortLabel: "สระ",
-    items: ["ะ", "า", "ิ", "ี", "ึ", "ื", "ุ", "ู", "เ", "แ", "โ", "ใ", "ไ", "ำ", "ั", "็", "่", "้", "๊", "๋", "์", "ๆ", " ", "⌫"],
+    items: ["ะ", "า", "ิ", "ี", "ึ", "ื", "ุ", "ู", "เ", "แ", "โ", "ใ", "ไ", "ำ", "ั", "็", "่", "้", "๊", "๋", "์", "ๆ"],
   },
   {
     id: "quick",
@@ -17,7 +33,27 @@ export const CHARACTER_BANKS = Object.freeze([
     shortLabel: "คำด่วน",
     items: ["ใช่", "ไม่", "หิว", "น้ำ", "เจ็บ", "ช่วยด้วย", "ขอบคุณ", "ห้องน้ำ", "ร้อน", "หนาว", "พักก่อน", "เรียกคนดูแล"],
   },
+  {
+    id: "commands",
+    label: "คำสั่ง",
+    shortLabel: "คำสั่ง",
+    items: [
+      COMMAND_TOKENS.SPACE,
+      COMMAND_TOKENS.BACKSPACE,
+      COMMAND_TOKENS.SPEAK,
+      COMMAND_TOKENS.FINISH,
+      COMMAND_TOKENS.CLEAR,
+    ],
+  },
 ]);
+
+export function getItemLabel(token) {
+  return COMMAND_LABELS[token] ?? token;
+}
+
+export function isCommandToken(token) {
+  return Object.values(COMMAND_TOKENS).includes(token);
+}
 
 export class RouletteScanner {
   constructor({ banks = CHARACTER_BANKS, intervalMs = 1_350 } = {}) {
@@ -137,7 +173,9 @@ export class BlinkBurstBuffer {
 }
 
 export function applyToken(text, token) {
-  if (token === "⌫") return Array.from(text).slice(0, -1).join("");
+  if (token === COMMAND_TOKENS.BACKSPACE) return removeLastGrapheme(text);
+  if (token === COMMAND_TOKENS.SPACE) return `${text} `;
+  if (isCommandToken(token)) return text;
   const quickPhrases = new Set(CHARACTER_BANKS.find((bank) => bank.id === "quick").items);
   if (quickPhrases.has(token)) {
     const spacer = text && !text.endsWith(" ") ? " " : "";
@@ -146,3 +184,11 @@ export function applyToken(text, token) {
   return `${text}${token}`;
 }
 
+export function removeLastGrapheme(text) {
+  if (!text) return "";
+  if (typeof Intl?.Segmenter === "function") {
+    const segments = [...new Intl.Segmenter("th", { granularity: "grapheme" }).segment(text)];
+    return text.slice(0, segments.at(-1).index);
+  }
+  return Array.from(text).slice(0, -1).join("");
+}

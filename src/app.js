@@ -17,7 +17,7 @@ const LONG_CLOSE_MS = 5_000;
 
 const DEFAULT_SETTINGS = Object.freeze({
   openThreshold: 0.24,
-  closedThreshold: 0.4,
+  closedThreshold: 0.35,
 });
 
 const $ = (selector) => document.querySelector(selector);

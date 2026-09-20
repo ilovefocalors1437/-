@@ -1,6 +1,6 @@
 export const DEFAULT_BLINK_CONFIG = Object.freeze({
-  closedThreshold: 0.58,
-  openThreshold: 0.34,
+  closedThreshold: 0.4,
+  openThreshold: 0.24,
   minBlinkMs: 90,
   maxBlinkMs: 900,
   longCloseMs: 5_000,
@@ -158,7 +158,7 @@ export function deriveCalibration(openSamples, closedSamples) {
     open,
     closed,
     separation,
-    openThreshold: clamp01(open + separation * 0.34),
-    closedThreshold: clamp01(open + separation * 0.62),
+    openThreshold: clamp01(open + separation * 0.18),
+    closedThreshold: clamp01(open + separation * 0.38),
   };
 }

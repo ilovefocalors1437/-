@@ -356,6 +356,7 @@ button:disabled { cursor: not-allowed; opacity: .46; }
 
 .notice-modal .modal-card p { min-height: 0; }
 .notice-modal .primary-button { width: 100%; margin-top: 1.4rem; }
+.notice-tip { margin-top: .9rem; padding: .7rem .85rem; border-radius: .7rem; background: var(--teal-soft); color: var(--teal-dark); font-weight: 650; }
 
 .toast-region { position: fixed; z-index: 40; right: 1rem; bottom: 1rem; display: grid; gap: .55rem; pointer-events: none; }
 .toast { max-width: min(90vw, 380px); padding: .85rem 1rem; border-radius: .75rem; background: var(--ink); color: white; box-shadow: var(--shadow); font-size: .78rem; animation: toast-in .2s ease-out; }

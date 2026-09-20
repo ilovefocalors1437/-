@@ -14,6 +14,8 @@ const MEDIAPIPE_WASM = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${M
 const FACE_MODEL = "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task";
 const STORAGE_KEY = "blink-to-speak-profile-v4";
 const LONG_CLOSE_MS = 5_000;
+// Ignores stray extra blinks right after a command resolves.
+const BLINK_REFRACTORY_MS = 320;
 
 const DEFAULT_SETTINGS = Object.freeze({
   openThreshold: 0.24,
@@ -91,6 +93,7 @@ let faceIsPresent = false;
 let restingEyes = false;
 let calibration = null;
 let lastRawEyeScore = 0;
+let blinkLockUntil = 0;
 
 function saveSettings() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
@@ -261,13 +264,13 @@ function processBlinkEvents(events, timestamp) {
         elements.choiceHint.textContent = "กำลังตรวจการกระพริบตา…";
         break;
       case "blink": {
-        if (!scanRequested) break;
-        const action = blinkWindow.recordBlink();
+        if (!scanRequested || timestamp < blinkLockUntil) break;
+        const action = blinkWindow.recordBlink(timestamp);
         if (action.type === "pending") {
           renderBlinkProgress(action.count);
           elements.choiceHint.textContent = action.count === 1
-            ? "ตรวจพบ 1 ครั้ง — จะเลือกเมื่อครบ 1.35 วิ"
-            : "ตรวจพบ 2 ครั้ง — จะสลับหมวดเมื่อครบ 1.35 วิ";
+            ? "กะพริบอีกครั้งใน 0.55 วิ เพื่อสลับหมวด"
+            : "ตรวจพบ 2 ครั้ง — กำลังสลับหมวด";
         }
         break;
       }
@@ -312,9 +315,11 @@ function processScanWindow(timestamp) {
   if (action.type === "pass") {
     scanner.advance(timestamp);
   } else if (action.type === "select") {
+    blinkLockUntil = timestamp + BLINK_REFRACTORY_MS;
     applySelection(action.candidate);
     scanner.advance(timestamp);
   } else if (action.type === "switch-bank") {
+    blinkLockUntil = timestamp + BLINK_REFRACTORY_MS;
     scanner.nextBank(timestamp);
     renderBanks();
     renderCharacterGrid();

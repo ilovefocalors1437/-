@@ -15,21 +15,29 @@ test("zero blinks passes when the fixed scan window ends", () => {
   assert.deepEqual(window.resolve(1_100), { type: "pass", candidate: "ก" });
 });
 
-test("one blink selects the item only when its scan window ends", () => {
-  const window = new BlinkWindowCounter({ windowMs: 1_000 });
+test("one blink selects after the confirm window measured from that blink", () => {
+  const window = new BlinkWindowCounter({ windowMs: 1_000, confirmMs: 500 });
   window.start(100, "ข");
-  window.recordBlink();
-  assert.equal(window.resolve(1_099), null);
-  assert.deepEqual(window.resolve(1_100), { type: "select", candidate: "ข" });
+  window.recordBlink(900);
+  assert.equal(window.resolve(1_399), null);
+  assert.deepEqual(window.resolve(1_400), { type: "select", candidate: "ข" });
 });
 
-test("two blinks switch mode after the same fixed window", () => {
-  const window = new BlinkWindowCounter();
+test("a second blink switches mode right away", () => {
+  const window = new BlinkWindowCounter({ windowMs: 1_000, confirmMs: 500 });
   window.start(100, "ค");
-  window.recordBlink();
-  window.recordBlink();
-  assert.equal(window.resolve(100 + BLINK_WINDOW_MS - 1), null);
-  assert.deepEqual(window.resolve(100 + BLINK_WINDOW_MS), { type: "switch-bank", count: 2 });
+  window.recordBlink(900);
+  window.recordBlink(1_150);
+  assert.deepEqual(window.resolve(1_150), { type: "switch-bank", count: 2 });
+});
+
+test("a double blink straddling the slot boundary switches mode instead of selecting twice", () => {
+  const window = new BlinkWindowCounter({ windowMs: BLINK_WINDOW_MS, confirmMs: 550 });
+  window.start(0, "ง");
+  window.recordBlink(1_290);
+  assert.equal(window.resolve(BLINK_WINDOW_MS), null);
+  window.recordBlink(1_500);
+  assert.deepEqual(window.resolve(1_500), { type: "switch-bank", count: 2 });
 });
 
 test("closed eyes freeze an expired window until they reopen or stop", () => {

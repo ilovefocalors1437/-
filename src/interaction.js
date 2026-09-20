@@ -1,4 +1,6 @@
 export const BLINK_WINDOW_MS = 1_350;
+// Counted from the first blink, so a double blink is never split by the scan-slot boundary.
+export const CONFIRM_WINDOW_MS = 550;
 
 export const CHARACTER_BANKS = Object.freeze([
   {
@@ -96,8 +98,9 @@ export class RouletteScanner {
 }
 
 export class BlinkWindowCounter {
-  constructor({ windowMs = BLINK_WINDOW_MS } = {}) {
+  constructor({ windowMs = BLINK_WINDOW_MS, confirmMs = CONFIRM_WINDOW_MS } = {}) {
     this.windowMs = windowMs;
+    this.confirmMs = confirmMs;
     this.reset();
   }
 
@@ -116,9 +119,10 @@ export class BlinkWindowCounter {
     return true;
   }
 
-  recordBlink() {
+  recordBlink(timestamp) {
     if (this.deadline === null) return { type: "ignored", count: 0 };
     this.count += 1;
+    this.deadline = this.count === 1 ? timestamp + this.confirmMs : timestamp;
     return { type: "pending", count: this.count, deadline: this.deadline };
   }
 

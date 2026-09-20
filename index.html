@@ -212,6 +212,21 @@
         <button id="closeNotice" class="primary-button" type="button">รับทราบ</button>
       </div>
     </div>
+    <!-- Inline so the full-screen notice stays dismissable even if app.js is cached or fails to load. -->
+    <script>
+      (() => {
+        const modal = document.getElementById("noticeModal");
+        const close = () => (modal.hidden = true);
+        document.getElementById("closeNotice").addEventListener("click", close);
+        modal.addEventListener("click", (event) => {
+          if (event.target === modal) close();
+        });
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") close();
+        });
+        document.getElementById("closeNotice").focus();
+      })();
+    </script>
 
     <div id="toastRegion" class="toast-region" aria-live="assertive"></div>
 

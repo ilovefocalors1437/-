@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#143b3b" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content="เว็บช่วยสื่อสารด้วยการกระพริบตา ประมวลผลภาพจากกล้องบนอุปกรณ์"
+    />
+    <title>ระบบสื่อสารด้วยการกระพริบตา</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#composer">ข้ามไปยังข้อความ</a>
+
+    <header class="app-header">
+      <div class="header-copy">
+        <span class="eyebrow">ระบบช่วยการสื่อสาร</span>
+        <h1>สื่อสารด้วยการกระพริบตา</h1>
+      </div>
+      <div class="header-actions">
+        <div class="privacy-pill" title="ภาพจากกล้องไม่ถูกส่งไปยังเซิร์ฟเวอร์">
+          <span class="privacy-dot" aria-hidden="true"></span>
+          ประมวลผลบนเครื่อง
+        </div>
+        <button id="settingsButton" class="icon-button" type="button" aria-label="เปิดการตั้งค่า" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.5 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6h.08A1.65 1.65 0 0 0 10 3.09V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.12.6.59 1.05 1.18 1.08h.5a2 2 0 1 1 0 4h-.09A1.65 1.65 0 0 0 19.4 15Z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <section class="camera-card" aria-labelledby="cameraTitle">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">กล้องและดวงตา</span>
+            <h2 id="cameraTitle">การตรวจจับ</h2>
+          </div>
+          <span id="trackingBadge" class="status-badge is-idle">
+            <span class="status-dot" aria-hidden="true"></span>
+            ยังไม่เริ่ม
+          </span>
+        </div>
+
+        <div class="camera-stage" id="cameraStage">
+          <video id="cameraVideo" autoplay muted playsinline></video>
+          <canvas id="cameraOverlay" aria-hidden="true"></canvas>
+          <div class="camera-placeholder" id="cameraPlaceholder">
+            <div class="camera-illustration" aria-hidden="true">
+              <svg viewBox="0 0 120 72"><path d="M25 24h57a8 8 0 0 1 8 8v27a8 8 0 0 1-8 8H25a8 8 0 0 1-8-8V32a8 8 0 0 1 8-8Z"/><path d="m90 38 19-10v35L90 53V38Z"/><circle cx="54" cy="45" r="12"/></svg>
+            </div>
+            <p>เปิดกล้องเพื่อเริ่มตรวจจับการกระพริบตา</p>
+            <span>วิดีโอจะถูกประมวลผลในเบราว์เซอร์เท่านั้น</span>
+          </div>
+          <div id="longCloseOverlay" class="long-close-overlay" hidden>
+            <span>หลับตาค้างเพื่อจบประโยค</span>
+            <strong id="longCloseCountdown">10.0</strong>
+          </div>
+        </div>
+
+        <div class="eye-meter" aria-label="ระดับการหลับตาแบบเรียลไทม์">
+          <div class="meter-copy">
+            <span>ระดับการหลับตา</span>
+            <strong id="eyeScoreText">0%</strong>
+          </div>
+          <div class="meter-track" aria-hidden="true">
+            <span id="eyeMeterFill"></span>
+            <i id="eyeThresholdMark"></i>
+          </div>
+          <div class="meter-labels"><span>ลืมตา</span><span>หลับตา</span></div>
+        </div>
+
+        <div class="camera-controls">
+          <button id="cameraButton" class="primary-button" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 10 21 7v10l-6-3v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3Z"/></svg>
+            เปิดกล้อง
+          </button>
+          <button id="calibrateButton" class="secondary-button" type="button" disabled>
+            ปรับเทียบดวงตา
+          </button>
+        </div>
+
+        <div class="signal-row" aria-live="polite">
+          <div class="signal-icon" id="signalIcon" aria-hidden="true">○</div>
+          <div>
+            <strong id="signalTitle">พร้อมเริ่มต้น</strong>
+            <p id="signalDetail">จัดใบหน้าให้อยู่กลางภาพและมีแสงสว่างเพียงพอ</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="communication-column">
+        <section id="composer" class="message-card" aria-labelledby="messageTitle">
+          <div class="section-heading">
+            <div>
+              <span class="section-kicker">ข้อความของฉัน</span>
+              <h2 id="messageTitle">ประโยคที่กำลังสร้าง</h2>
+            </div>
+            <span id="characterCount" class="character-count">0 ตัวอักษร</span>
+          </div>
+          <div id="messageOutput" class="message-output" role="textbox" aria-live="polite" aria-label="ข้อความที่กำลังสร้าง">
+            <span class="empty-message">ข้อความที่เลือกจะแสดงตรงนี้…</span>
+          </div>
+          <div class="message-actions">
+            <button id="speakButton" class="text-button" type="button" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Zm4.5 3.5a5 5 0 0 1 0 7m2.5-10a9 9 0 0 1 0 13"/></svg>
+              อ่านออกเสียง
+            </button>
+            <button id="undoButton" class="text-button" type="button" disabled>ลบตัวล่าสุด</button>
+            <button id="clearButton" class="text-button danger" type="button" disabled>ล้างข้อความ</button>
+          </div>
+        </section>
+
+        <section class="roulette-card" aria-labelledby="rouletteTitle">
+          <div class="section-heading roulette-heading">
+            <div>
+              <span class="section-kicker">วงล้ออักษร</span>
+              <h2 id="rouletteTitle">กระพริบ 1 ครั้งเพื่อเลือก</h2>
+            </div>
+            <button id="scanToggle" class="scan-toggle" type="button" aria-pressed="false" disabled>
+              <span class="play-icon" aria-hidden="true">▶</span>
+              <span id="scanToggleText">เริ่มวงล้อ</span>
+            </button>
+          </div>
+
+          <div id="bankTabs" class="bank-tabs" role="tablist" aria-label="หมวดตัวเลือก"></div>
+
+          <div class="current-choice" aria-live="polite">
+            <span class="choice-label">ตัวเลือกปัจจุบัน</span>
+            <strong id="currentChoice">ก</strong>
+            <span id="choiceHint">รอเปิดกล้อง</span>
+            <div id="burstProgress" class="burst-progress" hidden>
+              <span></span><span></span>
+            </div>
+          </div>
+
+          <div id="characterGrid" class="character-grid" role="tabpanel" aria-label="รายการตัวอักษร"></div>
+
+          <div class="gesture-guide">
+            <div>
+              <span class="gesture-mark single" aria-hidden="true">◉</span>
+              <p><strong>กระพริบ 1 ครั้ง</strong><br />เลือกตัวที่กำลังแสดง</p>
+            </div>
+            <div>
+              <span class="gesture-mark double" aria-hidden="true">◉◉</span>
+              <p><strong><span id="switchBlinkLabel">2</span> ครั้งติดกัน</strong><br />สลับหมวดตัวเลือก</p>
+            </div>
+            <div>
+              <span class="gesture-mark hold" aria-hidden="true">━</span>
+              <p><strong>หลับตาค้าง <span id="longCloseLabel">10</span> วิ</strong><br />จบและอ่านประโยค</p>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <aside id="settingsPanel" class="settings-panel" aria-hidden="true" aria-labelledby="settingsTitle">
+      <div class="settings-header">
+        <div>
+          <span class="section-kicker">ตั้งค่าผู้ใช้</span>
+          <h2 id="settingsTitle">ปรับการควบคุม</h2>
+        </div>
+        <button id="closeSettings" class="icon-button" type="button" aria-label="ปิดการตั้งค่า">×</button>
+      </div>
+      <div class="settings-body">
+        <label class="range-field">
+          <span><b>ความเร็ววงล้อ</b><output id="scanSpeedOutput">1.35 วิ</output></span>
+          <input id="scanSpeed" type="range" min="700" max="2500" step="50" value="1350" />
+          <small>ช้าลงเมื่อผู้ใช้ต้องใช้เวลามองตัวเลือก</small>
+        </label>
+        <label class="range-field">
+          <span><b>จำนวนกระพริบเพื่อสลับหมวด</b><output id="blinkCountOutput">2 ครั้ง</output></span>
+          <input id="blinkCount" type="range" min="2" max="4" step="1" value="2" />
+        </label>
+        <label class="range-field">
+          <span><b>ช่วงเวลานับกระพริบติดกัน</b><output id="burstWindowOutput">1.3 วิ</output></span>
+          <input id="burstWindow" type="range" min="700" max="2200" step="100" value="1300" />
+        </label>
+        <label class="range-field">
+          <span><b>เวลาหลับตาเพื่อจบประโยค</b><output id="longCloseOutput">10 วิ</output></span>
+          <input id="longClose" type="range" min="5" max="15" step="1" value="10" />
+        </label>
+        <div class="threshold-card">
+          <span>ค่า threshold จากการปรับเทียบ</span>
+          <strong id="thresholdValue">58%</strong>
+          <small>ระบบใช้ทั้งสองตาและ hysteresis เพื่อลดการตรวจจับผิด</small>
+        </div>
+        <button id="resetSettings" class="secondary-button full-width" type="button">คืนค่าเริ่มต้น</button>
+      </div>
+    </aside>
+    <div id="settingsBackdrop" class="settings-backdrop" hidden></div>
+
+    <div id="calibrationModal" class="modal" hidden>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="calibrationTitle">
+        <div id="calibrationVisual" class="calibration-visual" aria-hidden="true">
+          <span class="calibration-eye"></span><span class="calibration-eye"></span>
+        </div>
+        <span class="section-kicker">ปรับเทียบเฉพาะบุคคล</span>
+        <h2 id="calibrationTitle">มองตรงและลืมตาตามปกติ</h2>
+        <p id="calibrationInstruction">ระบบจะเก็บค่าดวงตาในสภาพแสงปัจจุบัน</p>
+        <strong id="calibrationCountdown" class="calibration-countdown">3</strong>
+        <div class="calibration-progress"><span id="calibrationProgress"></span></div>
+        <button id="cancelCalibration" class="text-button" type="button">ยกเลิก</button>
+      </div>
+    </div>
+
+    <div id="toastRegion" class="toast-region" aria-live="assertive"></div>
+
+    <noscript>เว็บไซต์นี้ต้องใช้ JavaScript เพื่อประมวลผลการกระพริบตา</noscript>
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>

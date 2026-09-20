@@ -60,6 +60,8 @@ const elements = {
   calibrationCountdown: $("#calibrationCountdown"),
   calibrationProgress: $("#calibrationProgress"),
   cancelCalibration: $("#cancelCalibration"),
+  noticeModal: $("#noticeModal"),
+  closeNotice: $("#closeNotice"),
   toastRegion: $("#toastRegion"),
 };
 
@@ -608,6 +610,10 @@ function renderGuide() {
   elements.eyeThresholdMark.style.left = `${settings.closedThreshold * 100}%`;
 }
 
+function dismissNotice() {
+  elements.noticeModal.hidden = true;
+}
+
 function setGuideOpen(open) {
   elements.settingsPanel.classList.toggle("is-open", open);
   elements.settingsPanel.setAttribute("aria-hidden", String(!open));
@@ -638,6 +644,10 @@ elements.clearButton.addEventListener("click", () => {
   renderMessage();
   toast("ล้างข้อความแล้ว");
 });
+elements.closeNotice.addEventListener("click", dismissNotice);
+elements.noticeModal.addEventListener("click", (event) => {
+  if (event.target === elements.noticeModal) dismissNotice();
+});
 elements.settingsButton.addEventListener("click", () => setGuideOpen(true));
 elements.closeSettings.addEventListener("click", () => setGuideOpen(false));
 elements.settingsBackdrop.addEventListener("click", () => setGuideOpen(false));
@@ -645,6 +655,7 @@ elements.settingsBackdrop.addEventListener("click", () => setGuideOpen(false));
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     if (calibration) cancelCalibration();
+    dismissNotice();
     setGuideOpen(false);
   }
   // Space is a caregiver/testing fallback when focus is not on a control.
@@ -663,3 +674,4 @@ renderCharacterGrid();
 renderCurrentChoice();
 renderGuide();
 updateScanButton();
+elements.closeNotice.focus();

@@ -6,12 +6,11 @@
 
 > MVP สำหรับทดลองและเก็บข้อมูล ไม่ใช่อุปกรณ์การแพทย์ และไม่ควรเป็นช่องทางฉุกเฉินเพียงช่องทางเดียว
 
-## 4 หน้า
+## 3 หน้า
 
 - **หน้าหลัก** — ประกอบข้อความจากพยัญชนะและสระ
 - **แชต** — Google Sign-In, เพิ่มเพื่อนด้วย UID, DM และ group chat; ผู้ใช้ทั่วไปพิมพ์ได้
 - **วิธีใช้** — แสดง gesture และขั้นตอนปรับเทียบแทนปุ่มคู่มือเดิม
-- **สนับสนุน** — QR PromptPay และข้อความ “แรงใจ 😭💖”
 
 ## การควบคุมแบบรีโมต
 
@@ -48,8 +47,7 @@ Chat ใช้ Supabase Auth + Google OAuth, Postgres, Realtime และ RLS �
 ## โครงสร้าง
 
 ```text
-index.html / styles.css      UI แบบ 4 หน้า
-assets/                      ภาพหน้า support
+index.html / styles.css      UI แบบ 3 หน้า
 src/app.js                   router, กล้อง, gesture และ UI controller
 src/blink-engine.js          state machine แยกตาซ้าย/ขวา
 src/interaction.js           remote selector + wink resolver

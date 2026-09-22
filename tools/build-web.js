@@ -8,7 +8,7 @@ if (dirname(output) !== root) throw new Error("Invalid build output");
 rmSync(output, { recursive: true, force: true });
 mkdirSync(resolve(output, "docs"), { recursive: true });
 mkdirSync(resolve(output, "supabase"), { recursive: true });
-for (const file of ["index.html", "styles.css", "favicon.svg", "assets", "src", "docs/SUPABASE_SETUP.md", "supabase/schema.sql"]) {
+for (const file of ["index.html", "styles.css", "src", "docs/SUPABASE_SETUP.md", "supabase/schema.sql"]) {
   cpSync(resolve(root, file), resolve(output, file), { recursive: true });
 }
 console.log("Built static frontend in dist/ (app, setup guide and public schema only).");

@@ -21,14 +21,11 @@ try {
   const base=`http://127.0.0.1:${server.address().port}`;
   const page=await browser.newPage({viewport:{width:1440,height:1000}}); const errors=[]; page.on("pageerror",(error)=>errors.push(error.message));
   await page.goto(base);
-  assert.equal(await page.locator("[data-page]").count(),4);
+  assert.equal(await page.locator("[data-page]").count(),3);
   await page.locator("#mainMessageOutput").fill("คนทั่วไปพิมพ์ข้อความได้");
   assert.equal(await page.locator("#characterCount").textContent(),"23 ตัวอักษร");
   await page.locator('[data-route="guide"]').first().click();
   assert.equal(await page.locator("#page-guide").isVisible(),true);
-  await page.locator('[data-route="support"]').first().click();
-  assert.match(await page.locator("#supportTitle").textContent(),/แรงใจ/);
-  assert.equal(await page.locator(".qr-card img").isVisible(),true);
   await page.locator('[data-route="chat"]').first().click();
   await page.locator("#setupNotice").waitFor({state:"visible"});
   assert.equal(await page.locator("#googleLogin").isDisabled(),true);
@@ -59,5 +56,5 @@ try {
   assert.deepEqual(appErrors,[]);
   if(process.env.SCREENSHOT_PATH) await app.screenshot({path:process.env.SCREENSHOT_PATH,fullPage:true});
   await context.close();
-  console.log("PASS browser: four pages + support QR + Google auth mock + UID/DM/send/group UI + mobile layout.");
+  console.log("PASS browser: three pages + Google auth mock + UID/DM/send/group UI + mobile layout.");
 } finally { await browser?.close(); await new Promise((done)=>server.close(done)); }

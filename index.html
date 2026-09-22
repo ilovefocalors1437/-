@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0f5c57" />
-    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <meta name="description" content="EyeSay ระบบแปลงการกะพริบตาเป็นข้อความและแชต" />
     <title>EyeSay</title>
     <link rel="stylesheet" href="./styles.css" />
@@ -14,16 +13,13 @@
 
     <header class="app-header">
       <a class="brand" href="#home" data-route="home" aria-label="EyeSay หน้าหลัก">
-        <span class="brand-eye" aria-hidden="true"></span>
         <span><b>EyeSay</b><small>ให้ดวงตากลับมาเป็นเสียง</small></span>
       </a>
       <nav class="main-nav" aria-label="หน้าหลัก">
         <button class="nav-link is-active" data-route="home" type="button">หน้าหลัก</button>
         <button class="nav-link" data-route="chat" type="button">แชต</button>
         <button class="nav-link" data-route="guide" type="button">วิธีใช้</button>
-        <button class="nav-link" data-route="support" type="button">สนับสนุน</button>
       </nav>
-      <div class="privacy-pill"><span></span>ภาพกล้องอยู่บนเครื่อง</div>
     </header>
 
     <main class="page-shell">
@@ -90,21 +86,15 @@
       <section id="page-guide" class="app-page" data-page="guide" aria-labelledby="guideTitle" hidden>
         <div class="page-intro"><div><span class="eyebrow">GUIDELINE</span><h1 id="guideTitle">ควบคุม EyeSay<br /><em>ด้วยดวงตา</em></h1></div><p>เริ่มจากปรับเทียบดวงตา แล้วลองทีละท่าช้า ๆ ระบบแยก “ขยิบสั้น” กับ “ขยิบค้าง” ออกจากกัน</p></div>
         <div class="guide-grid">
-          <article class="guide-card"><span class="guide-number">01</span><div class="eye-demo wink"></div><h2>ขยิบ 1 ครั้ง</h2><p>ขยิบตาซ้ายหรือขวาสั้น ๆ แล้วลืมตา ระบบจะเลือกตัวอักษรที่ไฮไลต์อยู่</p></article>
-          <article class="guide-card"><span class="guide-number">02</span><div class="eye-demo double"></div><h2>ขยิบ 2 ครั้ง</h2><p>ขยิบซ้ำภายใน <b>0.46 วินาที</b> เพื่อสลับ พยัญชนะ → สระ → หยุด/ส่ง</p></article>
-          <article class="guide-card"><span class="guide-number">03</span><div class="eye-demo hold"></div><h2>ขยิบค้างเหมือนรีโมต</h2><p>ค้างตาข้างเดียวเกิน <b>0.36 วินาที</b> ระบบจะเลื่อนหนึ่งตัวทุก <b>0.2 วินาที</b> ปล่อยตาแล้วหยุดทันทีและไม่เลือกตัว</p></article>
-          <article class="guide-card"><span class="guide-number">04</span><div class="eye-demo both"></div><h2>หลับสองตา</h2><p>หลับ–ลืมสั้น ๆ เพื่อวน หน้าหลัก → แชต → วิธีใช้ หากอยู่โหมดหยุด/ส่ง จะใช้เป็นการยืนยันแทน</p></article>
+          <article class="guide-card"><span class="guide-number">01</span><h2>ขยิบ 1 ครั้ง</h2><p>ขยิบตาซ้ายหรือขวาสั้น ๆ แล้วลืมตา ระบบจะเลือกตัวอักษรที่ไฮไลต์อยู่</p></article>
+          <article class="guide-card"><span class="guide-number">02</span><h2>ขยิบ 2 ครั้ง</h2><p>ขยิบซ้ำภายใน <b>0.46 วินาที</b> เพื่อสลับ พยัญชนะ → สระ → หยุด/ส่ง</p></article>
+          <article class="guide-card"><span class="guide-number">03</span><h2>ขยิบค้างเหมือนรีโมต</h2><p>ค้างตาข้างเดียวเกิน <b>0.36 วินาที</b> ระบบจะเลื่อนหนึ่งตัวทุก <b>0.2 วินาที</b> ปล่อยตาแล้วหยุดทันทีและไม่เลือกตัว</p></article>
+          <article class="guide-card"><span class="guide-number">04</span><h2>หลับสองตา</h2><p>หลับ–ลืมสั้น ๆ เพื่อวน หน้าหลัก → แชต → วิธีใช้ หากอยู่โหมดหยุด/ส่ง จะใช้เป็นการยืนยันแทน</p></article>
           <article class="guide-card wide"><span class="guide-number">05</span><h2>หยุดอย่างปลอดภัย</h2><p>สลับไปแท็บ “หยุด” จนเห็น “ยืนยันหยุด?” แล้วหลับตาสองข้างเพื่อหยุดระบบเลือก หากยังไม่ต้องการหยุด ให้ขยิบตาข้างเดียวเพื่อย้อนกลับ</p><div class="guide-flow"><span>ขยิบ 2 ครั้ง<br /><b>ไปแท็บหยุด</b></span><i>→</i><span>หลับสองตา<br /><b>ยืนยันหยุด</b></span><i>→</i><span>พักได้<br /><b>กล้องยังเปิด</b></span></div></article>
           <article class="guide-card wide calibration-guide"><span class="guide-number">06</span><h2>ก่อนใช้งานจริง</h2><ul><li>วางใบหน้าไว้กลางภาพและเพิ่มแสงให้เห็นดวงตาชัด</li><li>กด “ปรับเทียบดวงตา” เมื่อผู้ใช้ แสง หรือมุมกล้องเปลี่ยน</li><li>หากท่าทางติดกัน ให้ลืมตาตามปกติหนึ่งจังหวะก่อนสั่งครั้งถัดไป</li><li>ค่า threshold ปัจจุบัน <strong id="thresholdValue">40%</strong></li></ul></article>
         </div>
       </section>
 
-      <section id="page-support" class="app-page" data-page="support" aria-labelledby="supportTitle" hidden>
-        <div class="support-page">
-          <div class="support-copy"><span class="eyebrow">SUPPORT EYESAY</span><h1 id="supportTitle">แรงใจ 😭💖</h1><p>ทุกแรงสนับสนุนช่วยให้ EyeSay ได้ทดลองกับผู้ใช้จริง ปรับความแม่นยำ และพัฒนาการสื่อสารที่เข้าถึงได้มากขึ้น</p><div class="support-note"><b>ขอบคุณที่เชื่อว่าดวงตาก็สื่อสารได้</b><span>สแกน QR ผ่านแอปธนาคารที่รองรับ PromptPay</span></div></div>
-          <figure class="qr-card"><img src="./assets/support-promptpay.png" alt="QR PromptPay บัญชี ธีรวีร์ ปรีชาธร" /><figcaption><span>PromptPay</span><b>ธีรวีร์ ปรีชาธร</b></figcaption></figure>
-        </div>
-      </section>
     </main>
 
     <section id="cameraCard" class="card camera-card" aria-labelledby="cameraTitle">

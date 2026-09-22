@@ -1,8 +1,9 @@
 import { BlinkEngine, deriveCalibration } from "./blink-engine.js";
 import {
+  BLINK_WINDOW_MS,
+  BlinkWindowCounter,
   CHARACTER_BANKS,
-  RemoteScanner,
-  BlinkCommandResolver,
+  RouletteScanner,
   applyToken,
   removeLastGrapheme,
 } from "./interaction.js";
@@ -13,6 +14,7 @@ const MEDIAPIPE_WASM = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${M
 const FACE_MODEL = "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task";
 const STORAGE_KEY = "eyesay-eye-profile-v5";
 const DEFAULT_SETTINGS = Object.freeze({ openThreshold: 0.24, closedThreshold: 0.4 });
+const ACTIVE_PAGES = ["home", "chat"];
 const $ = (selector) => document.querySelector(selector);
 
 const elements = {
@@ -22,12 +24,11 @@ const elements = {
   video: $("#cameraVideo"), canvas: $("#cameraOverlay"), cameraPlaceholder: $("#cameraPlaceholder"),
   cameraButton: $("#cameraButton"), calibrateButton: $("#calibrateButton"), trackingBadge: $("#trackingBadge"),
   signalIcon: $("#signalIcon"), signalTitle: $("#signalTitle"), signalDetail: $("#signalDetail"),
-  leftEyeFill: $("#leftEyeFill"), rightEyeFill: $("#rightEyeFill"), leftEyeText: $("#leftEyeText"), rightEyeText: $("#rightEyeText"),
-  leftThresholdMark: $("#leftThresholdMark"), rightThresholdMark: $("#rightThresholdMark"),
+  eyeMeterFill: $("#eyeMeterFill"), eyeScoreText: $("#eyeScoreText"), eyeThresholdMark: $("#eyeThresholdMark"),
   gestureOverlay: $("#gestureOverlay"), gestureOverlayTitle: $("#gestureOverlayTitle"), gestureOverlayDetail: $("#gestureOverlayDetail"),
   mainMessageOutput: $("#mainMessageOutput"), chatMessageOutput: $("#chatMessageOutput"), characterCount: $("#characterCount"),
   undoButton: $("#undoButton"), clearButton: $("#clearButton"), scanToggle: $("#scanToggle"), scanToggleText: $("#scanToggleText"),
-  currentChoice: $("#currentChoice"), choiceHint: $("#choiceHint"), bankTabs: $("#bankTabs"), characterGrid: $("#characterGrid"), winkProgress: $("#winkProgress"),
+  currentChoice: $("#currentChoice"), choiceHint: $("#choiceHint"), bankTabs: $("#bankTabs"), characterGrid: $("#characterGrid"), blinkProgress: $("#winkProgress"),
   thresholdValue: $("#thresholdValue"), calibrationModal: $("#calibrationModal"), calibrationVisual: $("#calibrationVisual"),
   calibrationTitle: $("#calibrationTitle"), calibrationInstruction: $("#calibrationInstruction"), calibrationCountdown: $("#calibrationCountdown"),
   calibrationProgress: $("#calibrationProgress"), cancelCalibration: $("#cancelCalibration"), toastRegion: $("#toastRegion"),
@@ -39,8 +40,8 @@ function loadSettings() {
 }
 
 let settings = loadSettings();
-const scanner = new RemoteScanner();
-const winkResolver = new BlinkCommandResolver();
+const scanner = new RouletteScanner({ intervalMs: BLINK_WINDOW_MS });
+const blinkWindow = new BlinkWindowCounter({ windowMs: BLINK_WINDOW_MS });
 const blinkEngine = new BlinkEngine({ openThreshold: settings.openThreshold, closedThreshold: settings.closedThreshold });
 let currentPage = "home";
 let lastContentBankId = "consonants";
@@ -52,6 +53,7 @@ let animationFrame = null;
 let lastVideoTime = -1;
 let faceIsPresent = false;
 let controlsEnabled = false;
+let restingEyes = false;
 let calibration = null;
 let lastRawEyeScore = 0;
 
@@ -59,17 +61,21 @@ function saveSettings() { localStorage.setItem(STORAGE_KEY, JSON.stringify(setti
 function setTrackingStatus(kind, label) { elements.trackingBadge.className = `status-badge is-${kind}`; elements.trackingBadge.lastChild.textContent = label; }
 function setSignal(title, detail, icon = "○") { elements.signalTitle.textContent = title; elements.signalDetail.textContent = detail; elements.signalIcon.textContent = icon; }
 function toast(text, type = "info") { const item = document.createElement("div"); item.className = `toast${type === "error" ? " is-error" : ""}`; item.textContent = text; elements.toastRegion.append(item); setTimeout(() => item.remove(), 3400); }
-
 function banksForPage() { return CHARACTER_BANKS.map((bank) => ({ ...bank, items: [...bank.items] })); }
 
 function dockEyeControls(page) {
-  if (page === "home") {
-    $("#homeCameraSlot").append(elements.cameraCard);
-    $("#homeRemoteSlot").append(elements.remoteCard);
-  } else if (page === "chat") {
-    $("#chatCameraSlot").append(elements.cameraCard);
-    $("#chatRemoteSlot").append(elements.remoteCard);
-  }
+  if (page === "home") { $("#homeCameraSlot").append(elements.cameraCard); $("#homeRemoteSlot").append(elements.remoteCard); }
+  else if (page === "chat") { $("#chatCameraSlot").append(elements.cameraCard); $("#chatRemoteSlot").append(elements.remoteCard); }
+}
+
+function restartScanWindow(timestamp = performance.now()) {
+  blinkWindow.reset();
+  if (!controlsEnabled || !faceIsPresent || calibration || !ACTIVE_PAGES.includes(currentPage)) { scanner.pause(); return; }
+  restingEyes = false;
+  scanner.start(timestamp);
+  blinkWindow.start(timestamp, scanner.item);
+  renderBlinkProgress(0);
+  renderCurrentChoice();
 }
 
 function navigate(page, { updateHash = true } = {}) {
@@ -77,13 +83,11 @@ function navigate(page, { updateHash = true } = {}) {
   currentPage = page;
   elements.pages.forEach((item) => { const active = item.dataset.page === page; item.hidden = !active; item.classList.toggle("is-active", active); });
   elements.routes.forEach((item) => item.classList.toggle("is-active", item.dataset.route === page));
-  winkResolver.cancel();
-  elements.winkProgress.hidden = true;
+  blinkWindow.reset();
   scanner.replaceBanks(banksForPage(page));
   scanner.setBank(lastContentBankId, performance.now());
   dockEyeControls(page);
-  if (controlsEnabled && ["home", "chat"].includes(page)) scanner.start(performance.now());
-  else scanner.pause();
+  if (ACTIVE_PAGES.includes(page)) restartScanWindow(); else scanner.pause();
   renderBanks(); renderCharacterGrid(); renderCurrentChoice();
   if (updateHash) history.replaceState(null, "", `#${page}`);
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -102,30 +106,29 @@ function renderBanks() {
     const button = document.createElement("button");
     button.type = "button"; button.className = "bank-tab"; button.role = "tab"; button.dataset.bankId = bank.id; button.textContent = bank.label;
     button.setAttribute("aria-selected", String(bank.id === scanner.bank.id));
-    button.addEventListener("click", () => { winkResolver.cancel(); lastContentBankId = bank.id; scanner.setBank(bank.id, performance.now()); if (controlsEnabled) scanner.start(performance.now()); renderBanks(); renderCharacterGrid(); renderCurrentChoice(); });
+    button.addEventListener("click", () => { lastContentBankId = bank.id; scanner.setBank(bank.id, performance.now()); restartScanWindow(); renderBanks(); renderCharacterGrid(); renderCurrentChoice(); });
     elements.bankTabs.append(button);
   });
 }
 
 function renderCharacterGrid() {
   elements.characterGrid.replaceChildren();
-  elements.characterGrid.classList.remove("is-action");
   scanner.bank.items.forEach((item, index) => {
     const button = document.createElement("button");
     button.type = "button"; button.className = `character-key${index === scanner.itemIndex ? " is-active" : ""}`; button.textContent = item; button.setAttribute("aria-label", `เลือก ${item}`);
-    button.addEventListener("click", () => {
-      scanner.selectIndex(index, performance.now());
-      applySelection(item); scanner.advance(performance.now());
-      renderCharacterGrid(); renderCurrentChoice();
-    });
+    button.addEventListener("click", () => { scanner.selectIndex(index, performance.now()); applySelection(item); scanner.advance(performance.now()); restartScanWindow(); renderCharacterGrid(); renderCurrentChoice(); });
     elements.characterGrid.append(button);
   });
 }
 
 function renderCurrentChoice() {
   elements.currentChoice.textContent = scanner.item;
-  elements.currentChoice.classList.remove("is-action");
-  elements.choiceHint.textContent = !mediaStream ? "รอเปิดกล้อง" : !faceIsPresent ? "กำลังค้นหาใบหน้า" : !controlsEnabled ? "ระบบเลือกหยุดอยู่" : "กำลังเลื่อนอัตโนมัติ · สองตาเลือก · ตาเดียวเร่ง";
+  if (!mediaStream) elements.choiceHint.textContent = "รอเปิดกล้อง";
+  else if (!faceIsPresent) elements.choiceHint.textContent = "กำลังค้นหาใบหน้า";
+  else if (!controlsEnabled) elements.choiceHint.textContent = "วงล้อหยุดอยู่";
+  else if (restingEyes) elements.choiceHint.textContent = "พักสายตาได้ — ลืมตาก่อนครบ 5 วินาที";
+  else if (blinkWindow.count === 1) elements.choiceHint.textContent = "หยุดที่ตัวนี้ · กะพริบอีกครั้งเพื่อสลับหมวด";
+  else elements.choiceHint.textContent = "รอบละ 1.35 วินาที · กะพริบเพื่อเลือก";
 }
 
 function updateActiveKey() {
@@ -134,63 +137,51 @@ function updateActiveKey() {
   keys[scanner.itemIndex]?.scrollIntoView({ block: "nearest", behavior: "smooth" });
 }
 
-function applySelection(token) {
-  message = applyToken(message, token); renderMessage();
-  setSignal(`เลือก “${token}” แล้ว`, "พร้อมรับคำสั่งถัดไป", "✓");
+function renderBlinkProgress(count) {
+  elements.blinkProgress.hidden = count === 0;
+  elements.blinkProgress.querySelectorAll("i").forEach((dot, index) => dot.classList.toggle("is-detected", index < count));
 }
 
-function startSelection() { if (!mediaStream) return toast("เปิดกล้องก่อนเริ่มควบคุม", "error"); controlsEnabled = true; if (["home", "chat"].includes(currentPage)) scanner.start(performance.now()); updateScanButton(); renderCurrentChoice(); setSignal("พร้อมรับคำสั่ง", "ระบบเลื่อนทุก 1.2 วินาที · หลับสองตาเพื่อเลือก", "◉"); }
-function stopSelection() { controlsEnabled = false; scanner.pause(); winkResolver.cancel(); elements.winkProgress.hidden = true; updateScanButton(); renderCurrentChoice(); setSignal("หยุดระบบเลือกแล้ว", "กล้องยังเปิดอยู่ กดเริ่มเมื่อต้องการใช้ต่อ", "Ⅱ"); toast("หยุดระบบเลือกแล้ว"); }
-function updateScanButton() { elements.scanToggle.setAttribute("aria-pressed", String(controlsEnabled)); elements.scanToggleText.textContent = controlsEnabled ? "หยุดควบคุม" : "เริ่มควบคุม"; elements.scanToggle.firstElementChild.textContent = controlsEnabled ? "Ⅱ" : "▶"; }
-
-function renderWinkPending() { scanner.pause(); elements.winkProgress.hidden = false; elements.winkProgress.querySelectorAll("i").forEach((dot, i) => dot.classList.toggle("is-detected", i === 0)); elements.choiceHint.textContent = "หลับสองตาอีกครั้งใน 0.46 วิ เพื่อสลับหมวด"; }
-
-function handleBothBlink(event) {
-  if (!controlsEnabled || calibration) return;
-  const action = winkResolver.record(event.timestamp, scanner.item, "both");
-  if (action.type === "pending-select") return renderWinkPending();
-  if (action.type === "switch-bank") {
-    scanner.nextBank(event.timestamp);
-    lastContentBankId = scanner.bank.id;
-    elements.winkProgress.hidden = true;
-    renderBanks(); renderCharacterGrid(); renderCurrentChoice();
-    scanner.start(event.timestamp);
-    setSignal(`เปลี่ยนเป็นหมวด “${scanner.bank.label}”`, "กลับไปเลื่อนด้วยความเร็วปกติ", "↻");
-  }
-}
-
-function handleHoldStep(event) {
-  if (!controlsEnabled || calibration) return;
-  winkResolver.cancel(); elements.winkProgress.hidden = true;
-  scanner.advance(event.timestamp); updateActiveKey(); renderCurrentChoice();
-  elements.gestureOverlay.hidden = false; elements.gestureOverlayTitle.textContent = "กำลังเร่งความเร็ว"; elements.gestureOverlayDetail.textContent = `0.2 วิ/ตัว · ปัจจุบัน “${scanner.item}”`;
-}
-
-function resolvePendingWink(timestamp) {
-  const action = winkResolver.resolve(timestamp);
-  if (!action || !controlsEnabled) return;
-  elements.winkProgress.hidden = true; applySelection(action.candidate); scanner.advance(timestamp); scanner.start(timestamp); updateActiveKey(); renderCurrentChoice();
-}
-
-function processAutoScan(timestamp) {
-  if (!controlsEnabled || !faceIsPresent || calibration || !["home", "chat"].includes(currentPage) || winkResolver.deadline !== null) return;
-  if (blinkEngine.getTelemetry(timestamp).gesture) return;
-  if (scanner.tick(timestamp)) { updateActiveKey(); renderCurrentChoice(); }
-}
+function applySelection(token) { message = applyToken(message, token); renderMessage(); setSignal(`เลือก “${token}” แล้ว`, "วงล้อเริ่มรอบถัดไป", "✓"); }
+function startSelection() { if (!mediaStream) return toast("เปิดกล้องก่อนเริ่มวงล้อ", "error"); controlsEnabled = true; restartScanWindow(); updateScanButton(); setSignal("วงล้อพร้อมใช้งาน", `หนึ่งรอบ 1.35 วินาที · threshold ${Math.round(settings.closedThreshold * 100)}%`, "◉"); }
+function stopSelection({ quiet = false } = {}) { controlsEnabled = false; restingEyes = false; scanner.pause(); blinkWindow.reset(); renderBlinkProgress(0); elements.gestureOverlay.hidden = true; updateScanButton(); renderCurrentChoice(); setSignal("หยุดวงล้อแล้ว", "กล้องยังเปิดอยู่ กดเริ่มเมื่อต้องการใช้ต่อ", "Ⅱ"); if (!quiet) toast("หยุดวงล้อแล้ว"); }
+function updateScanButton() { elements.scanToggle.setAttribute("aria-pressed", String(controlsEnabled)); elements.scanToggleText.textContent = controlsEnabled ? "หยุดวงล้อ" : "เริ่มวงล้อ"; elements.scanToggle.firstElementChild.textContent = controlsEnabled ? "Ⅱ" : "▶"; }
 
 function processBlinkEvents(events, timestamp) {
   for (const event of events) {
     if (calibration && !["tracking-found", "tracking-lost"].includes(event.type)) continue;
-    if (event.type === "tracking-found") { faceIsPresent = true; if (controlsEnabled && ["home", "chat"].includes(currentPage)) scanner.start(timestamp); setTrackingStatus("ready", "พบใบหน้า"); setSignal("ตรวจจับดวงตาแล้ว", "ระบบเลื่อนอัตโนมัติพร้อมใช้งาน", "✓"); renderCurrentChoice(); }
-    else if (event.type === "tracking-lost") { faceIsPresent = false; scanner.pause(); winkResolver.cancel(); setTrackingStatus("searching", "หาใบหน้า"); setSignal("ไม่พบใบหน้า", "ระบบพักรับคำสั่งชั่วคราว", "!"); renderCurrentChoice(); }
-    else if (event.type === "wink") { scanner.start(event.timestamp); setSignal("ตรวจพบตาข้างเดียว", "ขยิบสั้นข้างเดียวไม่มีคำสั่ง เพื่อกันการเลือกผิด", "◐"); }
-    else if (event.type === "hold-step") handleHoldStep(event);
-    else if (event.type === "hold-end") { elements.gestureOverlay.hidden = true; scanner.start(event.timestamp); renderCurrentChoice(); }
-    else if (event.type === "both-blink") handleBothBlink(event);
-    else if (event.type === "both-hold" && controlsEnabled) { elements.gestureOverlay.hidden = true; stopSelection(); }
-    else if (event.type === "both-hold-ended") elements.gestureOverlay.hidden = true;
+    if (event.type === "tracking-found") {
+      faceIsPresent = true; setTrackingStatus("ready", "พบใบหน้า"); setSignal("ตรวจจับดวงตาแล้ว", `ค่า threshold ปัจจุบัน ${Math.round(settings.closedThreshold * 100)}%`, "✓"); restartScanWindow(timestamp);
+    } else if (event.type === "tracking-lost") {
+      faceIsPresent = false; restingEyes = false; scanner.pause(); blinkWindow.reset(); renderBlinkProgress(0); setTrackingStatus("searching", "หาใบหน้า"); setSignal("ไม่พบใบหน้า", "วงล้อพักชั่วคราวจนกว่าจะพบใบหน้า", "!"); renderCurrentChoice();
+    } else if (event.type === "eyes-closed" && controlsEnabled) {
+      restingEyes = true; scanner.pause(); renderCurrentChoice();
+    } else if (event.type === "blink" && controlsEnabled && ACTIVE_PAGES.includes(currentPage) && blinkWindow.deadline !== null) {
+      restingEyes = false; const action = blinkWindow.recordBlink(event.timestamp); renderBlinkProgress(action.count); renderCurrentChoice();
+      setSignal(action.count === 1 ? "รับการกะพริบครั้งที่ 1" : "รับการกะพริบครั้งที่ 2", action.count === 1 ? "ค้างตัวเลือกไว้ 0.55 วินาที" : "กำลังสลับหมวด", action.count === 1 ? "●" : "●●");
+    } else if (event.type === "closure-rejected" && controlsEnabled) {
+      restingEyes = false; elements.gestureOverlay.hidden = true; restartScanWindow(event.timestamp); setSignal("พักสายตาแล้ว", "วงล้อเดินต่อจากตัวเดิม", "○");
+    } else if (event.type === "long-close") {
+      stopCamera("long-close");
+    }
   }
-  resolvePendingWink(timestamp);
+  processScanWindow(timestamp);
+}
+
+function processScanWindow(timestamp) {
+  if (!controlsEnabled || !faceIsPresent || calibration || !ACTIVE_PAGES.includes(currentPage)) return;
+  const telemetry = blinkEngine.getTelemetry(timestamp);
+  const action = blinkWindow.resolve(timestamp, { eyesClosed: telemetry.state === "closed" });
+  if (!action) return;
+  renderBlinkProgress(0);
+  if (action.type === "pass") {
+    scanner.advance(timestamp); updateActiveKey(); renderCurrentChoice(); restartScanWindow(timestamp);
+  } else if (action.type === "select") {
+    applySelection(action.candidate); scanner.advance(timestamp); updateActiveKey(); renderCurrentChoice(); restartScanWindow(timestamp);
+  } else if (action.type === "switch-bank") {
+    scanner.nextBank(timestamp); lastContentBankId = scanner.bank.id; renderBanks(); renderCharacterGrid(); renderCurrentChoice(); restartScanWindow(timestamp);
+    setSignal(`เปลี่ยนเป็นหมวด “${scanner.bank.label}”`, "วงล้อเริ่มจากตัวแรกของหมวด", "↻");
+  }
 }
 
 function drawEyeContours(landmarks) {
@@ -208,8 +199,13 @@ function getBlendshapeScores(result) {
 
 function updateTelemetry(timestamp) {
   const telemetry = blinkEngine.getTelemetry(timestamp);
-  for (const eye of ["left", "right"]) { const percent = Math.round(telemetry[eye] * 100); elements[`${eye}EyeFill`].style.width = `${percent}%`; elements[`${eye}EyeText`].textContent = `${percent}%`; }
-  if (telemetry.gesture === "both" && telemetry.closedForMs > 300) { elements.gestureOverlay.hidden = false; elements.gestureOverlayTitle.textContent = "หลับตาสองข้าง"; elements.gestureOverlayDetail.textContent = "ลืมตาเพื่อเลือก · ค้าง 0.9 วิ เพื่อหยุด"; }
+  const combinedScore = Math.min(telemetry.left, telemetry.right);
+  const percent = Math.round(combinedScore * 100);
+  elements.eyeMeterFill.style.width = `${percent}%`; elements.eyeScoreText.textContent = `${percent}%`;
+  if (telemetry.state === "closed" && telemetry.closedForMs >= BLINK_WINDOW_MS) {
+    const remaining = Math.max(0, 5 - telemetry.closedForMs / 1000);
+    elements.gestureOverlay.hidden = false; elements.gestureOverlayTitle.textContent = "กำลังพักสายตา"; elements.gestureOverlayDetail.textContent = remaining > 0 ? `ลืมตาเพื่อใช้ต่อ · หยุดใน ${remaining.toFixed(1)} วิ` : "กำลังหยุดระบบ";
+  } else if (telemetry.state !== "closed") elements.gestureOverlay.hidden = true;
 }
 
 function resizeCanvasToVideo() { if (!elements.video.videoWidth) return; if (elements.canvas.width !== elements.video.videoWidth) elements.canvas.width = elements.video.videoWidth; if (elements.canvas.height !== elements.video.videoHeight) elements.canvas.height = elements.video.videoHeight; }
@@ -232,7 +228,7 @@ async function predictionLoop(timestamp) {
       processBlinkEvents(events, timestamp); collectCalibrationFrame(timestamp, facePresent ? lastRawEyeScore : null);
     } catch (error) { console.error(error); }
   }
-  resolvePendingWink(timestamp); processAutoScan(timestamp); updateTelemetry(timestamp); animationFrame = requestAnimationFrame(predictionLoop);
+  processScanWindow(timestamp); updateTelemetry(timestamp); animationFrame = requestAnimationFrame(predictionLoop);
 }
 
 async function startCamera() {
@@ -242,13 +238,16 @@ async function startCamera() {
   try {
     mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user", width: { ideal: 960 }, height: { ideal: 720 } }, audio: false });
     elements.video.srcObject = mediaStream; await elements.video.play(); elements.cameraPlaceholder.hidden = true; faceLandmarker ??= await createFaceLandmarker();
-    elements.cameraButton.textContent = "ปิดกล้อง"; elements.calibrateButton.disabled = false; elements.scanToggle.disabled = false; controlsEnabled = true; scanner.start(performance.now()); blinkEngine.reset(); updateScanButton(); setTrackingStatus("searching", "หาใบหน้า"); animationFrame = requestAnimationFrame(predictionLoop);
+    elements.cameraButton.textContent = "ปิดกล้อง"; elements.calibrateButton.disabled = false; elements.scanToggle.disabled = false; controlsEnabled = true; blinkEngine.reset(); updateScanButton(); setTrackingStatus("searching", "หาใบหน้า"); animationFrame = requestAnimationFrame(predictionLoop);
   } catch (error) { console.error(error); stopCamera(); toast(error?.name === "NotAllowedError" ? "กรุณาอนุญาตกล้อง" : "เปิดกล้องไม่สำเร็จ", "error"); }
   finally { elements.cameraButton.disabled = false; }
 }
 
-function stopCamera() {
-  if (animationFrame) cancelAnimationFrame(animationFrame); animationFrame = null; mediaStream?.getTracks().forEach((track) => track.stop()); mediaStream = null; elements.video.srcObject = null; elements.cameraPlaceholder.hidden = false; elements.cameraButton.textContent = "เปิดกล้อง"; elements.calibrateButton.disabled = true; elements.scanToggle.disabled = true; controlsEnabled = false; faceIsPresent = false; scanner.pause(); winkResolver.cancel(); blinkEngine.reset(); drawEyeContours(null); setTrackingStatus("idle", "ยังไม่เริ่ม"); setSignal("พร้อมเริ่มต้น", "จัดหน้าให้อยู่กลางภาพและมีแสงเพียงพอ", "○"); updateScanButton(); renderCurrentChoice();
+function stopCamera(reason = "manual") {
+  if (animationFrame) cancelAnimationFrame(animationFrame); animationFrame = null; mediaStream?.getTracks().forEach((track) => track.stop()); mediaStream = null; elements.video.srcObject = null; elements.cameraPlaceholder.hidden = false; elements.cameraButton.textContent = "เปิดกล้อง"; elements.calibrateButton.disabled = true; elements.scanToggle.disabled = true; controlsEnabled = false; restingEyes = false; faceIsPresent = false; scanner.pause(); blinkWindow.reset(); blinkEngine.reset(); renderBlinkProgress(0); drawEyeContours(null); elements.gestureOverlay.hidden = true; setTrackingStatus("idle", "ยังไม่เริ่ม");
+  if (reason === "long-close") { setSignal("หยุดระบบแล้ว", "หลับตาครบ 5 วินาที · เปิดกล้องใหม่เมื่อต้องการใช้ต่อ", "Ⅱ"); toast("หยุดระบบแล้ว — พักสายตาได้เลย"); }
+  else setSignal("พร้อมเริ่มต้น", "จัดหน้าให้อยู่กลางภาพและมีแสงเพียงพอ", "○");
+  updateScanButton(); renderCurrentChoice();
 }
 
 const CALIBRATION_PHASES = [
@@ -257,12 +256,13 @@ const CALIBRATION_PHASES = [
   { duration:1800,title:"เตรียมหลับตา",instruction:"เมื่อเริ่มนับ ให้หลับตาแบบสบาย ๆ",eye:"closed" },
   { duration:2500,title:"หลับตาค้างไว้",instruction:"กำลังเก็บค่าขณะหลับตา",eye:"closed",collect:"closed" },
 ];
-function startCalibration() { if (!mediaStream || !faceIsPresent) return toast("ต้องตรวจพบใบหน้าก่อนปรับเทียบ", "error"); controlsEnabled = false; scanner.pause(); winkResolver.cancel(); blinkEngine.reset(); calibration = { phaseIndex:0,phaseStartedAt:performance.now(),openSamples:[],closedSamples:[] }; elements.calibrationModal.hidden = false; updateCalibrationUI(performance.now()); }
+function startCalibration() { if (!mediaStream || !faceIsPresent) return toast("ต้องตรวจพบใบหน้าก่อนปรับเทียบ", "error"); controlsEnabled = false; scanner.pause(); blinkWindow.reset(); blinkEngine.reset(); calibration = { phaseIndex:0,phaseStartedAt:performance.now(),openSamples:[],closedSamples:[] }; elements.calibrationModal.hidden = false; updateCalibrationUI(performance.now()); updateScanButton(); }
 function collectCalibrationFrame(timestamp, score) { if (!calibration) return; const phase = CALIBRATION_PHASES[calibration.phaseIndex]; if (phase.collect && Number.isFinite(score)) calibration[`${phase.collect}Samples`].push(score); updateCalibrationUI(timestamp); if (timestamp - calibration.phaseStartedAt >= phase.duration) { calibration.phaseIndex += 1; calibration.phaseStartedAt = timestamp; if (calibration.phaseIndex >= CALIBRATION_PHASES.length) finishCalibration(); } }
 function updateCalibrationUI(timestamp) { if (!calibration) return; const phase = CALIBRATION_PHASES[calibration.phaseIndex]; const elapsed = Math.max(0,timestamp-calibration.phaseStartedAt); elements.calibrationTitle.textContent=phase.title; elements.calibrationInstruction.textContent=phase.instruction; elements.calibrationCountdown.textContent=Math.max(1,Math.ceil((phase.duration-elapsed)/1000)); elements.calibrationProgress.style.width=`${Math.min(100,elapsed/phase.duration*100)}%`; elements.calibrationVisual.classList.toggle("is-closed",phase.eye==="closed"); }
-function finishCalibration() { const result=deriveCalibration(calibration.openSamples,calibration.closedSamples); calibration=null; elements.calibrationModal.hidden=true; if(!result.ok){toast("ปรับเทียบไม่สำเร็จ ลองเพิ่มแสง", "error"); blinkEngine.reset(); return;} settings.openThreshold=Number(result.openThreshold.toFixed(3)); settings.closedThreshold=Number(result.closedThreshold.toFixed(3)); blinkEngine.configure(settings); blinkEngine.reset(); saveSettings(); renderGuide(); controlsEnabled=true; scanner.start(performance.now()); updateScanButton(); toast("ปรับเทียบดวงตาสำเร็จ"); }
-function cancelCalibration(){calibration=null;elements.calibrationModal.hidden=true;blinkEngine.reset();controlsEnabled=true;scanner.start(performance.now());updateScanButton();}
-function renderGuide(){const percent=`${Math.round(settings.closedThreshold*100)}%`;elements.thresholdValue.textContent=percent;elements.leftThresholdMark.style.left=percent;elements.rightThresholdMark.style.left=percent;}
+function resumeAfterCalibration() { blinkEngine.reset(); controlsEnabled = true; updateScanButton(); restartScanWindow(performance.now()); }
+function finishCalibration() { const result=deriveCalibration(calibration.openSamples,calibration.closedSamples); calibration=null; elements.calibrationModal.hidden=true; if(!result.ok){toast("ปรับเทียบไม่สำเร็จ ลองเพิ่มแสง", "error"); resumeAfterCalibration(); return;} settings.openThreshold=Number(result.openThreshold.toFixed(3)); settings.closedThreshold=Number(result.closedThreshold.toFixed(3)); blinkEngine.configure(settings); saveSettings(); renderGuide(); resumeAfterCalibration(); toast("ปรับเทียบดวงตาสำเร็จ"); }
+function cancelCalibration(){calibration=null;elements.calibrationModal.hidden=true;resumeAfterCalibration();}
+function renderGuide(){const percent=`${Math.round(settings.closedThreshold*100)}%`;elements.thresholdValue.textContent=percent;elements.eyeThresholdMark.style.left=percent;}
 
 elements.routes.forEach((route)=>route.addEventListener("click",(event)=>{event.preventDefault();navigate(route.dataset.route);}));
 window.addEventListener("hashchange",()=>navigate(location.hash.slice(1)||"home",{updateHash:false}));
@@ -270,17 +270,12 @@ elements.cameraButton.addEventListener("click",()=>mediaStream?stopCamera():star
 elements.scanToggle.addEventListener("click",()=>controlsEnabled?stopSelection():startSelection());
 elements.undoButton.addEventListener("click",()=>{message=removeLastGrapheme(message);renderMessage();}); elements.clearButton.addEventListener("click",()=>{message="";renderMessage();toast("ล้างข้อความแล้ว");});
 for(const output of [elements.mainMessageOutput,elements.chatMessageOutput].filter(Boolean)) output.addEventListener("input",()=>{message=output.value;renderMessage();});
-document.addEventListener("keydown",(event)=>{if(event.code==="Space"&&event.target===document.body){event.preventDefault();applySelection(scanner.item);scanner.advance(performance.now());updateActiveKey();renderCurrentChoice();}if((event.ctrlKey||event.metaKey)&&event.key==="Enter"&&currentPage==="chat")void chatPanel?.send();});
+document.addEventListener("keydown",(event)=>{if(event.code==="Space"&&event.target===document.body){event.preventDefault();applySelection(scanner.item);scanner.advance(performance.now());restartScanWindow();updateActiveKey();renderCurrentChoice();}if((event.ctrlKey||event.metaKey)&&event.key==="Enter"&&currentPage==="chat")void chatPanel?.send();});
 window.addEventListener("beforeunload",()=>stopCamera());
 
 if ($("#page-chat")) {
   import("./supabase-chat.js").then(({ mountSupabaseChat }) => {
-    chatPanel = mountSupabaseChat({
-      getMessage:()=>message,
-      onSent:()=>{message="";renderMessage();},
-      onSendStatus:(text,bad)=>{setSignal("สถานะแชต",text,bad?"!":"↗");toast(text,bad?"error":"info");},
-      onAvailability:()=>renderCurrentChoice(),
-    });
+    chatPanel = mountSupabaseChat({ getMessage:()=>message, onSent:()=>{message="";renderMessage();}, onSendStatus:(text,bad)=>{setSignal("สถานะแชต",text,bad?"!":"↗");toast(text,bad?"error":"info");}, onAvailability:()=>renderCurrentChoice() });
     renderMessage();
   }).catch((error)=>toast(`เปิดแชตในเครื่องไม่สำเร็จ: ${error.message}`,"error"));
 }

@@ -2,87 +2,83 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { BlinkEngine, DEFAULT_BLINK_CONFIG, deriveCalibration } from "../src/blink-engine.js";
 
-function feed(engine, frames) {
-  return frames.flatMap((frame) => engine.process(frame));
-}
+const feed = (engine, frames) => frames.flatMap((frame) => engine.process(frame));
 
-test("emits a blink only after a valid closure reopens", () => {
-  const engine = new BlinkEngine({ smoothing: 1, minBlinkMs: 80 });
-  const events = feed(engine, [
-    { timestamp: 0, leftScore: 0.1, rightScore: 0.1 },
-    { timestamp: 100, leftScore: 0.9, rightScore: 0.9 },
-    { timestamp: 240, leftScore: 0.1, rightScore: 0.1 },
-  ]);
-  assert.deepEqual(events.map((event) => event.type), ["tracking-found", "eyes-closed", "blink"]);
-  assert.equal(events.at(-1).duration, 140);
-});
-
-test("default threshold recognizes a lighter blink around forty percent", () => {
-  assert.equal(DEFAULT_BLINK_CONFIG.closedThreshold, 0.4);
-  assert.equal(DEFAULT_BLINK_CONFIG.openThreshold, 0.24);
-
-  const engine = new BlinkEngine({ smoothing: 1, minBlinkMs: 80 });
-  const events = feed(engine, [
-    { timestamp: 0, leftScore: 0.15, rightScore: 0.15 },
-    { timestamp: 100, leftScore: 0.42, rightScore: 0.42 },
-    { timestamp: 230, leftScore: 0.18, rightScore: 0.18 },
-  ]);
-  assert.equal(events.some((event) => event.type === "blink"), true);
-});
-
-test("requires both eyes so a wink is ignored", () => {
+test("a short left-eye closure becomes one wink only after reopening", () => {
   const engine = new BlinkEngine({ smoothing: 1 });
   const events = feed(engine, [
-    { timestamp: 0, leftScore: 0.1, rightScore: 0.1 },
-    { timestamp: 100, leftScore: 0.9, rightScore: 0.1 },
-    { timestamp: 300, leftScore: 0.1, rightScore: 0.1 },
+    { timestamp: 0, leftScore: .1, rightScore: .1 },
+    { timestamp: 100, leftScore: .8, rightScore: .1 },
+    { timestamp: 250, leftScore: .1, rightScore: .1 },
   ]);
-  assert.deepEqual(events.map((event) => event.type), ["tracking-found"]);
+  assert.equal(events.filter((event) => event.type === "wink").length, 1);
+  assert.equal(events.find((event) => event.type === "wink").eye, "left");
 });
 
-test("long closure fires once and never becomes a blink", () => {
-  const engine = new BlinkEngine({ smoothing: 1, longCloseMs: 1_000, maxBlinkMs: 700 });
-  const events = feed(engine, [
-    { timestamp: 0, leftScore: 0.1, rightScore: 0.1 },
-    { timestamp: 100, leftScore: 0.9, rightScore: 0.9 },
-    { timestamp: 1_100, leftScore: 0.9, rightScore: 0.9 },
-    { timestamp: 1_500, leftScore: 0.9, rightScore: 0.9 },
-    { timestamp: 1_700, leftScore: 0.1, rightScore: 0.1 },
-  ]);
-  assert.equal(events.filter((event) => event.type === "long-close").length, 1);
-  assert.equal(events.some((event) => event.type === "blink"), false);
-  assert.equal(events.at(-1).type, "long-close-ended");
-});
-
-test("default long closure threshold is five seconds", () => {
+test("default threshold recognizes a lighter forty-percent wink", () => {
+  assert.equal(DEFAULT_BLINK_CONFIG.closedThreshold, .4);
   const engine = new BlinkEngine({ smoothing: 1 });
   const events = feed(engine, [
-    { timestamp: 0, leftScore: 0.1, rightScore: 0.1 },
-    { timestamp: 100, leftScore: 0.9, rightScore: 0.9 },
-    { timestamp: 5_099, leftScore: 0.9, rightScore: 0.9 },
-    { timestamp: 5_100, leftScore: 0.9, rightScore: 0.9 },
+    { timestamp: 0, leftScore: .15, rightScore: .15 },
+    { timestamp: 100, leftScore: .42, rightScore: .15 },
+    { timestamp: 230, leftScore: .18, rightScore: .15 },
   ]);
-  assert.equal(events.filter((event) => event.type === "long-close").length, 1);
-  assert.equal(events.at(-1).duration, 5_000);
+  assert.equal(events.some((event) => event.type === "wink"), true);
 });
 
-test("tracking loss resets a partial closure", () => {
+test("near-simultaneous eyelids upgrade to a bilateral blink", () => {
   const engine = new BlinkEngine({ smoothing: 1 });
   const events = feed(engine, [
-    { timestamp: 0, leftScore: 0.1, rightScore: 0.1 },
-    { timestamp: 100, leftScore: 0.9, rightScore: 0.9 },
+    { timestamp: 0, leftScore: .1, rightScore: .1 },
+    { timestamp: 100, leftScore: .9, rightScore: .1 },
+    { timestamp: 160, leftScore: .9, rightScore: .9 },
+    { timestamp: 280, leftScore: .1, rightScore: .1 },
+  ]);
+  assert.equal(events.some((event) => event.type === "both-blink"), true);
+  assert.equal(events.some((event) => event.type === "wink"), false);
+});
+
+test("one-eye hold repeats every 200 ms and never also selects", () => {
+  const engine = new BlinkEngine({ smoothing: 1, holdStartMs: 360, holdStepMs: 200 });
+  const events = feed(engine, [
+    { timestamp: 0, leftScore: .1, rightScore: .1 },
+    { timestamp: 100, leftScore: .9, rightScore: .1 },
+    { timestamp: 460, leftScore: .9, rightScore: .1 },
+    { timestamp: 860, leftScore: .9, rightScore: .1 },
+    { timestamp: 900, leftScore: .1, rightScore: .1 },
+  ]);
+  assert.equal(events.filter((event) => event.type === "hold-step").length, 3);
+  assert.equal(events.some((event) => event.type === "hold-end"), true);
+  assert.equal(events.some((event) => event.type === "wink"), false);
+});
+
+test("both-eye hold emits once", () => {
+  const engine = new BlinkEngine({ smoothing: 1, bothHoldMs: 900 });
+  const events = feed(engine, [
+    { timestamp: 0, leftScore: .1, rightScore: .1 },
+    { timestamp: 100, leftScore: .9, rightScore: .9 },
+    { timestamp: 1_000, leftScore: .9, rightScore: .9 },
+    { timestamp: 1_200, leftScore: .9, rightScore: .9 },
+    { timestamp: 1_300, leftScore: .1, rightScore: .1 },
+  ]);
+  assert.equal(events.filter((event) => event.type === "both-hold").length, 1);
+  assert.equal(events.some((event) => event.type === "both-blink"), false);
+});
+
+test("tracking loss cancels a partial gesture", () => {
+  const engine = new BlinkEngine({ smoothing: 1 });
+  const events = feed(engine, [
+    { timestamp: 0, leftScore: .1, rightScore: .1 },
+    { timestamp: 100, leftScore: .9, rightScore: .1 },
     { timestamp: 150, facePresent: false },
-    { timestamp: 300, leftScore: 0.1, rightScore: 0.1 },
+    { timestamp: 300, leftScore: .1, rightScore: .1 },
   ]);
-  assert.equal(events.some((event) => event.type === "blink"), false);
+  assert.equal(events.some((event) => event.type === "wink"), false);
 });
 
 test("calibration uses robust medians and rejects poor separation", () => {
-  const good = deriveCalibration([0.08, 0.1, 0.11, 0.12], [0.78, 0.8, 0.82, 0.95]);
-  assert.equal(good.ok, true);
-  assert.ok(good.openThreshold < good.closedThreshold);
-  assert.ok(good.closedThreshold < 0.4);
-
-  const poor = deriveCalibration([0.3, 0.31], [0.39, 0.4]);
-  assert.deepEqual(poor.reason, "low-separation");
+  const good = deriveCalibration([.08,.1,.11,.12],[.78,.8,.82,.95]);
+  assert.equal(good.ok, true); assert.ok(good.openThreshold < good.closedThreshold);
+  const poor = deriveCalibration([.3,.31],[.39,.4]);
+  assert.equal(poor.reason, "low-separation");
 });

@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "test": "node --test",
-    "serve": "npx --yes serve ."
+    "test:browser": "npm run build:web && node tools/smoke-supabase.js",
+    "serve": "npm run build:web && npx --yes serve dist -l 4173",
+    "build:web": "node tools/build-web.js"
   },
   "engines": {
     "node": ">=20"
   }
 }
-

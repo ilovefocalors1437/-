@@ -3,235 +3,133 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#143b3b" />
+    <meta name="theme-color" content="#0f5c57" />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <meta
-      name="description"
-      content="เว็บช่วยสื่อสารด้วยการกระพริบตา ประมวลผลภาพจากกล้องบนอุปกรณ์"
-    />
-    <title>ระบบสื่อสารด้วยการกระพริบตา</title>
+    <meta name="description" content="EyeSay ระบบแปลงการกะพริบตาเป็นข้อความและแชต" />
+    <title>EyeSay</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <a class="skip-link" href="#composer">ข้ามไปยังข้อความ</a>
+    <a class="skip-link" href="#page-home">ข้ามไปยังเนื้อหา</a>
 
     <header class="app-header">
-      <div class="header-copy">
-        <span class="eyebrow">ระบบแปลงการกะพริบตาเป็นข้อความสำหรับผู้มีภาวะอัมพาตและบกพร่องทางการพูด</span>
-        <h1>EyeSay</h1>
-      </div>
-      <div class="header-actions">
-        <div class="privacy-pill" title="ภาพจากกล้องไม่ถูกส่งไปยังเซิร์ฟเวอร์">
-          <span class="privacy-dot" aria-hidden="true"></span>
-          ประมวลผลบนเครื่อง
-        </div>
-        <button id="settingsButton" class="icon-button" type="button" aria-label="เปิดคู่มือการใช้งาน" aria-expanded="false">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/><path d="M8 7h8M8 11h7"/></svg>
-        </button>
-      </div>
+      <a class="brand" href="#home" data-route="home" aria-label="EyeSay หน้าหลัก">
+        <span class="brand-eye" aria-hidden="true"></span>
+        <span><b>EyeSay</b><small>ให้ดวงตากลับมาเป็นเสียง</small></span>
+      </a>
+      <nav class="main-nav" aria-label="หน้าหลัก">
+        <button class="nav-link is-active" data-route="home" type="button">หน้าหลัก</button>
+        <button class="nav-link" data-route="chat" type="button">แชต</button>
+        <button class="nav-link" data-route="guide" type="button">วิธีใช้</button>
+        <button class="nav-link" data-route="support" type="button">สนับสนุน</button>
+      </nav>
+      <div class="privacy-pill"><span></span>ภาพกล้องอยู่บนเครื่อง</div>
     </header>
 
-    <main class="app-shell">
-      <section class="camera-card" aria-labelledby="cameraTitle">
-        <div class="section-heading">
-          <div>
-            <span class="section-kicker">กล้องและดวงตา</span>
-            <h2 id="cameraTitle">การตรวจจับ</h2>
-          </div>
-          <span id="trackingBadge" class="status-badge is-idle">
-            <span class="status-dot" aria-hidden="true"></span>
-            ยังไม่เริ่ม
-          </span>
+    <main class="page-shell">
+      <section id="page-home" class="app-page is-active" data-page="home" aria-labelledby="homeTitle">
+        <div class="page-intro">
+          <div><span class="eyebrow">EYE-CONTROLLED COMMUNICATION</span><h1 id="homeTitle">สื่อสารด้วยดวงตา<br /><em>ในจังหวะของคุณ</em></h1></div>
+          <p>ขยิบเพื่อเลือก ขยิบค้างเพื่อเลื่อน และหลับตาทั้งสองข้างเพื่อไปยังหน้าถัดไป</p>
         </div>
-
-        <div class="camera-stage" id="cameraStage">
-          <video id="cameraVideo" autoplay muted playsinline></video>
-          <canvas id="cameraOverlay" aria-hidden="true"></canvas>
-          <div class="camera-placeholder" id="cameraPlaceholder">
-            <div class="camera-illustration" aria-hidden="true">
-              <svg viewBox="0 0 120 72"><path d="M25 24h57a8 8 0 0 1 8 8v27a8 8 0 0 1-8 8H25a8 8 0 0 1-8-8V32a8 8 0 0 1 8-8Z"/><path d="m90 38 19-10v35L90 53V38Z"/><circle cx="54" cy="45" r="12"/></svg>
-            </div>
-            <p>เปิดกล้องเพื่อเริ่มตรวจจับการกระพริบตา</p>
-            <span>วิดีโอจะถูกประมวลผลในเบราว์เซอร์เท่านั้น</span>
-          </div>
-          <div id="longCloseOverlay" class="long-close-overlay" hidden>
-            <span>กำลังพักสายตา • ลืมตาก่อน 5 วิ เพื่อทำต่อ</span>
-            <strong id="longCloseCountdown">5.0</strong>
-          </div>
-        </div>
-
-        <div class="eye-meter" aria-label="ระดับการหลับตาแบบเรียลไทม์">
-          <div class="meter-copy">
-            <span>ระดับการหลับตา</span>
-            <strong id="eyeScoreText">0%</strong>
-          </div>
-          <div class="meter-track" aria-hidden="true">
-            <span id="eyeMeterFill"></span>
-            <i id="eyeThresholdMark"></i>
-          </div>
-          <div class="meter-labels"><span>ลืมตา</span><span>หลับตา</span></div>
-        </div>
-
-        <div class="camera-controls">
-          <button id="cameraButton" class="primary-button" type="button">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 10 21 7v10l-6-3v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3Z"/></svg>
-            เปิดกล้อง
-          </button>
-          <button id="calibrateButton" class="secondary-button" type="button" disabled>
-            ปรับเทียบดวงตา
-          </button>
-        </div>
-
-        <div class="signal-row" aria-live="polite">
-          <div class="signal-icon" id="signalIcon" aria-hidden="true">○</div>
-          <div>
-            <strong id="signalTitle">พร้อมเริ่มต้น</strong>
-            <p id="signalDetail">จัดใบหน้าให้อยู่กลางภาพและมีแสงสว่างเพียงพอ</p>
+        <div class="workspace-grid">
+          <div class="workspace-left"><div id="homeCameraSlot"></div></div>
+          <div class="workspace-right">
+            <section class="card message-card" aria-labelledby="messageTitle">
+              <div class="section-heading"><div><span class="section-kicker">ข้อความของฉัน</span><h2 id="messageTitle">ประโยคที่กำลังสร้าง</h2></div><span id="characterCount">0 ตัวอักษร</span></div>
+              <textarea id="mainMessageOutput" class="message-output" rows="4" maxlength="2000" placeholder="ข้อความที่เลือกจะแสดงตรงนี้…" aria-label="ข้อความที่กำลังสร้าง"></textarea>
+              <div class="message-actions"><button id="undoButton" class="text-button" type="button" disabled>⌫ ลบตัวล่าสุด</button><button id="clearButton" class="text-button danger" type="button" disabled>ล้างข้อความ</button></div>
+            </section>
+            <div id="homeRemoteSlot"></div>
           </div>
         </div>
       </section>
 
-      <section class="communication-column">
-        <section id="composer" class="message-card" aria-labelledby="messageTitle">
-          <div class="section-heading">
-            <div>
-              <span class="section-kicker">ข้อความของฉัน</span>
-              <h2 id="messageTitle">ประโยคที่กำลังสร้าง</h2>
-            </div>
-            <span id="characterCount" class="character-count">0 ตัวอักษร</span>
-          </div>
-          <div id="messageOutput" class="message-output" role="textbox" aria-live="polite" aria-label="ข้อความที่กำลังสร้าง">
-            <span class="empty-message">ข้อความที่เลือกจะแสดงตรงนี้…</span>
-          </div>
-          <div class="message-actions">
-            <button id="undoButton" class="text-button" type="button" disabled>ลบตัวล่าสุด</button>
-            <button id="clearButton" class="text-button danger" type="button" disabled>ล้างข้อความ</button>
-          </div>
-        </section>
+      <section id="page-chat" class="app-page" data-page="chat" aria-labelledby="chatTitle" hidden>
+        <div class="page-intro compact"><div><span class="eyebrow">EYESAY CHAT</span><h1 id="chatTitle">คุยกับคนสำคัญ</h1></div><p>ผู้ดูแลจัดการบัญชี รายชื่อ และกลุ่มด้วยการสัมผัส ผู้ใช้ส่งข้อความด้วยดวงตาหรือพิมพ์ได้</p></div>
+        <div class="chat-workspace">
+          <aside class="chat-eye-column"><div id="chatCameraSlot"></div><div id="chatRemoteSlot"></div></aside>
+          <section class="chat-app card">
+            <div id="setupNotice" class="setup-notice" hidden>ยังไม่ได้ใส่ Supabase publishable key ดู <a href="./docs/SUPABASE_SETUP.md" target="_blank" rel="noopener">คู่มือติดตั้ง</a></div>
+            <section id="authCard" class="auth-welcome">
+              <div class="auth-illustration" aria-hidden="true">◉</div>
+              <span class="section-kicker">บัญชี EyeSay</span>
+              <h2>เข้าสู่ระบบเพื่อเริ่มแชต</h2>
+              <p>ให้ญาติหรือผู้ดูแลกดเข้าสู่ระบบด้วยบัญชี Google จากนั้นระบบจะสร้าง UID ส่วนตัวให้โดยอัตโนมัติ</p>
+              <button id="googleLogin" class="google-button" type="button"><span>G</span> ดำเนินการต่อด้วย Google</button>
+            </section>
 
-        <section class="roulette-card" aria-labelledby="rouletteTitle">
-          <div class="section-heading roulette-heading">
-            <div>
-              <span class="section-kicker">วงล้ออักษร</span>
-              <h2 id="rouletteTitle">0 ผ่าน · 1 เลือก · 2 สลับหมวด</h2>
-            </div>
-            <button id="scanToggle" class="scan-toggle" type="button" aria-pressed="false" disabled>
-              <span class="play-icon" aria-hidden="true">▶</span>
-              <span id="scanToggleText">เริ่มวงล้อ</span>
-            </button>
-          </div>
+            <section id="chatSignedIn" class="chat-signed-in" hidden>
+              <header class="chat-account-bar">
+                <div><span class="avatar" id="accountAvatar">E</span><span><b id="accountName"></b><small>UID <code id="publicUid"></code></small></span></div>
+                <div><button id="copyUid" class="icon-text-button" type="button">คัดลอก UID</button><button id="logoutButton" class="icon-text-button danger" type="button">ออกจากระบบ</button></div>
+              </header>
+              <div class="chat-layout">
+                <aside class="conversation-panel">
+                  <div class="conversation-toolbar"><h2>ข้อความ</h2><button id="openGroupDialog" class="round-button" type="button" aria-label="สร้างกลุ่ม">＋</button></div>
+                  <form id="addContactForm" class="uid-form"><label for="contactUid">เพิ่มเพื่อนด้วย UID</label><div><input id="contactUid" type="text" placeholder="ES-XXXXXXXXXXXX" pattern="ES-[A-Fa-f0-9]{12}" maxlength="15" required autocomplete="off" /><button type="submit">เพิ่ม</button></div></form>
+                  <div class="contact-actions"><button id="refreshChat" class="text-button" type="button">รีเฟรช</button><span id="contactRequestCount"></span></div>
+                  <div id="contactRequests" class="contact-list"></div>
+                  <div id="conversationList" class="conversation-list"></div>
+                </aside>
+                <section class="conversation-view">
+                  <header class="conversation-header"><div><span class="section-kicker">กำลังสนทนา</span><h2 id="conversationTitle">เลือกห้องแชต</h2></div><span id="conversationKind"></span></header>
+                  <div id="chatMessages" class="chat-messages" aria-live="polite"><p class="empty-chat">เลือกเพื่อนหรือกลุ่มเพื่อดูข้อความ</p></div>
+                  <div class="chat-compose">
+                    <textarea id="chatMessageOutput" rows="3" maxlength="2000" placeholder="พิมพ์ หรือใช้ดวงตาเลือกข้อความ…"></textarea>
+                    <button id="chatSend" class="send-button" type="button" disabled aria-label="ส่งข้อความ">➤</button>
+                  </div>
+                  <p id="chatFeedback" class="chat-feedback" role="status" aria-live="polite"></p>
+                </section>
+              </div>
+            </section>
+          </section>
+        </div>
+      </section>
 
-          <div id="bankTabs" class="bank-tabs" role="tablist" aria-label="หมวดตัวเลือก"></div>
+      <section id="page-guide" class="app-page" data-page="guide" aria-labelledby="guideTitle" hidden>
+        <div class="page-intro"><div><span class="eyebrow">GUIDELINE</span><h1 id="guideTitle">ควบคุม EyeSay<br /><em>ด้วยดวงตา</em></h1></div><p>เริ่มจากปรับเทียบดวงตา แล้วลองทีละท่าช้า ๆ ระบบแยก “ขยิบสั้น” กับ “ขยิบค้าง” ออกจากกัน</p></div>
+        <div class="guide-grid">
+          <article class="guide-card"><span class="guide-number">01</span><div class="eye-demo wink"></div><h2>ขยิบ 1 ครั้ง</h2><p>ขยิบตาซ้ายหรือขวาสั้น ๆ แล้วลืมตา ระบบจะเลือกตัวอักษรที่ไฮไลต์อยู่</p></article>
+          <article class="guide-card"><span class="guide-number">02</span><div class="eye-demo double"></div><h2>ขยิบ 2 ครั้ง</h2><p>ขยิบซ้ำภายใน <b>0.46 วินาที</b> เพื่อสลับ พยัญชนะ → สระ → หยุด/ส่ง</p></article>
+          <article class="guide-card"><span class="guide-number">03</span><div class="eye-demo hold"></div><h2>ขยิบค้างเหมือนรีโมต</h2><p>ค้างตาข้างเดียวเกิน <b>0.36 วินาที</b> ระบบจะเลื่อนหนึ่งตัวทุก <b>0.2 วินาที</b> ปล่อยตาแล้วหยุดทันทีและไม่เลือกตัว</p></article>
+          <article class="guide-card"><span class="guide-number">04</span><div class="eye-demo both"></div><h2>หลับสองตา</h2><p>หลับ–ลืมสั้น ๆ เพื่อวน หน้าหลัก → แชต → วิธีใช้ หากอยู่โหมดหยุด/ส่ง จะใช้เป็นการยืนยันแทน</p></article>
+          <article class="guide-card wide"><span class="guide-number">05</span><h2>หยุดอย่างปลอดภัย</h2><p>สลับไปแท็บ “หยุด” จนเห็น “ยืนยันหยุด?” แล้วหลับตาสองข้างเพื่อหยุดระบบเลือก หากยังไม่ต้องการหยุด ให้ขยิบตาข้างเดียวเพื่อย้อนกลับ</p><div class="guide-flow"><span>ขยิบ 2 ครั้ง<br /><b>ไปแท็บหยุด</b></span><i>→</i><span>หลับสองตา<br /><b>ยืนยันหยุด</b></span><i>→</i><span>พักได้<br /><b>กล้องยังเปิด</b></span></div></article>
+          <article class="guide-card wide calibration-guide"><span class="guide-number">06</span><h2>ก่อนใช้งานจริง</h2><ul><li>วางใบหน้าไว้กลางภาพและเพิ่มแสงให้เห็นดวงตาชัด</li><li>กด “ปรับเทียบดวงตา” เมื่อผู้ใช้ แสง หรือมุมกล้องเปลี่ยน</li><li>หากท่าทางติดกัน ให้ลืมตาตามปกติหนึ่งจังหวะก่อนสั่งครั้งถัดไป</li><li>ค่า threshold ปัจจุบัน <strong id="thresholdValue">40%</strong></li></ul></article>
+        </div>
+      </section>
 
-          <div class="current-choice" aria-live="polite">
-            <span class="choice-label">ตัวเลือกปัจจุบัน</span>
-            <strong id="currentChoice">ก</strong>
-            <span id="choiceHint">รอเปิดกล้อง</span>
-            <div id="burstProgress" class="burst-progress" hidden>
-              <span></span><span></span>
-            </div>
-          </div>
-
-          <div id="characterGrid" class="character-grid" role="tabpanel" aria-label="รายการตัวอักษร"></div>
-
-          <div class="gesture-guide">
-            <div>
-              <span class="gesture-mark" aria-hidden="true">0</span>
-              <p><strong>ไม่กระพริบ</strong><br />ผ่านไปตัวถัดไป</p>
-            </div>
-            <div>
-              <span class="gesture-mark single" aria-hidden="true">◉</span>
-              <p><strong>กระพริบ 1 ครั้ง</strong><br />เลือกตัวที่กำลังแสดง</p>
-            </div>
-            <div>
-              <span class="gesture-mark double" aria-hidden="true">◉◉</span>
-              <p><strong>กระพริบ 2 ครั้ง</strong><br />สลับหมวดตัวเลือก</p>
-            </div>
-            <div>
-              <span class="gesture-mark hold" aria-hidden="true">━</span>
-              <p><strong>หลับตาค้าง</strong><br />1–4 วิพัก · 5 วิหยุด</p>
-            </div>
-          </div>
-        </section>
+      <section id="page-support" class="app-page" data-page="support" aria-labelledby="supportTitle" hidden>
+        <div class="support-page">
+          <div class="support-copy"><span class="eyebrow">SUPPORT EYESAY</span><h1 id="supportTitle">แรงใจ 😭💖</h1><p>ทุกแรงสนับสนุนช่วยให้ EyeSay ได้ทดลองกับผู้ใช้จริง ปรับความแม่นยำ และพัฒนาการสื่อสารที่เข้าถึงได้มากขึ้น</p><div class="support-note"><b>ขอบคุณที่เชื่อว่าดวงตาก็สื่อสารได้</b><span>สแกน QR ผ่านแอปธนาคารที่รองรับ PromptPay</span></div></div>
+          <figure class="qr-card"><img src="./assets/support-promptpay.png" alt="QR PromptPay บัญชี ธีรวีร์ ปรีชาธร" /><figcaption><span>PromptPay</span><b>ธีรวีร์ ปรีชาธร</b></figcaption></figure>
+        </div>
       </section>
     </main>
 
-    <aside id="settingsPanel" class="settings-panel" aria-hidden="true" aria-labelledby="settingsTitle">
-      <div class="settings-header">
-        <div>
-          <span class="section-kicker">อ่านก่อนเริ่ม</span>
-          <h2 id="settingsTitle">คู่มือการใช้งาน</h2>
-        </div>
-        <button id="closeSettings" class="icon-button" type="button" aria-label="ปิดคู่มือ">×</button>
-      </div>
-      <div class="settings-body guide-body">
-        <div class="guide-window">
-          <span>หนึ่งตัวอักษร = หนึ่งรอบ</span>
-          <strong>1.35 วินาที</strong>
-          <p>วงล้อหยุดรอทันทีที่คุณกะพริบครั้งแรก แล้วรออีก 0.55 วินาทีเพื่อดูว่ามีครั้งที่สองไหม</p>
-        </div>
-        <ol class="guide-list">
-          <li><b>ไม่กระพริบตา</b><span>ระบบข้ามตัวปัจจุบันและไปตัวถัดไป</span></li>
-          <li><b>กระพริบ 1 ครั้ง</b><span>เลือกตัวที่ค้างอยู่ หลังรอครบ 0.55 วินาทีจากจังหวะที่กะพริบ</span></li>
-          <li><b>กระพริบ 2 ครั้ง</b><span>กะพริบซ้ำภายใน 0.55 วินาที ระบบจะสลับ พยัญชนะ → สระ → ข้อความด่วน ทันที</span></li>
-          <li><b>หลับตาค้างประมาณ 1–4 วินาที</b><span>วงล้อจะ freeze ให้พักสายตา เมื่อลืมตาจะเริ่มรอบใหม่จากตัวเดิม</span></li>
-          <li><b>หลับตาครบ 5 วินาที</b><span>หยุดกล้องและระบบเลือกทันที กด “เปิดกล้อง” เพื่อใช้งานต่อ</span></li>
-        </ol>
-        <div class="guide-note">
-          <b>ก่อนใช้งานจริง</b>
-          <p>จัดหน้าให้อยู่กลางภาพ มีแสงพอ และกด “ปรับเทียบดวงตา” ทุกครั้งที่แสงหรือมุมกล้องเปลี่ยนมาก</p>
-        </div>
-        <div class="threshold-card">
-          <span>ค่า threshold ปัจจุบัน (ปรับอัตโนมัติ)</span>
-          <strong id="thresholdValue">35%</strong>
-          <small>ระบบใช้ทั้งสองตาและ hysteresis เพื่อลดการตรวจจับผิด</small>
-        </div>
-      </div>
-    </aside>
-    <div id="settingsBackdrop" class="settings-backdrop" hidden></div>
+    <section id="cameraCard" class="card camera-card" aria-labelledby="cameraTitle">
+      <div class="section-heading"><div><span class="section-kicker">กล้องและดวงตา</span><h2 id="cameraTitle">การตรวจจับแยกซ้าย–ขวา</h2></div><span id="trackingBadge" class="status-badge is-idle"><span></span>ยังไม่เริ่ม</span></div>
+      <div class="camera-stage"><video id="cameraVideo" autoplay muted playsinline></video><canvas id="cameraOverlay" aria-hidden="true"></canvas><div id="cameraPlaceholder" class="camera-placeholder"><span class="camera-icon">◉</span><p>เปิดกล้องเพื่อเริ่มควบคุมด้วยดวงตา</p><small>ประมวลผลบนอุปกรณ์เท่านั้น</small></div><div id="gestureOverlay" class="gesture-overlay" hidden><b id="gestureOverlayTitle">กำลังขยิบค้าง</b><span id="gestureOverlayDetail">เลื่อนทุก 0.2 วินาที</span></div></div>
+      <div class="dual-meter"><div><span>ตาซ้าย</span><div class="meter-track"><i id="leftEyeFill"></i><b id="leftThresholdMark"></b></div><strong id="leftEyeText">0%</strong></div><div><span>ตาขวา</span><div class="meter-track"><i id="rightEyeFill"></i><b id="rightThresholdMark"></b></div><strong id="rightEyeText">0%</strong></div></div>
+      <div class="camera-controls"><button id="cameraButton" class="primary-button" type="button">เปิดกล้อง</button><button id="calibrateButton" class="secondary-button" type="button" disabled>ปรับเทียบดวงตา</button></div>
+      <div class="signal-row"><span id="signalIcon">○</span><div><b id="signalTitle">พร้อมเริ่มต้น</b><p id="signalDetail">จัดหน้าให้อยู่กลางภาพและมีแสงเพียงพอ</p></div></div>
+    </section>
 
-    <div id="calibrationModal" class="modal" hidden>
-      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="calibrationTitle">
-        <div id="calibrationVisual" class="calibration-visual" aria-hidden="true">
-          <span class="calibration-eye"></span><span class="calibration-eye"></span>
-        </div>
-        <span class="section-kicker">ปรับเทียบเฉพาะบุคคล</span>
-        <h2 id="calibrationTitle">มองตรงและลืมตาตามปกติ</h2>
-        <p id="calibrationInstruction">ระบบจะเก็บค่าดวงตาในสภาพแสงปัจจุบัน</p>
-        <strong id="calibrationCountdown" class="calibration-countdown">3</strong>
-        <div class="calibration-progress"><span id="calibrationProgress"></span></div>
-        <button id="cancelCalibration" class="text-button" type="button">ยกเลิก</button>
-      </div>
-    </div>
+    <section id="remoteCard" class="card remote-card" aria-labelledby="remoteTitle">
+      <div class="section-heading"><div><span class="section-kicker">ตัวเลือกแบบรีโมต</span><h2 id="remoteTitle">ขยิบเลือก · ขยิบค้างเลื่อน</h2></div><button id="scanToggle" class="scan-toggle" type="button" aria-pressed="false" disabled><span>▶</span><b id="scanToggleText">เริ่มควบคุม</b></button></div>
+      <div id="bankTabs" class="bank-tabs" role="tablist" aria-label="หมวดตัวเลือก"></div>
+      <div class="current-choice" aria-live="polite"><span>ตัวเลือกปัจจุบัน</span><strong id="currentChoice">ก</strong><small id="choiceHint">รอเปิดกล้อง</small><div id="winkProgress" class="wink-progress" hidden><i></i><i></i></div></div>
+      <div id="characterGrid" class="character-grid" role="tabpanel"></div>
+      <div class="remote-legend"><span>◐ <b>ขยิบ 1×</b> เลือก</span><span>◐◐ <b>ขยิบ 2×</b> สลับหมวด</span><span>━ <b>ค้าง 1 ข้าง</b> เลื่อนทุก .2 วิ</span><span>◉ <b>สองตา</b> เปลี่ยนหน้า/ยืนยัน</span></div>
+    </section>
 
-    <div id="noticeModal" class="modal notice-modal">
-      <div class="modal-card" role="alertdialog" aria-modal="true" aria-labelledby="noticeTitle" aria-describedby="noticeText">
-        <span class="section-kicker">แจ้งให้ทราบ</span>
-        <h2 id="noticeTitle">ระบบยังอยู่ระหว่างพัฒนา</h2>
-        <p id="noticeText">ตอนนี้ระบบกะพริบตา 2 ครั้งเพื่อสลับโหมดยังพัฒนาได้ไม่ดีพอ sorry จะมี pace ยุ่งยากนิดนึง (┬┬﹏┬┬)</p>
-        <p class="notice-tip">กะพริบรัว ๆ จะไม่เปลี่ยนโหมดนะ ต้องกะพริบเป็นจังหวะชัด ๆ 2 ครั้งติดกัน</p>
-        <button id="closeNotice" class="primary-button" type="button">รับทราบ</button>
-      </div>
-    </div>
-    <!-- Inline so the full-screen notice stays dismissable even if app.js is cached or fails to load. -->
-    <script>
-      (() => {
-        const modal = document.getElementById("noticeModal");
-        const close = () => (modal.hidden = true);
-        document.getElementById("closeNotice").addEventListener("click", close);
-        modal.addEventListener("click", (event) => {
-          if (event.target === modal) close();
-        });
-        document.addEventListener("keydown", (event) => {
-          if (event.key === "Escape") close();
-        });
-        document.getElementById("closeNotice").focus();
-      })();
-    </script>
+    <dialog id="groupDialog" class="group-dialog">
+      <form id="groupForm" method="dialog"><div class="dialog-heading"><div><span class="section-kicker">สำหรับผู้ดูแล</span><h2>สร้างกลุ่มแชต</h2></div><button id="closeGroupDialog" class="round-button" type="button" aria-label="ปิด">×</button></div><label for="groupName">ชื่อกลุ่ม</label><input id="groupName" type="text" minlength="2" maxlength="60" required placeholder="เช่น ครอบครัว" /><fieldset><legend>เลือกเพื่อนเข้ากลุ่ม (สูงสุด 20 คน)</legend><div id="groupMemberList" class="group-member-list"></div></fieldset><button class="primary-button" value="default" type="submit">สร้างกลุ่ม</button></form>
+    </dialog>
 
+    <div id="calibrationModal" class="modal" hidden><div class="modal-card" role="dialog" aria-modal="true"><div id="calibrationVisual" class="calibration-visual"><span></span><span></span></div><span class="section-kicker">ปรับเทียบเฉพาะบุคคล</span><h2 id="calibrationTitle">มองตรงและลืมตาตามปกติ</h2><p id="calibrationInstruction"></p><strong id="calibrationCountdown">3</strong><div class="calibration-progress"><span id="calibrationProgress"></span></div><button id="cancelCalibration" class="text-button" type="button">ยกเลิก</button></div></div>
     <div id="toastRegion" class="toast-region" aria-live="assertive"></div>
-
-    <noscript>เว็บไซต์นี้ต้องใช้ JavaScript เพื่อประมวลผลการกระพริบตา</noscript>
+    <noscript>เว็บไซต์นี้ต้องใช้ JavaScript เพื่อประมวลผลการกะพริบตา</noscript>
     <script type="module" src="./src/app.js"></script>
   </body>
 </html>

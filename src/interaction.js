@@ -1,6 +1,6 @@
-export const BLINK_WINDOW_MS = 1_350;
-// Counted from the first blink, so a double blink is never split by the scan-slot boundary.
-export const CONFIRM_WINDOW_MS = 550;
+export const WINK_CONFIRM_MS = 460;
+export const HOLD_STEP_MS = 200;
+export const STOP_ACTION = "หยุด";
 
 export const CHARACTER_BANKS = Object.freeze([
   {
@@ -16,21 +16,18 @@ export const CHARACTER_BANKS = Object.freeze([
     items: ["ะ", "า", "ิ", "ี", "ึ", "ื", "ุ", "ู", "เ", "แ", "โ", "ใ", "ไ", "ำ", "ั", "็", "่", "้", "๊", "๋", "์", "ๆ"],
   },
   {
-    id: "quick",
-    label: "ข้อความด่วน",
-    shortLabel: "คำด่วน",
-    items: ["ใช่", "ไม่", "หิว", "น้ำ", "เจ็บ", "ช่วยด้วย", "ขอบคุณ", "ห้องน้ำ", "ร้อน", "หนาว", "พักก่อน", "เรียกคนดูแล"],
+    id: "stop",
+    label: "หยุด",
+    shortLabel: "หยุด",
+    items: [STOP_ACTION],
   },
 ]);
 
-export class RouletteScanner {
-  constructor({ banks = CHARACTER_BANKS, intervalMs = 1_350 } = {}) {
+export class RemoteScanner {
+  constructor({ banks = CHARACTER_BANKS } = {}) {
     this.banks = banks;
-    this.intervalMs = intervalMs;
     this.bankIndex = 0;
     this.itemIndex = 0;
-    this.lastAdvancedAt = null;
-    this.paused = true;
   }
 
   get bank() {
@@ -41,114 +38,87 @@ export class RouletteScanner {
     return this.bank.items[this.itemIndex];
   }
 
-  setInterval(intervalMs) {
-    this.intervalMs = Math.max(450, Number(intervalMs) || 1_350);
-  }
-
-  advance(timestamp = performance.now()) {
+  advance() {
     this.itemIndex = (this.itemIndex + 1) % this.bank.items.length;
-    this.lastAdvancedAt = timestamp;
     return this.item;
   }
 
-  start(timestamp = performance.now()) {
-    this.paused = false;
-    this.lastAdvancedAt = timestamp;
-  }
-
-  pause() {
-    this.paused = true;
-  }
-
-  tick(timestamp) {
-    if (this.paused) return false;
-    if (this.lastAdvancedAt === null) this.lastAdvancedAt = timestamp;
-    if (timestamp - this.lastAdvancedAt < this.intervalMs) return false;
-
-    const steps = Math.floor((timestamp - this.lastAdvancedAt) / this.intervalMs);
-    this.itemIndex = (this.itemIndex + steps) % this.bank.items.length;
-    this.lastAdvancedAt += steps * this.intervalMs;
-    return true;
-  }
-
-  nextBank(timestamp = performance.now()) {
+  nextBank() {
     this.bankIndex = (this.bankIndex + 1) % this.banks.length;
     this.itemIndex = 0;
-    this.lastAdvancedAt = timestamp;
     return this.bank;
   }
 
-  setBank(id, timestamp = performance.now()) {
+  setBank(id) {
     const index = this.banks.findIndex((bank) => bank.id === id);
     if (index < 0) return false;
     this.bankIndex = index;
     this.itemIndex = 0;
-    this.lastAdvancedAt = timestamp;
     return true;
   }
 
-  selectIndex(index, timestamp = performance.now()) {
+  selectIndex(index) {
     if (!Number.isInteger(index) || index < 0 || index >= this.bank.items.length) {
       return false;
     }
     this.itemIndex = index;
-    this.lastAdvancedAt = timestamp;
     return true;
+  }
+
+  replaceBanks(banks) {
+    const activeId = this.bank?.id;
+    this.banks = banks;
+    this.bankIndex = Math.max(0, banks.findIndex((bank) => bank.id === activeId));
+    this.itemIndex = Math.min(this.itemIndex, this.bank.items.length - 1);
   }
 }
 
-export class BlinkWindowCounter {
-  constructor({ windowMs = BLINK_WINDOW_MS, confirmMs = CONFIRM_WINDOW_MS } = {}) {
-    this.windowMs = windowMs;
+// Resolves a short one-eye wink after a small grace period. A second wink inside
+// that period switches banks. Long holds never call this class, so hold and tap
+// cannot both fire for the same gesture.
+export class WinkCommandResolver {
+  constructor({ confirmMs = WINK_CONFIRM_MS } = {}) {
     this.confirmMs = confirmMs;
     this.reset();
   }
 
   reset() {
-    this.count = 0;
-    this.startedAt = null;
+    this.eye = null;
     this.deadline = null;
     this.candidate = null;
   }
 
-  start(timestamp, candidate) {
-    if (this.deadline !== null) return false;
+  record(timestamp, candidate, eye) {
+    if (this.deadline !== null && timestamp <= this.deadline) {
+      const firstEye = this.eye;
+      this.reset();
+      return { type: "switch-bank", firstEye, secondEye: eye };
+    }
     this.candidate = candidate;
-    this.startedAt = timestamp;
-    this.deadline = timestamp + this.windowMs;
-    return true;
+    this.eye = eye;
+    this.deadline = timestamp + this.confirmMs;
+    return { type: "pending-select", candidate, eye, deadline: this.deadline };
   }
 
-  recordBlink(timestamp) {
-    if (this.deadline === null) return { type: "ignored", count: 0 };
-    this.count += 1;
-    this.deadline = this.count === 1 ? timestamp + this.confirmMs : timestamp;
-    return { type: "pending", count: this.count, deadline: this.deadline };
-  }
-
-  resolve(timestamp, { eyesClosed = false } = {}) {
-    if (this.deadline === null || timestamp < this.deadline || eyesClosed) return null;
-    const count = this.count;
+  resolve(timestamp) {
+    if (this.deadline === null || timestamp < this.deadline) return null;
     const candidate = this.candidate;
+    const eye = this.eye;
     this.reset();
-    if (count === 0) return { type: "pass", candidate };
-    if (count === 1) return { type: "select", candidate };
-    return { type: "switch-bank", count };
+    return { type: "select", candidate, eye };
   }
 
   cancel() {
-    const hadPending = this.count > 0;
+    const hadPending = this.deadline !== null;
     this.reset();
     return hadPending;
   }
 }
 
+// Kept as a temporary alias for older imports while local drafts migrate.
+export const RouletteScanner = RemoteScanner;
+
 export function applyToken(text, token) {
-  const quickPhrases = new Set(CHARACTER_BANKS.find((bank) => bank.id === "quick").items);
-  if (quickPhrases.has(token)) {
-    const spacer = text && !text.endsWith(" ") ? " " : "";
-    return `${text}${spacer}${token} `;
-  }
   return `${text}${token}`;
 }
 

@@ -5,6 +5,7 @@ import { extname, resolve, sep } from "node:path";
 import { pathToFileURL } from "node:url";
 
 const modulePath = process.env.PLAYWRIGHT_MODULE;
+const localChat = process.argv.includes("--local-chat");
 const { chromium } = await import(modulePath ? pathToFileURL(modulePath).href : "playwright");
 const root = resolve("dist");
 const mime = { ".html":"text/html", ".js":"text/javascript", ".css":"text/css", ".svg":"image/svg+xml", ".png":"image/png", ".md":"text/plain" };
@@ -21,18 +22,24 @@ try {
   const base=`http://127.0.0.1:${server.address().port}`;
   const page=await browser.newPage({viewport:{width:1440,height:1000}}); const errors=[]; page.on("pageerror",(error)=>errors.push(error.message));
   await page.goto(base);
-  assert.equal(await page.locator("[data-page]").count(),3);
+  assert.equal(await page.locator("[data-page]").count(),localChat?3:2);
   await page.locator("#mainMessageOutput").fill("คนทั่วไปพิมพ์ข้อความได้");
   assert.equal(await page.locator("#characterCount").textContent(),"23 ตัวอักษร");
   await page.locator('[data-route="guide"]').first().click();
   assert.equal(await page.locator("#page-guide").isVisible(),true);
-  await page.locator('[data-route="chat"]').first().click();
-  await page.locator("#setupNotice").waitFor({state:"visible"});
-  assert.equal(await page.locator("#googleLogin").isDisabled(),true);
+  if(localChat){
+    await page.locator('[data-route="chat"]').first().click();
+    await page.locator("#setupNotice").waitFor({state:"visible"});
+    assert.equal(await page.locator("#googleLogin").isDisabled(),true);
+  }else{
+    assert.equal(await page.locator('[data-route="chat"]').count(),0);
+    assert.equal(await page.locator("#page-chat").count(),0);
+  }
   await page.setViewportSize({width:390,height:844});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   assert.deepEqual(errors,[]);
 
+  if(localChat){
   const context=await browser.newContext({viewport:{width:1440,height:1000}}); const app=await context.newPage(); const appErrors=[]; app.on("pageerror",(error)=>appErrors.push(error.message));
   await app.route("**/src/supabase-config.js",(route)=>route.fulfill({contentType:"text/javascript",body:'export const SUPABASE_URL="https://test.supabase.co"; export const SUPABASE_PUBLISHABLE_KEY="sb_publishable_test";'}));
   const fakeModule=await readFile(resolve("tools/fake-supabase-browser.js"),"utf8");
@@ -44,9 +51,7 @@ try {
   await app.locator("#contactRequests").getByRole("button",{name:"แชต",exact:true}).click();
   await app.locator("#conversationTitle").filter({hasText:"เพื่อนทดสอบ"}).waitFor();
   await app.locator("#chatMessageOutput").fill("น้ำ");
-  await app.locator('[data-bank-id="send"]').click();
-  assert.equal(await app.locator("#currentChoice").textContent(),"ยืนยันส่ง?");
-  await app.getByRole("button",{name:"เลือก ส่งข้อความ",exact:true}).click();
+  await app.locator("#chatSend").click();
   await app.waitForFunction(()=>document.getElementById("chatFeedback").textContent.includes("ส่งข้อความแล้ว"));
   assert.equal(await app.locator("#chatMessageOutput").inputValue(),"");
   assert.equal(await app.evaluate(()=>globalThis.__fakeSent.length),1);
@@ -56,5 +61,6 @@ try {
   assert.deepEqual(appErrors,[]);
   if(process.env.SCREENSHOT_PATH) await app.screenshot({path:process.env.SCREENSHOT_PATH,fullPage:true});
   await context.close();
-  console.log("PASS browser: three pages + Google auth mock + UID/DM/send/group UI + mobile layout.");
+  console.log("PASS localhost browser: communication + local-only chat/auth/UID/DM/group + mobile layout.");
+  }else console.log("PASS public browser: chat/auth/database UI excluded + communication/guide + mobile layout.");
 } finally { await browser?.close(); await new Promise((done)=>server.close(done)); }

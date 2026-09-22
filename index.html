@@ -17,7 +17,9 @@
       </a>
       <nav class="main-nav" aria-label="หน้าหลัก">
         <button class="nav-link is-active" data-route="home" type="button">หน้าหลัก</button>
+        <!-- LOCAL_CHAT_START -->
         <button class="nav-link" data-route="chat" type="button">แชต</button>
+        <!-- LOCAL_CHAT_END -->
         <button class="nav-link" data-route="guide" type="button">วิธีใช้</button>
       </nav>
     </header>
@@ -26,7 +28,7 @@
       <section id="page-home" class="app-page is-active" data-page="home" aria-labelledby="homeTitle">
         <div class="page-intro">
           <div><span class="eyebrow">EYE-CONTROLLED COMMUNICATION</span><h1 id="homeTitle">สื่อสารด้วยดวงตา<br /><em>ในจังหวะของคุณ</em></h1></div>
-          <p>ขยิบเพื่อเลือก ขยิบค้างเพื่อเลื่อน และหลับตาทั้งสองข้างเพื่อไปยังหน้าถัดไป</p>
+          <p>ระบบเลื่อนตัวเลือกให้อัตโนมัติ หลับสองตาเพื่อเลือก หรือค้างตาข้างเดียวเพื่อเร่งความเร็ว</p>
         </div>
         <div class="workspace-grid">
           <div class="workspace-left"><div id="homeCameraSlot"></div></div>
@@ -41,6 +43,7 @@
         </div>
       </section>
 
+      <!-- LOCAL_CHAT_START -->
       <section id="page-chat" class="app-page" data-page="chat" aria-labelledby="chatTitle" hidden>
         <div class="page-intro compact"><div><span class="eyebrow">EYESAY CHAT</span><h1 id="chatTitle">คุยกับคนสำคัญ</h1></div><p>ผู้ดูแลจัดการบัญชี รายชื่อ และกลุ่มด้วยการสัมผัส ผู้ใช้ส่งข้อความด้วยดวงตาหรือพิมพ์ได้</p></div>
         <div class="chat-workspace">
@@ -82,16 +85,17 @@
           </section>
         </div>
       </section>
+      <!-- LOCAL_CHAT_END -->
 
       <section id="page-guide" class="app-page" data-page="guide" aria-labelledby="guideTitle" hidden>
-        <div class="page-intro"><div><span class="eyebrow">GUIDELINE</span><h1 id="guideTitle">ควบคุม EyeSay<br /><em>ด้วยดวงตา</em></h1></div><p>เริ่มจากปรับเทียบดวงตา แล้วลองทีละท่าช้า ๆ ระบบแยก “ขยิบสั้น” กับ “ขยิบค้าง” ออกจากกัน</p></div>
+        <div class="page-intro"><div><span class="eyebrow">GUIDELINE</span><h1 id="guideTitle">ควบคุม EyeSay<br /><em>แบบไม่ซ้อนคำสั่ง</em></h1></div><p>การเลือกใช้สองตา ส่วนการเร่งความเร็วใช้ตาข้างเดียว จึงไม่ต้องเดาว่าผู้ใช้ต้องการเลือกหรือเลื่อน</p></div>
         <div class="guide-grid">
-          <article class="guide-card"><span class="guide-number">01</span><h2>ขยิบ 1 ครั้ง</h2><p>ขยิบตาซ้ายหรือขวาสั้น ๆ แล้วลืมตา ระบบจะเลือกตัวอักษรที่ไฮไลต์อยู่</p></article>
-          <article class="guide-card"><span class="guide-number">02</span><h2>ขยิบ 2 ครั้ง</h2><p>ขยิบซ้ำภายใน <b>0.46 วินาที</b> เพื่อสลับ พยัญชนะ → สระ → หยุด/ส่ง</p></article>
-          <article class="guide-card"><span class="guide-number">03</span><h2>ขยิบค้างเหมือนรีโมต</h2><p>ค้างตาข้างเดียวเกิน <b>0.36 วินาที</b> ระบบจะเลื่อนหนึ่งตัวทุก <b>0.2 วินาที</b> ปล่อยตาแล้วหยุดทันทีและไม่เลือกตัว</p></article>
-          <article class="guide-card"><span class="guide-number">04</span><h2>หลับสองตา</h2><p>หลับ–ลืมสั้น ๆ เพื่อวน หน้าหลัก → แชต → วิธีใช้ หากอยู่โหมดหยุด/ส่ง จะใช้เป็นการยืนยันแทน</p></article>
-          <article class="guide-card wide"><span class="guide-number">05</span><h2>หยุดอย่างปลอดภัย</h2><p>สลับไปแท็บ “หยุด” จนเห็น “ยืนยันหยุด?” แล้วหลับตาสองข้างเพื่อหยุดระบบเลือก หากยังไม่ต้องการหยุด ให้ขยิบตาข้างเดียวเพื่อย้อนกลับ</p><div class="guide-flow"><span>ขยิบ 2 ครั้ง<br /><b>ไปแท็บหยุด</b></span><i>→</i><span>หลับสองตา<br /><b>ยืนยันหยุด</b></span><i>→</i><span>พักได้<br /><b>กล้องยังเปิด</b></span></div></article>
-          <article class="guide-card wide calibration-guide"><span class="guide-number">06</span><h2>ก่อนใช้งานจริง</h2><ul><li>วางใบหน้าไว้กลางภาพและเพิ่มแสงให้เห็นดวงตาชัด</li><li>กด “ปรับเทียบดวงตา” เมื่อผู้ใช้ แสง หรือมุมกล้องเปลี่ยน</li><li>หากท่าทางติดกัน ให้ลืมตาตามปกติหนึ่งจังหวะก่อนสั่งครั้งถัดไป</li><li>ค่า threshold ปัจจุบัน <strong id="thresholdValue">40%</strong></li></ul></article>
+          <article class="guide-card"><span class="guide-number">01</span><h2>ระบบเลื่อนให้อัตโนมัติ</h2><p>ตัวเลือกจะเดินไปข้างหน้าทุก <b>1.2 วินาที</b> ผู้ใช้เพียงรอตัวที่ต้องการ ไม่ต้องขยิบซ้ำเพื่อเลื่อน</p></article>
+          <article class="guide-card"><span class="guide-number">02</span><h2>หลับสองตา 1 ครั้ง</h2><p>หลับ–ลืมสองตาสั้น ๆ เพื่อเลือกตัวอักษรปัจจุบัน ระบบจะหยุดรอ <b>0.46 วินาที</b> เพื่อป้องกันการชนกับคำสั่งสองครั้ง</p></article>
+          <article class="guide-card"><span class="guide-number">03</span><h2>หลับสองตา 2 ครั้ง</h2><p>ทำซ้ำภายใน <b>0.46 วินาที</b> เพื่อสลับระหว่างหมวดพยัญชนะและสระ โดยไม่เลือกตัวอักษร</p></article>
+          <article class="guide-card"><span class="guide-number">04</span><h2>ค้างตาเดียวเพื่อเร่งความเร็ว</h2><p>ค้างตาซ้ายหรือขวาเกิน <b>0.36 วินาที</b> ระบบจะเร่งเป็นหนึ่งตัวทุก <b>0.2 วินาที</b> ตาเดียวไม่มีคำสั่งเลือกจึงไม่ overlap</p></article>
+          <article class="guide-card wide"><span class="guide-number">05</span><h2>ค้างสองตาเพื่อหยุด</h2><p>หลับสองตาค้างประมาณ <b>0.9 วินาที</b> เพื่อหยุดระบบเลือกทันที กล้องยังเปิดอยู่และกด “เริ่มควบคุม” เพื่อทำต่อได้</p><div class="guide-flow"><span>ระบบเลื่อนปกติ<br /><b>1.2 วิ / ตัว</b></span><i>→</i><span>ค้างตาเดียว<br /><b>เร่งเป็น .2 วิ / ตัว</b></span><i>→</i><span>ปล่อยตา<br /><b>กลับความเร็วปกติ</b></span></div></article>
+          <article class="guide-card wide calibration-guide"><span class="guide-number">06</span><h2>ก่อนใช้งานจริง</h2><ul><li>วางใบหน้าไว้กลางภาพและเพิ่มแสงให้เห็นดวงตาชัด</li><li>กด “ปรับเทียบดวงตา” เมื่อผู้ใช้ แสง หรือมุมกล้องเปลี่ยน</li><li>การเปลี่ยนหน้าใช้ปุ่มบนจอโดยผู้ดูแล เพื่อลดคำสั่งดวงตาที่ซับซ้อน</li><li>ค่า threshold ปัจจุบัน <strong id="thresholdValue">40%</strong></li></ul></article>
         </div>
       </section>
 
@@ -106,11 +110,11 @@
     </section>
 
     <section id="remoteCard" class="card remote-card" aria-labelledby="remoteTitle">
-      <div class="section-heading"><div><span class="section-kicker">ตัวเลือกแบบรีโมต</span><h2 id="remoteTitle">ขยิบเลือก · ขยิบค้างเลื่อน</h2></div><button id="scanToggle" class="scan-toggle" type="button" aria-pressed="false" disabled><span>▶</span><b id="scanToggleText">เริ่มควบคุม</b></button></div>
+      <div class="section-heading"><div><span class="section-kicker">ตัวเลือกอัตโนมัติ</span><h2 id="remoteTitle">สองตาเลือก · ตาเดียวเร่งความเร็ว</h2></div><button id="scanToggle" class="scan-toggle" type="button" aria-pressed="false" disabled><span>▶</span><b id="scanToggleText">เริ่มควบคุม</b></button></div>
       <div id="bankTabs" class="bank-tabs" role="tablist" aria-label="หมวดตัวเลือก"></div>
       <div class="current-choice" aria-live="polite"><span>ตัวเลือกปัจจุบัน</span><strong id="currentChoice">ก</strong><small id="choiceHint">รอเปิดกล้อง</small><div id="winkProgress" class="wink-progress" hidden><i></i><i></i></div></div>
       <div id="characterGrid" class="character-grid" role="tabpanel"></div>
-      <div class="remote-legend"><span>◐ <b>ขยิบ 1×</b> เลือก</span><span>◐◐ <b>ขยิบ 2×</b> สลับหมวด</span><span>━ <b>ค้าง 1 ข้าง</b> เลื่อนทุก .2 วิ</span><span>◉ <b>สองตา</b> เปลี่ยนหน้า/ยืนยัน</span></div>
+      <div class="remote-legend"><span><b>สองตา 1×</b> เลือกตัว</span><span><b>สองตา 2×</b> สลับหมวด</span><span><b>ค้างตาเดียว</b> เร่งเป็น .2 วิ/ตัว</span><span><b>ค้างสองตา</b> หยุดระบบเลือก</span></div>
     </section>
 
     <dialog id="groupDialog" class="group-dialog">

@@ -1,4 +1,4 @@
-# ตั้งค่า EyeSay Chat ด้วย Supabase + Google
+# ตั้งค่า EyeSay Chat รุ่น localhost ด้วย Supabase + Google
 
 EyeSay ใช้ Supabase Auth, Postgres, Row Level Security (RLS) และ Realtime ผู้ใช้เข้าสู่ระบบด้วย Google มี UID สำหรับเพิ่มเพื่อน คุย DM และสร้างกลุ่มได้ โดยไม่ต้องเชื่อม LINE, Discord หรือ Facebook
 
@@ -14,11 +14,9 @@ EyeSay ใช้ Supabase Auth, Postgres, Row Level Security (RLS) และ Rea
 2. ใส่ Authorized JavaScript origins เป็น URL เว็บจริงและ `http://localhost:4173`
 3. คัดลอก Callback URL ที่ Supabase แสดงใน Authentication → Providers → Google ไปใส่ Authorized redirect URI ของ Google
 4. นำ Google Client ID และ Client Secret ใส่ใน Supabase Authentication → Providers → Google แล้วเปิด provider
-5. ใน Supabase Authentication → URL Configuration ตั้ง Site URL และเพิ่ม Redirect URLs:
-   - `http://localhost:4173/**`
-   - `https://ilovefocalors1437.github.io/-/**`
+5. ใน Supabase Authentication → URL Configuration ตั้ง Site URL และ Redirect URL เป็น `http://localhost:4173/**`
 
-หน้าเว็บใช้ Supabase OAuth ซึ่งส่งต่อไปยัง Google Identity Services ให้เอง จึงไม่ต้องฝัง Google Client Secret ในเว็บ
+รุ่น localhost ใช้ Supabase OAuth ซึ่งส่งต่อไปยัง Google Identity Services ให้เอง จึงไม่ต้องฝัง Google Client Secret ในเว็บ รุ่นที่ deploy บน GitHub Pages ไม่มีหน้าแชตและไม่มีไฟล์ตั้งค่า Supabase
 
 ## 3. ใส่คีย์สำหรับหน้าเว็บ
 

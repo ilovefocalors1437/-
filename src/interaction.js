@@ -1,6 +1,6 @@
 export const WINK_CONFIRM_MS = 460;
 export const HOLD_STEP_MS = 200;
-export const STOP_ACTION = "หยุด";
+export const NORMAL_SCAN_MS = 1_200;
 
 export const CHARACTER_BANKS = Object.freeze([
   {
@@ -15,19 +15,16 @@ export const CHARACTER_BANKS = Object.freeze([
     shortLabel: "สระ",
     items: ["ะ", "า", "ิ", "ี", "ึ", "ื", "ุ", "ู", "เ", "แ", "โ", "ใ", "ไ", "ำ", "ั", "็", "่", "้", "๊", "๋", "์", "ๆ"],
   },
-  {
-    id: "stop",
-    label: "หยุด",
-    shortLabel: "หยุด",
-    items: [STOP_ACTION],
-  },
 ]);
 
 export class RemoteScanner {
-  constructor({ banks = CHARACTER_BANKS } = {}) {
+  constructor({ banks = CHARACTER_BANKS, intervalMs = NORMAL_SCAN_MS } = {}) {
     this.banks = banks;
+    this.intervalMs = intervalMs;
     this.bankIndex = 0;
     this.itemIndex = 0;
+    this.lastAdvancedAt = null;
+    this.paused = true;
   }
 
   get bank() {
@@ -38,30 +35,53 @@ export class RemoteScanner {
     return this.bank.items[this.itemIndex];
   }
 
-  advance() {
+  advance(timestamp = performance.now()) {
     this.itemIndex = (this.itemIndex + 1) % this.bank.items.length;
+    this.lastAdvancedAt = timestamp;
     return this.item;
   }
 
-  nextBank() {
+  start(timestamp = performance.now()) {
+    this.paused = false;
+    this.lastAdvancedAt = timestamp;
+  }
+
+  pause() {
+    this.paused = true;
+  }
+
+  tick(timestamp) {
+    if (this.paused) return false;
+    if (this.lastAdvancedAt === null) this.lastAdvancedAt = timestamp;
+    if (timestamp - this.lastAdvancedAt < this.intervalMs) return false;
+    const steps = Math.floor((timestamp - this.lastAdvancedAt) / this.intervalMs);
+    this.itemIndex = (this.itemIndex + steps) % this.bank.items.length;
+    this.lastAdvancedAt += steps * this.intervalMs;
+    return true;
+  }
+
+  nextBank(timestamp = performance.now()) {
     this.bankIndex = (this.bankIndex + 1) % this.banks.length;
     this.itemIndex = 0;
+    this.lastAdvancedAt = timestamp;
     return this.bank;
   }
 
-  setBank(id) {
+  setBank(id, timestamp = performance.now()) {
     const index = this.banks.findIndex((bank) => bank.id === id);
     if (index < 0) return false;
     this.bankIndex = index;
     this.itemIndex = 0;
+    this.lastAdvancedAt = timestamp;
     return true;
   }
 
-  selectIndex(index) {
+  selectIndex(index, timestamp = performance.now()) {
     if (!Number.isInteger(index) || index < 0 || index >= this.bank.items.length) {
       return false;
     }
     this.itemIndex = index;
+    this.lastAdvancedAt = timestamp;
     return true;
   }
 
@@ -73,10 +93,10 @@ export class RemoteScanner {
   }
 }
 
-// Resolves a short one-eye wink after a small grace period. A second wink inside
-// that period switches banks. Long holds never call this class, so hold and tap
-// cannot both fire for the same gesture.
-export class WinkCommandResolver {
+// Resolves one short bilateral blink after a small grace period. A second blink
+// switches banks. One-eye events never enter this resolver, so acceleration and
+// selection cannot fire from the same gesture.
+export class BlinkCommandResolver {
   constructor({ confirmMs = WINK_CONFIRM_MS } = {}) {
     this.confirmMs = confirmMs;
     this.reset();

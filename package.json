@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "test": "node --test",
-    "test:browser": "npm run build:web && node tools/smoke-supabase.js",
-    "serve": "npm run build:web && npx --yes serve dist -l 4173",
-    "build:web": "node tools/build-web.js"
+    "test:browser": "npm run build:web && node tools/smoke-supabase.js && npm run build:local && node tools/smoke-supabase.js --local-chat",
+    "serve": "npm run build:local && npx --yes serve dist -l 4173",
+    "build:web": "node tools/build-web.js",
+    "build:local": "node tools/build-web.js --local-chat"
   },
   "engines": {
     "node": ">=20"

@@ -2,26 +2,25 @@
 
 **ระบบแปลงการกะพริบตาเป็นข้อความสำหรับผู้มีภาวะอัมพาตและบกพร่องทางการพูด**
 
-เว็บต้นแบบใช้ MediaPipe Face Landmarker ตรวจตาซ้าย/ขวาบนอุปกรณ์ เพื่อให้ผู้ใช้เลือกตัวอักษร ควบคุมหน้า และส่งข้อความโดยไม่ใช้มือ ภาพกล้องไม่ถูกอัปโหลดไป Supabase
+เว็บต้นแบบใช้ MediaPipe Face Landmarker ตรวจตาซ้าย/ขวาบนอุปกรณ์ เพื่อให้ผู้ใช้เลือกตัวอักษรโดยไม่ใช้มือ ภาพกล้องไม่ถูกอัปโหลดออกจากเครื่อง
 
 > MVP สำหรับทดลองและเก็บข้อมูล ไม่ใช่อุปกรณ์การแพทย์ และไม่ควรเป็นช่องทางฉุกเฉินเพียงช่องทางเดียว
 
-## 3 หน้า
+## รุ่นที่เผยแพร่และรุ่น localhost
 
-- **หน้าหลัก** — ประกอบข้อความจากพยัญชนะและสระ
-- **แชต** — Google Sign-In, เพิ่มเพื่อนด้วย UID, DM และ group chat; ผู้ใช้ทั่วไปพิมพ์ได้
-- **วิธีใช้** — แสดง gesture และขั้นตอนปรับเทียบแทนปุ่มคู่มือเดิม
+- GitHub Pages มีเฉพาะ **หน้าหลัก** และ **วิธีใช้** ไม่มีโค้ด Auth, Chat หรือ schema อยู่ใน deployment artifact
+- `npm run serve` สร้างรุ่น localhost ที่เพิ่ม **แชต** สำหรับทดลอง Google Sign-In, UID, DM และ group chat
 
-## การควบคุมแบบรีโมต
+## การควบคุมแบบอัตโนมัติ
 
-- ขยิบตาซ้ายหรือขวา **1 ครั้ง**: เลือกตัวปัจจุบันหลังรอหน้าต่างยืนยัน 0.46 วินาที
-- ขยิบ **2 ครั้ง** ภายใน 0.46 วินาที: สลับ พยัญชนะ → สระ → หยุด/ส่ง
-- ขยิบตาข้างเดียวค้างเกิน **0.36 วินาที**: เลื่อนหนึ่งตัวทุก **0.2 วินาที** จนลืมตา
-- หลับ–ลืม **สองตา**: วน หน้าหลัก → แชต → วิธีใช้
-- ในแท็บ **หยุด**: สองตายืนยันหยุดระบบเลือก หนึ่งตาย้อนกลับ
-- ในแท็บ **ส่งข้อความ**: สองตายืนยันส่ง หนึ่งตาย้อนกลับ
+- ตัวเลือกเดินเองทุก **1.2 วินาที**
+- หลับ–ลืม **สองตา 1 ครั้ง**: เลือกตัวปัจจุบันหลังรอหน้าต่างยืนยัน 0.46 วินาที
+- หลับ–ลืม **สองตา 2 ครั้ง** ภายใน 0.46 วินาที: สลับพยัญชนะ/สระ
+- ค้าง **ตาข้างเดียว** เกิน 0.36 วินาที: เร่งเป็นหนึ่งตัวทุก **0.2 วินาที** จนลืมตา
+- ค้าง **สองตา** 0.9 วินาที: หยุดระบบเลือก โดยกล้องยังเปิดอยู่
+- ขยิบตาข้างเดียวสั้น ๆ ไม่มีคำสั่ง จึงไม่เผลอเลือกตัวอักษรขณะพยายามเร่งความเร็ว
 
-Gesture hold กับ wink ไม่ซ้อนกัน: ระบบยังไม่เลือกในจังหวะปิดตา แต่รอจนลืมตา หากค้างถึง hold threshold แล้ว gesture นั้นจะกลายเป็นการเลื่อนและไม่มี event เลือกตามมา
+การเลือกกับการเร่งความเร็วใช้จำนวนตาคนละแบบ จึงไม่ overlap กัน และการเปลี่ยนหน้าให้ผู้ดูแลกดบนจอแทน
 
 ## เริ่มในเครื่อง
 
@@ -34,7 +33,7 @@ npm run serve
 
 ## EyeSay Chat
 
-Chat ใช้ Supabase Auth + Google OAuth, Postgres, Realtime และ RLS ผู้ดูแลใช้การสัมผัสเพื่อเข้าสู่ระบบ เพิ่ม UID และสร้างกลุ่มก่อน ส่วนผู้ใช้ส่งข้อความด้วยสายตาหรือพิมพ์ได้
+Chat เป็นฟีเจอร์ localhost เท่านั้น ใช้ Supabase Auth + Google OAuth, Postgres, Realtime และ RLS ผู้ดูแลใช้การสัมผัสเพื่อเข้าสู่ระบบ เพิ่ม UID และสร้างกลุ่มก่อน
 
 ใส่เฉพาะ `sb_publishable_...` ใน `src/supabase-config.js` ห้ามฝัง `sb_secret_...` หรือ `service_role` ในเว็บ ดูขั้นตอนทั้งหมดที่ [คู่มือ Supabase](docs/SUPABASE_SETUP.md)
 
@@ -47,22 +46,23 @@ Chat ใช้ Supabase Auth + Google OAuth, Postgres, Realtime และ RLS �
 ## โครงสร้าง
 
 ```text
-index.html / styles.css      UI แบบ 3 หน้า
+index.html / styles.css      source UI (chat ถูกตัดออกจาก public build)
 src/app.js                   router, กล้อง, gesture และ UI controller
 src/blink-engine.js          state machine แยกตาซ้าย/ขวา
-src/interaction.js           remote selector + wink resolver
+src/interaction.js           auto scanner + bilateral blink resolver
 src/supabase-chat.js         Google Auth, UID, DM, group, Realtime
 supabase/schema.sql          tables, RPC, trigger และ RLS
 docs/SUPABASE_SETUP.md       คู่มือตั้งค่า Google + Supabase
 test/                        unit tests
-tools/smoke-supabase.js      browser smoke โดยใช้ Supabase จำลอง
+tools/build-web.js           แยก public build กับ localhost build
+tools/smoke-supabase.js      browser smoke ทั้งสอง edition
 ```
 
 ## งานที่ต้องทดสอบกับผู้ใช้จริง
 
 - false accept/false reject ของตาซ้ายและขวาแยกตามผู้ใช้ แว่น แสง หนังตาตก และการขยับศีรษะ
-- hold threshold 0.36 วินาที, step 0.2 วินาที และ double-wink window 0.46 วินาทีว่าล้าเกินไปหรือไม่
+- ความเร็วปกติ 1.2 วินาที, เร่ง 0.2 วินาที และ double-blink window 0.46 วินาทีว่าล้าเกินไปหรือไม่
 - ทางควบคุมสำรองสำหรับผู้ใช้ที่ไม่สามารถขยิบตาข้างเดียวได้
 - นโยบายเก็บ/ลบข้อความและข้อมูลบัญชีให้เหมาะสมกับ PDPA
 
-Push เข้า `main` จะ deploy static site ผ่าน GitHub Actions แต่ Chat จะใช้งานจริงได้เมื่อรัน schema เปิด Google provider และใส่ publishable key แล้ว
+Push เข้า `main` จะ deploy เฉพาะรุ่น public ที่ไม่มี Chat ส่วน Chat localhost จะใช้งานจริงได้เมื่อรัน schema เปิด Google provider และใส่ publishable key แล้ว

@@ -1,0 +1,34 @@
+** Drc report for /home/user/-/pcb/dual_laser_pbm.kicad_pcb **
+** Created on 2026-11-23 03:43:53 **
+
+** Found 6 DRC violations **
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; Severity: warning
+    @(141.9500 mm, 114.2000 mm): Reference 'D6'
+    @(142.3500 mm, 115.8100 mm): Line on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; Severity: warning
+    @(141.9500 mm, 123.8000 mm): Reference 'D7'
+    @(142.3500 mm, 122.1900 mm): Line on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; Severity: warning
+    @(116.6000 mm, 116.0200 mm): Reference 'C4'
+    @(-3.8600 mm, -2.9250 mm): Polygon on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; Severity: warning
+    @(121.5000 mm, 115.3000 mm): Reference 'U2'
+    @(121.5000 mm, 115.6150 mm): Line on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; Severity: warning
+    @(121.5000 mm, 115.3000 mm): Reference 'U2'
+    @(121.5000 mm, 115.6150 mm): Line on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; Severity: warning
+    @(111.0000 mm, 130.2000 mm): Reference 'SW1'
+    @(109.7500 mm, 130.6500 mm): Line on F.Silkscreen
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** End of Report **

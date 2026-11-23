@@ -16,6 +16,10 @@ import math
 import os
 import sys
 
+if os.environ.get("PYTHONHASHSEED") != "0":      # make set/dict order (and so routing) reproducible
+    os.environ["PYTHONHASHSEED"] = "0"
+    os.execv(sys.executable, [sys.executable] + sys.argv)
+
 import numpy as np
 
 os.environ.setdefault("KICAD7_FOOTPRINT_DIR", "/usr/share/kicad/footprints")
@@ -45,7 +49,7 @@ GND, VBUS, V5, V3, VLD = "GND", "VBUS", "+5V", "+3V3", "VLD"
 
 # Track width per net (mm); anything not listed is 0.25
 WIDTH = {
-    VBUS: 0.8, V5: 0.6, VLD: 0.6, V3: 0.3,
+    VBUS: 0.6, V5: 0.6, VLD: 0.6, V3: 0.3,
     "LD1_K": 0.6, "LD2_K": 0.6, "ISENSE1": 0.6, "ISENSE2": 0.6,
 }
 
@@ -108,11 +112,12 @@ PARTS = [
     ("Q2", SOT23, "2N7002", 28.0, 9.0, 0, {"1": "LASER_EN", "2": "INTLK_LO", "3": "VLD_G"},
      "Enable switch. Its source returns to GND only through the interlock loop, "
      "so the laser rail needs MCU enable AND a closed interlock."),
-    ("R7", R0603, "100k", 25.2, 9.0, 90, {"1": GND, "2": "LASER_EN"},
+    ("R7", R0603, "100k", 25.2, 8.6, 270, {"1": GND, "2": "LASER_EN"},
      "Holds LASER_EN low while the MCU is in reset."),
     ("J2", ("Connector_JST", "JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"), "INTERLOCK",
      29.0, 2.9, 0, {"1": "INTLK_LO", "2": GND},
-     "Interlock loop (e.g. skin-contact or key switch). Open loop = lasers cannot power."),
+     "Interlock loop (e.g. skin-contact or key switch). Open loop = laser rail cannot switch on. "
+     "The MCU also reads the loop on PA11 (internal pull-up)."),
     ("D5", ("LED_SMD", "LED_0603_1608Metric"), "amber", 43.0, 35.1, 90,
      {"1": GND, "2": "LEDA_EMIT"},
      "Emission indicator, powered from the switched VLD rail itself, so it is lit "
@@ -597,7 +602,18 @@ def fanout_gnd():
                     dist[(0, ni, nj)] = nd; par[(0, ni, nj)] = node
                     heapq.heappush(heap, (nd, (0, ni, nj)))
         if not found:
-            print("  ! no GND fanout for", ref, pad.GetNumber()); continue
+            # fall back: a short track to the nearest other GND pad
+            others = sorted((math.hypot(pad_center(o)[0] - cx, pad_center(o)[1] - cy), r2, p2.GetNumber())
+                            for r2, p2, o in PADS_BY_NET[GND] if o is not it)
+            ok = False
+            for d, r2, num in others[:4]:
+                nf = len(FAILED)
+                route_subset(GND, [(ref, pad.GetNumber()), (r2, num)], 0.3)
+                if len(FAILED) == nf:
+                    ok = True; break
+                FAILED.pop()
+            print(f"  GND fanout fallback for {ref}.{pad.GetNumber()}:", "linked to " + r2 if ok else "FAILED")
+            continue
         path = []
         node = found
         while node is not None:
@@ -714,6 +730,13 @@ def add_text(txt, x, y, h, layer=pcbnew.F_SilkS, angle=0, thick=None, bold=False
 def overlaps(a, b, m=0.0):
     return not (a[2] + m <= b[0] or b[2] + m <= a[0] or a[3] + m <= b[1] or b[3] + m <= a[1])
 
+# hand-placed reference designators where the automatic search finds no clean spot
+MANUAL_REF = {
+    "J2": (25.95, 5.6, 90, 0.8),
+    "C11": (33.3, 14.6, 0, 0.6),
+    "R16": (39.4, 25.45, 0, 0.7),
+}
+
 def place_refs():
     obst = []
     for ref, fp in FOOTPRINTS.items():
@@ -745,6 +768,14 @@ def place_refs():
         t = fp.Reference()
         if ref.startswith(("H", "FID")):
             t.SetVisible(False); continue
+        if ref in MANUAL_REF:
+            x, y, ang, hh = MANUAL_REF[ref]
+            t.SetTextSize(pcbnew.VECTOR2I(mm(hh), mm(hh))); t.SetTextThickness(mm(0.12 if hh < 0.8 else 0.15))
+            t.SetTextAngle(pcbnew.EDA_ANGLE(ang, pcbnew.DEGREES_T)); t.SetPosition(P(x, y))
+            bb = t.GetBoundingBox()
+            bx0, by0 = unP(bb.GetOrigin()); bx1, by1 = unP(bb.GetEnd())
+            TEXT_BOXES[0].append((bx0, by0, bx1, by1))
+            continue
         t.SetTextSize(pcbnew.VECTOR2I(mm(0.8), mm(0.8)))
         t.SetTextThickness(mm(0.15))
         x0, y0, x1, y1 = bodies[ref]
@@ -907,7 +938,7 @@ def board_texts():
     add_text("LD2 850nm", 56.2, 26.0, 1.0, angle=90)
     add_text("REV 0.1 MOCK", 37.2, 36.7, 0.9)
     B = pcbnew.B_SilkS
-    add_text("DUAL-LASER PBM HEAD 660/850", 29.0, 7.8, 1.3, layer=B)
+    add_text("DUAL-LASER PBM HEAD 660/850", 29.0, 5.9, 1.3, layer=B)
     add_text("LASER RADIATION - AVOID EYE EXPOSURE", 29.0, 30.6, 1.0, layer=B)
     add_text("CLASS 3B - 850nm IS INVISIBLE", 29.0, 32.4, 1.0, layer=B)
     add_text("REV 0.1 MOCK - NOT THE ORIGINAL DESIGN", 29.0, 34.4, 0.9, layer=B)

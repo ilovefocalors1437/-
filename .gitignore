@@ -15,3 +15,4 @@ sat-app/android/.gradle/
 sat-app/android/build/
 sat-app/android/app/build/
 sat-app/android/local.properties
+sat-app/dist-apk/

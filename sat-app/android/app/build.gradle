@@ -1,0 +1,44 @@
+plugins { id 'com.android.application' }
+
+// The web app in ../www is packaged as assets/www
+def webAssets = layout.buildDirectory.dir('webAssets')
+tasks.register('syncWebAssets', Sync) {
+    from('../../www') { exclude 'calc/demo.html' }
+    into webAssets.map { it.dir('www') }
+}
+
+android {
+    namespace 'app.satmath.practice'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'app.satmath.practice'
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+    signingConfigs {
+        // Fixed key committed to the repo so every build can update the previous install
+        // (keeps saved tests and history). This is a personal sideload app, not a store release.
+        shared {
+            storeFile file('../sideload.keystore')
+            storePassword 'android'
+            keyAlias 'sideload'
+            keyPassword 'android'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.shared
+        }
+        debug { signingConfig signingConfigs.shared }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    sourceSets { main { assets.srcDirs = [webAssets] } }
+    lint { abortOnError false; checkReleaseBuilds false }
+}
+tasks.named('preBuild') { dependsOn 'syncWebAssets' }

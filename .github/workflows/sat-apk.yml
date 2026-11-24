@@ -1,0 +1,57 @@
+# Builds the SAT Math Practice Android app (sat-app/) and publishes the APK as a release asset.
+name: Build SAT practice APK
+
+on:
+  push:
+    paths:
+      - 'sat-app/**'
+      - '.github/workflows/sat-apk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sat-apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check question bank and scoring engine
+        if: hashFiles('sat-app/www/data/questions.js') != ''
+        working-directory: sat-app
+        run: node tools/selftest.js
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.11.1'
+      - name: Build APK
+        working-directory: sat-app/android
+        run: gradle --no-daemon assembleRelease
+      - name: Collect APK
+        run: |
+          mkdir -p out
+          cp sat-app/android/app/build/outputs/apk/release/app-release.apk out/SAT-Math-Practice.apk
+          ls -la out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SAT-Math-Practice-apk
+          path: out/SAT-Math-Practice.apk
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete sat-apk-latest --yes --cleanup-tag || true
+          gh release create sat-apk-latest out/SAT-Math-Practice.apk \
+            --target "$GITHUB_SHA" --prerelease \
+            --title "SAT Math Practice (latest APK)" \
+            --notes "Automatic build of sat-app/ from commit $GITHUB_SHA. Download SAT-Math-Practice.apk and open it on your Android phone to install."

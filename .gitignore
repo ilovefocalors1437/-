@@ -9,3 +9,9 @@ server/data/
 *.sqlite
 *.sqlite-*
 dist/
+
+# SAT practice app build outputs
+sat-app/android/.gradle/
+sat-app/android/build/
+sat-app/android/app/build/
+sat-app/android/local.properties

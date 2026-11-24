@@ -70,8 +70,8 @@ function F(n, d = 1) { return new Fr(n, d); }
 /* ---------------- LaTeX formatting ---------------- */
 // number (int or Fr) -> tex
 function num(x) {
-  if (x instanceof Fr) return x.tex();
-  if (Number.isInteger(x)) return String(x);
+  if (x instanceof Fr) return x.d === 1 && Math.abs(x.n) >= 1000 ? texInt(x.n) : x.tex();
+  if (Number.isInteger(x)) return Math.abs(x) >= 1000 ? texInt(x) : String(x);
   return decStr(x);
 }
 function decStr(x, dp = 6) { let s = (+x.toFixed(dp)).toString(); return s; }
@@ -268,8 +268,9 @@ function txt(x, y, s, opt = {}) {
   const style = opt.italic ? " font-style='italic'" : '';
   const weight = opt.bold ? " font-weight='bold'" : '';
   const base = opt.base || 'middle';
+  const halo = opt.halo ? " stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'" : '';
   const rot = opt.rotate ? ` transform='rotate(${opt.rotate} ${r2(x)} ${r2(y)})'` : '';
-  return `<text x='${r2(x)}' y='${r2(y)}' text-anchor='${anchor}' dominant-baseline='${base}'${size}${style}${weight}${rot} fill='#000'>${s}</text>`;
+  return `<text x='${r2(x)}' y='${r2(y)}' text-anchor='${anchor}' dominant-baseline='${base}'${size}${style}${weight}${rot}${halo} fill='#000'>${s}</text>`;
 }
 function it(s) { return `<tspan font-style='italic'>${s}</tspan>`; }
 function line(x1, y1, x2, y2, opt = {}) {
@@ -303,9 +304,9 @@ function plane(opts) {
   if (y0 <= 0 && y1 >= 0) { b += line(X(x0) - 8, Y(0), X(x1) + 8, Y(0), { w: 1.3 }) + arrowHead(X(x1) + 12, Y(0), 1, 0) + arrowHead(X(x0) - 12, Y(0), -1, 0); b += txt(X(x1) + 12, Y(0) - 11, it('x')); }
   if (x0 <= 0 && x1 >= 0) { b += line(X(0), Y(y0) + 8, X(0), Y(y1) - 8, { w: 1.3 }) + arrowHead(X(0), Y(y1) - 12, 0, -1) + arrowHead(X(0), Y(y0) + 12, 0, 1); b += txt(X(0) + 11, Y(y1) - 12, it('y')); }
   const ox = (x0 <= 0 && x1 >= 0) ? X(0) : X(x0), oy = (y0 <= 0 && y1 >= 0) ? Y(0) : Y(y0);
-  for (let x = Math.ceil(x0 / tx) * tx; x <= x1 + 1e-9; x += tx) { if (Math.abs(x) < 1e-9) continue; b += line(X(x), oy - 3, X(x), oy + 3, { w: 1 }) + txt(X(x), oy + 12, fmtTick(x), { size: 11 }); }
-  for (let y = Math.ceil(y0 / ty) * ty; y <= y1 + 1e-9; y += ty) { if (Math.abs(y) < 1e-9) continue; b += line(ox - 3, Y(y), ox + 3, Y(y), { w: 1 }) + txt(ox - 6, Y(y), fmtTick(y), { size: 11, anchor: 'end' }); }
-  if (x0 <= 0 && x1 >= 0 && y0 <= 0 && y1 >= 0) b += txt(X(0) - 7, Y(0) + 10, it('O'), { size: 11 });
+  for (let x = Math.ceil(x0 / tx) * tx; x <= x1 + 1e-9; x += tx) { if (Math.abs(x) < 1e-9) continue; b += line(X(x), oy - 3, X(x), oy + 3, { w: 1 }) + txt(X(x), oy + 12, fmtTick(x), { size: 11, halo: true }); }
+  for (let y = Math.ceil(y0 / ty) * ty; y <= y1 + 1e-9; y += ty) { if (Math.abs(y) < 1e-9) continue; b += line(ox - 3, Y(y), ox + 3, Y(y), { w: 1 }) + txt(ox - 6, Y(y), fmtTick(y), { size: 11, anchor: 'end', halo: true }); }
+  if (x0 <= 0 && x1 >= 0 && y0 <= 0 && y1 >= 0) b += txt(X(0) - 8, Y(0) + 11, it('O'), { size: 11, halo: true });
   let g = '';
   for (const itm of opts.items || []) {
     if (itm.fn) {
@@ -413,8 +414,9 @@ function figure(opts) {
   for (const [a, o, c, lab, dist] of opts.angleLabels || []) {
     const u = unit(P[a], P[o]), v = unit(P[c], P[o]);
     let bx = u[0] + v[0], by = u[1] + v[1]; const L = Math.hypot(bx, by) || 1; bx /= L; by /= L;
-    const d = (dist || 24) / s;
-    b += txt(X(P[o][0] + bx * d), Y(P[o][1] + by * d), lab, { size: 12 });
+    const half = Math.acos(Math.max(-1, Math.min(1, u[0] * v[0] + u[1] * v[1]))) / 2;
+    const d = Math.min(70, Math.max(dist || 24, 10 + 17 / Math.max(0.2, Math.sin(half)))) / s;
+    b += txt(X(P[o][0] + bx * d), Y(P[o][1] + by * d), lab, { size: 12, halo: true });
     if (opts.arcs !== false) {
       const rr = 13; const a1 = Math.atan2(u[1], u[0]), a2 = Math.atan2(v[1], v[0]);
       let da = a2 - a1; while (da <= -Math.PI) da += 2 * Math.PI; while (da > Math.PI) da -= 2 * Math.PI;
@@ -465,3 +467,16 @@ function numCh(vals, fmt) {
 }
 module.exports.valOf = valOf;
 module.exports.numCh = numCh;
+// parenthesise negatives: pn(-3) -> "(-3)"
+function pn(x) { return valOf(x) < 0 ? '(' + num(x) + ')' : num(x); }
+// coefficient times variable: cv(1,'x') -> 'x', cv(-1,'x') -> '-x'
+function cv(c, v) { return poly([[c, v]]); }
+module.exports.pn = pn; module.exports.cv = cv;
+
+// friendly number for answer choices: terminating values as decimals, others as fractions, big integers with commas
+function nice(x) {
+  if (x instanceof Fr) { if (x.d === 1) return texInt(x.n); let d = x.d; while (d % 2 === 0) d /= 2; while (d % 5 === 0) d /= 5; if (d === 1 && String(+x.val().toFixed(6)).length <= 7) return decStr(x.val()); return x.tex(); }
+  if (Number.isInteger(x)) return texInt(x);
+  return decStr(+x.toFixed(4));
+}
+module.exports.nice = nice;

@@ -10,7 +10,7 @@ const OUT = path.join(__dirname, '../../www/data/questions.js');
 
 function loadTemplates() {
   const all = [];
-  for (const s of SOURCES) for (const t of require(s)) all.push(t);
+  for (const s of SOURCES) { let mod; try { mod = require(s); } catch (e) { if (e.code === 'MODULE_NOT_FOUND' && e.message.includes(s.slice(2))) { console.warn('skip', s); continue; } throw e; } for (const t of mod) all.push(t); }
   return all;
 }
 
@@ -63,11 +63,20 @@ function build() {
         q.answer = out.answer;
       }
       q.explanation = out.explanation;
+      for (const k of ['stem', 'explanation']) q[k] = fixMath(q[k]);
+      if (q._choices) q._choices = q._choices.map(fixMath);
+      // fractions in answer choices are shown full size, as on the SAT (not inside exponents)
+      if (q._choices) q._choices = q._choices.map((c) => c.replace(/(\^\{[^{}]*)?\\frac/g, (all, pre) => (pre ? all : '\\dfrac')));
       items.push(q);
     }
   }
   placeChoices(items);
   return { items, verified, unverified };
+}
+
+// inside math, write < and > as \lt / \gt so the HTML parser never sees a raw '<'
+function fixMath(h) {
+  return h.replace(/\\\(([\s\S]*?)\\\)|\\\[([\s\S]*?)\\\]/g, (all) => all.replace(/</g, '\\lt ').replace(/>/g, '\\gt '));
 }
 
 // Put the correct choice (index 0 from the generator) in a balanced position.

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Graphing Calculator</title>
+<link rel="stylesheet" href="../vendor/katex/katex.min.css">
+<link rel="stylesheet" href="calc.css">
+<style>
+  html, body { height: 100%; margin: 0; background: #fff; }
+  body { display: flex; flex-direction: column; overscroll-behavior: none; }
+  #host { flex: 1 1 auto; min-height: 0; display: flex; }
+</style>
+</head>
+<body>
+<div id="host"></div>
+<script src="../vendor/katex/katex.min.js"></script>
+<script src="parser.js"></script>
+<script src="graph.js"></script>
+<script src="ui.js"></script>
+<script src="calc.js"></script>
+<script>
+  (function () {
+    var KEY = 'satcalc-demo-state';
+    var host = document.getElementById('host');
+    SatCalc.mount(host);
+    if (!/[?&]fresh\b/.test(location.search)) {
+      try { var s = localStorage.getItem(KEY); if (s) SatCalc.setState(JSON.parse(s)); } catch (e) { /* ignore */ }
+    }
+    SatCalc.onChange = function (state) {
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* ignore */ }
+    };
+  })();
+</script>
+</body>
+</html>

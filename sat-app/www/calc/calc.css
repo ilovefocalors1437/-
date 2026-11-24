@@ -1,0 +1,174 @@
+/* Graphing Calculator — all rules scoped under .satcalc */
+.satcalc {
+  --sc-ink: #1f2328; --sc-muted: #646b76; --sc-line: #e2e5ea; --sc-soft: #f4f5f7; --sc-accent: #2d6fbe;
+  --sc-kh: 44px; --sc-ks: 42px; --sc-split: 52%;
+  position: relative; display: flex; flex-direction: column; width: 100%; height: 100%; min-width: 0; min-height: 0;
+  overflow: hidden; background: #fff; color: var(--sc-ink);
+  font: 15px/1.35 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent;
+  text-align: left;
+}
+.satcalc *, .satcalc *::before, .satcalc *::after { box-sizing: border-box; }
+.satcalc button { font: inherit; color: inherit; cursor: pointer; margin: 0; -webkit-tap-highlight-color: transparent; }
+.satcalc input { font: inherit; margin: 0; -webkit-user-select: text; user-select: text; }
+.satcalc .sc-flex { flex: 1 1 auto; }
+.satcalc .katex { font-size: 1.08em; }
+
+/* ---------- top bar */
+.satcalc .sc-top { flex: 0 0 auto; display: flex; align-items: center; gap: 6px; padding: 4px 8px; height: 50px;
+  border-bottom: 1px solid var(--sc-line); background: #f8f9fb; }
+.satcalc .sc-seg { display: flex; background: #e7eaee; border-radius: 10px; padding: 3px; gap: 2px; }
+.satcalc .sc-segbtn { min-height: 40px; padding: 0 14px; border: 0; border-radius: 8px; background: transparent; color: #3d434c; font-weight: 600; font-size: 14px; }
+.satcalc .sc-segbtn.on { background: #fff; color: var(--sc-ink); box-shadow: 0 1px 3px rgba(0,0,0,.14); }
+.satcalc .sc-angle { min-width: 52px; min-height: 40px; border: 1px solid #d3d8de; border-radius: 8px; background: #fff; font-size: 12px; font-weight: 700; letter-spacing: .04em; color: #3d434c; }
+.satcalc .sc-gear { width: 42px; height: 42px; border: 0; border-radius: 8px; background: transparent; color: #3d434c; display: flex; align-items: center; justify-content: center; }
+.satcalc .sc-gear:active, .satcalc .sc-angle:active { background: #e7eaee; }
+
+/* ---------- body / modes */
+.satcalc .sc-body { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; position: relative; }
+.satcalc.sc-m-graph .sc-smode, .satcalc.sc-m-sci .sc-gmode, .satcalc.sc-m-sci .sc-gkeys { display: none !important; }
+.satcalc .sc-gmode { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+.satcalc .sc-gpane { position: relative; flex: 0 0 var(--sc-split); min-height: 110px; overflow: hidden; background: #fff; }
+.satcalc .sc-ghost { position: absolute; inset: 0; }
+.satcalc .sc-canvas { display: block; touch-action: none; }
+.satcalc .sc-zoom { position: absolute; right: 8px; top: 8px; display: flex; flex-direction: column; gap: 6px; z-index: 2; }
+.satcalc .sc-zbtn { width: 40px; height: 40px; border-radius: 9px; border: 1px solid #d3d8de; background: rgba(255,255,255,.95);
+  font-size: 22px; line-height: 1; display: flex; align-items: center; justify-content: center; color: #3a4048; box-shadow: 0 1px 3px rgba(0,0,0,.1); padding: 0; }
+.satcalc .sc-zbtn:active { background: #e8ebef; }
+.satcalc .sc-split { flex: 0 0 18px; display: flex; align-items: center; justify-content: center; cursor: row-resize; touch-action: none;
+  background: #f4f5f7; border-top: 1px solid var(--sc-line); border-bottom: 1px solid var(--sc-line); }
+.satcalc .sc-grip { width: 44px; height: 4px; border-radius: 2px; background: #c3c8cf; }
+.satcalc .sc-lpane { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; background: #fff; }
+.satcalc .sc-lbar { flex: 0 0 auto; display: flex; align-items: center; gap: 6px; padding: 4px 6px; border-bottom: 1px solid var(--sc-line); background: #fafbfc; }
+.satcalc .sc-lbtn { min-height: 40px; padding: 0 12px; border: 1px solid #d6dae0; border-radius: 8px; background: #fff; font-size: 14px; color: #2b3139; white-space: nowrap; display: flex; align-items: center; gap: 4px; }
+.satcalc .sc-lbtn b { color: var(--sc-accent); font-size: 18px; font-weight: 700; }
+.satcalc .sc-kbtn { width: 46px; padding: 0; justify-content: center; }
+.satcalc.sc-kp .sc-kbtn { background: #e5edf9; border-color: #b9cdee; color: var(--sc-accent); }
+.satcalc .sc-list { flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+
+/* wide (tablet / landscape) */
+.satcalc.sc-wide .sc-gmode { flex-direction: row; }
+.satcalc.sc-wide .sc-lpane { order: 0; flex: 0 0 clamp(340px, 36%, 440px); border-right: 1px solid #d6dae0; }
+.satcalc.sc-wide .sc-gpane { order: 1; flex: 1 1 auto; }
+.satcalc.sc-wide .sc-split { display: none; }
+
+/* ---------- expression rows */
+.satcalc .sc-row { position: relative; display: flex; align-items: stretch; min-height: 56px; border-bottom: 1px solid var(--sc-line); background: #fff; }
+.satcalc .sc-tab { flex: 0 0 42px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 3px; padding: 5px 0 0;
+  border: 0; border-right: 1px solid var(--sc-line); background: var(--sc-soft); }
+.satcalc .sc-num { font-size: 11px; line-height: 1; color: #8b919a; }
+.satcalc .sc-dot { display: none; width: 22px; height: 22px; border-radius: 50%; border: 3px solid transparent; }
+.satcalc .sc-graphable .sc-dot { display: block; }
+.satcalc .sc-sel .sc-tab { background: #e4ebf7; }
+.satcalc .sc-editing .sc-tab { background: #3c6fc4; }
+.satcalc .sc-editing .sc-num { color: #fff; }
+.satcalc .sc-main { position: relative; flex: 1 1 auto; min-width: 0; padding: 6px 8px; display: flex; flex-direction: column; justify-content: center; gap: 2px; }
+.satcalc .sc-in { width: 100%; border: 0; outline: 0; background: transparent; color: var(--sc-ink); padding: 5px 2px;
+  font: 17px/1.3 ui-monospace, "SFMono-Regular", Menlo, Consolas, "Roboto Mono", monospace; caret-color: var(--sc-accent); }
+.satcalc .sc-row:not(.sc-editing) .sc-in { position: absolute; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.satcalc .sc-math { min-height: 30px; display: flex; align-items: center; font-size: 18px; white-space: nowrap; overflow-x: auto; overflow-y: hidden; cursor: text; padding: 2px 0; scrollbar-width: none; }
+.satcalc .sc-math::-webkit-scrollbar { display: none; }
+.satcalc .sc-editing .sc-math { min-height: 0; font-size: 13px; color: var(--sc-muted); padding: 0 2px; }
+.satcalc .sc-editing .sc-math:empty { display: none; }
+.satcalc .sc-row.sc-hidden .sc-math { opacity: .5; }
+.satcalc .sc-del { flex: 0 0 40px; border: 0; background: transparent; color: #9aa0a8; display: flex; align-items: flex-start; justify-content: center; padding-top: 14px; }
+.satcalc .sc-row:not(.sc-editing):not(.sc-sel) .sc-del { visibility: hidden; }
+@media (hover: hover) { .satcalc .sc-row:hover .sc-del { visibility: visible !important; } }
+.satcalc .sc-del:active { color: #c8433e; }
+
+/* status line */
+.satcalc .sc-status { font-size: 14px; color: #4b5260; }
+.satcalc .sc-s-val { text-align: right; font-size: 16px; color: #39404b; padding-right: 2px; }
+.satcalc .sc-s-err { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; color: #9a4a1c; font-size: 13px; }
+.satcalc .sc-warn { color: #d9822b; font-size: 15px; flex: 0 0 auto; }
+.satcalc .sc-emsg { flex: 1 1 0; min-width: 0; }
+.satcalc .sc-math.sc-empty:empty::before { content: attr(data-ph); color: #a1a7b0; font-size: 15px; font-style: normal; }
+.satcalc .sc-addsl { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; width: 100%; }
+.satcalc .sc-addlbl { color: var(--sc-muted); }
+.satcalc .sc-chip { min-width: 40px; min-height: 40px; padding: 0 12px; border-radius: 20px; border: 1px solid #b9cdee; background: #eef4fd; color: #1f4f98; font-size: 15px; }
+.satcalc .sc-reg { display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 14px; color: #39404b; }
+.satcalc .sc-srow { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+.satcalc .sc-srow2 { display: none; align-items: center; gap: 6px; font-size: 13px; color: var(--sc-muted); margin-top: 4px; }
+.satcalc .sc-editing .sc-srow2 { display: flex; }
+.satcalc .sc-sin, .satcalc .sc-dom { width: 54px; height: 36px; border: 1px solid #d6dae0; border-radius: 7px; text-align: center; font-size: 14px; outline: 0; background: #fff; color: var(--sc-ink); padding: 0 2px; }
+.satcalc .sc-sin:focus, .satcalc .sc-dom:focus { border-color: var(--sc-accent); box-shadow: 0 0 0 2px #cfe0f7; }
+.satcalc .sc-range { flex: 1 1 auto; min-width: 50px; height: 40px; margin: 0; accent-color: var(--sc-accent); touch-action: pan-y; }
+.satcalc .sc-play { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid #d6dae0; background: #fff; color: #3a4048; display: flex; align-items: center; justify-content: center; padding: 0; }
+.satcalc .sc-play.on { background: var(--sc-accent); color: #fff; border-color: var(--sc-accent); }
+.satcalc .sc-domrow { display: flex; align-items: center; gap: 8px; }
+.satcalc .sc-dom { width: 64px; }
+
+/* ---------- tables */
+.satcalc .sc-twrap { overflow-x: auto; max-width: 100%; padding: 2px 0; }
+.satcalc .sc-table { border-collapse: collapse; }
+.satcalc .sc-table th, .satcalc .sc-table td { border: 1px solid #dde1e6; padding: 0; }
+.satcalc .sc-table th { position: relative; background: #f1f3f6; height: 40px; border-top: 3px solid #b8bec6; }
+.satcalc .sc-table th.sc-th { border-top-color: var(--col, #b8bec6); }
+.satcalc .sc-table th.sc-thadd, .satcalc .sc-table td.sc-tdpad { border: 0; background: transparent; }
+.satcalc .sc-hin, .satcalc .sc-cin { display: block; width: 82px; height: 38px; border: 0; outline: 0; text-align: center; background: transparent; color: var(--sc-ink); font-size: 15px; padding: 0 4px; }
+.satcalc .sc-hview { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: #f1f3f6; font-size: 16px; cursor: text; overflow: hidden; }
+.satcalc .sc-hedit .sc-hview { display: none; }
+.satcalc .sc-cin:focus, .satcalc .sc-hin:focus { background: #eef4ff; box-shadow: inset 0 0 0 2px #5b8ad6; }
+.satcalc .sc-comp { color: #7a808a; font-style: italic; }
+.satcalc .sc-cerr { background: #fff2e6; }
+.satcalc .sc-addcol { width: 40px; height: 40px; border: 0; background: transparent; font-size: 22px; color: var(--sc-accent); padding: 0; }
+
+/* ---------- keypad */
+.satcalc .sc-keypad { flex: 0 0 auto; background: #e6e9ed; border-top: 1px solid #d3d7dd; padding: 5px 5px 6px; }
+.satcalc .sc-gkeys { display: none; }
+.satcalc.sc-kp .sc-gkeys { display: block; }
+.satcalc .sc-kgrid { display: grid; gap: 5px; max-width: 760px; margin: 0 auto; }
+.satcalc .sc-kbottom { margin-top: 5px; }
+.satcalc .sc-kscroll { max-height: calc(var(--sc-kh) * 4 + 15px); overflow-y: auto; overscroll-behavior: contain; }
+.satcalc .sc-key { height: var(--sc-kh); min-height: 38px; min-width: 0; border: 0; border-radius: 7px; background: #fff; color: var(--sc-ink);
+  font-size: 18px; line-height: 1; padding: 0 2px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 0 rgba(0,0,0,.2);
+  touch-action: manipulation; white-space: nowrap; overflow: hidden; }
+.satcalc .sc-key sup, .satcalc .sc-key sub { font-size: .7em; line-height: 0; }
+.satcalc .sc-key sup { position: relative; top: -.15em; }
+.satcalc .sc-kscroll { -webkit-mask-image: linear-gradient(to bottom, #000 82%, rgba(0,0,0,.35)); mask-image: linear-gradient(to bottom, #000 82%, rgba(0,0,0,.35)); }
+.satcalc .sc-kscroll.atend { -webkit-mask-image: none; mask-image: none; }
+.satcalc .sc-key.var { font-family: KaTeX_Math, "Times New Roman", serif; font-style: italic; font-size: 20px; }
+.satcalc .sc-key.fn { font-size: 15px; }
+.satcalc .sc-key.op { background: #f3f4f6; font-size: 21px; }
+.satcalc .sc-key.alt { background: #d3d8df; font-size: 16px; }
+.satcalc .sc-key.alt.on { background: #b9c9e4; }
+.satcalc .sc-key.go { background: var(--sc-accent); color: #fff; font-size: 20px; }
+.satcalc .sc-key.warn { background: #f1d9d2; color: #8a2f1a; font-weight: 600; font-size: 15px; }
+.satcalc .sc-key.down { filter: brightness(.86); }
+.satcalc .sc-sgrid .sc-key { height: var(--sc-ks); }
+
+/* ---------- scientific mode */
+.satcalc .sc-smode { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+.satcalc .sc-sleft { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+.satcalc .sc-hist { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 4px 10px; overscroll-behavior: contain; }
+.satcalc .sc-hempty { color: #969ca5; font-size: 14px; padding: 18px 4px; text-align: center; }
+.satcalc .sc-hrow { display: flex; flex-direction: column; padding: 4px 0; border-bottom: 1px solid #eef0f3; }
+.satcalc .sc-hexpr { align-self: stretch; text-align: left; border: 0; background: transparent; font-size: 17px; min-height: 40px; padding: 2px 4px; overflow-x: auto; white-space: nowrap; border-radius: 6px; }
+.satcalc .sc-hres { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
+.satcalc .sc-hval { border: 0; background: transparent; font-size: 20px; min-height: 40px; padding: 0 6px; border-radius: 6px; max-width: 100%; overflow-x: auto; white-space: nowrap; }
+.satcalc .sc-hexpr:active, .satcalc .sc-hval:active { background: #eef1f5; }
+.satcalc .sc-herr { color: #9a4a1c; font-size: 14px; padding: 6px; }
+.satcalc .sc-fbtn { min-width: 44px; height: 40px; border: 1px solid #d6dae0; border-radius: 8px; background: #fff; font-size: 13px; padding: 0 6px; }
+.satcalc .sc-fbtn.on { background: #e5edf9; border-color: #b9cdee; }
+.satcalc .sc-entry { flex: 0 0 auto; border-top: 1px solid var(--sc-line); padding: 4px 12px 2px; background: #fbfbfc; }
+.satcalc .sc-sciin { width: 100%; border: 0; outline: 0; background: transparent; padding: 6px 0 2px; color: var(--sc-ink);
+  font: 20px/1.3 ui-monospace, "SFMono-Regular", Menlo, Consolas, "Roboto Mono", monospace; caret-color: var(--sc-accent); }
+.satcalc .sc-emath { min-height: 22px; font-size: 15px; color: var(--sc-muted); white-space: nowrap; overflow-x: auto; scrollbar-width: none; }
+.satcalc .sc-sprev { min-height: 28px; text-align: right; font-size: 19px; color: #9aa0a8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.satcalc .sc-sprev.ok { color: #49505b; }
+.satcalc .sc-skeys { flex: 0 0 auto; }
+.satcalc.sc-wide .sc-smode { flex-direction: row; }
+.satcalc.sc-wide .sc-skeys { flex: 0 0 min(48%, 520px); border-top: 0; border-left: 1px solid #d3d7dd; display: flex; flex-direction: column; justify-content: center; }
+.satcalc.sc-wide .sc-skeys .sc-kgrid { width: 100%; }
+
+/* ---------- popovers */
+.satcalc .sc-pop { position: absolute; z-index: 30; background: #fff; border: 1px solid #d3d8de; border-radius: 12px; box-shadow: 0 8px 28px rgba(0,0,0,.18); padding: 10px; max-width: calc(100% - 12px); }
+.satcalc .sc-ph { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #8b919a; margin: 4px 2px 6px; }
+.satcalc .sc-optrow { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.satcalc .sc-opt { min-height: 40px; padding: 0 14px; border: 1px solid #d3d8de; border-radius: 8px; background: #fff; font-size: 14px; }
+.satcalc .sc-opt.on { background: var(--sc-accent); border-color: var(--sc-accent); color: #fff; }
+.satcalc .sc-wideopt { width: 100%; }
+.satcalc .sc-danger { color: #a4321f; border-color: #e7c0b6; }
+.satcalc .sc-swatches { display: grid; grid-template-columns: repeat(6, 40px); gap: 6px; margin-top: 8px; }
+.satcalc .sc-swatch { width: 40px; height: 40px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 1px #c9ced5; padding: 0; }
+.satcalc .sc-swatch.on { box-shadow: 0 0 0 2.5px #1f2328; }

@@ -25,7 +25,6 @@ function stubBank() {
     p.on('pageerror', e => errors.push('pageerror: ' + e.message));
     if (stub) {
       await p.route('**/data/questions.js', r => r.fulfill({ contentType: 'text/javascript', body: stubBank() }));
-      await p.route('**/calc/calc.*', r => r.fulfill({ contentType: r.request().url().endsWith('css') ? 'text/css' : 'text/javascript', body: '' }));
     }
     return p;
   }

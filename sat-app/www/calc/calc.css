@@ -172,3 +172,74 @@
 .satcalc .sc-swatches { display: grid; grid-template-columns: repeat(6, 40px); gap: 6px; margin-top: 8px; }
 .satcalc .sc-swatch { width: 40px; height: 40px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 1px #c9ced5; padding: 0; }
 .satcalc .sc-swatch.on { box-shadow: 0 0 0 2.5px #1f2328; }
+
+/* ---------- structured math field */
+.satcalc .mq { position: relative; display: block; min-height: 34px; padding: 3px 2px; overflow-x: auto; overflow-y: hidden; white-space: nowrap;
+  cursor: text; font-family: KaTeX_Main, "Times New Roman", serif; font-size: 20px; line-height: 1.25; color: var(--sc-ink); scrollbar-width: none; outline: none; }
+.satcalc .mq::-webkit-scrollbar { display: none; }
+.satcalc .mq-ta { position: absolute; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; border: 0; padding: 0; margin: 0; resize: none; overflow: hidden; pointer-events: none; font-size: 16px; }
+.satcalc .mq-view { display: inline-block; vertical-align: middle; padding: 2px 0; }
+.satcalc .mq.mq-isempty:not(.mq-focus)::after { content: attr(data-ph); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 15px; color: #a1a7b0; position: absolute; left: 4px; top: 50%; transform: translateY(-50%); }
+.satcalc .mq-blk { display: inline-block; vertical-align: baseline; }
+.satcalc .mq-blk.mq-empty:not(.mq-root) { min-width: .55em; min-height: .9em; background: #e8ebf0; border-radius: 2px; vertical-align: -0.1em; }
+.satcalc .mq-root { min-width: 2px; }
+.satcalc .mq-v { font-family: KaTeX_Math, "Times New Roman", serif; font-style: italic; }
+.satcalc .mq-fn { font-family: KaTeX_Main, serif; font-style: normal; }
+.satcalc .mq-fnend { margin-right: .12em; }
+.satcalc .mq-op { margin: 0 .2em; }
+.satcalc .mq-p { margin-right: .18em; }
+.satcalc .mq-frac { display: inline-flex; flex-direction: column; align-items: stretch; vertical-align: middle; text-align: center; margin: 0 .1em; font-size: 92%; }
+.satcalc .mq-frac .mq-frac { font-size: 88%; }
+.satcalc .mq-num, .satcalc .mq-den { display: block; padding: 0 .12em; text-align: center; }
+.satcalc .mq-num { padding-bottom: .06em; }
+.satcalc .mq-den { border-top: 1.4px solid currentColor; padding-top: .06em; }
+.satcalc .mq-sup { display: inline-block; font-size: 72%; vertical-align: .62em; margin-left: .03em; }
+.satcalc .mq-sub { display: inline-block; font-size: 72%; vertical-align: -.35em; }
+.satcalc .mq-sqrt { display: inline-flex; align-items: stretch; vertical-align: middle; }
+.satcalc .mq-rad { display: inline-block; transform-origin: center bottom; line-height: 1; padding-top: .08em; }
+.satcalc .mq-rbody { border-top: 1.4px solid currentColor; padding: .06em .08em 0 .04em; }
+.satcalc .mq-idx { font-size: 60%; align-self: flex-start; margin-right: -.4em; }
+.satcalc .mq-paren { display: inline-flex; align-items: center; vertical-align: middle; }
+.satcalc .mq-pl, .satcalc .mq-pr { display: inline-block; transform-origin: center; line-height: 1; padding: 0 .04em; }
+.satcalc .mq-cur { display: inline-block; width: 0; height: 1.15em; border-left: 1.7px solid #1f2328; margin-right: -1.7px; vertical-align: -.2em; animation: sc-blink 1.06s step-end infinite; }
+.satcalc .mq-hascur { background: transparent !important; }
+@keyframes sc-blink { 50% { border-color: transparent; } }
+.satcalc .mq-all .mq-view { background: #cfe0f7; }
+.satcalc .sc-scimf { font-size: 22px; }
+
+/* ---------- round 2: toolbar, regression panel, tables, notes, settings */
+.satcalc .sc-ibtn { width: 42px; padding: 0; justify-content: center; }
+.satcalc .sc-ibtn:disabled { opacity: .35; cursor: default; }
+.satcalc .sc-addbtn { width: 46px; justify-content: center; padding: 0; }
+.satcalc .sc-addbtn b { font-size: 24px; }
+.satcalc .sc-collapse { font-size: 20px; }
+.satcalc .sc-menuopt { margin-top: 6px; text-align: left; }
+.satcalc .sc-addmenu { display: flex; flex-direction: column; width: 170px; }
+.satcalc .sc-addmenu .sc-menuopt:first-child { margin-top: 0; }
+.satcalc .sc-expand { position: absolute; left: 8px; top: 8px; z-index: 2; display: none; font-size: 20px; }
+.satcalc.sc-collapsed .sc-expand { display: flex; }
+.satcalc.sc-collapsed .sc-lpane, .satcalc.sc-collapsed .sc-split, .satcalc.sc-collapsed .sc-gkeys { display: none !important; }
+.satcalc.sc-collapsed .sc-gpane { flex: 1 1 auto; }
+.satcalc .sc-reg { display: flex; flex-direction: column; gap: 3px; font-size: 14px; color: #39404b; margin-top: 2px; }
+.satcalc .sc-rsec { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 14px; }
+.satcalc .sc-rlabel { flex: 0 0 100%; font-size: 10.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: #8b919a; }
+.satcalc .sc-plotres { min-height: 40px; min-width: 56px; font-size: 13px; padding: 0 10px; }
+.satcalc .sc-plotres.on { background: #3c6fc4; color: #fff; border-color: #3c6fc4; }
+.satcalc .sc-ttools { display: flex; gap: 6px; margin-top: 4px; }
+.satcalc .sc-tbtn { min-height: 40px; display: flex; align-items: center; gap: 4px; padding: 0 10px; border: 1px solid #d6dae0; border-radius: 8px; background: #fff; font-size: 13px; color: #2b3139; }
+.satcalc .sc-thv { background: #f6f6f7; }
+.satcalc .sc-vbtn { border: 0; width: 100%; color: #8b919a; font-style: italic; }
+.satcalc .sc-th.sc-hidden .sc-hview { opacity: .45; }
+.satcalc .sc-tdv .sc-cin { background: #fafafa; }
+.satcalc .sc-colmenu { display: flex; flex-direction: column; gap: 6px; }
+.satcalc .sc-cmrow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.satcalc .sc-cmlabel { min-width: 44px; font-size: 16px; }
+.satcalc .sc-cmopt { padding: 0 10px; font-size: 13px; }
+.satcalc .sc-cmcolor { width: 36px; height: 36px; }
+.satcalc .sc-noterow .sc-tab { background: #fbf6e4; }
+.satcalc .sc-note { width: 100%; min-height: 36px; border: 0; outline: 0; resize: none; background: transparent; font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #3b4048; padding: 6px 2px; -webkit-user-select: text; user-select: text; }
+.satcalc .sc-bounds { margin-top: 4px; }
+.satcalc .sc-brow { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-family: KaTeX_Main, serif; }
+.satcalc .sc-bin { width: 82px; height: 38px; border: 1px solid #d3d8de; border-radius: 7px; text-align: center; font-size: 14px; }
+.satcalc .sc-bin.sc-bad { border-color: #c8433e; }
+.satcalc .sc-pop-settings { width: 300px; }

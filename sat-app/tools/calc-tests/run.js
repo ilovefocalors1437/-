@@ -207,7 +207,7 @@ throwsErr('sin()', /takes 1 argument/);
 throwsErr('nCr(5)', /takes 2/);
 throwsErr('2 $ 3', /Unexpected character/);
 throwsErr('foo(2)+q', /Undefined/);
-throwsErr('[1,2]<3', /lists/);
+ok(JSON.stringify(ev('[1,2,5]<3')) === '[true,true,false]', 'list comparison is element-wise');
 throwsErr('{x}', /comparison|Undefined/);
 throwsErr('(1,2,3)', /2D/);
 throwsErr('[1...]', /Range|Incomplete|Unexpected/);
@@ -396,6 +396,111 @@ ok(assignOk.assign === 'a' && assignOk.value === 5, 'scientific assignment');
 evc('ans*2', 10, { ans: 5 });
 const big = 'x+'.repeat(300) + '1';
 ok(res(['y=' + big], 0).kind === 'explicit', 'long expression');
+
+// ================================================================== round 2
+// ---- the user's reference case (verbatim)
+(function () {
+  const items = [
+    { id: 't', type: 'table', columns: [{ header: 'x_1', values: ['-27', '-9', '21'] }, { header: 'y_1', values: ['3', '0', '5'] }] },
+    { id: 'r', type: 'expr', text: '(x_1+3)*y_1 ~ m*x_1+b', plotResid: true },
+    { id: 'f', type: 'expr', text: 'f(x)=mx+b' }
+  ];
+  const A = C.analyze(items);
+  const reg = A.results.get('r');
+  ok(reg.kind === 'regression', 'reference: regression');
+  ok(reg.params.m === 4 && reg.params.b === 36, 'reference: m = 4, b = 36 exactly (' + reg.params.m + ',' + reg.params.b + ')');
+  ok(reg.rmse === 0, 'reference: RMSE = 0 (' + reg.rmse + ')');
+  ok(reg.plainLhs === false && isNaN(reg.r2), 'reference: lhs is an expression so no r²');
+  ok(reg.residName === 'e_1' && reg.resid.join(',') === '0,0,0', 'reference: residuals e_1 = [0,0,0]');
+  const f = A.results.get('f');
+  ok(f.kind === 'explicit' && f.fns[0](0) === 36, 'reference: f(0) = 36');
+  const tab = A.results.get('t');
+  const vcol = tab.cols.find((c) => c.virtual);
+  ok(vcol && vcol.name === 'e_1' && vcol.values.join(',') === '0,0,0', 'reference: residual column added to table');
+  ok(tab.series.some((s) => s.resid && s.pts.length === 3), 'reference: residual points plotted');
+  const P2 = C.findPOIs({ type: 'fx', f: f.fns[0] }, [], { xmin: -40, xmax: 40, ymin: -20, ymax: 60, n: 800 });
+  ok(P2.some((p) => p.type === 'yint' && p.x === 0 && p.y === 36), 'reference: y-intercept (0, 36)');
+  ok(P2.some((p) => p.type === 'zero' && Math.abs(p.x + 9) < 1e-9), 'reference: x-intercept (-9, 0)');
+})();
+// ---- regression statistics
+(function () {
+  const T = { id: 't', type: 'table', columns: [{ header: 'x_1', values: ['1', '2', '3', '4', '5'] }, { header: 'y_1', values: ['5', '3.9', '3.2', '1.8', '1.1'] }] };
+  let r = C.analyze([T, { id: 1, type: 'expr', text: 'y_1 ~ m x_1 + b' }]).results.get(1);
+  ok(r.plainLhs && r.linear && isFinite(r.r2) && r.r < 0 && Math.abs(r.r * r.r - r.r2) < 1e-12, 'linear model reports r² and negative r');
+  r = C.analyze([T, { id: 1, type: 'expr', text: 'y_1 ~ a x_1^2 + b x_1 + c' }]).results.get(1);
+  ok(isFinite(r.r2) && isNaN(r.r), 'quadratic reports r² but not r');
+  r = C.analyze([T, { id: 1, type: 'expr', text: 'y_1 ~ a b^{x_1}' }]).results.get(1);
+  ok(!r.linear && isFinite(r.r2) && r.r2 > 0.9, 'exponential reports R²');
+  r = C.analyze([T, { id: 1, type: 'expr', text: '2y_1 ~ m x_1 + b' }]).results.get(1);
+  ok(isNaN(r.r2) && r.rmse > 0, 'expression on the left reports RMSE');
+  const A = C.analyze([T, { id: 1, type: 'expr', text: 'y_1 ~ m x_1 + b' }, { id: 2, type: 'expr', text: 'y_1 ~ a x_1^2 + c' }, { id: 3, type: 'expr', text: 'total(e_1^2)' }, { id: 4, type: 'expr', text: 'length(e_2)' }]);
+  ok(A.results.get(1).residName === 'e_1' && A.results.get(2).residName === 'e_2', 'residual names e_1, e_2 in order');
+  close(A.results.get(3).value, (function () { const rr = A.results.get(1); return rr.resid.reduce((s, v) => s + v * v, 0); })(), 1e-12, 'residuals usable in other lines');
+  ok(A.results.get(4).value === 5, 'e_2 is a list of 5 residuals');
+})();
+ok(C.findPOIs({ type: 'fx', f: (x) => 2 * x + 1 }, [{ type: 'fx', f: (x) => 2 * x + 1 }], { xmin: -10, xmax: 10, ymin: -10, ymax: 10, n: 800 }).every((p) => p.type !== 'int'), 'coincident curves give no intersection dots');
+// ---- d/dx, comprehensions, conditions on lists
+close(res(['y=d/dx(x^3)'], 0).fns[0](2), 12, 1e-6, 'd/dx(x^3) at 2');
+close(res(['f(x)=sin(x)', 'y=d/dx f(x)'], 1).fns[0](0), 1, 1e-8, 'd/dx f(x) without parentheses');
+ok(/\\frac\{d\}\{dx\}/.test(C.toLatex(C.parse('d/dx(x^2)'))), 'd/dx latex');
+evc('[n^2 for n=[1...4]]', [1, 4, 9, 16]);
+evc('[a+b for a=[1,2], b=[10,20]]', [11, 21, 12, 22]);
+r = res(['[(n,n^2) for n=[1...5]]'], 0);
+ok(r.kind === 'points' && r.pts.length === 5 && r.pts[4][1] === 25, 'comprehension of points');
+r = res(['y=[n x for n=[1...3]]'], 0);
+ok(r.kind === 'explicit' && r.fns.length === 3 && r.fns[2](2) === 6, 'comprehension with x draws several curves');
+evc('L[L>2]', [5, 8], { vars: { L: [1, 5, 2, 8] } });
+evc('{L>2: L, 0}', [0, 5, 0, 8], { vars: { L: [1, 5, 2, 8] } });
+ok(JSON.stringify(ev('L{L>2}', { vars: { L: [1, 5, 2, 8] } })) === '[null,5,null,8]', 'restriction on a list');
+ok(JSON.stringify(ev('[1,2,3]=[1,5,3]')) === '[true,false,true]', 'list equality is element-wise');
+evc('total(L[L>=5])', 13, { vars: { L: [1, 5, 2, 8] } });
+evc('2≤3', true);
+ok(res(['y≤x^2'], 0).kind === 'ineq', 'unicode ≤ in graphs');
+// ---- draggable point metadata
+r = analyze(['a=1', '(a,2)', '(3,4)', '(a,a^2)', 'b=x']).results;
+ok(r.get(1).drag && r.get(1).drag.x.name === 'a' && r.get(1).drag.y.c, 'point (a,2) drags a and keeps y');
+ok(r.get(2).drag && r.get(2).drag.x.c && r.get(2).drag.y.c, 'constant point is draggable');
+ok(r.get(3).drag && r.get(3).drag.x.name === 'a' && r.get(3).drag.y === null, '(a,a^2) drags only through a');
+// ---- points of interest on parametric / polar / implicit
+(function () {
+  const v = { xmin: -10, xmax: 10, ymin: -10, ymax: 10, n: 800 };
+  const has2 = (L, x, y, t) => L.some((p) => Math.abs(p.x - x) < 1e-6 && Math.abs(p.y - y) < 1e-6 && (!t || p.type === t));
+  const ell = { type: 'P', fn: (t) => [3 * Math.cos(t) + 1, 2 * Math.sin(t) + 1], t0: 0, t1: 2 * Math.PI };
+  let P = C.findPOIs(ell, [], v);
+  ok(has2(P, 1, 3, 'max') && has2(P, 1, -1, 'min'), 'parametric top/bottom points');
+  ok(P.filter((p) => p.type === 'zero').length === 2 && P.filter((p) => p.type === 'yint').length === 2, 'parametric intercepts');
+  P = C.findPOIs(ell, [{ type: 'fx', f: () => 1 }], v);
+  ok(has2(P, 4, 1, 'int') && has2(P, -2, 1, 'int'), 'parametric ∩ line');
+  P = C.findPOIs({ type: 'fx', f: () => 1 }, [ell], v);
+  ok(has2(P, 4, 1, 'int') && has2(P, -2, 1, 'int'), 'line ∩ parametric');
+  const card = { type: 'P', fn: (t) => { const r = 1 + Math.cos(t); return [r * Math.cos(t), r * Math.sin(t)]; }, t0: 0, t1: 2 * Math.PI };
+  P = C.findPOIs(card, [], v);
+  ok(has2(P, 2, 0, 'zero') && P.some((p) => p.type === 'max' && Math.abs(p.y - 3 * Math.sqrt(3) / 4) < 1e-6), 'polar cardioid intercept and top');
+  // implicit circle centred off-axis: top/bottom via traced chains
+  const F = (x, y) => (x - 2) * (x - 2) + (y - 3) * (y - 3) - 4;
+  const ch = []; for (let i = 0; i <= 400; i++) { const a = i / 400 * 2 * Math.PI; ch.push(2 + 2 * Math.cos(a), 3 + 2 * Math.sin(a)); }
+  P = C.findPOIs({ type: 'F', F: F, chains: [new Float64Array(ch)] }, [], v);
+  ok(has2(P, 2, 5, 'max') && has2(P, 2, 1, 'min'), 'implicit circle top and bottom ' + JSON.stringify(P));
+})();
+// ---- structured editor text conversion (MathField, pure functions)
+(function () {
+  try { require(path.resolve(__dirname, '../../www/calc/ui.js')); } catch (e) { ok(false, 'ui.js loads in node: ' + e.message); return; }
+  const MF = globalThis.SatCalcMathField;
+  ok(!!MF, 'MathField exported');
+  const rt = (t) => MF.ser(MF.treeFromText(t));
+  const same = ['y=2x^2-3x+1', '(x+1)/(x-2)', '1/2x', 'log_2(8)', 'x_1^2', 'f\'(x)', '(1,2),(3,4)', 'd/dx(x^3)', 'y=(x+1', 'nthroot(27,3)', '(x_1+3)*y_1 ~ m*x_1+b', 'sin^2(x)', 'y={x<0:-x,x>=0:x^2}'];
+  same.forEach((t) => ok(MF.sameMath(rt(t), t) || rt(t) === t, 'editor round trip keeps meaning: ' + t + ' -> ' + rt(t)));
+  ok(rt('y=(x+1') === 'y=(x+1', 'unparseable text is kept verbatim');
+  ok(rt('[(n,n^2) for n=[1...5]]') === '[(n,n^2) for n=[1...5]]', 'comprehension keeps its spaces: ' + rt('[(n,n^2) for n=[1...5]]'));
+  // typing model: build trees like the editor does
+  const fr = { t: 'frac', a: [{ t: 'c', v: '1' }], b: [{ t: 'c', v: '2' }, { t: 'c', v: 'x' }] };
+  ok(MF.ser([fr]) === '1/(2x)', 'Desmos-style 1/2x (denominator 2x) serialises to 1/(2x)');
+  ok(MF.ser([{ t: 'c', v: '2' }, { t: 'frac', a: [{ t: 'c', v: '1' }], b: [{ t: 'c', v: '3' }] }]) === '2(1/3)', 'fraction after a number is grouped');
+  ok(MF.ser([{ t: 'c', v: 'x' }, { t: 'sup', a: [{ t: 'c', v: '2' }, { t: 'c', v: 'y' }] }]) === 'x^(2y)', 'exponent box groups its content');
+  ok(MF.ser([{ t: 'c', v: 'x' }, { t: 'sub', a: [{ t: 'c', v: '1' }, { t: 'c', v: '2' }] }]) === 'x_{12}', 'subscript box');
+  ok(MF.ser([{ t: 'paren', l: '|', r: '|', a: [{ t: 'c', v: 'x' }] }]) === 'abs(x)', 'absolute value box');
+  ok(MF.ser(MF.fromText('2pi')) === '2π' && MF.ser(MF.fromText('x<=3')) === 'x≤3', 'pi and <= become symbols');
+})();
 
 console.log(`calc core tests: ${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

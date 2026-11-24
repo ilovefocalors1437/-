@@ -228,7 +228,7 @@ async function smallTargets(page) {
 
   // 6. keypad typing
   await setState(page, exprs([]));
-  await page.locator('.sc-row .sc-math').first().tap();
+  await page.locator('.sc-row .mq').first().tap();
   await page.waitForTimeout(150);
   const kpOpen = await page.evaluate(() => document.querySelector('.satcalc').classList.contains('sc-kp'));
   check(kpOpen, 'keypad opens on touch focus');
@@ -243,16 +243,16 @@ async function smallTargets(page) {
   res = await results(page);
   check(res[0] && res[0].text === 'y=2x+1', 'keypad typed line 1: ' + (res[0] && res[0].text));
   check(res[1] && res[1].text === 'y=x^2-4sin(x)', 'keypad typed line 2: ' + (res[1] && res[1].text));
-  check(res[2] && res[2].text === '√(2)*3' && res[2].display === '4.242640687', 'keypad typed constant: ' + JSON.stringify(res[2]));
+  check(res[2] && res[2].text === 'sqrt(2)*3' && res[2].display === '4.242640687', 'keypad typed constant: ' + JSON.stringify(res[2]));
   // backspace removes the "√(" pair etc.
   await pressKeys(page, ['⌫', '⌫']);
   res = await results(page);
-  check(res[2].text === '√(2)', 'backspace: ' + res[2].text);
+  check(res[2].text === 'sqrt(2)', 'backspace: ' + res[2].text);
   await shot(page, 'phone-7-keypad');
   // physical keyboard still works
   await page.keyboard.type('+1');
   res = await results(page);
-  check(res[2].text === '√(2)+1', 'physical keyboard typing: ' + res[2].text);
+  check(res[2].text === 'sqrt(2)+1', 'physical keyboard typing: ' + res[2].text);
 
   // 7. scientific mode
   await page.locator('.sc-segbtn', { hasText: 'Scientific' }).tap();
@@ -283,7 +283,7 @@ async function smallTargets(page) {
   await page.evaluate((s) => SatCalc.setState(JSON.parse(s)), st);
   const st2 = await page.evaluate(() => JSON.stringify(SatCalc.getState()));
   check(st === st2, 'getState/setState round trip');
-  const changed = await page.evaluate(() => new Promise((res) => { SatCalc.onChange = (s) => res(!!s && s.version === 1); SatCalc._app().addItem('expr', null, 'y=5'); setTimeout(() => res(false), 2000); }));
+  const changed = await page.evaluate(() => new Promise((res) => { SatCalc.onChange = (s) => res(!!s && s.version >= 1); SatCalc._app().addItem('expr', null, 'y=5'); setTimeout(() => res(false), 2000); }));
   check(changed, 'onChange fires with state');
   allErrors.push(...page._errors);
   await page.context().close();
@@ -292,7 +292,7 @@ async function smallTargets(page) {
   page = await newPage(browser, { width: 360, height: 740 }, true);
   await setState(page, Object.assign(exprs(['y=x^2-2x-3', 'a=2', 'y=ax+1 {x>-2}', 'y_1 ~ m x_1 + b', 'mean([1,2,3,4,100])']), {}));
   await page.evaluate(() => { const app = SatCalc._app(); app.addItem('table'); });
-  await page.locator('.sc-row .sc-math').first().tap();
+  await page.locator('.sc-row .mq').first().tap();
   await page.waitForTimeout(200);
   let ov = await noHScroll(page);
   check(ov.sw <= ov.w && !ov.over.length, 'no horizontal overflow at 360px ' + JSON.stringify(ov));
@@ -339,7 +339,7 @@ async function smallTargets(page) {
   });
   console.log('tablet pan render (interacting, median ms): ' + perf.toFixed(1));
   await page.evaluate(() => SatCalc._app().toggleKeypad(true));
-  await page.locator('.sc-row .sc-math').nth(1).click();
+  await page.locator('.sc-row .mq').nth(1).click();
   await page.waitForTimeout(200);
   await shot(page, 'tablet-2-keypad');
   await page.locator('.sc-segbtn', { hasText: 'Scientific' }).click();
@@ -351,7 +351,7 @@ async function smallTargets(page) {
 
   // ---------------------------------------------------------------- desktop (mouse + physical keyboard)
   page = await newPage(browser, { width: 1280, height: 800 }, false);
-  await page.locator('.sc-row .sc-math').first().click();
+  await page.locator('.sc-row .mq').first().click();
   await page.keyboard.type('y=x^2-2x');
   await page.keyboard.press('Enter');
   await page.keyboard.type('y=x');
@@ -370,7 +370,8 @@ async function smallTargets(page) {
   const w1 = await page.evaluate(() => SatCalc._app().graph.getView().ppu);
   check(w1 > w0 * 1.3, 'wheel zoom in');
   // table typing via keyboard grows rows
-  await page.locator('.sc-lbtn', { hasText: 'Table' }).click();
+  await page.locator('.sc-addbtn').click();
+  await page.locator('.sc-menuopt', { hasText: 'Table' }).click();
   await page.keyboard.type('1'); await page.keyboard.press('Enter'); await page.keyboard.type('2'); await page.keyboard.press('Enter');
   await page.keyboard.type('3'); await page.keyboard.press('Enter'); await page.keyboard.type('4');
   const tcells = await page.evaluate(() => { const t = SatCalc._app().state.items.find((i) => i.type === 'table'); return t.columns[0].values.slice(0, 4).join(','); });
@@ -379,10 +380,207 @@ async function smallTargets(page) {
   allErrors.push(...page._errors);
   await page.context().close();
 
+
+  // ================================================================ round 2 (phone 390x780)
+  page = await newPage(browser, { width: 390, height: 780 }, true);
+  // --- the user's reference case, verbatim
+  await setState(page, { items: [
+    { type: 'table', columns: [{ header: 'x_1', values: ['-27', '-9', '21'] }, { header: 'y_1', values: ['3', '0', '5'] }] },
+    { type: 'expr', text: '(x_1+3)*y_1 ~ m*x_1+b' },
+    { type: 'expr', text: 'f(x)=mx+b' }
+  ], split: 0.45 });
+  res = await results(page);
+  check(res[1].kind === 'regression' && res[1].params.m === 4 && res[1].params.b === 36, 'reference: m=4, b=36');
+  const regText = await page.evaluate(() => document.querySelectorAll('.sc-reg')[0].textContent);
+  check(/parameters/i.test(regText) && /statistics/i.test(regText) && /RMSE/.test(regText) && /residuals/i.test(regText), 'reference: regression panel sections ' + regText);
+  await page.locator('.sc-plotres').first().tap();
+  await page.waitForTimeout(200);
+  const vhead = await page.evaluate(() => !!document.querySelector('.sc-thv'));
+  check(vhead, 'reference: plotting residuals adds e_1 column to the table');
+  await page.evaluate(() => SatCalc._app().graph.setBounds({ xmin: -32, xmax: 28, ymin: -12, ymax: 50 }));
+  await page.waitForTimeout(150);
+  // tap the line y = 4x + 36 to select it, then tap its y-intercept
+  await tapGraph(page, -5, 16);
+  P = await pois(page);
+  check(hasPoi(P, 0, 36, 'yint') && hasPoi(P, -9, 0, 'zero'), 'reference: f has POIs (0,36) and (-9,0) ' + JSON.stringify(P));
+  await tapGraph(page, 0, 36);
+  const lab = await page.evaluate(() => { const g = SatCalc._app().graph; return Array.from(g.poiOpen).map((i) => g.pois[i]); });
+  check(lab.length === 1 && lab[0].x === 0 && lab[0].y === 36, 'reference: tapping shows the (0, 36) label');
+  await page.evaluate(() => { document.querySelector('.sc-list').scrollTop = 0; });
+  await shot(page, 'r2-phone-1-reference-case');
+  await page.evaluate(() => { document.querySelector('.sc-list').scrollTop = 1000; });
+  await shot(page, 'r2-phone-1b-reference-list');
+
+  // --- structured math input
+  await setState(page, exprs([]));
+  await page.locator('.sc-row .mq').first().tap();
+  await pressKeys(page, ['y', '=', '1', '÷', '2', 'x']);
+  res = await results(page);
+  check(res[0] && res[0].text === 'y=1/(2x)', 'Desmos-style fraction: ' + (res[0] && res[0].text));
+  await pressKeys(page, ['→', '+', '3']);
+  res = await results(page);
+  check(res[0].text === 'y=1/(2x)+3', 'right arrow leaves the denominator: ' + res[0].text);
+  await pressKeys(page, ['↵', 'y', '=', 'x', 'aᵇ', '2', '+', '1']);
+  res = await results(page);
+  check(res[1] && res[1].text === 'y=x^2+1', 'operator leaves exponent like Desmos: ' + (res[1] && res[1].text));
+  await pressKeys(page, ['↵', '√', 'x', '+', '1', '→', '−', '1']);
+  res = await results(page);
+  check(res[2] && res[2].text === 'sqrt(x+1)-1', 'radical box: ' + (res[2] && res[2].text));
+  await pressKeys(page, ['↵', 'x', 'a₁', '1', '→', 'a²']);
+  res = await results(page);
+  check(res[3] && res[3].text === 'x_1^2', 'subscript then square: ' + (res[3] && res[3].text));
+  const boxes = await page.evaluate(() => ({ frac: document.querySelectorAll('.mq-frac').length, sup: document.querySelectorAll('.mq-sup').length, sqrt: document.querySelectorAll('.mq-sqrt').length, sub: document.querySelectorAll('.mq-sub').length }));
+  check(boxes.frac >= 1 && boxes.sup >= 2 && boxes.sqrt >= 1 && boxes.sub >= 1, 'boxes rendered ' + JSON.stringify(boxes));
+  await shot(page, 'r2-phone-2-structured-input');
+  // physical keyboard + paste into a fresh line
+  await pressKeys(page, ['↵']);
+  await page.keyboard.type('y=sqrt(x)/2');
+  res = await results(page);
+  check(res[4] && res[4].text === 'y=sqrt(x)/2', 'keyboard typing sqrt auto-box and fraction: ' + (res[4] && res[4].text));
+  await pressKeys(page, ['→']);
+  await page.evaluate(() => {
+    const ta = document.activeElement;
+    const dt = new DataTransfer(); dt.setData('text/plain', '+(x+1)/(x-2)');
+    ta.dispatchEvent(new ClipboardEvent('paste', { clipboardData: dt, bubbles: true, cancelable: true }));
+  });
+  res = await results(page);
+  check(res[4] && res[4].text === 'y=sqrt(x)/2+(x+1)/(x-2)', 'paste plain text: ' + (res[4] && res[4].text));
+  // caret placement by tapping: tap at the start of line 1 and type a minus sign
+  await page.locator('.sc-row .mq').first().scrollIntoViewIfNeeded();
+  const box1 = await page.locator('.sc-row .mq').first().boundingBox();
+  await page.touchscreen.tap(box1.x + 3, box1.y + box1.height / 2);
+  await pressKeys(page, ['−']);
+  res = await results(page);
+  check(res[0].text.indexOf('-') === 0, 'tap places the caret: ' + res[0].text);
+
+  // --- undo / redo
+  await setState(page, exprs(['y=x']));
+  await page.locator('.sc-row .mq').first().tap();
+  await pressKeys(page, ['+', '1']);
+  await page.waitForTimeout(600);
+  await pressKeys(page, ['+', '2']);
+  await page.waitForTimeout(600);
+  await page.locator('.sc-ibtn[aria-label="Undo"]').tap();
+  res = await results(page);
+  check(res[0].text === 'y=x+1', 'undo: ' + res[0].text);
+  await page.locator('.sc-ibtn[aria-label="Undo"]').tap();
+  res = await results(page);
+  check(res[0].text === 'y=x', 'undo twice: ' + res[0].text);
+  await page.locator('.sc-ibtn[aria-label="Redo"]').tap();
+  res = await results(page);
+  check(res[0].text === 'y=x+1', 'redo: ' + res[0].text);
+  await page.locator('.sc-row .mq').first().tap();
+  await page.keyboard.press('Control+z');
+  res = await results(page);
+  check(res[0].text === 'y=x', 'Ctrl+Z: ' + res[0].text);
+  await page.keyboard.press('Control+y');
+  res = await results(page);
+  check(res[0].text === 'y=x+1', 'Ctrl+Y: ' + res[0].text);
+
+  // --- draggable points
+  await page.evaluate(() => { SatCalc._app().toggleKeypad(false); document.activeElement.blur(); });
+  await setState(page, exprs(['a=1', '(a,2)', '(3,4)']));
+  await page.evaluate(() => SatCalc._app().graph.setView({ cx: 0, cy: 0, ppu: 30 }));
+  await page.waitForTimeout(150);
+  const drag = async (fx, fy, tx, ty) => {
+    const A1 = await graphPoint(page, fx, fy), B1 = await graphPoint(page, tx, ty);
+    await page.mouse.move(A1.x, A1.y); await page.mouse.down();
+    await page.mouse.move(B1.x, B1.y, { steps: 8 }); await page.mouse.up();
+    await page.waitForTimeout(150);
+  };
+  await drag(3, 4, 5, 1);
+  res = await results(page);
+  check(res[2].text === '(5,1)', 'drag constant point: ' + res[2].text);
+  await drag(1, 2, 4, 2);
+  res = await results(page);
+  check(res[0].text === 'a=4', 'drag (a,2) updates slider: ' + res[0].text);
+  await shot(page, 'r2-phone-3-drag-points');
+
+  // --- table tools: lines, zoom to fit, convert to table
+  await setState(page, { items: [{ type: 'expr', text: 'y=x^2-1' }, { type: 'table', columns: [{ header: 'x_1', values: ['10', '20', '30', '40'] }, { header: 'y_1', values: ['100', '300', '200', '400'] }] }] });
+  await page.locator('.sc-tbtn[aria-label="Zoom to fit data"]').tap();
+  await page.waitForTimeout(150);
+  const bnd = await page.evaluate(() => SatCalc._app().graph.getBounds());
+  check(bnd.xmin < 10 && bnd.xmax > 40 && bnd.ymin < 100 && bnd.ymax > 400 && bnd.xmin > 0, 'zoom to fit data ' + JSON.stringify(bnd));
+  await page.locator('.sc-tbtn[aria-label="Column options"]').tap();
+  await page.locator('.sc-cmopt', { hasText: 'Lines' }).first().tap();
+  await page.waitForTimeout(100);
+  const linesOn = await page.evaluate(() => SatCalc._app().state.items[1].columns[1].lines === true);
+  check(linesOn, 'column lines toggle');
+  await page.evaluate(() => SatCalc._app().closePop());
+  await shot(page, 'r2-phone-4-table-lines');
+  await page.locator('.sc-tab').first().tap();
+  await page.locator('.sc-menuopt', { hasText: 'Convert to table' }).tap();
+  res = await results(page);
+  const conv = res.find((r) => r.kind === 'table' && r !== res[1]);
+  const convVals = await page.evaluate(() => { const app = SatCalc._app(); const t = app.state.items[1]; const r = app.results.get(t.id); return r.cols.map((c) => c.header + ':' + c.values.join(',')); });
+  check(convVals.join(' ') === 'x_2:-2,-1,0,1,2 x_2^2-1:3,0,-1,0,3', 'convert y=x^2-1 to table ' + JSON.stringify(convVals));
+
+  // --- parametric POIs, collapse, settings window
+  await setState(page, exprs([{ type: 'expr', text: '(3cos(t)+1, 2sin(t)+1)', domain: { min: '0', max: '2π' } }]));
+  await tapGraph(page, 4, 1);
+  P = await pois(page);
+  check(hasPoi(P, 1, 3, 'max') && hasPoi(P, 1, -1, 'min'), 'parametric POIs on screen ' + JSON.stringify(P));
+  await page.locator('.sc-collapse').tap();
+  await page.waitForTimeout(150);
+  const collapsed = await page.evaluate(() => { const g = SatCalc._app().graph; return { lp: getComputedStyle(document.querySelector('.sc-lpane')).display, h: g.H }; });
+  check(collapsed.lp === 'none' && collapsed.h > 650, 'collapse list gives graph the space ' + JSON.stringify(collapsed));
+  await shot(page, 'r2-phone-5-collapsed');
+  await page.locator('.sc-expand').tap();
+  await page.waitForTimeout(100);
+  await page.locator('.sc-gear').tap();
+  await page.locator('.sc-bin[aria-label="x min"]').fill('-2');
+  await page.locator('.sc-bin[aria-label="x max"]').fill('8');
+  await page.locator('.sc-bin[aria-label="y min"]').fill('-1');
+  await page.locator('.sc-bin[aria-label="y max"]').fill('4');
+  await shot(page, 'r2-phone-6-settings');
+  await page.locator('.sc-opt', { hasText: 'Apply' }).tap();
+  const b2 = await page.evaluate(() => SatCalc._app().graph.getBounds());
+  check(near(b2.xmin, -2, 1e-6) && near(b2.xmax, 8, 1e-6) && near(b2.ymin, -1, 1e-6) && near(b2.ymax, 4, 1e-6), 'editable window bounds ' + JSON.stringify(b2));
+  await shot(page, 'r2-phone-7-bounds');
+
+  // --- notes
+  await page.locator('.sc-addbtn').tap();
+  await page.locator('.sc-menuopt', { hasText: 'Note' }).tap();
+  await page.keyboard.type('Vertex form check');
+  const noteSt = await page.evaluate(() => SatCalc.getState().items.find((i) => i.type === 'note'));
+  check(noteSt && noteSt.text === 'Vertex form check', 'note line saved ' + JSON.stringify(noteSt));
+
+  // --- old (round 1) saved state still loads
+  await page.evaluate(() => SatCalc.setState({ version: 1, mode: 'graph', angle: 'rad', items: [{ type: 'expr', text: '|x-1|', color: '#c8433e' }, { type: 'expr', text: 'y<=x^2' }, { type: 'expr', text: 'x^2/9-y^2/4=1' }, { type: 'expr', text: 'y=(x+1' }], viewport: { cx: 1, cy: 2, ppu: 25 } }));
+  res = await results(page);
+  check(res[0].kind === 'explicit' && res[1].kind === 'ineq' && res[2].kind === 'implicit' && res[3].kind === 'error', 'old state loads ' + JSON.stringify(res.map((r) => r.kind + ':' + r.text)));
+  const vpOld = await page.evaluate(() => SatCalc._app().graph.getView());
+  check(vpOld.cx === 1 && vpOld.cy === 2 && vpOld.ppu === 25, 'old viewport restored');
+  await shot(page, 'r2-phone-8-old-state');
+  allErrors.push(...page._errors);
+  await page.context().close();
+
+  // ---------------------------------------------------------------- round 2 tablet: reference case
+  page = await newPage(browser, { width: 1180, height: 820 }, true);
+  await setState(page, { items: [
+    { type: 'table', columns: [{ header: 'x_1', values: ['-27', '-9', '21'] }, { header: 'y_1', values: ['3', '0', '5'] }] },
+    { type: 'expr', text: '(x_1+3)*y_1 ~ m*x_1+b', plotResid: true },
+    { type: 'expr', text: 'f(x)=mx+b' },
+    { type: 'expr', text: '[(n,n^2/4) for n=[1...5]]' },
+    { type: 'expr', text: 'r=2+sin(3θ)' },
+    { type: 'expr', text: 'y=d/dx(x^3/30)' }
+  ] });
+  await page.evaluate(() => SatCalc._app().graph.setBounds({ xmin: -32, xmax: 28, ymin: -14, ymax: 46 }));
+  await page.evaluate(() => SatCalc._app().graph.select(SatCalc._app().state.items[2].id));
+  await page.waitForTimeout(250);
+  await page.evaluate(() => { const g = SatCalc._app().graph; const i = g.pois.findIndex((p) => p.x === 0 && p.y === 36); if (i >= 0) g.poiOpen.add(i); g.request(); });
+  await page.waitForTimeout(150);
+  res = await results(page);
+  check(res.every((r) => r.kind !== 'error'), 'tablet round-2 set has no errors ' + JSON.stringify(res.filter((r) => r.kind === 'error')));
+  await shot(page, 'r2-tablet-1-reference');
+  allErrors.push(...page._errors);
+  await page.context().close();
+
   // ---------------------------------------------------------------- phone landscape
   page = await newPage(browser, { width: 780, height: 360 }, true);
   await setState(page, exprs(['y=x^2-4', 'y=2x+1', 'a=1']));
-  await page.locator('.sc-row .sc-math').first().tap();
+  await page.locator('.sc-row .mq').first().tap();
   await page.waitForTimeout(200);
   ov = await noHScroll(page);
   check(ov.sw <= ov.w && !ov.over.length, 'no overflow phone landscape ' + JSON.stringify(ov));

@@ -65,6 +65,16 @@
         i = j;
         continue;
       }
+      if (c === 'd' && src.startsWith('d/dx', i) && !isLetter(src[i - 1]) && !isLetter(src[i + 4])) {
+        toks.push({ t: 'fn', v: 'ddx', pos: i });
+        i += 4;
+        continue;
+      }
+      if (c === 'f' && i > 0 && src.startsWith('for', i) && !isLetter(src[i - 1]) && !src.startsWith('fort', i)) {
+        toks.push({ t: 'kw', v: 'for', pos: i });
+        i += 3;
+        continue;
+      }
       if (isLetter(c)) {
         let w = null;
         for (let k = 0; k < WORDS.length; k++) {
@@ -130,7 +140,7 @@
       }
       if (src.substr(i, 3) === '...') { toks.push({ t: 'op', v: '...', pos: i }); i += 3; continue; }
       const m = SYM[c] || c;
-      if ('+-*/^()[]{},:!|<>=~%.\'°'.indexOf(m) >= 0 || m === '...') {
+      if ('+-*/^()[]{},:!|<>=~%.\'°'.indexOf(m) >= 0 || m === '...' || m === '<=' || m === '>=') {
         toks.push({ t: 'op', v: m, pos: i }); i++; continue;
       }
       throw err("Unexpected character '" + c + "'");
@@ -269,6 +279,7 @@
         return { type: 'id', name: t.v };
       }
       if (t.t === 'fn') return fnCall(t);
+      if (t.t === 'kw') throw err("'for' only works inside a list, e.g. [n^2 for n=[1...5]]");
       if (t.t === 'op') {
         if (t.v === '(') {
           if (isOp(peek(), ')')) throw err('Empty parentheses');
@@ -297,6 +308,7 @@
       if (t.base != null && !base) throw err('Missing log base');
       let powE = null;
       if (isOp(peek(), '^')) { p++; powE = powExp(); }
+      if (powE && powE.type === 'paren' && powE.a.type === 'neg') powE = powE.a;
       if (powE && powE.type === 'neg' && powE.a.type === 'num' && powE.a.v === 1 && TRIG_INV[name]) {
         name = TRIG_INV[name]; powE = null;
       }
@@ -336,6 +348,20 @@
           continue;
         }
         items.push(cmp());
+        if (items.length === 1 && rangeAt < 0 && peek() && peek().t === 'kw' && peek().v === 'for') {
+          p++;
+          const binds = [];
+          for (;;) {
+            const t = toks[p++];
+            if (!t || t.t !== 'id') throw err("Expected a variable after 'for'");
+            expect('=');
+            binds.push({ name: t.v, list: add() });
+            if (isOp(peek(), ',') && toks[p + 1] && toks[p + 1].t === 'id' && isOp(toks[p + 2], '=')) { p++; continue; }
+            break;
+          }
+          expect(']');
+          return { type: 'comp', body: items[0], binds: binds };
+        }
         if (isOp(peek(), ',')) { p++; continue; }
         if (isOp(peek(), '...')) continue;
         break;
@@ -586,7 +612,12 @@
   function eqTol(a, b) { return a === b || Math.abs(a - b) <= 1e-12 * Math.max(1, Math.abs(a), Math.abs(b)); }
   function cmpOp(op, a, b) {
     if (typeof a !== 'number' || typeof b !== 'number') {
-      if (Array.isArray(a) || Array.isArray(b)) throw err('Comparisons with lists are not supported');
+      if (Array.isArray(a) || Array.isArray(b)) {
+        const n = Math.min(Array.isArray(a) ? a.length : Infinity, Array.isArray(b) ? b.length : Infinity);
+        const out = new Array(n);
+        for (let i = 0; i < n; i++) out[i] = cmpOp(op, Array.isArray(a) ? a[i] : a, Array.isArray(b) ? b[i] : b);
+        return out;
+      }
       return false;
     }
     switch (op) {
@@ -689,26 +720,52 @@
         if (node.ops.indexOf('~') >= 0) throw err("'~' is only for regressions");
         const A = node.args.map((a) => compile(a, cx)), ops = node.ops;
         return fold((s) => {
-          let prev = A[0](s);
+          let prev = A[0](s), acc = true;
           for (let i = 0; i < ops.length; i++) {
             const cur = A[i + 1](s);
-            if (!cmpOp(ops[i], prev, cur)) return false;
+            const r = cmpOp(ops[i], prev, cur);
+            if (Array.isArray(r)) acc = Array.isArray(acc) ? acc.map((v, k) => v && r[k] === true).slice(0, Math.min(acc.length, r.length)) : (acc ? r.map((v) => v === true) : r.map(() => false));
+            else if (Array.isArray(acc)) { if (!r) acc = acc.map(() => false); }
+            else if (!r) return false;
             prev = cur;
           }
-          return true;
+          return acc;
         }, A);
       }
       case 'restrict': {
         const Cs = node.conds.map((c) => compileCond(c, cx));
-        return fold((s) => { for (let i = 0; i < Cs.length; i++) if (Cs[i](s) !== true) return NaN; return 1; }, Cs);
+        return fold((s) => {
+          let list = null;
+          for (let i = 0; i < Cs.length; i++) {
+            const c = Cs[i](s);
+            if (Array.isArray(c)) list = list ? list.map((v, k) => v && c[k] === true) : c.map((v) => v === true);
+            else if (c !== true) return NaN;
+          }
+          return list ? list.map((v) => (v ? 1 : NaN)) : 1;
+        }, Cs);
       }
       case 'piecewise': {
         const Cs = node.branches.map((b) => compileCond(b.cond, cx));
         const Vs = node.branches.map((b) => compile(b.val, cx));
         const E = node.else ? compile(node.else, cx) : null;
         const n = Cs.length;
+        const pick = (v, k) => (Array.isArray(v) ? (v[k] === undefined ? NaN : v[k]) : v);
         return fold((s) => {
-          for (let i = 0; i < n; i++) if (Cs[i](s) === true) return Vs[i](s);
+          for (let i = 0; i < n; i++) {
+            const c = Cs[i](s);
+            if (c === true) return Vs[i](s);
+            if (Array.isArray(c)) {
+              // element-wise piecewise over lists
+              const conds = Cs.map((f) => f(s)), vals = Vs.map((f) => f(s)), ev = E ? E(s) : NaN;
+              const len = Math.max.apply(null, conds.concat(vals, [ev]).map((v) => (Array.isArray(v) ? v.length : 0)));
+              const out = new Array(len);
+              for (let k = 0; k < len; k++) {
+                out[k] = pick(ev, k);
+                for (let j = 0; j < n; j++) if (pick(conds[j], k) === true) { out[k] = pick(vals[j], k); break; }
+              }
+              return out;
+            }
+          }
           return E ? E(s) : NaN;
         }, Cs.concat(Vs, E ? [E] : []));
       }
@@ -724,6 +781,7 @@
           };
           if (I.length === 1) {
             const i = I[0](s);
+            if (Array.isArray(i) && i.length && typeof i[0] === 'boolean') return a.filter((v, k) => i[k] === true);
             return Array.isArray(i) ? i.map(pick) : pick(i);
           }
           return I.map((f) => pick(f(s)));
@@ -733,6 +791,30 @@
         const A = compile(node.a, cx), m = node.m;
         const get = (v) => isPt(v) ? v[m] : Array.isArray(v) ? v.map(get) : (() => { throw err('.' + m + ' needs a point'); })();
         return fold((s) => get(A(s)), [A]);
+      }
+      case 'comp': {
+        const keys = node.binds.map(() => '\u0001c' + (++dKeyCounter));
+        const Ls = node.binds.map((b) => compile(b.list, cx));
+        const sub = new Map(cx.subst || []);
+        node.binds.forEach((b, i) => sub.set(b.name, (s) => s[keys[i]]));
+        const B = compile(node.body, Object.assign({}, cx, { subst: sub }));
+        return (s) => {
+          const lists = Ls.map((f) => { const v = f(s); return Array.isArray(v) ? v : [v]; });
+          const out = [];
+          const old = keys.map((k) => s[k]);
+          const rec = (d) => {
+            if (d === lists.length) {
+              const v = B(s);
+              if (Array.isArray(v)) { for (const w of v) out.push(w); } else out.push(v);
+              if (out.length > 10000) throw err('List too long (max 10000 items)');
+              return;
+            }
+            for (const v of lists[d]) { s[keys[d]] = v; rec(d + 1); }
+          };
+          rec(0);
+          keys.forEach((k, i) => { s[k] = old[i]; });
+          return out;
+        };
       }
       case 'pct': {
         const A = compile(node.a, cx);
@@ -996,6 +1078,21 @@
         return l.reduce((a, b) => f(a, b));
       }, args);
     }
+    if (name === 'ddx') {
+      arity('d/dx', args, 1);
+      const key = '\u0001d' + (++dKeyCounter);
+      const sub = new Map(cx.subst || []);
+      sub.set('x', (s) => s[key]);
+      const B = compile(node.args[0], Object.assign({}, cx, { subst: sub }));
+      const X = compileId('x', cx);
+      const d1 = (s, a) => {
+        if (typeof a !== 'number') return NaN;
+        const old = s[key], h = 1e-5 * Math.max(1, Math.abs(a));
+        s[key] = a + h; const f1 = B(s); s[key] = a - h; const f0 = B(s); s[key] = old;
+        return (typeof f1 === 'number' && typeof f0 === 'number') ? (f1 - f0) / (2 * h) : NaN;
+      };
+      return (s) => { const a = X(s); return Array.isArray(a) ? a.map((v) => d1(s, v)) : d1(s, a); };
+    }
     if (U[name] && !(LISTFN[name])) {
       arity(name, args, 1);
       const f = U[name], A = args[0];
@@ -1050,6 +1147,7 @@
       case 'restrict': node.conds.forEach((a) => walk(a, fn)); break;
       case 'piecewise': node.branches.forEach((b) => { walk(b.cond, fn); walk(b.val, fn); }); walk(node.else, fn); break;
       case 'index': walk(node.a, fn); node.items.forEach((a) => walk(a, fn)); break;
+      case 'comp': walk(node.body, fn); node.binds.forEach((b) => walk(b.list, fn)); break;
     }
   }
   function collectNames(ast, fns) {
@@ -1306,6 +1404,15 @@
       e.params = params;
       params.forEach((n) => define(n, { kind: 'reg', name: n, entry: e }));
     });
+    // residual lists e_1, e_2, ... (next free name for each regression, in order)
+    let residK = 1;
+    entries.forEach((e) => {
+      if (!e.reg || e.res) return;
+      while (defs.has('e_' + residK) || fns.has('e_' + residK)) residK++;
+      e.residName = 'e_' + residK;
+      define(e.residName, { kind: 'resid', name: e.residName, entry: e });
+      residK++;
+    });
 
     const cache = new Map(), busy = new Set();
     function getVar(name) {
@@ -1332,6 +1439,8 @@
         } else if (d.kind === 'reg') {
           const fit = fitEntry(d.entry);
           v = fit.params[name];
+        } else if (d.kind === 'resid') {
+          v = fitEntry(d.entry).resid;
         }
         cache.set(name, v);
         return v;
@@ -1446,7 +1555,17 @@
           const s2 = { x: 0 };
           curve = (x) => { s2.x = x; const v = Cf(s2); return typeof v === 'number' ? v : NaN; };
         }
-        e.fit = { params: pvals, order: params, r2: r2, curve: curve, indep: indep, n: best.n, linear: best.linear };
+        // residuals (lhs - model) over the full data, statistics
+        const rfull = F(best.p) || [];
+        const resid = rfull.map((v, i) => (best.mask.indexOf(i) >= 0 ? roundTiny(v) : NaN));
+        const rmse = roundTiny(Math.sqrt(best.cost / Math.max(1, best.n)));
+        const plainLhs = L.type === 'id';
+        let r = NaN;
+        if (plainLhs && best.linear && params.length === 2 && curve) {
+          const c0 = curve(0), c1 = curve(1), c2 = curve(2);
+          if (isFinite(c0) && isFinite(c1) && Math.abs((c2 - c1) - (c1 - c0)) < 1e-9 * (1 + Math.abs(c1 - c0))) r = (c1 >= c0 ? 1 : -1) * Math.sqrt(Math.max(0, r2));
+        }
+        e.fit = { params: pvals, order: params, r2: plainLhs ? r2 : NaN, r: r, rmse: rmse, plainLhs: plainLhs, curve: curve, indep: indep, n: best.n, linear: best.linear, resid: resid, residName: e.residName };
         return e.fit;
       } catch (ex) {
         e.fitErr = ex.calc ? ex : err(String(ex.message || ex));
@@ -1527,7 +1646,7 @@
       if (d && dup.has(d.name)) throw err("'" + d.name + "' is defined more than once");
       if (e.reg) {
         const fit = fitEntry(e);
-        return { kind: 'regression', params: fit.params, order: fit.order, r2: fit.r2, fns: fit.curve ? [fit.curve] : [], n: fit.n, linear: fit.linear };
+        return { kind: 'regression', params: fit.params, order: fit.order, r2: fit.r2, r: fit.r, rmse: fit.rmse, plainLhs: fit.plainLhs, residName: fit.residName, resid: fit.resid, indep: fit.indep, fns: fit.curve && fit.plainLhs ? [fit.curve] : [], n: fit.n, linear: fit.linear };
       }
       if (d && d.kind === 'var') {
         const v = getVar(d.name);
@@ -1630,7 +1749,17 @@
       if (!used.size) {
         if (cx.missing.size) throw missingError(cx.missing);
         const v = Cf({});
-        return valueResult(v);
+        const r = valueResult(v);
+        if (r.kind === 'points' && ast.type === 'tuple' && ast.items.length === 2) {
+          const spec = (n) => {
+            if (isNumLiteral(n)) return { c: true };
+            if (n.type === 'id') { const dd = defs.get(n.name); if (dd && dd.kind === 'var' && isNumLiteral(dd.ast) && !dup.has(n.name)) return { name: n.name }; }
+            return null;
+          };
+          const dx = spec(ast.items[0]), dy = spec(ast.items[1]);
+          if (dx || dy) r.drag = { x: dx, y: dy };
+        }
+        return r;
       }
       if (used.has('t') && !used.has('x') && !used.has('y') && !used.has('θ')) {
         if (cx.missing.size) throw missingError(cx.missing);
@@ -1678,6 +1807,19 @@
         for (let i = 0; i < n; i++) if (isFinite(xs[i]) && isFinite(ys[i])) pts.push([xs[i], ys[i]]);
         series.push({ col: k, pts: pts });
       }
+      // residual columns requested by regressions ("plot residuals")
+      entries.forEach((re) => {
+        if (!re.reg || !re.it || !re.it.plotResid) return;
+        let fit;
+        try { fit = fitEntry(re); } catch (ex) { return; }
+        const ci = e.cols.findIndex((c) => c.name && c.name === fit.indep);
+        if (ci < 0) return;
+        const xv = cols[ci].values;
+        cols.push({ header: fit.residName, name: fit.residName, computed: true, virtual: true, regId: re.id, values: fit.resid.slice() });
+        const pts = [];
+        for (let i = 0; i < Math.min(xv.length, fit.resid.length); i++) if (isFinite(xv[i]) && isFinite(fit.resid[i])) pts.push([xv[i], fit.resid[i]]);
+        series.push({ col: cols.length - 1, pts: pts, resid: true, regId: re.id });
+      });
       const errCol = cols.find((c) => c.error);
       const r = { kind: 'table', cols: cols, series: series };
       if (errCol) { r.error = errCol.error; r.missing = errCol.missing; }
@@ -1705,6 +1847,7 @@
     return { results: results, getVar: getVar, fns: fns };
   }
 
+  function roundTiny(v) { return Math.abs(v) < 1e-9 ? 0 : v; }
   function roundSmallRel(v) {
     if (!isFinite(v)) return v;
     const r = Math.round(v);
@@ -1836,6 +1979,7 @@
         return '\\left\\{' + parts.join(',\\ ') + '\\right\\}';
       }
       case 'index': return T(node.a) + '\\left[' + node.items.map(T).join(',') + '\\right]';
+      case 'comp': return '\\left[' + T(node.body) + '\\operatorname{for}' + node.binds.map((b) => idTex(b.name) + '=' + T(b.list)).join(',') + '\\right]';
       case 'member': return T(node.a) + '.' + node.m;
       case 'pct': return T(node.a) + '\\%';
       case 'degsym': return T(node.a) + '^{\\circ}';
@@ -1849,6 +1993,7 @@
     if (!node.builtin) {
       return idTex(name) + "'".repeat(node.primes || 0) + '\\left(' + a.map(T).join(',') + '\\right)';
     }
+    if (name === 'ddx') return '\\frac{d}{dx}\\left(' + a.map(T).join(',') + '\\right)' + sup;
     if (name === 'sqrt' && a.length === 1) return '\\sqrt{' + T(strip(a[0])) + '}' + sup;
     if (name === 'cbrt' && a.length === 1) return '\\sqrt[3]{' + T(strip(a[0])) + '}' + sup;
     if (name === 'nthroot' && a.length === 2) return '\\sqrt[' + T(a[1]) + ']{' + T(a[0]) + '}' + sup;
@@ -1894,6 +2039,11 @@
   function roots1d(h, a, b, n) {
     const S = sample(h, a, b, n), xs = S.xs, ys = S.ys;
     const out = [];
+    // coincident curves (h identically ~0) have no isolated intersections
+    let zeros = 0, big = 0;
+    for (let i = 0; i <= n; i++) { const v = Math.abs(ys[i]); if (isFinite(v)) big = Math.max(big, v); }
+    for (let i = 0; i <= n; i++) if (Math.abs(ys[i]) <= 1e-12 * Math.max(1, big)) zeros++;
+    if (zeros > Math.max(8, n * 0.02)) return out;
     for (let i = 0; i < n; i++) {
       const y0 = ys[i], y1 = ys[i + 1];
       if (y0 === 0 && isFinite(y0)) { out.push(xs[i]); continue; }
@@ -1963,6 +2113,7 @@
   }
   // curve descriptors: {type:'fx', f}, {type:'fy', f}, {type:'F', F, chains:[Float64Array world xy...]}
   function swapCurve(c) {
+    if (c.type === 'P') { const fn = c.fn; return { type: 'P', id: c.id, t0: c.t0, t1: c.t1, fn: (t) => { const p = fn(t); return p ? [p[1], p[0]] : null; } }; }
     if (c.type === 'fx') return { type: 'fy', f: c.f, id: c.id };
     if (c.type === 'fy') return { type: 'fx', f: c.f, id: c.id };
     const F = c.F;
@@ -1985,6 +2136,31 @@
     const out = [];
     const xr = view.xmax - view.xmin, yr = view.ymax - view.ymin;
     const scale = Math.max(xr, yr);
+    const paramXY = (P) => {
+      const X = (t) => { const p = P.fn(t); return p ? p[0] : NaN; };
+      const Y = (t) => { const p = P.fn(t); return p ? p[1] : NaN; };
+      return [X, Y];
+    };
+    const tn = Math.max(n, 800);
+    if (sel.type === 'P') {
+      const XY = paramXY(sel), X = XY[0], Y = XY[1];
+      roots1d(Y, sel.t0, sel.t1, tn).forEach((t) => out.push({ x: X(t), y: 0, type: 'zero' }));
+      roots1d(X, sel.t0, sel.t1, tn).forEach((t) => out.push({ x: 0, y: Y(t), type: 'yint' }));
+      extrema1d(Y, sel.t0, sel.t1, tn).forEach((p) => out.push({ x: X(p.x), y: p.y, type: p.type }));
+      others.forEach((o) => {
+        if (o.type === 'P') return;
+        const G = implicitOf(o);
+        roots1d((t) => G(X(t), Y(t)), sel.t0, sel.t1, tn).forEach((t) => out.push({ x: X(t), y: Y(t), type: 'int', other: o.id }));
+      });
+    }
+    // intersections of non-parametric selections with parametric curves
+    others.forEach((o) => {
+      if (o.type !== 'P' || sel.type === 'P') return;
+      const XY = paramXY(o), X = XY[0], Y = XY[1];
+      const G = implicitOf(sel);
+      roots1d((t) => G(X(t), Y(t)), o.t0, o.t1, tn).forEach((t) => out.push({ x: X(t), y: Y(t), type: 'int', other: o.id }));
+    });
+    others = others.filter((o) => o.type !== 'P');
     if (sel.type === 'fx') {
       const f = sel.f;
       roots1d(f, view.xmin, view.xmax, n).forEach((x) => out.push({ x: x, y: 0, type: 'zero' }));
@@ -1999,6 +2175,33 @@
       });
     } else if (sel.type === 'F') {
       const F = sel.F;
+      // top/bottom points (horizontal tangents) found along the traced curve
+      if (sel.chains && !sel.noExtrema) {
+        const h = 1e-7 * Math.max(1, scale);
+        const Fx = (x, y) => (F(x + h, y) - F(x - h, y)) / (2 * h);
+        sel.chains.forEach((ch) => {
+          const m = ch.length / 2;
+          if (m < 3) return;
+          let pg = Fx(ch[0], ch[1]);
+          for (let i = 1; i < m; i++) {
+            const qx = ch[2 * i], qy = ch[2 * i + 1], qg = Fx(qx, qy);
+            const px = ch[2 * i - 2], py = ch[2 * i - 1];
+            if (isFinite(pg) && isFinite(qg) && (pg < 0) !== (qg < 0)) {
+              const t = bisect((u) => Fx(px + (qx - px) * u, py + (qy - py) * u), 0, 1, pg, qg);
+              if (isFinite(t)) {
+                const nw = newton2(F, Fx, px + (qx - px) * t, py + (qy - py) * t, scale);
+                if (nw && Math.hypot(nw[0] - px, nw[1] - py) < scale * 0.02) {
+                  const a = Math.max(0, i - 4), b = Math.min(m - 1, i + 3);
+                  const ya = ch[2 * a + 1], yb = ch[2 * b + 1];
+                  if (nw[1] >= ya && nw[1] >= yb) out.push({ x: nw[0], y: nw[1], type: 'max' });
+                  else if (nw[1] <= ya && nw[1] <= yb) out.push({ x: nw[0], y: nw[1], type: 'min' });
+                }
+              }
+            }
+            pg = qg;
+          }
+        });
+      }
       roots1d((x) => F(x, 0), view.xmin, view.xmax, n).forEach((x) => out.push({ x: x, y: 0, type: 'zero' }));
       roots1d((y) => F(0, y), view.ymin, view.ymax, n).forEach((y) => out.push({ x: 0, y: y, type: 'yint' }));
       others.forEach((o) => {
@@ -2079,6 +2282,6 @@
     analyze: analyze, evaluate: evaluate, toLatex: toLatex, formatNumber: formatNumber, formatValue: formatValue,
     formatCoord: formatCoord, toFraction: toFraction, fracApprox: fracApprox, findPOIs: findPOIs, roots1d: roots1d,
     extrema1d: extrema1d, codegen: codegen, fitParams: fitParams, factorial: factorial, nCr: nCr, nPr: nPr, implicitOf: implicitOf,
-    ALL_LOCALS: ALL_LOCALS
+    ALL_LOCALS: ALL_LOCALS, WORDS: WORDS.concat(['for'])
   };
 })(typeof globalThis !== 'undefined' ? globalThis : (typeof window !== 'undefined' ? window : this));

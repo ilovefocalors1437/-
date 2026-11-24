@@ -5,6 +5,607 @@
  * Depends on SatCalcCore (parser.js) and SatCalcGraph (graph.js); KaTeX optional.
  * Exposes window.SatCalcApp (constructor) used by calc.js.
  */
+/*
+ * MathField — a small structured ("2D") math editor in the spirit of MathQuill.
+ * Fractions, exponents, subscripts, radicals and brackets are boxes the cursor
+ * moves through. The content is serialised to the calculator's plain-text syntax
+ * (e.g. typing 1/2x Desmos-style gives "1/(2x)"), and plain text (old saved state,
+ * paste) is converted back into boxes when that is provably equivalent; otherwise
+ * it is kept as plain characters, which always round-trips exactly.
+ * Exposes window.SatCalcMathField.
+ */
+(function (G) {
+  'use strict';
+  const Core = G.SatCalcCore;
+  const MARK = '‸';
+  const CLOSE = { '(': ')', '[': ']', '{': '}', '|': '|' };
+  const OPS = '+-=<>≤≥~,:';
+  const isLetterCh = (c) => !!c && /[A-Za-zα-ωΑ-Ω]/.test(c) && c !== 'π' && c !== 'θ';
+  const isDigitCh = (c) => !!c && /[0-9.]/.test(c);
+  const WORDS = (Core && Core.WORDS ? Core.WORDS.slice() : []).filter((w) => w.length > 1).sort((a, b) => b.length - a.length);
+
+  const C = (v) => ({ t: 'c', v: v });
+  const blocksOf = (n) => (n.t === 'frac' ? [n.a, n.b] : n.t === 'nroot' ? [n.n, n.a] : n.t === 'c' ? [] : [n.a]);
+  const isBox = (n) => n && n.t !== 'c';
+
+  // ------------------------------------------------------------ text -> tree
+  function fromText(src) {
+    src = String(src == null ? '' : src);
+    let i = 0;
+    const startsWord = (w) => src.startsWith(w, i);
+    function parenBlock(close) {
+      const inner = block(close);
+      if (src[i] === close) i++;
+      return inner;
+    }
+    function takeNumerator(out) {
+      let k = out.length;
+      while (k > 0) {
+        const n = out[k - 1];
+        if (n.t === 'c' && OPS.indexOf(n.v) >= 0) break;
+        k--;
+      }
+      let num = out.splice(k);
+      if (num.length === 1 && num[0].t === 'paren' && num[0].l === '(') num = num[0].a;
+      return num;
+    }
+    function operand() {
+      const c = src[i];
+      if (c === undefined) return [];
+      if (c === '(' || c === '{') { i++; const inner = parenBlock(CLOSE[c]); return postfix(inner, true); }
+      if (c === '-' || c === '+') { i++; return [C(c)].concat(operand()); }
+      if (c === MARK) { i++; return [C(MARK)]; }
+      if (isDigitCh(c)) { const out = []; while (isDigitCh(src[i])) out.push(C(src[i++])); return postfix(out); }
+      if (c === '√' || startsWord('sqrt')) {
+        i += c === '√' ? 1 : 4;
+        if (src[i] === '(') { i++; return postfix([{ t: 'sqrt', a: parenBlock(')') }]); }
+        return postfix([{ t: 'sqrt', a: operand() }]);
+      }
+      if (isLetterCh(c)) {
+        const w = WORDS.find((x) => startsWord(x));
+        if (w && src[i + w.length] === '(') {
+          i += w.length;
+          const out = w.split('').map(C);
+          i++;
+          out.push({ t: 'paren', l: '(', r: ')', a: parenBlock(')') });
+          return postfix(out);
+        }
+        const out = [C(src[i++])];
+        if (src[i] === '_') { i++; out.push({ t: 'sub', a: subOperand() }); }
+        return postfix(out);
+      }
+      i++;
+      return [C(c)];
+    }
+    function postfix(out, wrapped) {
+      if (wrapped && (src[i] === '^' || src[i] === '!')) out = [{ t: 'paren', l: '(', r: ')', a: out }];
+      for (;;) {
+        if (src[i] === '^') { i++; out.push({ t: 'sup', a: operand() }); continue; }
+        if (src[i] === '!') { i++; out.push(C('!')); continue; }
+        return out;
+      }
+    }
+    function subOperand() {
+      if (src[i] === '{' || src[i] === '(') { const cl = CLOSE[src[i]]; i++; return parenBlock(cl); }
+      const out = [];
+      if (isDigitCh(src[i])) { while (/[0-9]/.test(src[i] || '')) out.push(C(src[i++])); return out; }
+      while (/[A-Za-z0-9]/.test(src[i] || '')) out.push(C(src[i++]));
+      return out;
+    }
+    function block(stop) {
+      const out = [];
+      while (i < src.length) {
+        const c = src[i];
+        if (stop && stop.indexOf(c) >= 0) return out;
+        if (c === ' ') { i++; continue; }
+        if (c === '(' || c === '[' || c === '{') { i++; out.push({ t: 'paren', l: c, r: CLOSE[c], a: parenBlock(CLOSE[c]) }); continue; }
+        if (c === '|') { i++; out.push({ t: 'paren', l: '|', r: '|', a: parenBlock('|') }); continue; }
+        if (c === '√' || startsWord('sqrt(')) { out.push.apply(out, operand()); continue; }
+        if (startsWord('nthroot(')) {
+          i += 8;
+          const a = block(',)');
+          let n = [];
+          if (src[i] === ',') { i++; n = block(')'); }
+          if (src[i] === ')') i++;
+          out.push({ t: 'nroot', n: n, a: a });
+          continue;
+        }
+        if (startsWord('abs(')) { i += 4; out.push({ t: 'paren', l: '|', r: '|', a: parenBlock(')') }); continue; }
+        if (startsWord('d/dx')) { i += 4; out.push({ t: 'frac', a: [C('d')], b: [C('d'), C('x')] }); continue; }
+        if (c === '^') { i++; out.push({ t: 'sup', a: operand() }); continue; }
+        if (c === '_') { i++; out.push({ t: 'sub', a: subOperand() }); continue; }
+        if (c === '/') { i++; const num = takeNumerator(out); out.push({ t: 'frac', a: num, b: operand() }); continue; }
+        if ((c === '<' || c === '>') && src[i + 1] === '=') { out.push(C(c === '<' ? '≤' : '≥')); i += 2; continue; }
+        if (isLetterCh(c)) {
+          const w = WORDS.find((x) => startsWord(x));
+          if (w === 'pi' || w === 'theta') { out.push(C(w === 'pi' ? 'π' : 'θ')); i += w.length; continue; }
+          if (w) { for (const ch of w) out.push(C(ch)); i += w.length; continue; }
+        }
+        out.push(C(c === '−' ? '-' : c));
+        i++;
+      }
+      return out;
+    }
+    return block(null);
+  }
+  function charsOf(text) { return String(text == null ? '' : text).split('').map(C); }
+
+  // ------------------------------------------------------------ tree -> text
+  const simpleTok = (s) => /^[0-9.]+$/.test(s) || /^[A-Za-zπθ](_(\{[A-Za-z0-9]+\}|[A-Za-z0-9]))?$/.test(s);
+  function ser(blk, inBracket) {
+    let s = '';
+    for (let k = 0; k < blk.length; k++) {
+      const n = blk[k];
+      if (n.t === 'c') {
+        if (n.v === 'f' && inBracket && blk[k + 1] && blk[k + 1].v === 'o' && blk[k + 2] && blk[k + 2].v === 'r' && k > 0) { s += ' for '; k += 2; continue; }
+        if (n.v !== MARK) s += n.v;
+        continue;
+      }
+      if (n.t === 'frac') {
+        const a = ser(n.a), b = ser(n.b);
+        let f;
+        if (a === 'd' && b === 'dx') f = 'd/dx';
+        else {
+          const grouped = (blk2) => blk2.length === 1 && (blk2[0].t === 'sqrt' || blk2[0].t === 'nroot' || (blk2[0].t === 'paren' && blk2[0].l !== '{'));
+          f = (simpleTok(a) || grouped(n.a) ? a : '(' + a + ')') + '/' + (simpleTok(b) || grouped(n.b) ? b : '(' + b + ')');
+        }
+        const prev = blk[k - 1], next = blk[k + 1];
+        const needWrap = f !== 'd/dx' && ((prev && !(prev.t === 'c' && (OPS + '*/(').indexOf(prev.v) >= 0)) || (next && (next.t === 'sup' || next.t === 'sub' || (next.t === 'c' && next.v === '!'))));
+        s += needWrap ? '(' + f + ')' : f;
+        continue;
+      }
+      if (n.t === 'sup') { const a = ser(n.a); s += '^' + (simpleTok(a) && a.indexOf('_') < 0 ? a : '(' + a + ')'); continue; }
+      if (n.t === 'sub') { const a = ser(n.a); s += '_' + (a.length === 1 ? a : '{' + a + '}'); continue; }
+      if (n.t === 'sqrt') { s += 'sqrt(' + ser(n.a) + ')'; continue; }
+      if (n.t === 'nroot') { const idx = ser(n.n); s += idx ? 'nthroot(' + ser(n.a) + ',' + idx + ')' : 'sqrt(' + ser(n.a) + ')'; continue; }
+      if (n.t === 'paren') { s += n.l === '|' ? 'abs(' + ser(n.a) + ')' : n.l + ser(n.a, n.l === '[') + n.r; continue; }
+    }
+    return s;
+  }
+
+  // structural equality of parsed text, ignoring cosmetic differences
+  function canon(v) {
+    if (Array.isArray(v)) return v.map(canon);
+    if (!v || typeof v !== 'object') return v;
+    if (v.type === 'paren') return canon(v.a);
+    const o = {};
+    Object.keys(v).sort().forEach((k) => { if (k !== 's' && k !== 'implicit' && k !== 'bars' && k !== 'sym' && k !== 'brace' && k !== 'bang' && k !== 'bare') o[k] = canon(v[k]); });
+    return o;
+  }
+  function sameMath(a, b) {
+    let A, B;
+    try { A = Core.parse(a); } catch (e) { return false; }
+    try { B = Core.parse(b); } catch (e) { return false; }
+    return JSON.stringify(canon(A)) === JSON.stringify(canon(B));
+  }
+  function treeFromText(text) {
+    text = String(text == null ? '' : text);
+    try {
+      const t = fromText(text);
+      if (ser(t) === text || sameMath(ser(t), text)) return t;
+    } catch (e) { /* fall back */ }
+    return charsOf(text);
+  }
+
+  // ------------------------------------------------------------ editor
+  function MathField(opts) {
+    opts = opts || {};
+    const el = document.createElement('div');
+    el.className = 'mq' + (opts.cls ? ' ' + opts.cls : '');
+    el.setAttribute('role', 'textbox');
+    if (opts.placeholder) el.setAttribute('data-ph', opts.placeholder);
+    const ta = document.createElement('textarea');
+    ta.className = 'mq-ta';
+    ['autocomplete', 'autocorrect', 'autocapitalize'].forEach((k) => ta.setAttribute(k, 'off'));
+    ta.setAttribute('spellcheck', 'false');
+    ta.setAttribute('inputmode', 'none');
+    ta.setAttribute('aria-label', opts.label || 'Math input');
+    ta.setAttribute('rows', '1');
+    const view = document.createElement('span');
+    view.className = 'mq-view';
+    el.appendChild(ta);
+    el.appendChild(view);
+    this.el = el; this.ta = ta; this.view = view;
+    this.root = [];
+    this.cur = { blk: this.root, i: 0 };
+    this.focused = false;
+    this.all = false;
+    el._mf = this;
+    const self = this;
+    Object.defineProperty(el, 'value', { get: () => self.getValue(), set: (v) => self.setValue(v, true) });
+    el.focus = (o) => self.focus(o);
+    el.blur = () => ta.blur();
+    this.bind();
+    this.setValue(opts.value || '', true);
+  }
+  const M = MathField.prototype;
+
+  M.link = function () {
+    const walk = (blk, owner) => {
+      blk.pn = owner;
+      blk.forEach((n) => { n.pb = blk; blocksOf(n).forEach((b) => walk(b, n)); });
+    };
+    walk(this.root, null);
+  };
+  M.getValue = function () { return ser(this.root); };
+  M.setValue = function (text, silent) {
+    this.root = treeFromText(text);
+    this.cur = { blk: this.root, i: this.root.length };
+    this.all = false;
+    this.link();
+    this.render();
+    if (!silent) this.fire();
+  };
+  M.isEmpty = function () { return this.root.length === 0; };
+  M.fire = function () { this.el.dispatchEvent(new Event('input', { bubbles: true })); };
+  M.focus = function () {
+    try { this.ta.focus({ preventScroll: true }); } catch (e) { this.ta.focus(); }
+  };
+  M.cursorEnd = function () { this.cur = { blk: this.root, i: this.root.length }; this.render(); };
+
+  // ---- editing primitives
+  M.changed = function () { this.link(); this.render(); this.fire(); };
+  M.clearAll = function () { this.root.length = 0; this.cur = { blk: this.root, i: 0 }; this.all = false; };
+  M.insertNodes = function (nodes) {
+    if (this.all) this.clearAll();
+    const c = this.cur;
+    c.blk.splice.apply(c.blk, [c.i, 0].concat(nodes));
+    c.i += nodes.length;
+    this.link();
+  };
+  M.enter = function (blk, atEnd) { this.cur = { blk: blk, i: atEnd ? blk.length : 0 }; };
+  M.after = function (node) { const b = node.pb; this.cur = { blk: b, i: b.indexOf(node) + 1 }; };
+  M.before = function (node) { const b = node.pb; this.cur = { blk: b, i: b.indexOf(node) }; };
+  M.insertBox = function (node, into) {
+    this.insertNodes([node]);
+    this.enter(into || blocksOf(node)[0], false);
+  };
+  M.typeChar = function (ch) {
+    if (this.all) this.clearAll();
+    const c = this.cur;
+    switch (ch) {
+      case '/': {
+        let k = c.i;
+        while (k > 0) {
+          const n = c.blk[k - 1];
+          if (n.t === 'c' && (OPS + '*').indexOf(n.v) >= 0) break;
+          k--;
+        }
+        const num = c.blk.splice(k, c.i - k);
+        c.i = k;
+        const fr = { t: 'frac', a: num, b: [] };
+        this.insertNodes([fr]);
+        this.enter(num.length ? fr.b : fr.a, false);
+        break;
+      }
+      case '^': this.insertBox({ t: 'sup', a: [] }); break;
+      case '_': this.insertBox({ t: 'sub', a: [] }); break;
+      case '(': case '[': case '{': {
+        // "sqrt(" typed on a keyboard: the radical itself plays the role of the bracket
+        const pn = c.blk.pn;
+        if (ch === '(' && pn && pn.t === 'sqrt' && pn.fresh && !c.blk.length) { pn.fresh = false; pn.closeOnParen = true; this.render(); return; }
+        this.insertBox({ t: 'paren', l: ch, r: CLOSE[ch], a: [] });
+        break;
+      }
+      case '|': {
+        const pn = c.blk.pn;
+        if (pn && pn.t === 'paren' && pn.l === '|' && c.i === c.blk.length) { this.after(pn); break; }
+        this.insertBox({ t: 'paren', l: '|', r: '|', a: [] });
+        break;
+      }
+      case ')': case ']': case '}': {
+        const open = ch === ')' ? '(' : ch === ']' ? '[' : '{';
+        let b = c.blk, node = null;
+        while (b && b.pn) { if ((b.pn.t === 'paren' && b.pn.l === open) || (ch === ')' && b.pn.closeOnParen)) { node = b.pn; break; } b = b.pn.pb; }
+        if (!node) { this.insertNodes([C(ch)]); break; }
+        if (c.blk === node.a && c.i < c.blk.length) {
+          const rest = c.blk.splice(c.i);
+          const pb = node.pb;
+          pb.splice.apply(pb, [pb.indexOf(node) + 1, 0].concat(rest));
+          this.link();
+        }
+        this.after(node);
+        break;
+      }
+      case ' ': return;
+      case ',':
+        if (c.blk[c.i] && c.blk[c.i].t === 'c' && c.blk[c.i].v === ',') { c.i++; this.render(); return; }
+        this.insertNodes([C(',')]);
+        break;
+      default: {
+        // like Desmos: + - = < > typed in a non-empty exponent/subscript leave it
+        const pn = c.blk.pn;
+        if (pn && (pn.t === 'sup' || pn.t === 'sub') && c.blk.length && c.i === c.blk.length && '+-−=<>≤≥~,'.indexOf(ch) >= 0) this.after(pn);
+        this.insertNodes([C(ch === '−' ? '-' : ch)]);
+        this.autoReplace();
+      }
+    }
+    this.changed();
+  };
+  M.autoReplace = function () {
+    const c = this.cur, b = c.blk;
+    const tail = (n) => { if (c.i < n) return ''; let s = ''; for (let k = c.i - n; k < c.i; k++) { if (b[k].t !== 'c') return ''; s += b[k].v; } return s; };
+    const cut = (n) => { b.splice(c.i - n, n); c.i -= n; };
+    if (tail(4) === 'sqrt') { cut(4); this.insertBox({ t: 'sqrt', a: [], fresh: true }); return; }
+    if (tail(7) === 'nthroot') { cut(7); const n = { t: 'nroot', n: [], a: [] }; this.insertBox(n, n.n); return; }
+    if (tail(5) === 'theta') { cut(5); this.insertNodes([C('θ')]); return; }
+    if (tail(2) === 'pi' && !isLetterCh((b[c.i - 3] || {}).v)) { cut(2); this.insertNodes([C('π')]); return; }
+    if (tail(2) === '<=') { cut(2); this.insertNodes([C('≤')]); return; }
+    if (tail(2) === '>=') { cut(2); this.insertNodes([C('≥')]); return; }
+  };
+  M.insertText = function (text) {
+    // plain text (paste / keypad templates); MARK sets the cursor
+    if (this.all) this.clearAll();
+    const nodes = text.indexOf(MARK) >= 0 ? fromText(text) : treeFromText(text);
+    this.insertNodes(nodes);
+    let found = null;
+    const find = (blk) => { for (let k = 0; k < blk.length && !found; k++) { const n = blk[k]; if (n.t === 'c' && n.v === MARK) found = { blk: blk, i: k }; else blocksOf(n).forEach(find); } };
+    find(this.root);
+    if (found) { found.blk.splice(found.i, 1); this.cur = found; }
+    this.changed();
+  };
+  M.backspace = function () {
+    if (this.all) { this.clearAll(); this.changed(); return true; }
+    const c = this.cur;
+    if (c.i > 0) {
+      const n = c.blk[c.i - 1];
+      if (n.t === 'c' || blocksOf(n).every((b) => b.length === 0)) { c.blk.splice(c.i - 1, 1); c.i--; }
+      else { const bl = blocksOf(n); this.enter(bl[bl.length - 1], true); }
+      this.changed();
+      return true;
+    }
+    const node = c.blk.pn;
+    if (!node) return false;
+    const bl = blocksOf(node), idx = bl.indexOf(c.blk);
+    if (idx > 0 && bl[idx - 1].length) { this.enter(bl[idx - 1], true); this.render(); return true; }
+    // unwrap the box
+    const pb = node.pb, at = pb.indexOf(node);
+    let flat = [];
+    let caret = 0;
+    bl.forEach((b, k) => { if (k === idx) caret = flat.length; flat = flat.concat(b); });
+    pb.splice.apply(pb, [at, 1].concat(flat));
+    this.cur = { blk: pb, i: at + caret };
+    this.changed();
+    return true;
+  };
+  M.del = function () {
+    const c = this.cur;
+    if (c.i < c.blk.length) {
+      const n = c.blk[c.i];
+      if (n.t === 'c' || blocksOf(n).every((b) => b.length === 0)) c.blk.splice(c.i, 1);
+      else this.enter(blocksOf(n)[0], false);
+      this.changed();
+    }
+  };
+  M.left = function () {
+    this.all = false;
+    const c = this.cur;
+    if (c.i > 0) {
+      const n = c.blk[c.i - 1];
+      if (n.t === 'c') c.i--; else { const bl = blocksOf(n); this.enter(bl[bl.length - 1], true); }
+    } else if (c.blk.pn) {
+      const node = c.blk.pn, bl = blocksOf(node), idx = bl.indexOf(c.blk);
+      if (idx > 0) this.enter(bl[idx - 1], true); else this.before(node);
+    } else return false;
+    this.render();
+    return true;
+  };
+  M.right = function () {
+    this.all = false;
+    const c = this.cur;
+    if (c.i < c.blk.length) {
+      const n = c.blk[c.i];
+      if (n.t === 'c') c.i++; else this.enter(blocksOf(n)[0], false);
+    } else if (c.blk.pn) {
+      const node = c.blk.pn, bl = blocksOf(node), idx = bl.indexOf(c.blk);
+      if (idx < bl.length - 1) this.enter(bl[idx + 1], false); else this.after(node);
+    } else return false;
+    this.render();
+    return true;
+  };
+  M.vertical = function (up) {
+    let b = this.cur.blk;
+    while (b && b.pn) {
+      const n = b.pn;
+      if (n.t === 'frac' && ((up && b === n.b) || (!up && b === n.a))) { this.enter(up ? n.a : n.b, true); this.render(); return true; }
+      b = n.pb;
+    }
+    return false;
+  };
+
+  // keypad entry point: k = {a: action} or {i: text, b: caretBack}
+  M.keypad = function (k, upper) {
+    switch (k.a) {
+      case 'left': this.left(); return;
+      case 'right': this.right(); return;
+      case 'bs':
+        if (!this.backspace()) this.el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Backspace', bubbles: true, cancelable: true }));
+        return;
+      case 'enter': this.el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true })); return;
+    }
+    let ins = k.i, back = k.b || 0;
+    if (upper && ins.length === 1 && /[a-z]/.test(ins)) ins = ins.toUpperCase();
+    if (ins.length === 1 && !back) { this.typeChar(ins); return; }
+    if (ins === '^2') { this.typeChar('^'); this.typeChar('2'); this.right(); return; }
+    this.insertText(ins.slice(0, ins.length - back) + MARK + ins.slice(ins.length - back));
+  };
+
+  // ---- events
+  M.bind = function () {
+    const ta = this.ta, el = this.el;
+    ta.addEventListener('focus', () => { this.focused = true; el.classList.add('mq-focus'); this.render(); el.dispatchEvent(new Event('focus')); });
+    ta.addEventListener('blur', () => { this.focused = false; this.all = false; el.classList.remove('mq-focus'); this.render(); el.dispatchEvent(new Event('blur')); });
+    let composing = false;
+    ta.addEventListener('compositionstart', () => { composing = true; });
+    ta.addEventListener('compositionend', () => { composing = false; this.flushTA(); });
+    ta.addEventListener('input', () => { if (!composing) this.flushTA(); });
+    ta.addEventListener('paste', (e) => {
+      const t = e.clipboardData && e.clipboardData.getData('text/plain');
+      if (t != null) { e.preventDefault(); this.insertText(t.replace(/[\r\n]+/g, ' ').trim()); }
+    });
+    ta.addEventListener('copy', (e) => { if (this.all && e.clipboardData) { e.clipboardData.setData('text/plain', this.getValue()); e.preventDefault(); } });
+    ta.addEventListener('cut', (e) => { if (this.all && e.clipboardData) { e.clipboardData.setData('text/plain', this.getValue()); e.preventDefault(); this.clearAll(); this.changed(); } });
+    ta.addEventListener('keydown', (e) => {
+      let handled = true;
+      if ((e.ctrlKey || e.metaKey) && !e.altKey) {
+        if (e.key === 'a' || e.key === 'A') { this.all = true; this.render(); e.preventDefault(); e.stopPropagation(); }
+        return; // let copy/paste/undo shortcuts through
+      }
+      switch (e.key) {
+        case 'ArrowLeft': handled = this.left(); break;
+        case 'ArrowRight': handled = this.right(); break;
+        case 'ArrowUp': handled = this.vertical(true); break;
+        case 'ArrowDown': handled = this.vertical(false); break;
+        case 'Backspace': handled = this.backspace(); break;
+        case 'Delete': this.del(); break;
+        case 'Home': this.cur = { blk: this.root, i: 0 }; this.render(); break;
+        case 'End': this.cursorEnd(); break;
+        case 'Tab': handled = false; break;
+        default: handled = false;
+      }
+      if (handled) { e.preventDefault(); e.stopPropagation(); }
+    });
+    el.addEventListener('pointerdown', (e) => {
+      if (e.button > 0) return;
+      e.preventDefault();
+      const x = e.clientX, y = e.clientY;
+      if (!this.focused) this.focus();
+      this.placeCaret(x, y);
+    });
+  };
+  M.flushTA = function () {
+    const v = this.ta.value;
+    if (!v) return;
+    this.ta.value = '';
+    for (const ch of v) { if (ch === '\n') continue; this.typeChar(ch); }
+  };
+  M.placeCaret = function (x, y) {
+    let best = null;
+    (this.blocksR || []).forEach((info) => {
+      const blk = info.blk, r = info.el.getBoundingClientRect();
+      const dy = Math.max(0, r.top - y, y - r.bottom);
+      for (let k = 0; k <= blk.length; k++) {
+        let px;
+        if (k < blk.length && blk[k]._el) px = blk[k]._el.getBoundingClientRect().left;
+        else if (blk.length && blk[blk.length - 1]._el) px = blk[blk.length - 1]._el.getBoundingClientRect().right;
+        else px = r.left + r.width / 2;
+        const score = Math.abs(px - x) + dy * 3 + r.height * 0.02;
+        if (!best || score < best.s) best = { s: score, blk: blk, i: k };
+      }
+    });
+    this.all = false;
+    if (best) this.cur = { blk: best.blk, i: best.i };
+    this.render();
+  };
+
+  // ---- rendering
+  const OPCH = { '+': '+', '-': '−', '*': '·', '=': '=', '<': '<', '>': '>', '≤': '≤', '≥': '≥', '~': '∼', ',': ',', ':': ':' };
+  M.render = function () {
+    const view = this.view;
+    view.textContent = '';
+    this.blocksR = [];
+    const parens = [];
+    const self = this;
+    function rblock(blk, cls) {
+      const sp = document.createElement('span');
+      sp.className = 'mq-blk' + (cls ? ' ' + cls : '') + (blk.length ? '' : ' mq-empty');
+      self.blocksR.push({ blk: blk, el: sp });
+      // classify letters: function words upright
+      const kind = new Array(blk.length);
+      for (let k = 0; k < blk.length; k++) {
+        const n = blk[k];
+        if (n.t !== 'c' || kind[k]) continue;
+        if (isLetterCh(n.v)) {
+          let run = '';
+          for (let j = k; j < blk.length && blk[j].t === 'c' && isLetterCh(blk[j].v); j++) run += blk[j].v;
+          const w = WORDS.find((x) => run.startsWith(x));
+          if (w) { for (let j = 0; j < w.length; j++) kind[k + j] = 'mq-fn' + (j === w.length - 1 ? ' mq-fnend' : ''); }
+        }
+      }
+      blk.forEach((n, k) => {
+        let e;
+        if (n.t === 'c') {
+          e = document.createElement('span');
+          const v = n.v;
+          if (kind[k]) { e.className = kind[k]; e.textContent = v; }
+          else if (OPCH[v] !== undefined) { e.className = (v === ',' || v === ':') ? 'mq-p' : 'mq-op'; e.textContent = OPCH[v]; }
+          else if (isLetterCh(v) || v === 'θ') { e.className = 'mq-v'; e.textContent = v; }
+          else { e.className = 'mq-n'; e.textContent = v; }
+          if ((v === '-' || v === '+') && (k === 0 || (blk[k - 1].t === 'c' && OPCH[blk[k - 1].v] !== undefined && blk[k - 1].v !== '*'))) e.className = 'mq-un';
+        } else if (n.t === 'frac') {
+          e = document.createElement('span'); e.className = 'mq-frac';
+          e.appendChild(rblock(n.a, 'mq-num'));
+          e.appendChild(rblock(n.b, 'mq-den'));
+        } else if (n.t === 'sup' || n.t === 'sub') {
+          e = document.createElement('span'); e.className = 'mq-' + n.t;
+          e.appendChild(rblock(n.a));
+        } else if (n.t === 'sqrt' || n.t === 'nroot') {
+          e = document.createElement('span'); e.className = 'mq-sqrt';
+          if (n.t === 'nroot') { const ix = rblock(n.n, 'mq-idx'); e.appendChild(ix); }
+          const rad = document.createElement('span'); rad.className = 'mq-rad'; rad.textContent = '√';
+          e.appendChild(rad);
+          e.appendChild(rblock(n.a, 'mq-rbody'));
+          parens.push({ l: rad, body: e.lastChild, rad: true });
+        } else if (n.t === 'paren') {
+          e = document.createElement('span'); e.className = 'mq-paren';
+          const l = document.createElement('span'); l.className = 'mq-pl'; l.textContent = n.l;
+          const r = document.createElement('span'); r.className = 'mq-pr'; r.textContent = n.r;
+          e.appendChild(l);
+          const body = rblock(n.a);
+          e.appendChild(body);
+          e.appendChild(r);
+          parens.push({ l: l, r: r, body: body });
+        }
+        n._el = e;
+        sp.appendChild(e);
+      });
+      blk._el = sp;
+      return sp;
+    }
+    const top = rblock(this.root, 'mq-root');
+    view.appendChild(top);
+    this.el.classList.toggle('mq-isempty', !this.root.length);
+    this.el.classList.toggle('mq-all', this.all);
+    if (this.focused && !this.all) {
+      const c = this.cur, cur = document.createElement('span');
+      cur.className = 'mq-cur';
+      const host = c.blk._el;
+      if (host) {
+        if (c.i < c.blk.length && c.blk[c.i]._el) host.insertBefore(cur, c.blk[c.i]._el); else host.appendChild(cur);
+        host.classList.remove('mq-empty');
+        host.classList.add('mq-hascur');
+      }
+      this.curEl = cur;
+    }
+    // stretch brackets / radicals to their content
+    if (this.el.isConnected) {
+      const fs = parseFloat(getComputedStyle(this.el).fontSize) || 18;
+      for (let k = parens.length - 1; k >= 0; k--) {
+        const p = parens[k];
+        const hgt = p.body.offsetHeight;
+        const sc = Math.max(1, hgt / (fs * 1.2));
+        if (sc > 1.08) {
+          const tr = 'scaleY(' + sc.toFixed(3) + ')';
+          p.l.style.transform = tr;
+          if (p.r) p.r.style.transform = tr;
+        }
+      }
+      if (this.curEl && this.focused) {
+        const el = this.el, cr = this.curEl;
+        const left = cr.offsetLeft;
+        if (left < el.scrollLeft + 8) el.scrollLeft = Math.max(0, left - 24);
+        else if (left > el.scrollLeft + el.clientWidth - 8) el.scrollLeft = left - el.clientWidth + 24;
+      }
+    }
+  };
+
+  MathField.fromText = fromText;
+  MathField.ser = ser;
+  MathField.treeFromText = treeFromText;
+  MathField.sameMath = sameMath;
+  G.SatCalcMathField = MathField;
+})(typeof globalThis !== 'undefined' ? globalThis : window);
+
 (function (G) {
   'use strict';
   const Core = G.SatCalcCore, Graph = G.SatCalcGraph;
@@ -119,11 +720,12 @@
     this.activeField = null;
     this.state = this.defaultState();
     this.ensureTrailing();
+    this.initHistory();
   }
   const P = App.prototype;
 
   P.defaultState = function () {
-    return { mode: 'graph', angle: 'rad', grid: true, nums: true, items: [], viewport: null, split: 0.52, sci: { history: [], entry: '', vars: {}, ans: 0 } };
+    return { mode: 'graph', angle: 'rad', grid: true, nums: true, minor: true, collapsed: false, items: [], viewport: null, split: 0.52, sci: { history: [], entry: '', vars: {}, ans: 0 } };
   };
   P.nextColor = function () { const c = PALETTE[this.colorIx % PALETTE.length]; this.colorIx++; return c; };
   P.newExpr = function (text, extra) { return Object.assign({ id: this.uid++, type: 'expr', text: text || '', color: this.nextColor(), hidden: false }, extra || {}); };
@@ -156,22 +758,28 @@
     const s = this.state;
     const items = s.items.filter((it, i) => !(it.type === 'expr' && !String(it.text).trim() && i === s.items.length - 1)).map((it) => {
       if (it.type === 'table') {
-        return { type: 'table', color: it.color, hidden: !!it.hidden, columns: it.columns.map((c) => ({ header: c.header, values: c.values.slice(), color: c.color, hidden: !!c.hidden })) };
+        const t = { type: 'table', color: it.color, hidden: !!it.hidden, columns: it.columns.map((c) => ({ header: c.header, values: c.values.slice(), color: c.color, hidden: !!c.hidden, points: c.points !== false, lines: !!c.lines })) };
+        if (it.residHidden) t.residHidden = true;
+        return t;
       }
+      if (it.type === 'note') return { type: 'note', text: it.text };
       const o = { type: 'expr', text: it.text, color: it.color, hidden: !!it.hidden };
+      if (it.plotResid) o.plotResid = true;
       if (it.slider) o.slider = { min: it.slider.min, max: it.slider.max, step: it.slider.step };
       if (it.domain) o.domain = { min: it.domain.min, max: it.domain.max };
       return o;
     });
     const vp = this.graph ? this.graph.getView() : s.viewport;
     return {
-      version: 1,
+      version: 2,
       mode: s.mode,
       angle: s.angle,
       grid: s.grid,
       nums: s.nums,
+      minor: s.minor,
+      collapsed: s.collapsed,
       items: items,
-      viewport: vp ? { cx: vp.cx, cy: vp.cy, ppu: vp.ppu } : null,
+      viewport: vp ? { cx: vp.cx, cy: vp.cy, ppu: vp.ppu, asp: vp.asp || 1 } : null,
       split: s.split,
       sci: {
         history: s.sci.history.slice(-200).map((e) => ({ expr: e.expr, display: e.display, value: typeof e.value === 'number' ? e.value : null, frac: !!e.frac })),
@@ -192,6 +800,8 @@
       if (raw.angle === 'deg' || raw.angle === 'rad') st.angle = raw.angle;
       if (typeof raw.grid === 'boolean') st.grid = raw.grid;
       if (typeof raw.nums === 'boolean') st.nums = raw.nums;
+      if (typeof raw.minor === 'boolean') st.minor = raw.minor;
+      if (typeof raw.collapsed === 'boolean') st.collapsed = raw.collapsed;
       if (typeof raw.split === 'number' && raw.split > 0.15 && raw.split < 0.85) st.split = raw.split;
       if (Array.isArray(raw.items)) {
         raw.items.slice(0, 200).forEach((it) => {
@@ -202,8 +812,11 @@
             const tc = color(it.color);
             st.items.push({ id: this.uid++, type: 'table', color: tc, hidden: !!it.hidden, columns: cols.map((c) => ({
               header: str(c.header, 200), values: (Array.isArray(c.values) ? c.values.slice(0, 1000) : []).map((v) => str(v, 100)),
-              color: typeof c.color === 'string' && /^#[0-9a-fA-F]{6}$/.test(c.color) ? c.color : tc, hidden: !!c.hidden
-            })) });
+              color: typeof c.color === 'string' && /^#[0-9a-fA-F]{6}$/.test(c.color) ? c.color : tc, hidden: !!c.hidden,
+              points: c.points !== false, lines: !!c.lines
+            })), residHidden: !!it.residHidden });
+          } else if (it.type === 'note') {
+            st.items.push({ id: this.uid++, type: 'note', text: str(it.text, 5000), color: '#888888' });
           } else {
             const e = { id: this.uid++, type: 'expr', text: str(it.text), color: color(it.color), hidden: !!it.hidden };
             if (isObj(it.slider)) {
@@ -211,12 +824,13 @@
               if (isFinite(mn) && isFinite(mx) && mn < mx) e.slider = { min: mn, max: mx, step: isFinite(sp) && sp >= 0 ? sp : 0.1 };
             }
             if (isObj(it.domain)) e.domain = { min: str(it.domain.min, 100) || '0', max: str(it.domain.max, 100) || '1' };
+            if (it.plotResid) e.plotResid = true;
             st.items.push(e);
           }
         });
       }
       const vp = raw.viewport;
-      if (isObj(vp) && isFinite(vp.cx) && isFinite(vp.cy) && isFinite(vp.ppu) && vp.ppu > 0) st.viewport = { cx: +vp.cx, cy: +vp.cy, ppu: +vp.ppu };
+      if (isObj(vp) && isFinite(vp.cx) && isFinite(vp.cy) && isFinite(vp.ppu) && vp.ppu > 0) st.viewport = { cx: +vp.cx, cy: +vp.cy, ppu: +vp.ppu, asp: isFinite(vp.asp) && vp.asp > 0 ? +vp.asp : 1 };
       if (isObj(raw.sci)) {
         const sc = raw.sci;
         if (Array.isArray(sc.history)) {
@@ -227,16 +841,66 @@
         if (typeof sc.ans === 'number' && isFinite(sc.ans)) st.sci.ans = sc.ans;
       }
     }
+    const keepView = this._applying && this.graph;
     this.state = st;
     this.ensureTrailing();
     this.selId = null;
     if (this.root) {
-      if (this.graph) this.graph.setView(st.viewport);
+      if (this.graph && !keepView) this.graph.setView(st.viewport);
       this.renderAll();
     }
+    if (!this._applying) this.initHistory();
+  };
+  // ---- undo / redo (whole-document snapshots, typing coalesced)
+  P.snap = function () {
+    const g = this.getState();
+    return JSON.stringify({ items: g.items, angle: g.angle, grid: g.grid, nums: g.nums, minor: g.minor });
+  };
+  P.initHistory = function () { this.hstack = [this.snap()]; this.hidx = 0; clearTimeout(this._htimer); this._htimer = 0; this.updateUndoBtns(); };
+  P.recordHistory = function () {
+    clearTimeout(this._htimer); this._htimer = 0;
+    if (!this.hstack) this.initHistory();
+    const sn = this.snap();
+    if (sn === this.hstack[this.hidx]) return;
+    this.hstack = this.hstack.slice(0, this.hidx + 1);
+    this.hstack.push(sn);
+    if (this.hstack.length > 120) this.hstack.shift();
+    this.hidx = this.hstack.length - 1;
+    this.updateUndoBtns();
+  };
+  P.scheduleHistory = function () {
+    if (this._applying) return;
+    clearTimeout(this._htimer);
+    this._htimer = setTimeout(() => this.recordHistory(), 450);
+  };
+  P.applySnap = function (sn) {
+    const cur = this.getState();
+    const o = JSON.parse(sn);
+    this._applying = true;
+    try { this.setState(Object.assign(cur, o)); } finally { this._applying = false; }
+    this.updateUndoBtns();
+    this.changed(true);
+  };
+  P.undo = function () {
+    if (this._htimer) this.recordHistory();
+    if (!this.hstack || this.hidx <= 0) return;
+    this.hidx--;
+    this.applySnap(this.hstack[this.hidx]);
+  };
+  P.redo = function () {
+    if (this._htimer) this.recordHistory();
+    if (!this.hstack || this.hidx >= this.hstack.length - 1) return;
+    this.hidx++;
+    this.applySnap(this.hstack[this.hidx]);
+  };
+  P.updateUndoBtns = function () {
+    if (!this.undoBtn) return;
+    this.undoBtn.disabled = !(this.hstack && (this.hidx > 0 || this._htimer));
+    this.redoBtn.disabled = !(this.hstack && this.hidx < this.hstack.length - 1);
   };
   P.reset = function () { this.setState(null); if (this.graph) this.graph.home(); this.changed(); };
-  P.changed = function () {
+  P.changed = function (noHistory) {
+    if (!noHistory) { this.scheduleHistory(); if (this.undoBtn) this.undoBtn.disabled = false; }
     clearTimeout(this._chg);
     this._chg = setTimeout(() => {
       const fn = G.SatCalc && G.SatCalc.onChange;
@@ -266,17 +930,29 @@
       h('button', 'sc-zbtn sc-home', { type: 'button', 'aria-label': 'Default view', title: 'Default view', html: '<svg viewBox="0 0 24 24" width="20" height="20"><path d="M3 11.5 12 4l9 7.5M5.5 10v9.5h5v-5h3v5h5V10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>', onclick: () => this.graph.home() })
     ]);
     gpane.appendChild(zoom);
+    gpane.appendChild(h('button', 'sc-zbtn sc-expand', { type: 'button', 'aria-label': 'Show expression list', title: 'Show list', text: '»', onclick: () => this.setCollapsed(false) }));
     this.gpane = gpane;
     const split = h('div', 'sc-split', { role: 'separator', 'aria-label': 'Resize graph' }, [h('span', 'sc-grip')]);
     this.splitEl = split;
     this.bindSplit(split);
     const lpane = h('div', 'sc-lpane');
+    const addBtn = h('button', 'sc-lbtn sc-addbtn', { type: 'button', 'aria-label': 'Add item', title: 'Add item', html: '<b>+</b>' });
+    addBtn.addEventListener('click', () => {
+      const mk = (label, fn) => h('button', 'sc-opt sc-wideopt sc-menuopt', { type: 'button', text: label, onclick: () => { this.closePop(); fn(); } });
+      this.openPop(addBtn, h('div', 'sc-addmenu', null, [
+        mk('Expression', () => this.addItem('expr')),
+        mk('Table', () => this.addItem('table')),
+        mk('Note', () => this.addItem('note'))
+      ]));
+    });
+    this.undoBtn = h('button', 'sc-lbtn sc-ibtn', { type: 'button', 'aria-label': 'Undo', title: 'Undo (Ctrl+Z)', onclick: () => this.undo(), html: '<svg viewBox="0 0 24 24" width="22" height="22"><path d="M9 7 4 12l5 5M4.5 12H15a5 5 0 0 1 0 10h-2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 -3)"/></svg>' });
+    this.redoBtn = h('button', 'sc-lbtn sc-ibtn', { type: 'button', 'aria-label': 'Redo', title: 'Redo (Ctrl+Y)', onclick: () => this.redo(), html: '<svg viewBox="0 0 24 24" width="22" height="22"><path d="M15 7l5 5-5 5M19.5 12H9a5 5 0 0 0 0 10h2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 -3)"/></svg>' });
     const lbar = h('div', 'sc-lbar', null, [
-      h('button', 'sc-lbtn', { type: 'button', onclick: () => this.addItem('expr'), html: '<b>+</b> Expression' }),
-      h('button', 'sc-lbtn', { type: 'button', onclick: () => this.addItem('table'), html: '<b>+</b> Table' }),
+      addBtn, this.undoBtn, this.redoBtn,
       h('span', 'sc-flex'),
       h('button', 'sc-lbtn sc-kbtn', { type: 'button', 'aria-label': 'Toggle keypad', title: 'Keypad', onclick: () => this.toggleKeypad(), html: '<svg viewBox="0 0 24 24" width="22" height="22"><rect x="2.5" y="6" width="19" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 10h1M9 10h1M12 10h1M15 10h1M18 10h0.5M6 13.5h1M9 13.5h6M18 13.5h0.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>' })
     ]);
+    lbar.appendChild(h('button', 'sc-lbtn sc-ibtn sc-collapse', { type: 'button', 'aria-label': 'Hide expression list', title: 'Hide list', text: '«', onclick: () => this.setCollapsed(true) }));
     const list = h('div', 'sc-list');
     this.list = list;
     lpane.appendChild(lbar);
@@ -293,6 +969,16 @@
     this.graph = new Graph(ghost);
     this.graph.onSelect = (id) => this.onGraphSelect(id);
     this.graph.onViewChange = () => this.changed();
+    this.graph.onDragPoint = (id, x, y) => this.dragPoint(id, x, y);
+    this._docKey = (e) => {
+      if (!this.root || !(e.target === document.body || e.target === document.documentElement || this.root.contains(e.target))) return;
+      if (!(e.ctrlKey || e.metaKey) || e.altKey || this.state.mode !== 'graph') return;
+      const k = e.key.toLowerCase();
+      if (k === 'z' && !e.shiftKey) { e.preventDefault(); this.undo(); }
+      else if (k === 'y' || (k === 'z' && e.shiftKey)) { e.preventDefault(); this.redo(); }
+    };
+    document.addEventListener('keydown', this._docKey);
+    this.updateUndoBtns();
     this._viewApplied = false;
     this.ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => this.layout()) : null;
     if (this.ro) this.ro.observe(root); else G.addEventListener('resize', this._winResize = () => this.layout());
@@ -305,6 +991,7 @@
     if (this.graph) this.state.viewport = this.graph.getView();
     if (this.ro) this.ro.disconnect();
     if (this._winResize) G.removeEventListener('resize', this._winResize);
+    if (this._docKey) document.removeEventListener('keydown', this._docKey);
     this.root.remove();
     this.root = null; this.graph = null; this.rows.clear();
   };
@@ -386,6 +1073,7 @@
     this.angleBtn.textContent = this.deg() ? 'DEG' : 'RAD';
     this.root.querySelectorAll('.sc-key.angle').forEach((b) => { b.textContent = this.deg() ? 'DEG' : 'RAD'; });
     this.root.classList.toggle('sc-kp', this.keypadOpen);
+    this.root.classList.toggle('sc-collapsed', !!this.state.collapsed);
     if (m === 'graph' && this.graph) setTimeout(() => this.layout(), 0);
   };
   P.openPop = function (anchor, content, cls) {
@@ -403,6 +1091,12 @@
     pop.style.top = top + 'px';
     this.pop = pop;
   };
+  P.setCollapsed = function (v) {
+    this.state.collapsed = !!v;
+    if (v) { if (document.activeElement && this.root.contains(document.activeElement)) document.activeElement.blur(); }
+    this.renderMode();
+    this.changed(true);
+  };
   P.closePop = function () { if (this.pop) { this.pop.remove(); this.pop = null; } };
   P.openSettings = function (anchor) {
     const mk = (label, on, fn) => h('button', 'sc-opt' + (on ? ' on' : ''), { type: 'button', text: label, onclick: () => { fn(); this.closePop(); } });
@@ -413,16 +1107,42 @@
       h('div', 'sc-ph', { text: 'Graph' }),
       h('div', 'sc-optrow', null, [
         mk('Grid', s.grid, () => { s.grid = !s.grid; this.applyGraphFlags(); this.changed(); }),
-        mk('Axis numbers', s.nums, () => { s.nums = !s.nums; this.applyGraphFlags(); this.changed(); })
+        mk('Axis numbers', s.nums, () => { s.nums = !s.nums; this.applyGraphFlags(); this.changed(); }),
+        mk('Minor gridlines', s.minor, () => { s.minor = !s.minor; this.applyGraphFlags(); this.changed(); })
       ]),
+      this.boundsEditor(),
       h('div', 'sc-optrow', null, [h('button', 'sc-opt sc-danger', { type: 'button', text: 'Reset calculator', onclick: () => { this.closePop(); this.reset(); } })])
     ]);
     this.openPop(anchor, box, 'sc-pop-settings');
+  };
+  P.boundsEditor = function () {
+    const g = this.graph;
+    if (!g) return null;
+    const b = g.getBounds();
+    const r6 = (v) => String(+v.toPrecision(6));
+    const inp = (lbl, v) => { const e = h('input', 'sc-bin', { type: 'text', inputmode: 'decimal', 'aria-label': lbl, value: r6(v) }); return e; };
+    const x0 = inp('x min', b.xmin), x1 = inp('x max', b.xmax), y0 = inp('y min', b.ymin), y1 = inp('y max', b.ymax);
+    const num = (e) => evalNum(e.value, null, false);
+    const apply = () => {
+      if (g.setBounds({ xmin: num(x0), xmax: num(x1), ymin: num(y0), ymax: num(y1) })) this.closePop();
+      else [x0, x1, y0, y1].forEach((e) => e.classList.add('sc-bad'));
+    };
+    [x0, x1, y0, y1].forEach((e) => e.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); apply(); } }));
+    return h('div', 'sc-bounds', null, [
+      h('div', 'sc-ph', { text: 'Window' }),
+      h('div', 'sc-brow', null, [x0, h('span', null, { html: '≤ <i>x</i> ≤' }), x1]),
+      h('div', 'sc-brow', null, [y0, h('span', null, { html: '≤ <i>y</i> ≤' }), y1]),
+      h('div', 'sc-optrow', null, [
+        h('button', 'sc-opt', { type: 'button', text: 'Apply', onclick: apply }),
+        h('button', 'sc-opt', { type: 'button', text: 'Square axes', onclick: () => { const v = g.getView(); g.setView({ cx: v.cx, cy: v.cy, ppu: v.ppu, asp: 1 }); this.closePop(); } })
+      ])
+    ]);
   };
   P.applyGraphFlags = function () {
     if (!this.graph) return;
     this.graph.showGrid = this.state.grid;
     this.graph.showNums = this.state.nums;
+    this.graph.showMinor = this.state.minor !== false;
     this.graph.deg = this.deg();
     this.graph.request();
   };
@@ -453,7 +1173,7 @@
   };
   P.addItem = function (type, afterId, text, extra) {
     const items = this.state.items;
-    const it = type === 'table' ? this.newTable() : this.newExpr(text || '', extra);
+    const it = type === 'table' ? this.newTable() : type === 'note' ? { id: this.uid++, type: 'note', text: text || '', color: '#888888' } : this.newExpr(text || '', extra);
     let idx = items.length;
     if (afterId != null) { const i = items.findIndex((x) => x.id === afterId); if (i >= 0) idx = i + 1; }
     else {
@@ -468,7 +1188,9 @@
     this.syncRows();
     this.recompute();
     this.changed();
-    if (type === 'table') this.focusCell(it.id, 0, 0); else if (!extra || !extra.noFocus) this.focusItem(it.id);
+    if (type === 'table') this.focusCell(it.id, 0, 0);
+    else if (type === 'note') { const r = this.rows.get(it.id); if (r) r.input.focus(); }
+    else if (!extra || !extra.noFocus) this.focusItem(it.id);
     return it;
   };
   P.deleteItem = function (id, focusPrev) {
@@ -490,7 +1212,10 @@
     const r = this.rows.get(id);
     if (!r || !r.input) return;
     r.input.focus({ preventScroll: true });
-    if (caretEnd !== false) { const n = r.input.value.length; try { r.input.setSelectionRange(n, n); } catch (e) { /* ignore */ } }
+    if (caretEnd !== false) {
+      if (r.mf) r.mf.cursorEnd();
+      else { const n = r.input.value.length; try { r.input.setSelectionRange(n, n); } catch (e) { /* ignore */ } }
+    }
     r.el.scrollIntoView({ block: 'nearest' });
   };
 
@@ -506,13 +1231,27 @@
     const el = h('div', 'sc-row', { 'data-id': it.id }, [tab, main, del]);
     r.el = el; r.tab = tab; r.num = num; r.dot = dot; r.main = main;
     if (it.type === 'table') this.buildTableBody(r);
-    else {
-      const input = mathInput('sc-in', it.text, null);
-      const math = h('div', 'sc-math', { 'data-ph': 'Tap to type, e.g. y = 2x + 1' });
+    else if (it.type === 'note') {
+      el.classList.add('sc-noterow');
+      const ta = h('textarea', 'sc-note', { rows: '1', placeholder: 'Note', 'aria-label': 'Note' });
+      ta.value = it.text || '';
+      main.appendChild(ta);
+      r.input = ta;
+      const fit = () => { ta.style.height = 'auto'; ta.style.height = Math.max(36, ta.scrollHeight) + 'px'; };
+      ta.addEventListener('input', () => { it.text = ta.value; fit(); this.changed(); });
+      ta.addEventListener('focus', () => { this.activeField = null; this.rows.forEach((x) => x.el.classList.toggle('sc-editing', x === r)); });
+      ta.addEventListener('blur', () => el.classList.remove('sc-editing'));
+      setTimeout(fit, 0);
+    } else {
+      let input, mf = null;
+      try {
+        mf = new G.SatCalcMathField({ value: it.text, placeholder: 'Tap to type, e.g. y = 2x + 1', cls: 'sc-mf', label: 'Expression ' });
+        input = mf.el;
+      } catch (e) { mf = null; input = mathInput('sc-in', it.text, null); }
       const status = h('div', 'sc-status');
-      main.appendChild(input); main.appendChild(math); main.appendChild(status);
-      r.input = input; r.math = math; r.status = status;
-      math.addEventListener('click', () => this.focusItem(it.id));
+      main.appendChild(input); main.appendChild(status);
+      r.input = input; r.mf = mf; r.status = status;
+      if (!mf) { r.math = h('div', 'sc-math'); main.insertBefore(r.math, status); r.math.addEventListener('click', () => this.focusItem(it.id)); }
       input.addEventListener('focus', () => this.onFieldFocus(input, it.id));
       input.addEventListener('blur', () => { el.classList.remove('sc-editing'); this.cleanupAfterBlur(it.id); });
       input.addEventListener('input', () => {
@@ -589,7 +1328,11 @@
       this.deleteItem(it.id, true);
     }
   };
-  P.focusAny = function (it) { if (it.type === 'table') this.focusCell(it.id, 0, 0); else this.focusItem(it.id); };
+  P.focusAny = function (it) {
+    if (it.type === 'table') this.focusCell(it.id, 0, 0);
+    else if (it.type === 'note') { const r = this.rows.get(it.id); if (r) r.input.focus(); }
+    else this.focusItem(it.id);
+  };
   P.openItemMenu = function (id, anchor) {
     const it = this.itemById(id);
     if (!it) return;
@@ -597,11 +1340,15 @@
       type: 'button', 'aria-label': 'Color ' + c, style: 'background:' + c,
       onclick: () => { it.color = c; if (it.type === 'table') it.columns.forEach((col, k) => { if (k > 0) col.color = c; }); this.recompute(); this.changed(); this.closePop(); }
     }));
-    const box = h('div', 'sc-imenu', null, [
+    if (it.type === 'note') return;
+    const res = this.results.get(id);
+    const kids = [
       h('button', 'sc-opt sc-wideopt', { type: 'button', text: it.hidden ? 'Show on graph' : 'Hide from graph', onclick: () => { it.hidden = !it.hidden; this.recompute(); this.changed(); this.closePop(); } }),
       h('div', 'sc-swatches', null, sw)
-    ]);
-    this.openPop(anchor, box);
+    ];
+    if (res && res.kind === 'explicit') kids.push(h('button', 'sc-opt sc-wideopt sc-menuopt', { type: 'button', text: 'Convert to table', onclick: () => { this.closePop(); this.convertToTable(id); } }));
+    if (it.type === 'table') kids.push(h('button', 'sc-opt sc-wideopt sc-menuopt', { type: 'button', text: 'Zoom to fit data', onclick: () => { this.closePop(); this.zoomToTable(id); } }));
+    this.openPop(anchor, h('div', 'sc-imenu', null, kids));
   };
 
   // per-row status rendering
@@ -615,8 +1362,12 @@
     r.dot.style.background = it.hidden ? 'transparent' : it.color;
     r.dot.style.borderColor = it.color;
     if (it.type === 'table') { this.updateTable(r, res); return; }
+    if (it.type === 'note') return;
     const text = String(it.text);
-    if (!text.trim()) {
+    if (r.mf) {
+      if (r.mfSrc !== text && r.mf.getValue() !== text && document.activeElement !== r.mf.ta) r.mf.setValue(text, true);
+      r.mfSrc = text;
+    } else if (!text.trim()) {
       setTex(r.math, null, '');
       r.math.classList.add('sc-empty');
     } else {
@@ -672,13 +1423,27 @@
     } else st.style.display = '';
     if (res.kind === 'slider' && r.ctl.range) this.syncSlider(r, it, res);
     if (res.kind === 'regression' && r.ctl.reg) {
-      const parts = (res.order || []).map((n) => Core.toLatex({ type: 'id', name: n }) + '=' + texNum(res.params[n]));
-      parts.push('r^{2}=' + texNum(res.r2, 6));
-      const key = parts.join('|');
+      const params = (res.order || []).map((n) => Core.toLatex({ type: 'id', name: n }) + '=' + texNum(res.params[n]));
+      const stats = [];
+      if (res.plainLhs && isFinite(res.r2)) {
+        stats.push((res.linear ? 'r^{2}' : 'R^{2}') + '=' + texNum(res.r2, 6));
+        if (isFinite(res.r)) stats.push('r=' + texNum(res.r, 6));
+      } else stats.push('\\operatorname{RMSE}=' + texNum(res.rmse, 6));
+      const key = params.join('|') + '#' + stats.join('|') + '#' + res.residName + (it.plotResid ? '+' : '-');
       if (r.ctl.reg._k !== key) {
         r.ctl.reg._k = key;
         r.ctl.reg.innerHTML = '';
-        parts.forEach((p) => r.ctl.reg.appendChild(h('span', 'sc-rp', { html: texHTML(p) || p })));
+        const sec = (label, parts) => {
+          const row = h('div', 'sc-rsec', null, [h('span', 'sc-rlabel', { text: label })]);
+          parts.forEach((p) => row.appendChild(typeof p === 'string' ? h('span', 'sc-rp', { html: texHTML(p) || p }) : p));
+          r.ctl.reg.appendChild(row);
+        };
+        sec('parameters', params);
+        sec('statistics', stats);
+        if (res.residName) {
+          const btn = h('button', 'sc-chip sc-plotres' + (it.plotResid ? ' on' : ''), { type: 'button', text: it.plotResid ? 'plotted' : 'plot', 'aria-pressed': it.plotResid ? 'true' : 'false', onclick: () => { it.plotResid = !it.plotResid; this.recompute(); this.changed(); } });
+          sec('residuals', [Core.toLatex({ type: 'id', name: res.residName }), btn]);
+        }
       }
     }
   };
@@ -789,14 +1554,56 @@
     const table = h('table', 'sc-table');
     wrap.appendChild(table);
     const status = h('div', 'sc-status');
+    const ico = (d) => '<svg viewBox="0 0 24 24" width="20" height="20">' + d + '</svg>';
+    const tools = h('div', 'sc-ttools', null, [
+      h('button', 'sc-tbtn', { type: 'button', 'aria-label': 'Zoom to fit data', title: 'Zoom to fit data', html: ico('<circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>') + '<span>Fit</span>', onclick: () => this.zoomToTable(it.id) }),
+      h('button', 'sc-tbtn', { type: 'button', 'aria-label': 'Column options', title: 'Column options', html: ico('<circle cx="6" cy="12" r="1.8" fill="currentColor"/><circle cx="12" cy="12" r="1.8" fill="currentColor"/><circle cx="18" cy="12" r="1.8" fill="currentColor"/>') + '<span>Columns</span>', onclick: (e) => this.openColumnMenu(it.id, e.currentTarget) })
+    ]);
     r.main.appendChild(wrap);
+    r.main.appendChild(tools);
     r.main.appendChild(status);
     r.table = table; r.status = status;
     this.renderTable(r);
   };
+  P.openColumnMenu = function (id, anchor) {
+    const it = this.itemById(id);
+    if (!it) return;
+    const r = this.rows.get(id);
+    const box = h('div', 'sc-colmenu');
+    const redraw = () => { this.recompute(); this.changed(); if (r) this.renderTable(r); this.openColumnMenu(id, anchor); };
+    it.columns.forEach((c, ci) => {
+      if (ci === 0) return;
+      let ast = null;
+      try { ast = Core.parse(c.header); } catch (e) { ast = null; }
+      const label = h('span', 'sc-cmlabel', { html: (ast && texHTML(Core.toLatex(ast))) || (c.header || '?') });
+      const tog = (txt, on, fn) => h('button', 'sc-opt sc-cmopt' + (on ? ' on' : ''), { type: 'button', text: txt, 'aria-pressed': on ? 'true' : 'false', onclick: () => { fn(); redraw(); } });
+      const color = h('button', 'sc-swatch sc-cmcolor', { type: 'button', 'aria-label': 'Change colour', style: 'background:' + (c.color || it.color), onclick: () => { const k = PALETTE.indexOf(c.color); c.color = PALETTE[(k + 1) % PALETTE.length]; redraw(); } });
+      const row = h('div', 'sc-cmrow', null, [label, color,
+        tog('Points', c.points !== false, () => { c.points = c.points === false; }),
+        tog('Lines', !!c.lines, () => { c.lines = !c.lines; }),
+        tog(c.hidden ? 'Show' : 'Hide', !!c.hidden, () => { c.hidden = !c.hidden; })]);
+      if (it.columns.length > 2) row.appendChild(h('button', 'sc-opt sc-cmopt sc-danger', { type: 'button', 'aria-label': 'Delete column', text: '✕', onclick: () => { it.columns.splice(ci, 1); redraw(); } }));
+      box.appendChild(row);
+    });
+    this.openPop(anchor, box, 'sc-pop-cols');
+  };
+  P.compactTable = function (r) {
+    // drop rows whose cells are all empty (the blank last row is always re-added)
+    const it = r.it;
+    const n = Math.max.apply(null, it.columns.map((c) => c.values.length).concat([0]));
+    const keep = [];
+    for (let i = 0; i < n; i++) if (it.columns.some((c) => String(c.values[i] || '').trim())) keep.push(i);
+    if (keep.length === n) return;
+    it.columns.forEach((c) => { if (c.values.length) c.values = keep.map((i) => c.values[i] || ''); });
+    this.recompute();
+    this.renderTable(r);
+    this.changed();
+  };
+  const r0 = (it) => (it._minRows || 0);
   P.tableRowCount = function (it, res) {
     let n = 0;
     it.columns.forEach((c) => { for (let i = c.values.length - 1; i >= 0; i--) if (String(c.values[i]).trim()) { n = Math.max(n, i + 1); break; } });
+    if (r0(it) > n) n = r0(it);
     if (res && res.cols && res.cols[0]) n = Math.max(n, res.cols[0].values.length);
     return Math.max(n + 1, 2);
   };
@@ -822,6 +1629,16 @@
       this.bindCell(r, inp, -1, ci);
       tr.appendChild(th);
     });
+    const virt = res && res.cols ? res.cols.slice(it.columns.length).filter((c) => c.virtual) : [];
+    virt.forEach((c) => {
+      const reg = this.itemById(c.regId);
+      const th = h('th', 'sc-th sc-thv' + (it.residHidden ? ' sc-hidden' : ''), { title: 'Residuals — tap to show/hide points' });
+      th.style.setProperty('--col', reg ? reg.color : '#999');
+      const view = h('button', 'sc-hview sc-vbtn', { type: 'button', 'aria-label': 'Toggle residual points', html: texHTML(Core.toLatex({ type: 'id', name: c.name })) || c.name });
+      view.addEventListener('click', () => { it.residHidden = !it.residHidden; this.recompute(); this.renderTable(r); this.changed(); });
+      th.appendChild(view);
+      tr.appendChild(th);
+    });
     const addc = h('th', 'sc-thadd');
     addc.appendChild(h('button', 'sc-addcol', { type: 'button', 'aria-label': 'Add column', text: '+', onclick: () => {
       if (it.columns.length >= 10) return;
@@ -829,7 +1646,7 @@
       this.state.items.forEach((x) => { if (x.type === 'table') x.columns.forEach((c) => used.add(c.header.trim())); });
       let n = 1;
       while (used.has('y_' + n)) n++;
-      it.columns.push({ header: 'y_' + n, values: [], color: this.nextColor() });
+      it.columns.push({ header: 'y_' + n, values: [], color: this.nextColor(), points: true, lines: false });
       this.recompute(); this.changed();
       this.focusCell(it.id, -1, it.columns.length - 1);
     } }));
@@ -848,6 +1665,13 @@
         if (res && res.cols && res.cols[ci] && res.cols[ci].cellErrors && res.cols[ci].cellErrors[ri]) inp.classList.add('sc-cerr');
         td.appendChild(inp);
         this.bindCell(r, inp, ri, ci);
+        row.appendChild(td);
+      });
+      virt.forEach(() => {
+        const td = h('td', 'sc-tdv');
+        const inp = mathInput('sc-cin sc-comp', '', null);
+        inp.readOnly = true; inp.tabIndex = -1;
+        td.appendChild(inp);
         row.appendChild(td);
       });
       row.appendChild(h('td', 'sc-tdpad'));
@@ -885,7 +1709,11 @@
       this.setSel(it.id, true);
       if (isTouch() && !this.keypadOpen && this.state.mode === 'graph') this.toggleKeypad(true);
     });
-    inp.addEventListener('blur', () => { r.el.classList.remove('sc-editing'); if (ri < 0) inp.parentNode.classList.remove('sc-hedit'); });
+    inp.addEventListener('blur', () => {
+      r.el.classList.remove('sc-editing');
+      if (ri < 0) inp.parentNode.classList.remove('sc-hedit');
+      setTimeout(() => { if (this.root && r.table && !r.table.contains(document.activeElement)) this.compactTable(r); }, 0);
+    });
     inp.addEventListener('input', () => {
       const col = it.columns[ci];
       if (!col) return;
@@ -954,9 +1782,85 @@
   };
 
   // ------------------------------------------------------------ analysis -> graph
+  // drag a point on the graph: constant coordinates are rewritten, slider variables updated
+  P.dragPoint = function (id, x, y) {
+    const it = this.itemById(id), res = this.results.get(id);
+    if (!it || !res || !res.drag) return;
+    const fmt = (v) => String(+v.toFixed(6));
+    const setText = (item, t) => { item.text = t; const r = this.rows.get(item.id); if (r && r.input) r.input.value = t; };
+    const d = res.drag;
+    if (d.x && d.x.c && d.y && d.y.c) setText(it, '(' + fmt(x) + ',' + fmt(y) + ')');
+    else {
+      let ast = null;
+      try { ast = Core.parse(it.text); } catch (e) { ast = null; }
+      const parts = [d.x, d.y];
+      const vals = [x, y];
+      parts.forEach((sp, k) => {
+        if (!sp) return;
+        if (sp.name) {
+          const sl = this.state.items.find((o) => { const rr = this.results.get(o.id); return rr && rr.kind === 'slider' && rr.name === sp.name; });
+          if (sl) {
+            if (sl.slider) { sl.slider.min = Math.min(sl.slider.min, Math.floor(vals[k])); sl.slider.max = Math.max(sl.slider.max, Math.ceil(vals[k])); }
+            setText(sl, sp.name + '=' + fmt(vals[k]));
+          }
+        }
+      });
+      if (ast && ast.type === 'tuple' && ((d.x && d.x.c) || (d.y && d.y.c))) {
+        // rewrite only constant coordinates, keep variable ones
+        const raw = String(it.text);
+        const inner = raw.trim().replace(/^\(/, '').replace(/\)$/, '');
+        const ci = (() => { let dep = 0; for (let i = 0; i < inner.length; i++) { const c = inner[i]; if ('([{'.indexOf(c) >= 0) dep++; else if (')]}'.indexOf(c) >= 0) dep--; else if (c === ',' && !dep) return i; } return -1; })();
+        if (ci > 0) {
+          const xs = d.x && d.x.c ? fmt(x) : inner.slice(0, ci).trim();
+          const ys = d.y && d.y.c ? fmt(y) : inner.slice(ci + 1).trim();
+          setText(it, '(' + xs + ',' + ys + ')');
+        }
+      }
+    }
+    this.recompute();
+    this.changed();
+  };
+  P.convertToTable = function (id) {
+    const it = this.itemById(id), res = this.results.get(id);
+    if (!it || !res) return;
+    const tbl = this.newTable();
+    const xn = tbl.columns[0].header, yn = tbl.columns[1].header;
+    let header = null;
+    if (res.fnName) header = res.fnName + '(' + xn + ')';
+    else {
+      let text = String(it.text), toks;
+      try { toks = Core.tokenize(text); } catch (e) { toks = null; }
+      if (toks) {
+        const eq = toks.find((t) => t.t === 'op' && t.v === '=');
+        let off = 0;
+        if (eq) { off = eq.pos + 1; text = text.slice(off); }
+        const ids = Core.tokenize(text).filter((t) => t.t === 'id' && t.v === 'x').map((t) => t.pos).sort((a, b) => b - a);
+        ids.forEach((p) => { text = text.slice(0, p) + xn + text.slice(p + 1); });
+        header = text.trim();
+      }
+    }
+    tbl.columns[0].values = ['-2', '-1', '0', '1', '2'];
+    tbl.columns[1].header = header || yn;
+    tbl.columns[1].values = [];
+    tbl.color = it.color;
+    tbl.columns[1].color = it.color;
+    const items = this.state.items;
+    items.splice(items.indexOf(it) + 1, 0, tbl);
+    this.ensureTrailing();
+    this.syncRows();
+    this.recompute();
+    this.changed();
+  };
+  P.zoomToTable = function (id) {
+    const res = this.results.get(id);
+    if (!res || !this.graph) return;
+    const pts = [];
+    (res.series || []).forEach((s) => s.pts.forEach((p) => pts.push(p)));
+    this.graph.fitPoints(pts);
+  };
   P.recompute = function () {
     const items = this.state.items;
-    const A = Core.analyze(items.map((it) => it.type === 'table' ? { id: it.id, type: 'table', columns: it.columns } : { id: it.id, type: 'expr', text: it.text }), { deg: this.deg() });
+    const A = Core.analyze(items.filter((it) => it.type !== 'note').map((it) => it.type === 'table' ? { id: it.id, type: 'table', columns: it.columns } : { id: it.id, type: 'expr', text: it.text, plotResid: !!it.plotResid }), { deg: this.deg() });
     this.results = A.results;
     this.lastAnalysis = A;
     if (!this.root) return;
@@ -981,11 +1885,24 @@
           draw.push(Object.assign(base, polar ? { kind: 'polar', fns: res.fns, t0: t0, t1: t1 } : { kind: 'param', pfns: res.pfns, t0: t0, t1: t1 }));
           break;
         }
-        case 'table':
-          draw.push(Object.assign(base, { kind: 'pts', labels: false, series: (res.series || []).filter((s) => !(it.columns[s.col] && it.columns[s.col].hidden)).map((s) => ({ pts: s.pts, color: (it.columns[s.col] && it.columns[s.col].color) || it.color })) }));
+        case 'table': {
+          const series = [];
+          (res.series || []).forEach((sr) => {
+            if (sr.resid) {
+              if (it.residHidden) return;
+              const reg = this.itemById(sr.regId);
+              series.push({ pts: sr.pts, color: reg ? reg.color : '#888888' });
+              return;
+            }
+            const col = it.columns[sr.col];
+            if (!col || col.hidden) return;
+            series.push({ pts: sr.pts, color: col.color || it.color, points: col.points !== false, lines: !!col.lines });
+          });
+          draw.push(Object.assign(base, { kind: 'pts', labels: false, series: series }));
           break;
+        }
         default:
-          if (res.pts) draw.push(Object.assign(base, { kind: 'pts', labels: true, series: [{ pts: res.pts, color: it.color }] }));
+          if (res.pts) draw.push(Object.assign(base, { kind: 'pts', labels: true, drag: res.drag || null, series: [{ pts: res.pts, color: it.color }] }));
       }
     });
     if (this.graph) {
@@ -1088,6 +2005,14 @@
     if (k.a === 'frac') { this.toggleLastFrac(); return; }
     const el = this.targetField();
     if (!el) return;
+    if (el._mf) {
+      const mf = el._mf;
+      if (document.activeElement !== mf.ta) mf.focus();
+      if (k.a === 'clear') { this.sciClear(); return; }
+      if (el === this.sciIn && !k.a && mf.isEmpty() && /^[+*/^!%]/.test(k.i) && this.state.sci.history.length) mf.insertText('ans');
+      mf.keypad(k, this.shift);
+      return;
+    }
     if (document.activeElement !== el) el.focus({ preventScroll: true });
     const v = el.value;
     let s = el.selectionStart == null ? v.length : el.selectionStart, e = el.selectionEnd == null ? v.length : el.selectionEnd;
@@ -1145,14 +2070,15 @@
     const hist = h('div', 'sc-hist');
     this.hist = hist;
     const entry = h('div', 'sc-entry');
-    const input = mathInput('sc-sciin', this.state.sci.entry, 'Type an expression');
+    let input;
+    try { input = new G.SatCalcMathField({ value: this.state.sci.entry, placeholder: 'Type an expression', cls: 'sc-sciin sc-scimf', label: 'Calculator entry' }).el; } catch (e) { input = mathInput('sc-sciin', this.state.sci.entry, 'Type an expression'); }
     this.sciIn = input;
     const prev = h('div', 'sc-sprev');
     this.sciPrev = prev;
     const emath = h('div', 'sc-emath');
     this.sciMath = emath;
     entry.appendChild(input);
-    entry.appendChild(emath);
+    if (!input._mf) entry.appendChild(emath);
     entry.appendChild(prev);
     const left = h('div', 'sc-sleft', null, [hist, entry]);
     const keys = h('div', 'sc-keypad sc-skeys');
@@ -1257,6 +2183,7 @@
         val.addEventListener('click', () => {
           const ins = e.value != null ? (fr && e.frac ? '(' + fr.n + '/' + fr.d + ')' : String(Number(e.value.toPrecision(15)))) : e.display;
           const el = this.sciIn;
+          if (el._mf) { el._mf.focus(); el._mf.insertText(ins); return; }
           const st = el.selectionStart == null ? el.value.length : el.selectionStart, en = el.selectionEnd == null ? st : el.selectionEnd;
           el.value = el.value.slice(0, st) + ins + el.value.slice(en);
           el.dispatchEvent(new Event('input'));

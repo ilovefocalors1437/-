@@ -40,7 +40,9 @@
     this.canvas = c;
     this.ctx = c.getContext('2d');
     this.W = 300; this.H = 200; this.dpr = 1;
-    this.cx = 0; this.cy = 0; this.ppu = 0;
+    this.cx = 0; this.cy = 0; this.ppu = 0; this.asp = 1;
+    this.showMinor = true;
+    this.onDragPoint = null;
     this.items = [];
     this.curves = [];
     this.selId = null;
@@ -66,21 +68,43 @@
 
   // ------------------------------------------------------------ view
   P.X = function (x) { return this.W / 2 + (x - this.cx) * this.ppu; };
-  P.Y = function (y) { return this.H / 2 - (y - this.cy) * this.ppu; };
+  P.Y = function (y) { return this.H / 2 - (y - this.cy) * this.ppu * this.asp; };
   P.wx = function (px) { return this.cx + (px - this.W / 2) / this.ppu; };
-  P.wy = function (py) { return this.cy - (py - this.H / 2) / this.ppu; };
+  P.wy = function (py) { return this.cy - (py - this.H / 2) / (this.ppu * this.asp); };
+  P.ppy = function () { return this.ppu * this.asp; };
+  P.getBounds = function () { return { xmin: this.wx(0), xmax: this.wx(this.W), ymin: this.wy(this.H), ymax: this.wy(0) }; };
+  P.setBounds = function (b) {
+    if (!(b && b.xmax > b.xmin && b.ymax > b.ymin)) return false;
+    this.ppu = this.W / (b.xmax - b.xmin);
+    this.asp = (this.H / (b.ymax - b.ymin)) / this.ppu;
+    this.cx = (b.xmin + b.xmax) / 2; this.cy = (b.ymin + b.ymax) / 2;
+    this.viewChanged(true);
+    return true;
+  };
+  // fit a set of [x,y] points (e.g. table data) with a margin
+  P.fitPoints = function (pts) {
+    pts = pts.filter((p) => isFinite(p[0]) && isFinite(p[1]));
+    if (!pts.length) return;
+    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+    pts.forEach((p) => { x0 = Math.min(x0, p[0]); x1 = Math.max(x1, p[0]); y0 = Math.min(y0, p[1]); y1 = Math.max(y1, p[1]); });
+    let w = x1 - x0, h = y1 - y0;
+    if (w <= 0) w = Math.max(1, Math.abs(x0)) * 2;
+    if (h <= 0) h = Math.max(1, Math.abs(y0)) * 2;
+    this.setBounds({ xmin: (x0 + x1) / 2 - w * 0.6, xmax: (x0 + x1) / 2 + w * 0.6, ymin: (y0 + y1) / 2 - h * 0.62, ymax: (y0 + y1) / 2 + h * 0.62 });
+  };
   P.defaultPPU = function () { return Math.max(1e-9, Math.min(this.W / 20, this.H / 14)); };
   P.getView = function () {
-    return { cx: this.cx, cy: this.cy, ppu: this.ppu || this.defaultPPU(), w: this.W, h: this.H };
+    return { cx: this.cx, cy: this.cy, ppu: this.ppu || this.defaultPPU(), asp: this.asp, w: this.W, h: this.H };
   };
   P.setView = function (v) {
     if (v && isFinite(v.cx) && isFinite(v.cy) && isFinite(v.ppu) && v.ppu > 0) {
       this.cx = +v.cx; this.cy = +v.cy; this.ppu = Math.min(1e12, Math.max(1e-9, +v.ppu));
+      this.asp = isFinite(v.asp) && v.asp > 1e-6 && v.asp < 1e6 ? +v.asp : 1;
     } else this.home(true);
     this.viewChanged(true);
   };
   P.home = function (silent) {
-    this.cx = 0; this.cy = 0; this.ppu = this.defaultPPU();
+    this.cx = 0; this.cy = 0; this.ppu = this.defaultPPU(); this.asp = 1;
     if (!silent) this.viewChanged(true);
   };
   P.zoomBy = function (f, px, py) {
@@ -88,7 +112,7 @@
     const wx = this.wx(px), wy = this.wy(py);
     this.ppu = Math.min(1e12, Math.max(1e-9, this.ppu * f));
     this.cx = wx - (px - this.W / 2) / this.ppu;
-    this.cy = wy + (py - this.H / 2) / this.ppu;
+    this.cy = wy + (py - this.H / 2) / this.ppy();
     this.viewChanged(true);
   };
   P.viewChanged = function (final) {
@@ -164,7 +188,7 @@
     if (this.showGrid) this.drawGridLines(grid);
     this.drawAxes();
     const curves = [];
-    const vkey = [this.cx, this.cy, this.ppu, W, H, this.interacting ? 1 : 0, this.deg ? 1 : 0].join(',');
+    const vkey = [this.cx, this.cy, this.ppu, this.asp, W, H, this.interacting ? 1 : 0, this.deg ? 1 : 0].join(',');
     // inequality fills first
     for (const it of this.items) {
       if (it.kind !== 'ineq') continue;
@@ -196,7 +220,11 @@
           const fs = it.kind === 'param' ? it.pfns : it.fns;
           (fs || []).forEach((f, b) => {
             const chains = this.paramCached(it, f, vkey);
-            curves.push({ id: it.id, b: b, type: 'param', chains: chains, color: it.color });
+            const deg = this.deg;
+            const pf = it.kind === 'param'
+              ? (t) => { const p = f(t); return p && isFinite(p.x) && isFinite(p.y) ? [p.x, p.y] : null; }
+              : (t) => { const r = f(t); if (!isFinite(r)) return null; const th = deg ? t * D2R : t; return [r * Math.cos(th), r * Math.sin(th)]; };
+            curves.push({ id: it.id, b: b, type: 'param', chains: chains, color: it.color, pf: pf, t0: +it.t0, t1: +it.t1 });
           });
         }
       } catch (e) { /* a bad curve must not stop the others */ }
@@ -226,34 +254,40 @@
   };
 
   P.gridInfo = function () {
-    const major = niceStep(Math.max(1e-300, (this.W < 500 ? 36 : 64) / this.ppu));
-    const ratio = major.mant === 2 ? 4 : 5;
-    return { major: major.step, minor: major.step / ratio, ratio: ratio };
+    const target = this.W < 500 ? 36 : 64;
+    const mk = (pp) => {
+      const major = niceStep(Math.max(1e-300, target / pp));
+      const ratio = major.mant === 2 ? 4 : 5;
+      return { major: major.step, minor: major.step / ratio, ratio: ratio, pp: pp };
+    };
+    const gx = mk(this.ppu), gy = Math.abs(this.asp - 1) < 1e-9 ? gx : mk(this.ppy());
+    return { x: gx, y: gy };
   };
   P.drawGridLines = function (g) {
     const ctx = this.ctx, W = this.W, H = this.H;
-    const minorPx = g.minor * this.ppu;
     const x0 = this.wx(0), x1 = this.wx(W), y0 = this.wy(H), y1 = this.wy(0);
-    const lines = (step, color, skipMajor) => {
+    const lines = (minor, color) => {
       ctx.beginPath();
-      const kx0 = Math.ceil(x0 / step), kx1 = Math.floor(x1 / step);
+      const gx = g.x, gy = g.y;
+      const sx = minor ? gx.minor : gx.major, sy = minor ? gy.minor : gy.major;
+      const kx0 = Math.ceil(x0 / sx), kx1 = Math.floor(x1 / sx);
       for (let k = kx0; k <= kx1 && k - kx0 < 4000; k++) {
-        if (skipMajor && k % g.ratio === 0) continue;
-        const px = Math.round(this.X(k * step)) + 0.5;
+        if (minor && k % gx.ratio === 0) continue;
+        const px = Math.round(this.X(k * sx)) + 0.5;
         ctx.moveTo(px, 0); ctx.lineTo(px, H);
       }
-      const ky0 = Math.ceil(y0 / step), ky1 = Math.floor(y1 / step);
+      const ky0 = Math.ceil(y0 / sy), ky1 = Math.floor(y1 / sy);
       for (let k = ky0; k <= ky1 && k - ky0 < 4000; k++) {
-        if (skipMajor && k % g.ratio === 0) continue;
-        const py = Math.round(this.Y(k * step)) + 0.5;
+        if (minor && k % gy.ratio === 0) continue;
+        const py = Math.round(this.Y(k * sy)) + 0.5;
         ctx.moveTo(0, py); ctx.lineTo(W, py);
       }
       ctx.strokeStyle = color;
       ctx.lineWidth = 1;
       ctx.stroke();
     };
-    if (minorPx >= 7) lines(g.minor, '#eef0f3', true);
-    lines(g.major, '#d9dde3', false);
+    if (this.showMinor && g.x.minor * g.x.pp >= 7) lines(true, '#eef0f3');
+    lines(false, '#d9dde3');
   };
   P.drawAxes = function () {
     const ctx = this.ctx, W = this.W, H = this.H;
@@ -273,7 +307,7 @@
     ctx.strokeStyle = 'rgba(255,255,255,0.92)';
     ctx.lineJoin = 'round';
     ctx.fillStyle = '#3b4048';
-    const step = g.major;
+    let step = g.x.major;
     const ay = this.Y(0), ax = this.X(0);
     // x labels
     let ly = ay + 4, base = 'top';
@@ -296,6 +330,7 @@
     if (ax > W - 2) { lx = W - 5; align = 'right'; }
     ctx.textAlign = align;
     ctx.textBaseline = 'middle';
+    step = g.y.major;
     const ky0 = Math.ceil(this.wy(H) / step), ky1 = Math.floor(this.wy(0) / step);
     for (let k = ky0; k <= ky1 && k - ky0 < 400; k++) {
       if (k === 0) continue;
@@ -444,14 +479,14 @@
   P.contour = function (F, wantFill) {
     const W = this.W, H = this.H;
     const step = this.interacting ? (W * H > 350000 ? 5 : 4) : (W * H > 300000 ? 2.5 : 2);
-    const du = step / this.ppu;
+    const du = step / this.ppu, dv = step / this.ppy();
     const x0 = this.wx(0), y0 = this.wy(0);
     const nx = Math.ceil(W / step) + 1, ny = Math.ceil(H / step) + 1;
     const vals = new Float64Array(nx * ny);
     const have = new Uint8Array(nx * ny);
     const V = (i, j) => {
       const k = j * nx + i;
-      if (!have[k]) { have[k] = 1; vals[k] = F(x0 + i * du, y0 - j * du); }
+      if (!have[k]) { have[k] = 1; vals[k] = F(x0 + i * du, y0 - j * dv); }
       return vals[k];
     };
     const K = 4;
@@ -555,7 +590,7 @@
             const pushSeg = (e1, e2) => {
               const ax = ptX(e1), ay = ptY(e1), bx = ptX(e2), by = ptY(e2);
               // reject sign changes caused by poles: |F| mid-segment must be small
-              const vm = F(x0 + (ax + bx) * 0.5 * du, y0 - (ay + by) * 0.5 * du);
+              const vm = F(x0 + (ax + bx) * 0.5 * du, y0 - (ay + by) * 0.5 * dv);
               if (!isFinite(vm) || Math.abs(vm) > 0.5 * mx) return;
               segK.push(key(e1), key(e2));
               segP.push(ax * step, ay * step, bx * step, by * step);
@@ -568,7 +603,7 @@
               if (fa && fd && pa !== pd) cr.push(3);
               pushSeg(cr[0], cr[1]);
             } else {
-              const pm = F(x0 + (i + 0.5) * du, y0 - (j + 0.5) * du) > 0;
+              const pm = F(x0 + (i + 0.5) * du, y0 - (j + 0.5) * dv) > 0;
               if (pa !== pm) pushSeg(3, 0);
               if (pb !== pm) pushSeg(0, 1);
               if (pc !== pm) pushSeg(1, 2);
@@ -651,10 +686,21 @@
     for (const it of this.items) {
       if (it.kind !== 'pts') continue;
       (it.series || []).forEach((sr, si) => {
+        if (sr.lines && sr.pts.length > 1) {
+          const ctx = this.ctx;
+          ctx.save();
+          ctx.strokeStyle = sr.color || it.color; ctx.lineWidth = 2.5; ctx.lineJoin = 'round';
+          ctx.beginPath();
+          sr.pts.forEach((p, i) => { const px = Math.max(-1e5, Math.min(1e5, this.X(p[0]))), py = Math.max(-1e5, Math.min(1e5, this.Y(p[1]))); if (i) ctx.lineTo(px, py); else ctx.moveTo(px, py); });
+          ctx.stroke();
+          ctx.restore();
+        }
+        if (sr.points === false) return;
         sr.pts.forEach((p, i) => {
           if (!isFinite(p[0]) || !isFinite(p[1])) return;
           const px = this.X(p[0]), py = this.Y(p[1]);
           if (px < -10 || py < -10 || px > this.W + 10 || py > this.H + 10) return;
+          if (it.drag) this.drawDot(px, py, 9, 'rgba(0,0,0,0.07)', null);
           this.drawDot(px, py, it.id === this.selId ? 6 : 5, sr.color || it.color, null);
           const key = it.id + ':' + si + ':' + i;
           if ((it.labels && sr.pts.length <= 12) !== this.ptOpen.has(key)) labels.push([px, py, coordText(p[0], p[1])]);
@@ -687,8 +733,10 @@
     if (this.selId == null) { this.pois = []; return; }
     const view = { xmin: this.wx(0), xmax: this.wx(this.W), ymin: this.wy(this.H), ymax: this.wy(0), n: Math.min(1400, Math.max(400, Math.round(this.W * 1.5))) };
     const toWorld = (ch) => { const o = new Float64Array(ch.length); for (let i = 0; i < ch.length; i += 2) { o[i] = this.wx(ch[i]); o[i + 1] = this.wy(ch[i + 1]); } return o; };
-    const desc = (c) => c.type === 'fx' ? { type: 'fx', f: c.f, id: c.id } : c.type === 'fy' ? { type: 'fy', f: c.f, id: c.id } : c.type === 'F' ? { type: 'F', F: c.F, id: c.id, chains: c.chains.map(toWorld) } : null;
-    const all = this.curves.filter((c) => c.type !== 'param');
+    const desc = (c) => c.type === 'fx' ? { type: 'fx', f: c.f, id: c.id } : c.type === 'fy' ? { type: 'fy', f: c.f, id: c.id }
+      : c.type === 'F' ? { type: 'F', F: c.F, id: c.id, chains: c.chains.map(toWorld), noExtrema: !!c.ineq }
+      : c.type === 'param' && c.pf && isFinite(c.t0) && isFinite(c.t1) ? { type: 'P', fn: c.pf, t0: Math.min(c.t0, c.t1), t1: Math.max(c.t0, c.t1), id: c.id } : null;
+    const all = this.curves.filter((c) => desc(c));
     const sel = all.filter((c) => c.id === this.selId);
     const res = [];
     try {
@@ -803,7 +851,11 @@
         this.down = { x: p.x, y: p.y, cx: this.cx, cy: this.cy, moved: false, t: Date.now() };
         const hit = this.hitTest(p.x, p.y, touch);
         this.downHit = hit;
-        if (hit && hit.type === 'curve') {
+        const dragIt = hit && hit.type === 'pt' ? this.items.find((x) => x.id === hit.id && x.drag) : null;
+        if (dragIt) {
+          this.mode = 'drag';
+          this.dragIt = dragIt;
+        } else if (hit && hit.type === 'curve') {
           this.mode = 'trace';
           this.select(hit.c.id);
           this.traceCurve = hit.c;
@@ -827,7 +879,7 @@
         const cxp = (pts[0].x + pts[1].x) / 2, cyp = (pts[0].y + pts[1].y) / 2;
         this.ppu = Math.min(1e12, Math.max(1e-9, this.pinch.ppu * d / this.pinch.d));
         this.cx = this.pinch.wx - (cxp - this.W / 2) / this.ppu;
-        this.cy = this.pinch.wy + (cyp - this.H / 2) / this.ppu;
+        this.cy = this.pinch.wy + (cyp - this.H / 2) / this.ppy();
         this.viewChanged(false);
         return;
       }
@@ -837,8 +889,18 @@
       if (this.mode === 'pan' && this.down.moved) {
         this.interacting = true;
         this.cx = this.down.cx - dx / this.ppu;
-        this.cy = this.down.cy + dy / this.ppu;
+        this.cy = this.down.cy + dy / this.ppy();
         this.viewChanged(false);
+      } else if (this.mode === 'drag' && this.down.moved) {
+        let x = this.wx(p.x), y = this.wy(p.y);
+        const snap = (v, pp) => {
+          const r = Math.round(v);
+          if (Math.abs(v - r) * pp < 6) return r;
+          const st = Math.pow(10, Math.floor(Math.log10(10 / pp)));
+          return Math.round(v / st) * st;
+        };
+        x = snap(x, this.ppu); y = snap(y, this.ppy());
+        if (this.onDragPoint) this.onDragPoint(this.dragIt.id, +x.toPrecision(12), +y.toPrecision(12));
       } else if (this.mode === 'trace') {
         this.updateTrace(p.x, p.y);
       }
@@ -852,7 +914,8 @@
         return;
       }
       if (this.mode === 'pinch-end') { if (!this.ptrs.size) { this.mode = null; this.down = null; } return; }
-      if (this.down && !this.down.moved && this.mode === 'pan') {
+      if (this.mode === 'drag' && this.down && this.down.moved && this.onViewChange) this.onViewChange();
+      if (this.down && !this.down.moved && (this.mode === 'pan' || this.mode === 'drag')) {
         const hit = this.downHit;
         if (hit && hit.type === 'poi') {
           if (this.poiOpen.has(hit.i)) this.poiOpen.delete(hit.i); else this.poiOpen.add(hit.i);
@@ -882,7 +945,7 @@
       const wx = this.wx(p.x), wy = this.wy(p.y);
       this.ppu = Math.min(1e12, Math.max(1e-9, this.ppu * f));
       this.cx = wx - (p.x - this.W / 2) / this.ppu;
-      this.cy = wy + (p.y - this.H / 2) / this.ppu;
+      this.cy = wy + (p.y - this.H / 2) / this.ppy();
       this.viewChanged(true);
     }, { passive: false });
   };

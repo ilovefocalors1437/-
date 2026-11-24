@@ -156,3 +156,10 @@ details.spr-help li { margin: 3px 0; }
 @media (max-width: 560px) { .nav-pill { position: static; transform: none; padding: 8px 10px; font-size: 13.5px; } .t-footer .btn { padding: 8px 16px; } }
 @media (max-width: 420px) { .t-title { font-size: 12.5px; } .tool { min-width: 40px; padding: 4px 3px; font-size: 9.5px; } .t-clock { font-size: 18px; } }
 .linkbtn { background: none; border: 0; color: var(--muted); text-decoration: underline; font-size: 13.5px; min-height: 40px; display: block; margin: 8px auto 0; }
+
+/* exit */
+.t-exit { flex: none; display: flex; align-items: center; gap: 2px; background: #fff; border: 1px solid #9aa1b3; border-radius: 999px; padding: 0 10px 0 4px; min-height: 36px; font-size: 13px; font-weight: 600; }
+.t-exit svg { width: 18px; height: 18px; }
+.exit-opts { display: flex; flex-direction: column; gap: 10px; max-width: 280px; margin: 0 auto; }
+.card.resume { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: space-between; border-color: var(--blue); background: #f3f5ff; margin: 0 0 14px; }
+@media (max-width: 420px) { .t-exit { padding: 0 6px 0 2px; } .t-exit span { display: none; } .t-exit { min-width: 40px; justify-content: center; } }

@@ -62,6 +62,7 @@
     calc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2.5" width="14" height="19" rx="2"/><rect x="8" y="5.5" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 17h.01M12 17h.01M15.5 17h.01" stroke-width="2.4" stroke-linecap="round"/></svg>',
     ref: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h6l-4 8 4 8H5M13 9h6M13 15h6M16 6v6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     pause: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.5"/><path d="M9.5 8v8M14.5 8v8" stroke-width="2.4" stroke-linecap="round"/></svg>',
+    exit: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
     flag: '<svg viewBox="0 0 16 18"><path d="M2 1h12v15l-6-4-6 4z"/></svg>'
   };
 
@@ -176,13 +177,49 @@
     var counts = { mcq: 0, spr: 0 };
     BANK.forEach(function (q) { counts[q.type]++; });
     var best = hist.reduce(function (m, r) { return Math.max(m, r.scaled); }, 0);
+    var saved = load(K_SESSION, null);
+    var canResume = saved && saved.m1 && saved.m1.every(function (id) { return BY_ID[id]; }) && (saved.m2 || []).every(function (id) { return BY_ID[id]; });
+    var resumeCard = canResume ? h('div', { class: 'card resume' }, [
+      h('div', {}, [h('b', { text: 'Test in progress' }),
+        h('div', { class: 'muted small', text: 'Module ' + saved.module + ' · ' + fmtTime(saved.timeLeft) + ' left · ' +
+          (saved.module === 1 ? saved.m1 : saved.m2).filter(function (id) { var a = saved.answers[id]; return a !== undefined && a !== null && a !== ''; }).length + ' / 22 answered' })]),
+      h('div', { class: 'row' }, [
+        h('button', { class: 'btn primary', text: 'Resume', onclick: function () {
+          S = saved; S.paused = false; lastTick = Date.now();
+          if (calcMounted && window.SatCalc) { try { if (S.calc) window.SatCalc.setState(S.calc); else window.SatCalc.reset(); } catch (e) { /* ignore */ } }
+          show(S.stage === 'inter' ? 'inter' : 'test');
+        } }),
+        h('button', { class: 'btn danger', text: 'Discard', onclick: function () {
+          popup(h('div', { class: 'sheet' }, [
+            h('h3', { text: 'Discard the saved test?' }),
+            h('p', { class: 'muted', style: 'text-align:center', text: 'Its answers will be deleted and no score will be recorded.' }),
+            h('div', { class: 'row', style: 'justify-content:center' }, [
+              h('button', { class: 'btn', text: 'Cancel', onclick: closePopups }),
+              h('button', { class: 'btn danger', text: 'Discard', onclick: function () { clearSession(); show('home'); } })
+            ])
+          ]), true);
+        } })
+      ])
+    ]) : null;
     var wrap = h('div', { class: 'wrap' }, [
+      resumeCard,
       h('div', { class: 'hero' }, [
         h('h1', { text: 'SAT Math Practice' }),
         h('p', { text: 'A full adaptive Math section: 2 modules × 22 questions, 35 minutes each. Works offline.' }),
         h('div', { class: 'row' }, [
           h('button', { class: 'btn primary', text: 'Start a new test', onclick: function () {
             if (!BANK.length) { toast('Question bank failed to load.'); return; }
+            if (canResume) {
+              popup(h('div', { class: 'sheet' }, [
+                h('h3', { text: 'Start over?' }),
+                h('p', { class: 'muted', style: 'text-align:center', text: 'You have a test in progress. Starting a new one discards it.' }),
+                h('div', { class: 'row', style: 'justify-content:center' }, [
+                  h('button', { class: 'btn', text: 'Cancel', onclick: closePopups }),
+                  h('button', { class: 'btn primary', text: 'Start new test', onclick: startTest })
+                ])
+              ]), true);
+              return;
+            }
             startTest();
           } })
         ])
@@ -215,6 +252,7 @@
   function header() {
     var calcBtn = h('button', { class: 'tool' + (S.calcOpen ? ' on' : ''), html: ICON.calc + 'Calculator', onclick: toggleCalc });
     return h('div', { class: 't-header' }, [
+      h('button', { class: 't-exit', 'aria-label': 'Exit test', html: ICON.exit + '<span>Exit</span>', onclick: openExit }),
       h('div', { class: 't-title' }, ['Section 2: Math', h('span', { text: 'Module ' + S.module })]),
       h('div', { class: 't-timer' }, [
         h('div', { class: 't-clock' }),
@@ -359,8 +397,29 @@
       h('h3', { text: 'Section 2, Module ' + S.module + ': Math' }), legend(),
       gridCells(function (i) { closePopups(); go(i); }, true),
       h('div', { class: 'row', style: 'justify-content:center' }, [h('button', { class: 'btn', text: 'Go to Review Page', onclick: function () { show('review'); } })]),
-      h('button', { class: 'linkbtn', text: 'Exit and discard this test', onclick: confirmExit })
     ]));
+  }
+  function openExit() {
+    var wasPaused = S.paused;
+    S.paused = true;                       // the clock never runs while this dialog is open
+    var resume = function () { closePopups(); S.paused = wasPaused; lastTick = Date.now(); };
+    var sc = popup(h('div', { class: 'sheet' }, [
+      h('h3', { text: 'Exit the test?' }),
+      h('p', { class: 'muted', style: 'text-align:center', text: 'Save & exit stops the clock at ' + fmtTime(S.timeLeft) + ' and keeps every answer. Resume it any time from the home screen.' }),
+      h('div', { class: 'exit-opts' }, [
+        h('button', { class: 'btn primary', text: 'Save & exit', onclick: saveAndExit }),
+        h('button', { class: 'btn', text: 'Keep working', onclick: resume }),
+        h('button', { class: 'btn danger', text: 'Discard test', onclick: confirmExit })
+      ])
+    ]), true);
+    sc.addEventListener('click', function (e) { if (e.target === sc) resume(); });
+  }
+  function saveAndExit() {
+    S.paused = true;
+    saveSession();
+    stopTicker();
+    S = null;
+    show('home');
   }
   function confirmExit() {
     popup(h('div', { class: 'sheet' }, [
@@ -554,7 +613,8 @@
     if (view === 'results') { show('home'); return true; }
     if (view === 'test' || view === 'review' || view === 'inter') {
       if (S.calcOpen) { toggleCalc(); return true; }
-      pause(); return true;
+      if (view === 'inter') { pause(); return true; }
+      openExit(); return true;
     }
     return false;                                           // home: let the app close
   };

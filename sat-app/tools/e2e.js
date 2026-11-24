@@ -67,6 +67,15 @@ function stubBank() {
   await p.waitForTimeout(1300);
   const t2 = await p.evaluate(() => window.__sat.session.timeLeft);
   assert(t2 < t1 && t1 - t2 < 6, 'clock runs again ' + (t1 - t2));
+  // exit: save & exit keeps the test, home offers resume, clock frozen meanwhile
+  const answeredBefore = await p.evaluate(() => Object.keys(window.__sat.session.answers).length);
+  await p.click('.t-exit'); await p.waitForSelector('.exit-opts'); await shot(p, '06b-exit-dialog');
+  await p.click('.exit-opts .btn.primary'); await p.waitForSelector('.card.resume'); await shot(p, '06c-home-resume');
+  await p.waitForTimeout(1200);
+  await p.click('.card.resume >> text=Resume'); await p.waitForSelector('.q-num');
+  assert(await p.evaluate(() => Object.keys(window.__sat.session.answers).length) === answeredBefore, 'answers kept after exit');
+  const t3 = await p.evaluate(() => window.__sat.session.timeLeft);
+  assert(Math.abs(t3 - t2) < 1.2, 'clock frozen while exited ' + (t2 - t3));
   // calculator panel
   await p.click('.tool >> text=Calculator'); await p.waitForTimeout(700); await shot(p, '07-calc-phone');
   await p.click('.calc-split-btn'); await p.waitForTimeout(400); await shot(p, '08-calc-split');

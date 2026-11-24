@@ -428,7 +428,8 @@ function figure(opts) {
   for (const [a, c, lab, side] of opts.sideLabels || []) {
     const mx = (P[a][0] + P[c][0]) / 2, my = (P[a][1] + P[c][1]) / 2;
     let nx = -(P[c][1] - P[a][1]), ny = P[c][0] - P[a][0]; const L = Math.hypot(nx, ny); nx /= L; ny /= L;
-    if ((mx - cx) * nx + (my - cy) * ny < 0) { nx = -nx; ny = -ny; }
+    const lc = opts.labelCenter || [cx, cy];
+    if ((mx - lc[0]) * nx + (my - lc[1]) * ny < 0) { nx = -nx; ny = -ny; }
     if (side === 'in') { nx = -nx; ny = -ny; }
     const d = 13 / s;
     b += txt(X(mx + nx * d), Y(my + ny * d), lab, { size: 13 });

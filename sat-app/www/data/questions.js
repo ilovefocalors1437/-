@@ -253,12 +253,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The table shows four values of \\(x\\) and their corresponding values of \\(f(x)\\), where \\(f\\) is a linear function.</p><table class='qtable'><thead><tr><th>\\(x\\)</th><th>\\(f(x)\\)</th></tr></thead><tbody><tr><td>\\(0\\)</td><td>\\(5\\)</td></tr><tr><td>\\(1\\)</td><td>\\(9\\)</td></tr><tr><td>\\(2\\)</td><td>\\(13\\)</td></tr><tr><td>\\(3\\)</td><td>\\(17\\)</td></tr></tbody></table><p>Which equation defines \\(f\\)?</p>",
   "choices": [
-   "\\(f(x) = 4x + 9\\)",
-   "\\(f(x) = -4x + 5\\)",
    "\\(f(x) = 4x + 5\\)",
-   "\\(f(x) = 5x + 4\\)"
+   "\\(f(x) = -4x + 5\\)",
+   "\\(f(x) = 5x + 4\\)",
+   "\\(f(x) = 4x + 9\\)"
   ],
-  "answer": 2,
+  "answer": 0,
   "explanation": "When \\(x\\) increases by 1, \\(f(x)\\) changes by \\(4\\), so the slope is \\(4\\). Since \\(f(1) = 9\\), the \\(y\\)-intercept is \\(9 - 4(1) = 5\\). So \\(f(x) = 4x + 5\\)."
  },
  {
@@ -270,12 +270,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The table shows four values of \\(x\\) and their corresponding values of \\(f(x)\\), where \\(f\\) is a linear function.</p><table class='qtable'><thead><tr><th>\\(x\\)</th><th>\\(f(x)\\)</th></tr></thead><tbody><tr><td>\\(1\\)</td><td>\\(-5\\)</td></tr><tr><td>\\(2\\)</td><td>\\(-2\\)</td></tr><tr><td>\\(3\\)</td><td>\\(1\\)</td></tr><tr><td>\\(4\\)</td><td>\\(4\\)</td></tr></tbody></table><p>Which equation defines \\(f\\)?</p>",
   "choices": [
-   "\\(f(x) = -8x + 3\\)",
-   "\\(f(x) = 3x - 8\\)",
    "\\(f(x) = -3x - 8\\)",
-   "\\(f(x) = 3x - 5\\)"
+   "\\(f(x) = 3x - 5\\)",
+   "\\(f(x) = 3x - 8\\)",
+   "\\(f(x) = -8x + 3\\)"
   ],
-  "answer": 1,
+  "answer": 2,
   "explanation": "When \\(x\\) increases by 1, \\(f(x)\\) changes by \\(3\\), so the slope is \\(3\\). Since \\(f(2) = -2\\), the \\(y\\)-intercept is \\(-2 - 3(2) = -8\\). So \\(f(x) = 3x - 8\\)."
  },
  {
@@ -287,12 +287,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The table shows four values of \\(x\\) and their corresponding values of \\(f(x)\\), where \\(f\\) is a linear function.</p><table class='qtable'><thead><tr><th>\\(x\\)</th><th>\\(f(x)\\)</th></tr></thead><tbody><tr><td>\\(-1\\)</td><td>\\(5\\)</td></tr><tr><td>\\(0\\)</td><td>\\(7\\)</td></tr><tr><td>\\(2\\)</td><td>\\(11\\)</td></tr><tr><td>\\(5\\)</td><td>\\(17\\)</td></tr></tbody></table><p>Which equation defines \\(f\\)?</p>",
   "choices": [
-   "\\(f(x) = 2x + 7\\)",
    "\\(f(x) = 2x + 9\\)",
    "\\(f(x) = -2x + 7\\)",
-   "\\(f(x) = 7x + 2\\)"
+   "\\(f(x) = 7x + 2\\)",
+   "\\(f(x) = 2x + 7\\)"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "When \\(x\\) increases by 1, \\(f(x)\\) changes by \\(2\\), so the slope is \\(2\\). Since \\(f(0) = 7\\), the \\(y\\)-intercept is \\(7 - 2(0) = 7\\). So \\(f(x) = 2x + 7\\)."
  },
  {
@@ -304,12 +304,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The table shows four values of \\(x\\) and their corresponding values of \\(f(x)\\), where \\(f\\) is a linear function.</p><table class='qtable'><thead><tr><th>\\(x\\)</th><th>\\(f(x)\\)</th></tr></thead><tbody><tr><td>\\(0\\)</td><td>\\(-7\\)</td></tr><tr><td>\\(1\\)</td><td>\\(-3\\)</td></tr><tr><td>\\(2\\)</td><td>\\(1\\)</td></tr><tr><td>\\(3\\)</td><td>\\(5\\)</td></tr></tbody></table><p>Which equation defines \\(f\\)?</p>",
   "choices": [
-   "\\(f(x) = 4x - 7\\)",
+   "\\(f(x) = 4x - 3\\)",
    "\\(f(x) = -4x - 7\\)",
-   "\\(f(x) = -7x + 4\\)",
-   "\\(f(x) = 4x - 3\\)"
+   "\\(f(x) = 4x - 7\\)",
+   "\\(f(x) = -7x + 4\\)"
   ],
-  "answer": 0,
+  "answer": 2,
   "explanation": "When \\(x\\) increases by 1, \\(f(x)\\) changes by \\(4\\), so the slope is \\(4\\). Since \\(f(1) = -3\\), the \\(y\\)-intercept is \\(-3 - 4(1) = -7\\). So \\(f(x) = 4x - 7\\)."
  },
  {
@@ -321,12 +321,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The equation \\(C = 18h + 30\\) gives the total cost \\(C\\), in dollars, to rent a kayak for \\(h\\) hours. What is the best interpretation of \\(18\\) in this context?</p>",
   "choices": [
-   "The maximum number of hours the kayak can be rented",
-   "The total cost, in dollars, to rent the kayak for 1 hour",
    "A fixed fee, in dollars, charged in addition to the hourly cost",
-   "The cost, in dollars, per hour to rent the kayak"
+   "The total cost, in dollars, to rent the kayak for 1 hour",
+   "The cost, in dollars, per hour to rent the kayak",
+   "The maximum number of hours the kayak can be rented"
   ],
-  "answer": 3,
+  "answer": 2,
   "explanation": "In a linear model, the coefficient of the input variable is the rate of change: the amount the output changes for each increase of 1 in the input. Here that is \\(18\\), so it represents the cost, in dollars, per hour to rent the kayak."
  },
  {
@@ -338,12 +338,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A botanist models the height of a plant with \\(H = 0.6w + 12\\), where \\(H\\) is the height of the plant, in centimeters, \\(w\\) weeks after the botanist began measuring it. What is the best interpretation of \\(12\\) in this context?</p>",
   "choices": [
-   "The number of weeks it takes the plant to grow 12 centimeters",
    "The height of the plant, in centimeters, after 1 week",
-   "The increase in the height of the plant, in centimeters, each week",
-   "The height of the plant, in centimeters, when the botanist began measuring it"
+   "The number of weeks it takes the plant to grow 12 centimeters",
+   "The height of the plant, in centimeters, when the botanist began measuring it",
+   "The increase in the height of the plant, in centimeters, each week"
   ],
-  "answer": 3,
+  "answer": 2,
   "explanation": "The constant term is the value of the output when the input variable is 0, that is, at the start. So \\(12\\) represents the height of the plant, in centimeters, when the botanist began measuring it."
  },
  {
@@ -355,12 +355,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The equation \\(B = 92 - 5t\\) estimates the percent of battery charge \\(B\\) remaining on a phone \\(t\\) hours after it was unplugged. What is the best interpretation of \\(5\\) in this context?</p>",
   "choices": [
-   "The number of hours until the battery is completely drained",
    "The decrease in the percent of battery charge each hour",
    "The percent of battery charge remaining after 5 hours",
-   "The percent of battery charge when the phone was unplugged"
+   "The percent of battery charge when the phone was unplugged",
+   "The number of hours until the battery is completely drained"
   ],
-  "answer": 1,
+  "answer": 0,
   "explanation": "In a linear model, the coefficient of the input variable is the rate of change: the amount the output changes for each increase of 1 in the input. Here that is \\(5\\), so it represents the decrease in the percent of battery charge each hour."
  },
  {
@@ -372,12 +372,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The equation \\(S = 30w + 310\\) gives the amount \\(S\\), in dollars, in Leah's savings account \\(w\\) weeks after she began making equal weekly deposits. What is the best interpretation of \\(310\\) in this context?</p>",
   "choices": [
-   "The amount, in dollars, in the account when Leah began making weekly deposits",
-   "The amount, in dollars, Leah deposits each week",
+   "The total amount, in dollars, Leah will have after 30 weeks",
    "The number of weeks Leah will make deposits",
-   "The total amount, in dollars, Leah will have after 30 weeks"
+   "The amount, in dollars, Leah deposits each week",
+   "The amount, in dollars, in the account when Leah began making weekly deposits"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "The constant term is the value of the output when the input variable is 0, that is, at the start. So \\(310\\) represents the amount, in dollars, in the account when Leah began making weekly deposits."
  },
  {
@@ -595,7 +595,7 @@ window.SAT_QUESTIONS = [
   "tpl": "alg-ineq-solution",
   "domain": "algebra",
   "skill": "Linear inequalities in one or two variables",
-  "difficulty": 1,
+  "difficulty": 2,
   "type": "mcq",
   "stem": "<p>Which of the following values of \\(x\\) is a solution to the inequality \\(4x + 9 \\gt  21\\)?</p>",
   "choices": [
@@ -612,7 +612,7 @@ window.SAT_QUESTIONS = [
   "tpl": "alg-ineq-solution",
   "domain": "algebra",
   "skill": "Linear inequalities in one or two variables",
-  "difficulty": 1,
+  "difficulty": 2,
   "type": "mcq",
   "stem": "<p>Which of the following values of \\(x\\) satisfies \\(7x + 8 \\le 36\\)?</p>",
   "choices": [
@@ -629,7 +629,7 @@ window.SAT_QUESTIONS = [
   "tpl": "alg-ineq-solution",
   "domain": "algebra",
   "skill": "Linear inequalities in one or two variables",
-  "difficulty": 1,
+  "difficulty": 2,
   "type": "mcq",
   "stem": "<p>Which of the following is a solution to \\(-3x - 12 \\lt  -9\\)?</p>",
   "choices": [
@@ -646,7 +646,7 @@ window.SAT_QUESTIONS = [
   "tpl": "alg-ineq-solution",
   "domain": "algebra",
   "skill": "Linear inequalities in one or two variables",
-  "difficulty": 1,
+  "difficulty": 2,
   "type": "mcq",
   "stem": "<p>Which of the following values of \\(x\\) is a solution to the inequality \\(6x - 9 \\gt  -21\\)?</p>",
   "choices": [
@@ -719,12 +719,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The graph of the linear function \\(f\\) is shown in the \\(xy\\)-plane. What is the \\(y\\)-intercept of the graph of \\(y = f(x)\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><defs><clipPath id='c336'><rect x='22' y='22' width='256' height='256'/></clipPath></defs><line x1='22' y1='278' x2='22' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='43.3' y1='278' x2='43.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='64.7' y1='278' x2='64.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='86' y1='278' x2='86' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='107.3' y1='278' x2='107.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='128.7' y1='278' x2='128.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='150' y1='278' x2='150' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='171.3' y1='278' x2='171.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='192.7' y1='278' x2='192.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='214' y1='278' x2='214' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='235.3' y1='278' x2='235.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='256.7' y1='278' x2='256.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='278' y1='278' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='278' x2='278' y2='278' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='256.7' x2='278' y2='256.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='235.3' x2='278' y2='235.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='214' x2='278' y2='214' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='192.7' x2='278' y2='192.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='171.3' x2='278' y2='171.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='150' x2='278' y2='150' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='128.7' x2='278' y2='128.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='107.3' x2='278' y2='107.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='86' x2='278' y2='86' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='64.7' x2='278' y2='64.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='43.3' x2='278' y2='43.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='22' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='14' y1='150' x2='286' y2='150' stroke='#000' stroke-width='1.3'/><polygon points='290,150 283,153.2 283,146.9' fill='#000'/><polygon points='10,150 17,146.9 17,153.2' fill='#000'/><text x='290' y='139' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>x</tspan></text><line x1='150' y1='286' x2='150' y2='14' stroke='#000' stroke-width='1.3'/><polygon points='150,10 153.2,17 146.9,17' fill='#000'/><polygon points='150,290 146.9,283 153.2,283' fill='#000'/><text x='161' y='10' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>y</tspan></text><line x1='22' y1='147' x2='22' y2='153' stroke='#000' stroke-width='1'/><text x='22' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='43.3' y1='147' x2='43.3' y2='153' stroke='#000' stroke-width='1'/><text x='43.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='64.7' y1='147' x2='64.7' y2='153' stroke='#000' stroke-width='1'/><text x='64.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='86' y1='147' x2='86' y2='153' stroke='#000' stroke-width='1'/><text x='86' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='107.3' y1='147' x2='107.3' y2='153' stroke='#000' stroke-width='1'/><text x='107.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='128.7' y1='147' x2='128.7' y2='153' stroke='#000' stroke-width='1'/><text x='128.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='171.3' y1='147' x2='171.3' y2='153' stroke='#000' stroke-width='1'/><text x='171.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='192.7' y1='147' x2='192.7' y2='153' stroke='#000' stroke-width='1'/><text x='192.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='214' y1='147' x2='214' y2='153' stroke='#000' stroke-width='1'/><text x='214' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='235.3' y1='147' x2='235.3' y2='153' stroke='#000' stroke-width='1'/><text x='235.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='256.7' y1='147' x2='256.7' y2='153' stroke='#000' stroke-width='1'/><text x='256.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='278' y1='147' x2='278' y2='153' stroke='#000' stroke-width='1'/><text x='278' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='147' y1='278' x2='153' y2='278' stroke='#000' stroke-width='1'/><text x='144' y='278' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='147' y1='256.7' x2='153' y2='256.7' stroke='#000' stroke-width='1'/><text x='144' y='256.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='147' y1='235.3' x2='153' y2='235.3' stroke='#000' stroke-width='1'/><text x='144' y='235.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='147' y1='214' x2='153' y2='214' stroke='#000' stroke-width='1'/><text x='144' y='214' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='147' y1='192.7' x2='153' y2='192.7' stroke='#000' stroke-width='1'/><text x='144' y='192.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='147' y1='171.3' x2='153' y2='171.3' stroke='#000' stroke-width='1'/><text x='144' y='171.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='147' y1='128.7' x2='153' y2='128.7' stroke='#000' stroke-width='1'/><text x='144' y='128.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='147' y1='107.3' x2='153' y2='107.3' stroke='#000' stroke-width='1'/><text x='144' y='107.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='147' y1='86' x2='153' y2='86' stroke='#000' stroke-width='1'/><text x='144' y='86' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='147' y1='64.7' x2='153' y2='64.7' stroke='#000' stroke-width='1'/><text x='144' y='64.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='147' y1='43.3' x2='153' y2='43.3' stroke='#000' stroke-width='1'/><text x='144' y='43.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='147' y1='22' x2='153' y2='22' stroke='#000' stroke-width='1'/><text x='144' y='22' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><text x='142' y='161' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>O</tspan></text><g clip-path='url(#c336)'><path d='M22 448.7 L23.1 446.5 L24.1 444.4 L25.2 442.3 L26.3 440.1 L27.3 438 L28.4 435.9 L29.5 433.7 L30.5 431.6 L31.6 429.5 L32.7 427.3 L33.7 425.2 L34.8 423.1 L35.9 420.9 L36.9 418.8 L38 416.7 L39.1 414.5 L40.1 412.4 L41.2 410.3 L42.3 408.1 L43.3 406 L44.4 403.9 L45.5 401.7 L46.5 399.6 L47.6 397.5 L48.7 395.3 L49.7 393.2 L50.8 391.1 L51.9 388.9 L52.9 386.8 L54 384.7 L55.1 382.5 L56.1 380.4 L57.2 378.3 L58.3 376.1 L59.3 374 L60.4 371.9 L61.5 369.7 L62.5 367.6 L63.6 365.5 L64.7 363.3 L65.7 361.2 L66.8 359.1 L67.9 356.9 L68.9 354.8 L70 352.7 L71.1 350.5 L72.1 348.4 L73.2 346.3 L74.3 344.1 L75.3 342 L76.4 339.9 L77.5 337.7 L78.5 335.6 L79.6 333.5 L80.7 331.3 L81.7 329.2 L82.8 327.1 L83.9 324.9 L84.9 322.8 L86 320.7 L87.1 318.5 L88.1 316.4 L89.2 314.3 L90.3 312.1 L91.3 310 L92.4 307.9 L93.5 305.7 L94.5 303.6 L95.6 301.5 L96.7 299.3 L97.7 297.2 L98.8 295.1 L99.9 292.9 L100.9 290.8 L102 288.7 L103.1 286.5 L104.1 284.4 L105.2 282.3 L106.3 280.1 L107.3 278 L108.4 275.9 L109.5 273.7 L110.5 271.6 L111.6 269.5 L112.7 267.3 L113.7 265.2 L114.8 263.1 L115.9 260.9 L116.9 258.8 L118 256.7 L119.1 254.5 L120.1 252.4 L121.2 250.3 L122.3 248.1 L123.3 246 L124.4 243.9 L125.5 241.7 L126.5 239.6 L127.6 237.5 L128.7 235.3 L129.7 233.2 L130.8 231.1 L131.9 228.9 L132.9 226.8 L134 224.7 L135.1 222.5 L136.1 220.4 L137.2 218.3 L138.3 216.1 L139.3 214 L140.4 211.9 L141.5 209.7 L142.5 207.6 L143.6 205.5 L144.7 203.3 L145.7 201.2 L146.8 199.1 L147.9 196.9 L148.9 194.8 L150 192.7 L151.1 190.5 L152.1 188.4 L153.2 186.3 L154.3 184.1 L155.3 182 L156.4 179.9 L157.5 177.7 L158.5 175.6 L159.6 173.5 L160.7 171.3 L161.7 169.2 L162.8 167.1 L163.9 164.9 L164.9 162.8 L166 160.7 L167.1 158.5 L168.1 156.4 L169.2 154.3 L170.3 152.1 L171.3 150 L172.4 147.9 L173.5 145.7 L174.5 143.6 L175.6 141.5 L176.7 139.3 L177.7 137.2 L178.8 135.1 L179.9 132.9 L180.9 130.8 L182 128.7 L183.1 126.5 L184.1 124.4 L185.2 122.3 L186.3 120.1 L187.3 118 L188.4 115.9 L189.5 113.7 L190.5 111.6 L191.6 109.5 L192.7 107.3 L193.7 105.2 L194.8 103.1 L195.9 100.9 L196.9 98.8 L198 96.7 L199.1 94.5 L200.1 92.4 L201.2 90.3 L202.3 88.1 L203.3 86 L204.4 83.9 L205.5 81.7 L206.5 79.6 L207.6 77.5 L208.7 75.3 L209.7 73.2 L210.8 71.1 L211.9 68.9 L212.9 66.8 L214 64.7 L215.1 62.5 L216.1 60.4 L217.2 58.3 L218.3 56.1 L219.3 54 L220.4 51.9 L221.5 49.7 L222.5 47.6 L223.6 45.5 L224.7 43.3 L225.7 41.2 L226.8 39.1 L227.9 36.9 L228.9 34.8 L230 32.7 L231.1 30.5 L232.1 28.4 L233.2 26.3 L234.3 24.1 L235.3 22 L236.4 19.9 L237.5 17.7 L238.5 15.6 L239.6 13.5 L240.7 11.3 L241.7 9.2 L242.8 7.1 L243.9 4.9 L244.9 2.8 L246 0.7 L247.1 -1.5 L248.1 -3.6 L249.2 -5.7 L250.3 -7.9 L251.3 -10 L252.4 -12.1 L253.5 -14.3 L254.5 -16.4 L255.6 -18.5 L256.7 -20.7 L257.7 -22.8 L258.8 -24.9 L259.9 -27.1 L260.9 -29.2 L262 -31.3 L263.1 -33.5 L264.1 -35.6 L265.2 -37.7 L266.3 -39.9 L267.3 -42 L268.4 -44.1 L269.5 -46.3 L270.5 -48.4 L271.6 -50.5 L272.7 -52.7 L273.7 -54.8 L274.8 -56.9 L275.9 -59.1 L276.9 -61.2 L278 -63.3 ' fill='none' stroke='#000' stroke-width='2'/></g></svg>",
   "choices": [
-   "\\((0, 2)\\)",
-   "\\((1, 0)\\)",
    "\\((-2, 0)\\)",
-   "\\((0, -2)\\)"
+   "\\((0, -2)\\)",
+   "\\((1, 0)\\)",
+   "\\((0, 2)\\)"
   ],
-  "answer": 3,
+  "answer": 1,
   "explanation": "The graph crosses the \\(y\\)-axis at \\((0, -2)\\), so that is the \\(y\\)-intercept. (The graph crosses the \\(x\\)-axis at \\((1, 0)\\).)"
  },
  {
@@ -755,8 +755,8 @@ window.SAT_QUESTIONS = [
   "choices": [
    "\\(f(x) = \\dfrac{1}{2}x - 2\\)",
    "\\(f(x) = \\dfrac{1}{2}x + 2\\)",
-   "\\(f(x) = -2x + \\dfrac{1}{2}\\)",
-   "\\(f(x) = -\\dfrac{1}{2}x - 2\\)"
+   "\\(f(x) = -\\dfrac{1}{2}x - 2\\)",
+   "\\(f(x) = -2x + \\dfrac{1}{2}\\)"
   ],
   "answer": 0,
   "explanation": "The \\(y\\)-intercept is \\((0, -2)\\) and the line also passes through \\((4, 0)\\), so its slope is \\(\\frac{1}{2}\\). Therefore \\(f(x) = \\frac{1}{2}x - 2\\)."
@@ -770,10 +770,10 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The graph of the linear function \\(f\\) is shown in the \\(xy\\)-plane. What is the \\(y\\)-intercept of the graph of \\(y = f(x)\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><defs><clipPath id='c336'><rect x='22' y='22' width='256' height='256'/></clipPath></defs><line x1='22' y1='278' x2='22' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='43.3' y1='278' x2='43.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='64.7' y1='278' x2='64.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='86' y1='278' x2='86' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='107.3' y1='278' x2='107.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='128.7' y1='278' x2='128.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='150' y1='278' x2='150' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='171.3' y1='278' x2='171.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='192.7' y1='278' x2='192.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='214' y1='278' x2='214' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='235.3' y1='278' x2='235.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='256.7' y1='278' x2='256.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='278' y1='278' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='278' x2='278' y2='278' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='256.7' x2='278' y2='256.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='235.3' x2='278' y2='235.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='214' x2='278' y2='214' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='192.7' x2='278' y2='192.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='171.3' x2='278' y2='171.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='150' x2='278' y2='150' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='128.7' x2='278' y2='128.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='107.3' x2='278' y2='107.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='86' x2='278' y2='86' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='64.7' x2='278' y2='64.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='43.3' x2='278' y2='43.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='22' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='14' y1='150' x2='286' y2='150' stroke='#000' stroke-width='1.3'/><polygon points='290,150 283,153.2 283,146.9' fill='#000'/><polygon points='10,150 17,146.9 17,153.2' fill='#000'/><text x='290' y='139' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>x</tspan></text><line x1='150' y1='286' x2='150' y2='14' stroke='#000' stroke-width='1.3'/><polygon points='150,10 153.2,17 146.9,17' fill='#000'/><polygon points='150,290 146.9,283 153.2,283' fill='#000'/><text x='161' y='10' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>y</tspan></text><line x1='22' y1='147' x2='22' y2='153' stroke='#000' stroke-width='1'/><text x='22' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='43.3' y1='147' x2='43.3' y2='153' stroke='#000' stroke-width='1'/><text x='43.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='64.7' y1='147' x2='64.7' y2='153' stroke='#000' stroke-width='1'/><text x='64.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='86' y1='147' x2='86' y2='153' stroke='#000' stroke-width='1'/><text x='86' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='107.3' y1='147' x2='107.3' y2='153' stroke='#000' stroke-width='1'/><text x='107.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='128.7' y1='147' x2='128.7' y2='153' stroke='#000' stroke-width='1'/><text x='128.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='171.3' y1='147' x2='171.3' y2='153' stroke='#000' stroke-width='1'/><text x='171.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='192.7' y1='147' x2='192.7' y2='153' stroke='#000' stroke-width='1'/><text x='192.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='214' y1='147' x2='214' y2='153' stroke='#000' stroke-width='1'/><text x='214' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='235.3' y1='147' x2='235.3' y2='153' stroke='#000' stroke-width='1'/><text x='235.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='256.7' y1='147' x2='256.7' y2='153' stroke='#000' stroke-width='1'/><text x='256.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='278' y1='147' x2='278' y2='153' stroke='#000' stroke-width='1'/><text x='278' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='147' y1='278' x2='153' y2='278' stroke='#000' stroke-width='1'/><text x='144' y='278' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='147' y1='256.7' x2='153' y2='256.7' stroke='#000' stroke-width='1'/><text x='144' y='256.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='147' y1='235.3' x2='153' y2='235.3' stroke='#000' stroke-width='1'/><text x='144' y='235.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='147' y1='214' x2='153' y2='214' stroke='#000' stroke-width='1'/><text x='144' y='214' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='147' y1='192.7' x2='153' y2='192.7' stroke='#000' stroke-width='1'/><text x='144' y='192.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='147' y1='171.3' x2='153' y2='171.3' stroke='#000' stroke-width='1'/><text x='144' y='171.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='147' y1='128.7' x2='153' y2='128.7' stroke='#000' stroke-width='1'/><text x='144' y='128.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='147' y1='107.3' x2='153' y2='107.3' stroke='#000' stroke-width='1'/><text x='144' y='107.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='147' y1='86' x2='153' y2='86' stroke='#000' stroke-width='1'/><text x='144' y='86' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='147' y1='64.7' x2='153' y2='64.7' stroke='#000' stroke-width='1'/><text x='144' y='64.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='147' y1='43.3' x2='153' y2='43.3' stroke='#000' stroke-width='1'/><text x='144' y='43.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='147' y1='22' x2='153' y2='22' stroke='#000' stroke-width='1'/><text x='144' y='22' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><text x='142' y='161' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>O</tspan></text><g clip-path='url(#c336)'><path d='M22 235.3 L23.1 234.8 L24.1 234.3 L25.2 233.7 L26.3 233.2 L27.3 232.7 L28.4 232.1 L29.5 231.6 L30.5 231.1 L31.6 230.5 L32.7 230 L33.7 229.5 L34.8 228.9 L35.9 228.4 L36.9 227.9 L38 227.3 L39.1 226.8 L40.1 226.3 L41.2 225.7 L42.3 225.2 L43.3 224.7 L44.4 224.1 L45.5 223.6 L46.5 223.1 L47.6 222.5 L48.7 222 L49.7 221.5 L50.8 220.9 L51.9 220.4 L52.9 219.9 L54 219.3 L55.1 218.8 L56.1 218.3 L57.2 217.7 L58.3 217.2 L59.3 216.7 L60.4 216.1 L61.5 215.6 L62.5 215.1 L63.6 214.5 L64.7 214 L65.7 213.5 L66.8 212.9 L67.9 212.4 L68.9 211.9 L70 211.3 L71.1 210.8 L72.1 210.3 L73.2 209.7 L74.3 209.2 L75.3 208.7 L76.4 208.1 L77.5 207.6 L78.5 207.1 L79.6 206.5 L80.7 206 L81.7 205.5 L82.8 204.9 L83.9 204.4 L84.9 203.9 L86 203.3 L87.1 202.8 L88.1 202.3 L89.2 201.7 L90.3 201.2 L91.3 200.7 L92.4 200.1 L93.5 199.6 L94.5 199.1 L95.6 198.5 L96.7 198 L97.7 197.5 L98.8 196.9 L99.9 196.4 L100.9 195.9 L102 195.3 L103.1 194.8 L104.1 194.3 L105.2 193.7 L106.3 193.2 L107.3 192.7 L108.4 192.1 L109.5 191.6 L110.5 191.1 L111.6 190.5 L112.7 190 L113.7 189.5 L114.8 188.9 L115.9 188.4 L116.9 187.9 L118 187.3 L119.1 186.8 L120.1 186.3 L121.2 185.7 L122.3 185.2 L123.3 184.7 L124.4 184.1 L125.5 183.6 L126.5 183.1 L127.6 182.5 L128.7 182 L129.7 181.5 L130.8 180.9 L131.9 180.4 L132.9 179.9 L134 179.3 L135.1 178.8 L136.1 178.3 L137.2 177.7 L138.3 177.2 L139.3 176.7 L140.4 176.1 L141.5 175.6 L142.5 175.1 L143.6 174.5 L144.7 174 L145.7 173.5 L146.8 172.9 L147.9 172.4 L148.9 171.9 L150 171.3 L151.1 170.8 L152.1 170.3 L153.2 169.7 L154.3 169.2 L155.3 168.7 L156.4 168.1 L157.5 167.6 L158.5 167.1 L159.6 166.5 L160.7 166 L161.7 165.5 L162.8 164.9 L163.9 164.4 L164.9 163.9 L166 163.3 L167.1 162.8 L168.1 162.3 L169.2 161.7 L170.3 161.2 L171.3 160.7 L172.4 160.1 L173.5 159.6 L174.5 159.1 L175.6 158.5 L176.7 158 L177.7 157.5 L178.8 156.9 L179.9 156.4 L180.9 155.9 L182 155.3 L183.1 154.8 L184.1 154.3 L185.2 153.7 L186.3 153.2 L187.3 152.7 L188.4 152.1 L189.5 151.6 L190.5 151.1 L191.6 150.5 L192.7 150 L193.7 149.5 L194.8 148.9 L195.9 148.4 L196.9 147.9 L198 147.3 L199.1 146.8 L200.1 146.3 L201.2 145.7 L202.3 145.2 L203.3 144.7 L204.4 144.1 L205.5 143.6 L206.5 143.1 L207.6 142.5 L208.7 142 L209.7 141.5 L210.8 140.9 L211.9 140.4 L212.9 139.9 L214 139.3 L215.1 138.8 L216.1 138.3 L217.2 137.7 L218.3 137.2 L219.3 136.7 L220.4 136.1 L221.5 135.6 L222.5 135.1 L223.6 134.5 L224.7 134 L225.7 133.5 L226.8 132.9 L227.9 132.4 L228.9 131.9 L230 131.3 L231.1 130.8 L232.1 130.3 L233.2 129.7 L234.3 129.2 L235.3 128.7 L236.4 128.1 L237.5 127.6 L238.5 127.1 L239.6 126.5 L240.7 126 L241.7 125.5 L242.8 124.9 L243.9 124.4 L244.9 123.9 L246 123.3 L247.1 122.8 L248.1 122.3 L249.2 121.7 L250.3 121.2 L251.3 120.7 L252.4 120.1 L253.5 119.6 L254.5 119.1 L255.6 118.5 L256.7 118 L257.7 117.5 L258.8 116.9 L259.9 116.4 L260.9 115.9 L262 115.3 L263.1 114.8 L264.1 114.3 L265.2 113.7 L266.3 113.2 L267.3 112.7 L268.4 112.1 L269.5 111.6 L270.5 111.1 L271.6 110.5 L272.7 110 L273.7 109.5 L274.8 108.9 L275.9 108.4 L276.9 107.9 L278 107.3 ' fill='none' stroke='#000' stroke-width='2'/></g></svg>",
   "choices": [
-   "\\((0, 1)\\)",
+   "\\((-1, 0)\\)",
    "\\((0, -1)\\)",
-   "\\((2, 0)\\)",
-   "\\((-1, 0)\\)"
+   "\\((0, 1)\\)",
+   "\\((2, 0)\\)"
   ],
   "answer": 1,
   "explanation": "The graph crosses the \\(y\\)-axis at \\((0, -1)\\), so that is the \\(y\\)-intercept. (The graph crosses the \\(x\\)-axis at \\((2, 0)\\).)"
@@ -856,8 +856,8 @@ window.SAT_QUESTIONS = [
   "stem": "<p>A school play charges $14 for each adult ticket and $8 for each student ticket. On opening night, ticket sales totaled $1,290. Which equation represents this situation, where \\(x\\) is the number of adult tickets and \\(y\\) is the number of student tickets?</p>",
   "choices": [
    "\\(14x + 8y = 1{,}290\\)",
-   "\\(8x + 14y = 1{,}290\\)",
    "\\(x + y = 1{,}290\\)",
+   "\\(8x + 14y = 1{,}290\\)",
    "\\(22(x + y) = 1{,}290\\)"
   ],
   "answer": 0,
@@ -872,12 +872,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A farm has only cows and chickens. Each cow has 4 legs and each chicken has 2 legs. The animals on the farm have a total of 176 legs. Which equation represents this situation, where \\(x\\) is the number of cows and \\(y\\) is the number of chickens?</p>",
   "choices": [
-   "\\(4x + 2y = 176\\)",
+   "\\(2x + 4y = 176\\)",
    "\\(6(x + y) = 176\\)",
    "\\(x + y = 176\\)",
-   "\\(2x + 4y = 176\\)"
+   "\\(4x + 2y = 176\\)"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "Each of the \\(x\\) cows contributes 4, for a total of \\(4x\\), and each of the \\(y\\) chickens contributes 2, for \\(2y\\). Their sum is 176, so \\(4x + 2y = 176\\)."
  },
  {
@@ -889,12 +889,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A total of 180 people will travel to a conference in vans that each carry 12 people and cars that each carry 4 people. Every vehicle will be full. Which equation represents this situation, where \\(x\\) is the number of vans and \\(y\\) is the number of cars?</p>",
   "choices": [
-   "\\(12x + 4y = 180\\)",
-   "\\(4x + 12y = 180\\)",
    "\\(16(x + y) = 180\\)",
-   "\\(x + y = 180\\)"
+   "\\(x + y = 180\\)",
+   "\\(12x + 4y = 180\\)",
+   "\\(4x + 12y = 180\\)"
   ],
-  "answer": 0,
+  "answer": 2,
   "explanation": "Each of the \\(x\\) vans contributes 12, for a total of \\(12x\\), and each of the \\(y\\) cars contributes 4, for \\(4y\\). Their sum is 180, so \\(12x + 4y = 180\\)."
  },
  {
@@ -906,12 +906,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A school play charges $18 for each adult ticket and $9 for each student ticket. On opening night, ticket sales totaled $1,370. Which equation represents this situation, where \\(x\\) is the number of adult tickets and \\(y\\) is the number of student tickets?</p>",
   "choices": [
+   "\\(18x + 9y = 1{,}370\\)",
    "\\(x + y = 1{,}370\\)",
    "\\(9x + 18y = 1{,}370\\)",
-   "\\(27(x + y) = 1{,}370\\)",
-   "\\(18x + 9y = 1{,}370\\)"
+   "\\(27(x + y) = 1{,}370\\)"
   ],
-  "answer": 3,
+  "answer": 0,
   "explanation": "Each of the \\(x\\) adult tickets contributes 18, for a total of \\(18x\\), and each of the \\(y\\) student tickets contributes 9, for \\(9y\\). Their sum is 1,370, so \\(18x + 9y = 1{,}370\\)."
  },
  {
@@ -1364,12 +1364,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The graphs of the two linear equations in a system are shown in the \\(xy\\)-plane. What is the solution \\((x, y)\\) to the system?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><defs><clipPath id='c342'><rect x='22' y='22' width='256' height='256'/></clipPath></defs><line x1='22' y1='278' x2='22' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='40.3' y1='278' x2='40.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='58.6' y1='278' x2='58.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='76.9' y1='278' x2='76.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='95.1' y1='278' x2='95.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='113.4' y1='278' x2='113.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='131.7' y1='278' x2='131.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='150' y1='278' x2='150' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='168.3' y1='278' x2='168.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='186.6' y1='278' x2='186.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='204.9' y1='278' x2='204.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='223.1' y1='278' x2='223.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='241.4' y1='278' x2='241.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='259.7' y1='278' x2='259.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='278' y1='278' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='278' x2='278' y2='278' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='259.7' x2='278' y2='259.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='241.4' x2='278' y2='241.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='223.1' x2='278' y2='223.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='204.9' x2='278' y2='204.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='186.6' x2='278' y2='186.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='168.3' x2='278' y2='168.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='150' x2='278' y2='150' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='131.7' x2='278' y2='131.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='113.4' x2='278' y2='113.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='95.1' x2='278' y2='95.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='76.9' x2='278' y2='76.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='58.6' x2='278' y2='58.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='40.3' x2='278' y2='40.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='22' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='14' y1='150' x2='286' y2='150' stroke='#000' stroke-width='1.3'/><polygon points='290,150 283,153.2 283,146.9' fill='#000'/><polygon points='10,150 17,146.9 17,153.2' fill='#000'/><text x='290' y='139' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>x</tspan></text><line x1='150' y1='286' x2='150' y2='14' stroke='#000' stroke-width='1.3'/><polygon points='150,10 153.2,17 146.9,17' fill='#000'/><polygon points='150,290 146.9,283 153.2,283' fill='#000'/><text x='161' y='10' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>y</tspan></text><line x1='22' y1='147' x2='22' y2='153' stroke='#000' stroke-width='1'/><text x='22' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='40.3' y1='147' x2='40.3' y2='153' stroke='#000' stroke-width='1'/><text x='40.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='58.6' y1='147' x2='58.6' y2='153' stroke='#000' stroke-width='1'/><text x='58.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='76.9' y1='147' x2='76.9' y2='153' stroke='#000' stroke-width='1'/><text x='76.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='95.1' y1='147' x2='95.1' y2='153' stroke='#000' stroke-width='1'/><text x='95.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='113.4' y1='147' x2='113.4' y2='153' stroke='#000' stroke-width='1'/><text x='113.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='131.7' y1='147' x2='131.7' y2='153' stroke='#000' stroke-width='1'/><text x='131.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='168.3' y1='147' x2='168.3' y2='153' stroke='#000' stroke-width='1'/><text x='168.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='186.6' y1='147' x2='186.6' y2='153' stroke='#000' stroke-width='1'/><text x='186.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='204.9' y1='147' x2='204.9' y2='153' stroke='#000' stroke-width='1'/><text x='204.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='223.1' y1='147' x2='223.1' y2='153' stroke='#000' stroke-width='1'/><text x='223.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='241.4' y1='147' x2='241.4' y2='153' stroke='#000' stroke-width='1'/><text x='241.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='259.7' y1='147' x2='259.7' y2='153' stroke='#000' stroke-width='1'/><text x='259.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='278' y1='147' x2='278' y2='153' stroke='#000' stroke-width='1'/><text x='278' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><line x1='147' y1='278' x2='153' y2='278' stroke='#000' stroke-width='1'/><text x='144' y='278' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='147' y1='259.7' x2='153' y2='259.7' stroke='#000' stroke-width='1'/><text x='144' y='259.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='147' y1='241.4' x2='153' y2='241.4' stroke='#000' stroke-width='1'/><text x='144' y='241.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='147' y1='223.1' x2='153' y2='223.1' stroke='#000' stroke-width='1'/><text x='144' y='223.1' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='147' y1='204.9' x2='153' y2='204.9' stroke='#000' stroke-width='1'/><text x='144' y='204.9' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='147' y1='186.6' x2='153' y2='186.6' stroke='#000' stroke-width='1'/><text x='144' y='186.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='147' y1='168.3' x2='153' y2='168.3' stroke='#000' stroke-width='1'/><text x='144' y='168.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='147' y1='131.7' x2='153' y2='131.7' stroke='#000' stroke-width='1'/><text x='144' y='131.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='147' y1='113.4' x2='153' y2='113.4' stroke='#000' stroke-width='1'/><text x='144' y='113.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='147' y1='95.1' x2='153' y2='95.1' stroke='#000' stroke-width='1'/><text x='144' y='95.1' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='147' y1='76.9' x2='153' y2='76.9' stroke='#000' stroke-width='1'/><text x='144' y='76.9' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='147' y1='58.6' x2='153' y2='58.6' stroke='#000' stroke-width='1'/><text x='144' y='58.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='147' y1='40.3' x2='153' y2='40.3' stroke='#000' stroke-width='1'/><text x='144' y='40.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='147' y1='22' x2='153' y2='22' stroke='#000' stroke-width='1'/><text x='144' y='22' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><text x='142' y='161' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>O</tspan></text><g clip-path='url(#c342)'><path d='M22 12.9 L23.1 13.4 L24.1 13.9 L25.2 14.5 L26.3 15 L27.3 15.5 L28.4 16.1 L29.5 16.6 L30.5 17.1 L31.6 17.7 L32.7 18.2 L33.7 18.7 L34.8 19.3 L35.9 19.8 L36.9 20.3 L38 20.9 L39.1 21.4 L40.1 21.9 L41.2 22.5 L42.3 23 L43.3 23.5 L44.4 24.1 L45.5 24.6 L46.5 25.1 L47.6 25.7 L48.7 26.2 L49.7 26.7 L50.8 27.3 L51.9 27.8 L52.9 28.3 L54 28.9 L55.1 29.4 L56.1 29.9 L57.2 30.5 L58.3 31 L59.3 31.5 L60.4 32.1 L61.5 32.6 L62.5 33.1 L63.6 33.7 L64.7 34.2 L65.7 34.7 L66.8 35.3 L67.9 35.8 L68.9 36.3 L70 36.9 L71.1 37.4 L72.1 37.9 L73.2 38.5 L74.3 39 L75.3 39.5 L76.4 40.1 L77.5 40.6 L78.5 41.1 L79.6 41.7 L80.7 42.2 L81.7 42.7 L82.8 43.3 L83.9 43.8 L84.9 44.3 L86 44.9 L87.1 45.4 L88.1 45.9 L89.2 46.5 L90.3 47 L91.3 47.5 L92.4 48.1 L93.5 48.6 L94.5 49.1 L95.6 49.7 L96.7 50.2 L97.7 50.7 L98.8 51.3 L99.9 51.8 L100.9 52.3 L102 52.9 L103.1 53.4 L104.1 53.9 L105.2 54.5 L106.3 55 L107.3 55.5 L108.4 56.1 L109.5 56.6 L110.5 57.1 L111.6 57.7 L112.7 58.2 L113.7 58.7 L114.8 59.3 L115.9 59.8 L116.9 60.3 L118 60.9 L119.1 61.4 L120.1 61.9 L121.2 62.5 L122.3 63 L123.3 63.5 L124.4 64.1 L125.5 64.6 L126.5 65.1 L127.6 65.7 L128.7 66.2 L129.7 66.7 L130.8 67.3 L131.9 67.8 L132.9 68.3 L134 68.9 L135.1 69.4 L136.1 69.9 L137.2 70.5 L138.3 71 L139.3 71.5 L140.4 72.1 L141.5 72.6 L142.5 73.1 L143.6 73.7 L144.7 74.2 L145.7 74.7 L146.8 75.3 L147.9 75.8 L148.9 76.3 L150 76.9 L151.1 77.4 L152.1 77.9 L153.2 78.5 L154.3 79 L155.3 79.5 L156.4 80.1 L157.5 80.6 L158.5 81.1 L159.6 81.7 L160.7 82.2 L161.7 82.7 L162.8 83.3 L163.9 83.8 L164.9 84.3 L166 84.9 L167.1 85.4 L168.1 85.9 L169.2 86.5 L170.3 87 L171.3 87.5 L172.4 88.1 L173.5 88.6 L174.5 89.1 L175.6 89.7 L176.7 90.2 L177.7 90.7 L178.8 91.3 L179.9 91.8 L180.9 92.3 L182 92.9 L183.1 93.4 L184.1 93.9 L185.2 94.5 L186.3 95 L187.3 95.5 L188.4 96.1 L189.5 96.6 L190.5 97.1 L191.6 97.7 L192.7 98.2 L193.7 98.7 L194.8 99.3 L195.9 99.8 L196.9 100.3 L198 100.9 L199.1 101.4 L200.1 101.9 L201.2 102.5 L202.3 103 L203.3 103.5 L204.4 104.1 L205.5 104.6 L206.5 105.1 L207.6 105.7 L208.7 106.2 L209.7 106.7 L210.8 107.3 L211.9 107.8 L212.9 108.3 L214 108.9 L215.1 109.4 L216.1 109.9 L217.2 110.5 L218.3 111 L219.3 111.5 L220.4 112.1 L221.5 112.6 L222.5 113.1 L223.6 113.7 L224.7 114.2 L225.7 114.7 L226.8 115.3 L227.9 115.8 L228.9 116.3 L230 116.9 L231.1 117.4 L232.1 117.9 L233.2 118.5 L234.3 119 L235.3 119.5 L236.4 120.1 L237.5 120.6 L238.5 121.1 L239.6 121.7 L240.7 122.2 L241.7 122.7 L242.8 123.3 L243.9 123.8 L244.9 124.3 L246 124.9 L247.1 125.4 L248.1 125.9 L249.2 126.5 L250.3 127 L251.3 127.5 L252.4 128.1 L253.5 128.6 L254.5 129.1 L255.6 129.7 L256.7 130.2 L257.7 130.7 L258.8 131.3 L259.9 131.8 L260.9 132.3 L262 132.9 L263.1 133.4 L264.1 133.9 L265.2 134.5 L266.3 135 L267.3 135.5 L268.4 136.1 L269.5 136.6 L270.5 137.1 L271.6 137.7 L272.7 138.2 L273.7 138.7 L274.8 139.3 L275.9 139.8 L276.9 140.3 L278 140.9 ' fill='none' stroke='#000' stroke-width='2'/><path d='M22 314.6 L23.1 313.5 L24.1 312.4 L25.2 311.4 L26.3 310.3 L27.3 309.2 L28.4 308.2 L29.5 307.1 L30.5 306 L31.6 305 L32.7 303.9 L33.7 302.8 L34.8 301.8 L35.9 300.7 L36.9 299.6 L38 298.6 L39.1 297.5 L40.1 296.4 L41.2 295.4 L42.3 294.3 L43.3 293.2 L44.4 292.2 L45.5 291.1 L46.5 290 L47.6 289 L48.7 287.9 L49.7 286.8 L50.8 285.8 L51.9 284.7 L52.9 283.6 L54 282.6 L55.1 281.5 L56.1 280.4 L57.2 279.4 L58.3 278.3 L59.3 277.2 L60.4 276.2 L61.5 275.1 L62.5 274 L63.6 273 L64.7 271.9 L65.7 270.8 L66.8 269.8 L67.9 268.7 L68.9 267.6 L70 266.6 L71.1 265.5 L72.1 264.4 L73.2 263.4 L74.3 262.3 L75.3 261.2 L76.4 260.2 L77.5 259.1 L78.5 258 L79.6 257 L80.7 255.9 L81.7 254.8 L82.8 253.8 L83.9 252.7 L84.9 251.6 L86 250.6 L87.1 249.5 L88.1 248.4 L89.2 247.4 L90.3 246.3 L91.3 245.2 L92.4 244.2 L93.5 243.1 L94.5 242 L95.6 241 L96.7 239.9 L97.7 238.8 L98.8 237.8 L99.9 236.7 L100.9 235.6 L102 234.6 L103.1 233.5 L104.1 232.4 L105.2 231.4 L106.3 230.3 L107.3 229.2 L108.4 228.2 L109.5 227.1 L110.5 226 L111.6 225 L112.7 223.9 L113.7 222.8 L114.8 221.8 L115.9 220.7 L116.9 219.6 L118 218.6 L119.1 217.5 L120.1 216.4 L121.2 215.4 L122.3 214.3 L123.3 213.2 L124.4 212.2 L125.5 211.1 L126.5 210 L127.6 209 L128.7 207.9 L129.7 206.8 L130.8 205.8 L131.9 204.7 L132.9 203.6 L134 202.6 L135.1 201.5 L136.1 200.4 L137.2 199.4 L138.3 198.3 L139.3 197.2 L140.4 196.2 L141.5 195.1 L142.5 194 L143.6 193 L144.7 191.9 L145.7 190.8 L146.8 189.8 L147.9 188.7 L148.9 187.6 L150 186.6 L151.1 185.5 L152.1 184.4 L153.2 183.4 L154.3 182.3 L155.3 181.2 L156.4 180.2 L157.5 179.1 L158.5 178 L159.6 177 L160.7 175.9 L161.7 174.8 L162.8 173.8 L163.9 172.7 L164.9 171.6 L166 170.6 L167.1 169.5 L168.1 168.4 L169.2 167.4 L170.3 166.3 L171.3 165.2 L172.4 164.2 L173.5 163.1 L174.5 162 L175.6 161 L176.7 159.9 L177.7 158.8 L178.8 157.8 L179.9 156.7 L180.9 155.6 L182 154.6 L183.1 153.5 L184.1 152.4 L185.2 151.4 L186.3 150.3 L187.3 149.2 L188.4 148.2 L189.5 147.1 L190.5 146 L191.6 145 L192.7 143.9 L193.7 142.8 L194.8 141.8 L195.9 140.7 L196.9 139.6 L198 138.6 L199.1 137.5 L200.1 136.4 L201.2 135.4 L202.3 134.3 L203.3 133.2 L204.4 132.2 L205.5 131.1 L206.5 130 L207.6 129 L208.7 127.9 L209.7 126.8 L210.8 125.8 L211.9 124.7 L212.9 123.6 L214 122.6 L215.1 121.5 L216.1 120.4 L217.2 119.4 L218.3 118.3 L219.3 117.2 L220.4 116.2 L221.5 115.1 L222.5 114 L223.6 113 L224.7 111.9 L225.7 110.8 L226.8 109.8 L227.9 108.7 L228.9 107.6 L230 106.6 L231.1 105.5 L232.1 104.4 L233.2 103.4 L234.3 102.3 L235.3 101.2 L236.4 100.2 L237.5 99.1 L238.5 98 L239.6 97 L240.7 95.9 L241.7 94.8 L242.8 93.8 L243.9 92.7 L244.9 91.6 L246 90.6 L247.1 89.5 L248.1 88.4 L249.2 87.4 L250.3 86.3 L251.3 85.2 L252.4 84.2 L253.5 83.1 L254.5 82 L255.6 81 L256.7 79.9 L257.7 78.8 L258.8 77.8 L259.9 76.7 L260.9 75.6 L262 74.6 L263.1 73.5 L264.1 72.4 L265.2 71.4 L266.3 70.3 L267.3 69.2 L268.4 68.2 L269.5 67.1 L270.5 66 L271.6 65 L272.7 63.9 L273.7 62.8 L274.8 61.8 L275.9 60.7 L276.9 59.6 L278 58.6 ' fill='none' stroke='#000' stroke-width='2'/></g></svg>",
   "choices": [
-   "\\((2, 4)\\)",
-   "\\((0, 4)\\)",
    "\\((4, 2)\\)",
-   "\\((-4, 2)\\)"
+   "\\((-4, 2)\\)",
+   "\\((2, 4)\\)",
+   "\\((0, 4)\\)"
   ],
-  "answer": 2,
+  "answer": 0,
   "explanation": "The solution to a system of two linear equations is the point where their graphs intersect. The lines intersect at \\((4, 2)\\)."
  },
  {
@@ -1381,12 +1381,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The graphs of the two linear equations in a system are shown in the \\(xy\\)-plane. What is the solution \\((x, y)\\) to the system?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><defs><clipPath id='c342'><rect x='22' y='22' width='256' height='256'/></clipPath></defs><line x1='22' y1='278' x2='22' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='40.3' y1='278' x2='40.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='58.6' y1='278' x2='58.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='76.9' y1='278' x2='76.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='95.1' y1='278' x2='95.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='113.4' y1='278' x2='113.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='131.7' y1='278' x2='131.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='150' y1='278' x2='150' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='168.3' y1='278' x2='168.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='186.6' y1='278' x2='186.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='204.9' y1='278' x2='204.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='223.1' y1='278' x2='223.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='241.4' y1='278' x2='241.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='259.7' y1='278' x2='259.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='278' y1='278' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='278' x2='278' y2='278' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='259.7' x2='278' y2='259.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='241.4' x2='278' y2='241.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='223.1' x2='278' y2='223.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='204.9' x2='278' y2='204.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='186.6' x2='278' y2='186.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='168.3' x2='278' y2='168.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='150' x2='278' y2='150' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='131.7' x2='278' y2='131.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='113.4' x2='278' y2='113.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='95.1' x2='278' y2='95.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='76.9' x2='278' y2='76.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='58.6' x2='278' y2='58.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='40.3' x2='278' y2='40.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='22' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='14' y1='150' x2='286' y2='150' stroke='#000' stroke-width='1.3'/><polygon points='290,150 283,153.2 283,146.9' fill='#000'/><polygon points='10,150 17,146.9 17,153.2' fill='#000'/><text x='290' y='139' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>x</tspan></text><line x1='150' y1='286' x2='150' y2='14' stroke='#000' stroke-width='1.3'/><polygon points='150,10 153.2,17 146.9,17' fill='#000'/><polygon points='150,290 146.9,283 153.2,283' fill='#000'/><text x='161' y='10' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>y</tspan></text><line x1='22' y1='147' x2='22' y2='153' stroke='#000' stroke-width='1'/><text x='22' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='40.3' y1='147' x2='40.3' y2='153' stroke='#000' stroke-width='1'/><text x='40.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='58.6' y1='147' x2='58.6' y2='153' stroke='#000' stroke-width='1'/><text x='58.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='76.9' y1='147' x2='76.9' y2='153' stroke='#000' stroke-width='1'/><text x='76.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='95.1' y1='147' x2='95.1' y2='153' stroke='#000' stroke-width='1'/><text x='95.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='113.4' y1='147' x2='113.4' y2='153' stroke='#000' stroke-width='1'/><text x='113.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='131.7' y1='147' x2='131.7' y2='153' stroke='#000' stroke-width='1'/><text x='131.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='168.3' y1='147' x2='168.3' y2='153' stroke='#000' stroke-width='1'/><text x='168.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='186.6' y1='147' x2='186.6' y2='153' stroke='#000' stroke-width='1'/><text x='186.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='204.9' y1='147' x2='204.9' y2='153' stroke='#000' stroke-width='1'/><text x='204.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='223.1' y1='147' x2='223.1' y2='153' stroke='#000' stroke-width='1'/><text x='223.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='241.4' y1='147' x2='241.4' y2='153' stroke='#000' stroke-width='1'/><text x='241.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='259.7' y1='147' x2='259.7' y2='153' stroke='#000' stroke-width='1'/><text x='259.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='278' y1='147' x2='278' y2='153' stroke='#000' stroke-width='1'/><text x='278' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><line x1='147' y1='278' x2='153' y2='278' stroke='#000' stroke-width='1'/><text x='144' y='278' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='147' y1='259.7' x2='153' y2='259.7' stroke='#000' stroke-width='1'/><text x='144' y='259.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='147' y1='241.4' x2='153' y2='241.4' stroke='#000' stroke-width='1'/><text x='144' y='241.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='147' y1='223.1' x2='153' y2='223.1' stroke='#000' stroke-width='1'/><text x='144' y='223.1' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='147' y1='204.9' x2='153' y2='204.9' stroke='#000' stroke-width='1'/><text x='144' y='204.9' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='147' y1='186.6' x2='153' y2='186.6' stroke='#000' stroke-width='1'/><text x='144' y='186.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='147' y1='168.3' x2='153' y2='168.3' stroke='#000' stroke-width='1'/><text x='144' y='168.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='147' y1='131.7' x2='153' y2='131.7' stroke='#000' stroke-width='1'/><text x='144' y='131.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='147' y1='113.4' x2='153' y2='113.4' stroke='#000' stroke-width='1'/><text x='144' y='113.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='147' y1='95.1' x2='153' y2='95.1' stroke='#000' stroke-width='1'/><text x='144' y='95.1' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='147' y1='76.9' x2='153' y2='76.9' stroke='#000' stroke-width='1'/><text x='144' y='76.9' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='147' y1='58.6' x2='153' y2='58.6' stroke='#000' stroke-width='1'/><text x='144' y='58.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='147' y1='40.3' x2='153' y2='40.3' stroke='#000' stroke-width='1'/><text x='144' y='40.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='147' y1='22' x2='153' y2='22' stroke='#000' stroke-width='1'/><text x='144' y='22' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><text x='142' y='161' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>O</tspan></text><g clip-path='url(#c342)'><path d='M22 -69.4 L23.1 -68.4 L24.1 -67.3 L25.2 -66.2 L26.3 -65.2 L27.3 -64.1 L28.4 -63 L29.5 -62 L30.5 -60.9 L31.6 -59.8 L32.7 -58.8 L33.7 -57.7 L34.8 -56.6 L35.9 -55.6 L36.9 -54.5 L38 -53.4 L39.1 -52.4 L40.1 -51.3 L41.2 -50.2 L42.3 -49.2 L43.3 -48.1 L44.4 -47 L45.5 -46 L46.5 -44.9 L47.6 -43.8 L48.7 -42.8 L49.7 -41.7 L50.8 -40.6 L51.9 -39.6 L52.9 -38.5 L54 -37.4 L55.1 -36.4 L56.1 -35.3 L57.2 -34.2 L58.3 -33.2 L59.3 -32.1 L60.4 -31 L61.5 -30 L62.5 -28.9 L63.6 -27.8 L64.7 -26.8 L65.7 -25.7 L66.8 -24.6 L67.9 -23.6 L68.9 -22.5 L70 -21.4 L71.1 -20.4 L72.1 -19.3 L73.2 -18.2 L74.3 -17.2 L75.3 -16.1 L76.4 -15 L77.5 -14 L78.5 -12.9 L79.6 -11.8 L80.7 -10.8 L81.7 -9.7 L82.8 -8.6 L83.9 -7.6 L84.9 -6.5 L86 -5.4 L87.1 -4.4 L88.1 -3.3 L89.2 -2.2 L90.3 -1.2 L91.3 -0.1 L92.4 1 L93.5 2 L94.5 3.1 L95.6 4.2 L96.7 5.2 L97.7 6.3 L98.8 7.4 L99.9 8.4 L100.9 9.5 L102 10.6 L103.1 11.6 L104.1 12.7 L105.2 13.8 L106.3 14.8 L107.3 15.9 L108.4 17 L109.5 18 L110.5 19.1 L111.6 20.2 L112.7 21.2 L113.7 22.3 L114.8 23.4 L115.9 24.4 L116.9 25.5 L118 26.6 L119.1 27.6 L120.1 28.7 L121.2 29.8 L122.3 30.8 L123.3 31.9 L124.4 33 L125.5 34 L126.5 35.1 L127.6 36.2 L128.7 37.2 L129.7 38.3 L130.8 39.4 L131.9 40.4 L132.9 41.5 L134 42.6 L135.1 43.6 L136.1 44.7 L137.2 45.8 L138.3 46.8 L139.3 47.9 L140.4 49 L141.5 50 L142.5 51.1 L143.6 52.2 L144.7 53.2 L145.7 54.3 L146.8 55.4 L147.9 56.4 L148.9 57.5 L150 58.6 L151.1 59.6 L152.1 60.7 L153.2 61.8 L154.3 62.8 L155.3 63.9 L156.4 65 L157.5 66 L158.5 67.1 L159.6 68.2 L160.7 69.2 L161.7 70.3 L162.8 71.4 L163.9 72.4 L164.9 73.5 L166 74.6 L167.1 75.6 L168.1 76.7 L169.2 77.8 L170.3 78.8 L171.3 79.9 L172.4 81 L173.5 82 L174.5 83.1 L175.6 84.2 L176.7 85.2 L177.7 86.3 L178.8 87.4 L179.9 88.4 L180.9 89.5 L182 90.6 L183.1 91.6 L184.1 92.7 L185.2 93.8 L186.3 94.8 L187.3 95.9 L188.4 97 L189.5 98 L190.5 99.1 L191.6 100.2 L192.7 101.2 L193.7 102.3 L194.8 103.4 L195.9 104.4 L196.9 105.5 L198 106.6 L199.1 107.6 L200.1 108.7 L201.2 109.8 L202.3 110.8 L203.3 111.9 L204.4 113 L205.5 114 L206.5 115.1 L207.6 116.2 L208.7 117.2 L209.7 118.3 L210.8 119.4 L211.9 120.4 L212.9 121.5 L214 122.6 L215.1 123.6 L216.1 124.7 L217.2 125.8 L218.3 126.8 L219.3 127.9 L220.4 129 L221.5 130 L222.5 131.1 L223.6 132.2 L224.7 133.2 L225.7 134.3 L226.8 135.4 L227.9 136.4 L228.9 137.5 L230 138.6 L231.1 139.6 L232.1 140.7 L233.2 141.8 L234.3 142.8 L235.3 143.9 L236.4 145 L237.5 146 L238.5 147.1 L239.6 148.2 L240.7 149.2 L241.7 150.3 L242.8 151.4 L243.9 152.4 L244.9 153.5 L246 154.6 L247.1 155.6 L248.1 156.7 L249.2 157.8 L250.3 158.8 L251.3 159.9 L252.4 161 L253.5 162 L254.5 163.1 L255.6 164.2 L256.7 165.2 L257.7 166.3 L258.8 167.4 L259.9 168.4 L260.9 169.5 L262 170.6 L263.1 171.6 L264.1 172.7 L265.2 173.8 L266.3 174.8 L267.3 175.9 L268.4 177 L269.5 178 L270.5 179.1 L271.6 180.2 L272.7 181.2 L273.7 182.3 L274.8 183.4 L275.9 184.4 L276.9 185.5 L278 186.6 ' fill='none' stroke='#000' stroke-width='2'/><path d='M22 -8.5 L23.1 -7.8 L24.1 -7.1 L25.2 -6.3 L26.3 -5.6 L27.3 -4.9 L28.4 -4.2 L29.5 -3.5 L30.5 -2.8 L31.6 -2.1 L32.7 -1.4 L33.7 -0.7 L34.8 0.1 L35.9 0.8 L36.9 1.5 L38 2.2 L39.1 2.9 L40.1 3.6 L41.2 4.3 L42.3 5 L43.3 5.7 L44.4 6.5 L45.5 7.2 L46.5 7.9 L47.6 8.6 L48.7 9.3 L49.7 10 L50.8 10.7 L51.9 11.4 L52.9 12.1 L54 12.9 L55.1 13.6 L56.1 14.3 L57.2 15 L58.3 15.7 L59.3 16.4 L60.4 17.1 L61.5 17.8 L62.5 18.5 L63.6 19.3 L64.7 20 L65.7 20.7 L66.8 21.4 L67.9 22.1 L68.9 22.8 L70 23.5 L71.1 24.2 L72.1 24.9 L73.2 25.7 L74.3 26.4 L75.3 27.1 L76.4 27.8 L77.5 28.5 L78.5 29.2 L79.6 29.9 L80.7 30.6 L81.7 31.3 L82.8 32.1 L83.9 32.8 L84.9 33.5 L86 34.2 L87.1 34.9 L88.1 35.6 L89.2 36.3 L90.3 37 L91.3 37.7 L92.4 38.5 L93.5 39.2 L94.5 39.9 L95.6 40.6 L96.7 41.3 L97.7 42 L98.8 42.7 L99.9 43.4 L100.9 44.1 L102 44.9 L103.1 45.6 L104.1 46.3 L105.2 47 L106.3 47.7 L107.3 48.4 L108.4 49.1 L109.5 49.8 L110.5 50.5 L111.6 51.3 L112.7 52 L113.7 52.7 L114.8 53.4 L115.9 54.1 L116.9 54.8 L118 55.5 L119.1 56.2 L120.1 56.9 L121.2 57.7 L122.3 58.4 L123.3 59.1 L124.4 59.8 L125.5 60.5 L126.5 61.2 L127.6 61.9 L128.7 62.6 L129.7 63.3 L130.8 64.1 L131.9 64.8 L132.9 65.5 L134 66.2 L135.1 66.9 L136.1 67.6 L137.2 68.3 L138.3 69 L139.3 69.7 L140.4 70.5 L141.5 71.2 L142.5 71.9 L143.6 72.6 L144.7 73.3 L145.7 74 L146.8 74.7 L147.9 75.4 L148.9 76.1 L150 76.9 L151.1 77.6 L152.1 78.3 L153.2 79 L154.3 79.7 L155.3 80.4 L156.4 81.1 L157.5 81.8 L158.5 82.5 L159.6 83.3 L160.7 84 L161.7 84.7 L162.8 85.4 L163.9 86.1 L164.9 86.8 L166 87.5 L167.1 88.2 L168.1 88.9 L169.2 89.7 L170.3 90.4 L171.3 91.1 L172.4 91.8 L173.5 92.5 L174.5 93.2 L175.6 93.9 L176.7 94.6 L177.7 95.3 L178.8 96.1 L179.9 96.8 L180.9 97.5 L182 98.2 L183.1 98.9 L184.1 99.6 L185.2 100.3 L186.3 101 L187.3 101.7 L188.4 102.5 L189.5 103.2 L190.5 103.9 L191.6 104.6 L192.7 105.3 L193.7 106 L194.8 106.7 L195.9 107.4 L196.9 108.1 L198 108.9 L199.1 109.6 L200.1 110.3 L201.2 111 L202.3 111.7 L203.3 112.4 L204.4 113.1 L205.5 113.8 L206.5 114.5 L207.6 115.3 L208.7 116 L209.7 116.7 L210.8 117.4 L211.9 118.1 L212.9 118.8 L214 119.5 L215.1 120.2 L216.1 120.9 L217.2 121.7 L218.3 122.4 L219.3 123.1 L220.4 123.8 L221.5 124.5 L222.5 125.2 L223.6 125.9 L224.7 126.6 L225.7 127.3 L226.8 128.1 L227.9 128.8 L228.9 129.5 L230 130.2 L231.1 130.9 L232.1 131.6 L233.2 132.3 L234.3 133 L235.3 133.7 L236.4 134.5 L237.5 135.2 L238.5 135.9 L239.6 136.6 L240.7 137.3 L241.7 138 L242.8 138.7 L243.9 139.4 L244.9 140.1 L246 140.9 L247.1 141.6 L248.1 142.3 L249.2 143 L250.3 143.7 L251.3 144.4 L252.4 145.1 L253.5 145.8 L254.5 146.5 L255.6 147.3 L256.7 148 L257.7 148.7 L258.8 149.4 L259.9 150.1 L260.9 150.8 L262 151.5 L263.1 152.2 L264.1 152.9 L265.2 153.7 L266.3 154.4 L267.3 155.1 L268.4 155.8 L269.5 156.5 L270.5 157.2 L271.6 157.9 L272.7 158.6 L273.7 159.3 L274.8 160.1 L275.9 160.8 L276.9 161.5 L278 162.2 ' fill='none' stroke='#000' stroke-width='2'/></g></svg>",
   "choices": [
-   "\\((0, 5)\\)",
-   "\\((-3, 2)\\)",
+   "\\((3, 2)\\)",
    "\\((2, 3)\\)",
-   "\\((3, 2)\\)"
+   "\\((-3, 2)\\)",
+   "\\((0, 5)\\)"
   ],
-  "answer": 3,
+  "answer": 0,
   "explanation": "The solution to a system of two linear equations is the point where their graphs intersect. The lines intersect at \\((3, 2)\\)."
  },
  {
@@ -1415,12 +1415,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The graphs of the two linear equations in a system are shown in the \\(xy\\)-plane. What is the solution \\((x, y)\\) to the system?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><defs><clipPath id='c342'><rect x='22' y='22' width='256' height='256'/></clipPath></defs><line x1='22' y1='278' x2='22' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='40.3' y1='278' x2='40.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='58.6' y1='278' x2='58.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='76.9' y1='278' x2='76.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='95.1' y1='278' x2='95.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='113.4' y1='278' x2='113.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='131.7' y1='278' x2='131.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='150' y1='278' x2='150' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='168.3' y1='278' x2='168.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='186.6' y1='278' x2='186.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='204.9' y1='278' x2='204.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='223.1' y1='278' x2='223.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='241.4' y1='278' x2='241.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='259.7' y1='278' x2='259.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='278' y1='278' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='278' x2='278' y2='278' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='259.7' x2='278' y2='259.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='241.4' x2='278' y2='241.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='223.1' x2='278' y2='223.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='204.9' x2='278' y2='204.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='186.6' x2='278' y2='186.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='168.3' x2='278' y2='168.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='150' x2='278' y2='150' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='131.7' x2='278' y2='131.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='113.4' x2='278' y2='113.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='95.1' x2='278' y2='95.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='76.9' x2='278' y2='76.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='58.6' x2='278' y2='58.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='40.3' x2='278' y2='40.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='22' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='14' y1='150' x2='286' y2='150' stroke='#000' stroke-width='1.3'/><polygon points='290,150 283,153.2 283,146.9' fill='#000'/><polygon points='10,150 17,146.9 17,153.2' fill='#000'/><text x='290' y='139' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>x</tspan></text><line x1='150' y1='286' x2='150' y2='14' stroke='#000' stroke-width='1.3'/><polygon points='150,10 153.2,17 146.9,17' fill='#000'/><polygon points='150,290 146.9,283 153.2,283' fill='#000'/><text x='161' y='10' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>y</tspan></text><line x1='22' y1='147' x2='22' y2='153' stroke='#000' stroke-width='1'/><text x='22' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='40.3' y1='147' x2='40.3' y2='153' stroke='#000' stroke-width='1'/><text x='40.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='58.6' y1='147' x2='58.6' y2='153' stroke='#000' stroke-width='1'/><text x='58.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='76.9' y1='147' x2='76.9' y2='153' stroke='#000' stroke-width='1'/><text x='76.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='95.1' y1='147' x2='95.1' y2='153' stroke='#000' stroke-width='1'/><text x='95.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='113.4' y1='147' x2='113.4' y2='153' stroke='#000' stroke-width='1'/><text x='113.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='131.7' y1='147' x2='131.7' y2='153' stroke='#000' stroke-width='1'/><text x='131.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='168.3' y1='147' x2='168.3' y2='153' stroke='#000' stroke-width='1'/><text x='168.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='186.6' y1='147' x2='186.6' y2='153' stroke='#000' stroke-width='1'/><text x='186.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='204.9' y1='147' x2='204.9' y2='153' stroke='#000' stroke-width='1'/><text x='204.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='223.1' y1='147' x2='223.1' y2='153' stroke='#000' stroke-width='1'/><text x='223.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='241.4' y1='147' x2='241.4' y2='153' stroke='#000' stroke-width='1'/><text x='241.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='259.7' y1='147' x2='259.7' y2='153' stroke='#000' stroke-width='1'/><text x='259.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='278' y1='147' x2='278' y2='153' stroke='#000' stroke-width='1'/><text x='278' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><line x1='147' y1='278' x2='153' y2='278' stroke='#000' stroke-width='1'/><text x='144' y='278' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='147' y1='259.7' x2='153' y2='259.7' stroke='#000' stroke-width='1'/><text x='144' y='259.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='147' y1='241.4' x2='153' y2='241.4' stroke='#000' stroke-width='1'/><text x='144' y='241.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='147' y1='223.1' x2='153' y2='223.1' stroke='#000' stroke-width='1'/><text x='144' y='223.1' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='147' y1='204.9' x2='153' y2='204.9' stroke='#000' stroke-width='1'/><text x='144' y='204.9' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='147' y1='186.6' x2='153' y2='186.6' stroke='#000' stroke-width='1'/><text x='144' y='186.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='147' y1='168.3' x2='153' y2='168.3' stroke='#000' stroke-width='1'/><text x='144' y='168.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='147' y1='131.7' x2='153' y2='131.7' stroke='#000' stroke-width='1'/><text x='144' y='131.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='147' y1='113.4' x2='153' y2='113.4' stroke='#000' stroke-width='1'/><text x='144' y='113.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='147' y1='95.1' x2='153' y2='95.1' stroke='#000' stroke-width='1'/><text x='144' y='95.1' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='147' y1='76.9' x2='153' y2='76.9' stroke='#000' stroke-width='1'/><text x='144' y='76.9' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='147' y1='58.6' x2='153' y2='58.6' stroke='#000' stroke-width='1'/><text x='144' y='58.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='147' y1='40.3' x2='153' y2='40.3' stroke='#000' stroke-width='1'/><text x='144' y='40.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='147' y1='22' x2='153' y2='22' stroke='#000' stroke-width='1'/><text x='144' y='22' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><text x='142' y='161' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>O</tspan></text><g clip-path='url(#c342)'><path d='M22 95.1 L23.1 96.2 L24.1 97.3 L25.2 98.3 L26.3 99.4 L27.3 100.5 L28.4 101.5 L29.5 102.6 L30.5 103.7 L31.6 104.7 L32.7 105.8 L33.7 106.9 L34.8 107.9 L35.9 109 L36.9 110.1 L38 111.1 L39.1 112.2 L40.1 113.3 L41.2 114.3 L42.3 115.4 L43.3 116.5 L44.4 117.5 L45.5 118.6 L46.5 119.7 L47.6 120.7 L48.7 121.8 L49.7 122.9 L50.8 123.9 L51.9 125 L52.9 126.1 L54 127.1 L55.1 128.2 L56.1 129.3 L57.2 130.3 L58.3 131.4 L59.3 132.5 L60.4 133.5 L61.5 134.6 L62.5 135.7 L63.6 136.7 L64.7 137.8 L65.7 138.9 L66.8 139.9 L67.9 141 L68.9 142.1 L70 143.1 L71.1 144.2 L72.1 145.3 L73.2 146.3 L74.3 147.4 L75.3 148.5 L76.4 149.5 L77.5 150.6 L78.5 151.7 L79.6 152.7 L80.7 153.8 L81.7 154.9 L82.8 155.9 L83.9 157 L84.9 158.1 L86 159.1 L87.1 160.2 L88.1 161.3 L89.2 162.3 L90.3 163.4 L91.3 164.5 L92.4 165.5 L93.5 166.6 L94.5 167.7 L95.6 168.7 L96.7 169.8 L97.7 170.9 L98.8 171.9 L99.9 173 L100.9 174.1 L102 175.1 L103.1 176.2 L104.1 177.3 L105.2 178.3 L106.3 179.4 L107.3 180.5 L108.4 181.5 L109.5 182.6 L110.5 183.7 L111.6 184.7 L112.7 185.8 L113.7 186.9 L114.8 187.9 L115.9 189 L116.9 190.1 L118 191.1 L119.1 192.2 L120.1 193.3 L121.2 194.3 L122.3 195.4 L123.3 196.5 L124.4 197.5 L125.5 198.6 L126.5 199.7 L127.6 200.7 L128.7 201.8 L129.7 202.9 L130.8 203.9 L131.9 205 L132.9 206.1 L134 207.1 L135.1 208.2 L136.1 209.3 L137.2 210.3 L138.3 211.4 L139.3 212.5 L140.4 213.5 L141.5 214.6 L142.5 215.7 L143.6 216.7 L144.7 217.8 L145.7 218.9 L146.8 219.9 L147.9 221 L148.9 222.1 L150 223.1 L151.1 224.2 L152.1 225.3 L153.2 226.3 L154.3 227.4 L155.3 228.5 L156.4 229.5 L157.5 230.6 L158.5 231.7 L159.6 232.7 L160.7 233.8 L161.7 234.9 L162.8 235.9 L163.9 237 L164.9 238.1 L166 239.1 L167.1 240.2 L168.1 241.3 L169.2 242.3 L170.3 243.4 L171.3 244.5 L172.4 245.5 L173.5 246.6 L174.5 247.7 L175.6 248.7 L176.7 249.8 L177.7 250.9 L178.8 251.9 L179.9 253 L180.9 254.1 L182 255.1 L183.1 256.2 L184.1 257.3 L185.2 258.3 L186.3 259.4 L187.3 260.5 L188.4 261.5 L189.5 262.6 L190.5 263.7 L191.6 264.7 L192.7 265.8 L193.7 266.9 L194.8 267.9 L195.9 269 L196.9 270.1 L198 271.1 L199.1 272.2 L200.1 273.3 L201.2 274.3 L202.3 275.4 L203.3 276.5 L204.4 277.5 L205.5 278.6 L206.5 279.7 L207.6 280.7 L208.7 281.8 L209.7 282.9 L210.8 283.9 L211.9 285 L212.9 286.1 L214 287.1 L215.1 288.2 L216.1 289.3 L217.2 290.3 L218.3 291.4 L219.3 292.5 L220.4 293.5 L221.5 294.6 L222.5 295.7 L223.6 296.7 L224.7 297.8 L225.7 298.9 L226.8 299.9 L227.9 301 L228.9 302.1 L230 303.1 L231.1 304.2 L232.1 305.3 L233.2 306.3 L234.3 307.4 L235.3 308.5 L236.4 309.5 L237.5 310.6 L238.5 311.7 L239.6 312.7 L240.7 313.8 L241.7 314.9 L242.8 315.9 L243.9 317 L244.9 318.1 L246 319.1 L247.1 320.2 L248.1 321.3 L249.2 322.3 L250.3 323.4 L251.3 324.5 L252.4 325.5 L253.5 326.6 L254.5 327.7 L255.6 328.7 L256.7 329.8 L257.7 330.9 L258.8 331.9 L259.9 333 L260.9 334.1 L262 335.1 L263.1 336.2 L264.1 337.3 L265.2 338.3 L266.3 339.4 L267.3 340.5 L268.4 341.5 L269.5 342.6 L270.5 343.7 L271.6 344.7 L272.7 345.8 L273.7 346.9 L274.8 347.9 L275.9 349 L276.9 350.1 L278 351.1 ' fill='none' stroke='#000' stroke-width='2'/><path d='M22 314.6 L23.1 312.4 L24.1 310.3 L25.2 308.2 L26.3 306 L27.3 303.9 L28.4 301.8 L29.5 299.6 L30.5 297.5 L31.6 295.4 L32.7 293.2 L33.7 291.1 L34.8 289 L35.9 286.8 L36.9 284.7 L38 282.6 L39.1 280.4 L40.1 278.3 L41.2 276.2 L42.3 274 L43.3 271.9 L44.4 269.8 L45.5 267.6 L46.5 265.5 L47.6 263.4 L48.7 261.2 L49.7 259.1 L50.8 257 L51.9 254.8 L52.9 252.7 L54 250.6 L55.1 248.4 L56.1 246.3 L57.2 244.2 L58.3 242 L59.3 239.9 L60.4 237.8 L61.5 235.6 L62.5 233.5 L63.6 231.4 L64.7 229.2 L65.7 227.1 L66.8 225 L67.9 222.8 L68.9 220.7 L70 218.6 L71.1 216.4 L72.1 214.3 L73.2 212.2 L74.3 210 L75.3 207.9 L76.4 205.8 L77.5 203.6 L78.5 201.5 L79.6 199.4 L80.7 197.2 L81.7 195.1 L82.8 193 L83.9 190.8 L84.9 188.7 L86 186.6 L87.1 184.4 L88.1 182.3 L89.2 180.2 L90.3 178 L91.3 175.9 L92.4 173.8 L93.5 171.6 L94.5 169.5 L95.6 167.4 L96.7 165.2 L97.7 163.1 L98.8 161 L99.9 158.8 L100.9 156.7 L102 154.6 L103.1 152.4 L104.1 150.3 L105.2 148.2 L106.3 146 L107.3 143.9 L108.4 141.8 L109.5 139.6 L110.5 137.5 L111.6 135.4 L112.7 133.2 L113.7 131.1 L114.8 129 L115.9 126.8 L116.9 124.7 L118 122.6 L119.1 120.4 L120.1 118.3 L121.2 116.2 L122.3 114 L123.3 111.9 L124.4 109.8 L125.5 107.6 L126.5 105.5 L127.6 103.4 L128.7 101.2 L129.7 99.1 L130.8 97 L131.9 94.8 L132.9 92.7 L134 90.6 L135.1 88.4 L136.1 86.3 L137.2 84.2 L138.3 82 L139.3 79.9 L140.4 77.8 L141.5 75.6 L142.5 73.5 L143.6 71.4 L144.7 69.2 L145.7 67.1 L146.8 65 L147.9 62.8 L148.9 60.7 L150 58.6 L151.1 56.4 L152.1 54.3 L153.2 52.2 L154.3 50 L155.3 47.9 L156.4 45.8 L157.5 43.6 L158.5 41.5 L159.6 39.4 L160.7 37.2 L161.7 35.1 L162.8 33 L163.9 30.8 L164.9 28.7 L166 26.6 L167.1 24.4 L168.1 22.3 L169.2 20.2 L170.3 18 L171.3 15.9 L172.4 13.8 L173.5 11.6 L174.5 9.5 L175.6 7.4 L176.7 5.2 L177.7 3.1 L178.8 1 L179.9 -1.2 L180.9 -3.3 L182 -5.4 L183.1 -7.6 L184.1 -9.7 L185.2 -11.8 L186.3 -14 L187.3 -16.1 L188.4 -18.2 L189.5 -20.4 L190.5 -22.5 L191.6 -24.6 L192.7 -26.8 L193.7 -28.9 L194.8 -31 L195.9 -33.2 L196.9 -35.3 L198 -37.4 L199.1 -39.6 L200.1 -41.7 L201.2 -43.8 L202.3 -46 L203.3 -48.1 L204.4 -50.2 L205.5 -52.4 L206.5 -54.5 L207.6 -56.6 L208.7 -58.8 L209.7 -60.9 L210.8 -63 L211.9 -65.2 L212.9 -67.3 L214 -69.4 L215.1 -71.6 L216.1 -73.7 L217.2 -75.8 L218.3 -78 L219.3 -80.1 L220.4 -82.2 L221.5 -84.4 L222.5 -86.5 L223.6 -88.6 L224.7 -90.8 L225.7 -92.9 L226.8 -95 L227.9 -97.2 L228.9 -99.3 L230 -101.4 L231.1 -103.6 L232.1 -105.7 L233.2 -107.8 L234.3 -110 L235.3 -112.1 L236.4 -114.2 L237.5 -116.4 L238.5 -118.5 L239.6 -120.6 L240.7 -122.8 L241.7 -124.9 L242.8 -127 L243.9 -129.2 L244.9 -131.3 L246 -133.4 L247.1 -135.6 L248.1 -137.7 L249.2 -139.8 L250.3 -142 L251.3 -144.1 L252.4 -146.2 L253.5 -148.4 L254.5 -150.5 L255.6 -152.6 L256.7 -154.8 L257.7 -156.9 L258.8 -159 L259.9 -161.2 L260.9 -163.3 L262 -165.4 L263.1 -167.6 L264.1 -169.7 L265.2 -171.8 L266.3 -174 L267.3 -176.1 L268.4 -178.2 L269.5 -180.4 L270.5 -182.5 L271.6 -184.6 L272.7 -186.8 L273.7 -188.9 L274.8 -191 L275.9 -193.2 L276.9 -195.3 L278 -197.4 ' fill='none' stroke='#000' stroke-width='2'/></g></svg>",
   "choices": [
-   "\\((-3, -1)\\)",
    "\\((3, -1)\\)",
    "\\((-1, -3)\\)",
-   "\\((0, -4)\\)"
+   "\\((0, -4)\\)",
+   "\\((-3, -1)\\)"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "The solution to a system of two linear equations is the point where their graphs intersect. The lines intersect at \\((-3, -1)\\)."
  },
  {
@@ -1432,12 +1432,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>\\(y \\gt  2x - 5\\)<br>\\(y \\le 3x + 8\\)</p><p>Which point \\((x, y)\\) is a solution to the given system of inequalities in the \\(xy\\)-plane?</p>",
   "choices": [
-   "\\((3, 2)\\)",
-   "\\((-5, 7)\\)",
    "\\((7, 7)\\)",
-   "\\((6, -5)\\)"
+   "\\((6, -5)\\)",
+   "\\((3, 2)\\)",
+   "\\((-5, 7)\\)"
   ],
-  "answer": 0,
+  "answer": 2,
   "explanation": "Substitute each point into both inequalities. \\((3, 2)\\) makes both true. Each other point makes at least one inequality false; for example, \\((7, 7)\\) fails \\(y \\gt  2x - 5\\)."
  },
  {
@@ -1449,9 +1449,9 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>\\(x + y \\le 6\\)<br>\\(4x - y \\gt  3\\)</p><p>Which point \\((x, y)\\) is a solution to the given system of inequalities in the \\(xy\\)-plane?</p>",
   "choices": [
+   "\\((5, 3)\\)",
    "\\((-1, 10)\\)",
    "\\((0, 5)\\)",
-   "\\((5, 3)\\)",
    "\\((5, -6)\\)"
   ],
   "answer": 3,
@@ -1466,12 +1466,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>\\(y \\lt  2x + 4\\)<br>\\(x \\ge 4\\)</p><p>Which point \\((x, y)\\) is a solution to the given system of inequalities in the \\(xy\\)-plane?</p>",
   "choices": [
-   "\\((8, -7)\\)",
    "\\((2, -1)\\)",
-   "\\((-5, 0)\\)",
-   "\\((3, 7)\\)"
+   "\\((3, 7)\\)",
+   "\\((8, -7)\\)",
+   "\\((-5, 0)\\)"
   ],
-  "answer": 0,
+  "answer": 2,
   "explanation": "Substitute each point into both inequalities. \\((8, -7)\\) makes both true. Each other point makes at least one inequality false; for example, \\((-5, 0)\\) fails \\(y \\lt  2x + 4\\)."
  },
  {
@@ -1483,12 +1483,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>\\(y \\gt  3x - 3\\)<br>\\(y \\le -2x + 5\\)</p><p>Which point \\((x, y)\\) is a solution to the given system of inequalities in the \\(xy\\)-plane?</p>",
   "choices": [
-   "\\((2, 2)\\)",
-   "\\((8, 5)\\)",
+   "\\((1, 4)\\)",
    "\\((-6, 8)\\)",
-   "\\((1, 4)\\)"
+   "\\((2, 2)\\)",
+   "\\((8, 5)\\)"
   ],
-  "answer": 2,
+  "answer": 1,
   "explanation": "Substitute each point into both inequalities. \\((-6, 8)\\) makes both true. Each other point makes at least one inequality false; for example, \\((2, 2)\\) fails \\(y \\gt  3x - 3\\)."
  },
  {
@@ -1500,12 +1500,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A school club is selling T-shirts for $12 each and hats for $9 each. The club wants to raise at least $1,900. Which inequality represents this situation, where \\(t\\) is the number of T-shirts sold and \\(h\\) is the number of hats sold?</p>",
   "choices": [
-   "\\(t + h \\ge 1{,}900\\)",
-   "\\(12t + 9h \\ge 1{,}900\\)",
    "\\(12t + 9h \\le 1{,}900\\)",
-   "\\(9t + 12h \\ge 1{,}900\\)"
+   "\\(9t + 12h \\ge 1{,}900\\)",
+   "\\(t + h \\ge 1{,}900\\)",
+   "\\(12t + 9h \\ge 1{,}900\\)"
   ],
-  "answer": 1,
+  "answer": 3,
   "explanation": "Revenue is \\(12t + 9h\\) dollars, and \"at least\" means \\(\\ge\\). So the answer is \\(12t + 9h \\ge 1{,}900\\)."
  },
  {
@@ -1517,12 +1517,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A freight elevator can carry at most 2,500 pounds. A worker is loading it with small crates that weigh 35 pounds each and large crates that weigh 60 pounds each. Which inequality represents the possible numbers of small crates, \\(s\\), and large crates, \\(c\\), the elevator can carry?</p>",
   "choices": [
-   "\\(35s + 60c \\le 2{,}500\\)",
-   "\\(60s + 35c \\le 2{,}500\\)",
    "\\(95(s + c) \\le 2{,}500\\)",
-   "\\(35s + 60c \\ge 2{,}500\\)"
+   "\\(35s + 60c \\ge 2{,}500\\)",
+   "\\(60s + 35c \\le 2{,}500\\)",
+   "\\(35s + 60c \\le 2{,}500\\)"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "The total weight is \\(35s + 60c\\) pounds, and \"at most\" means \\(\\le\\). So the answer is \\(35s + 60c \\le 2{,}500\\)."
  },
  {
@@ -1534,12 +1534,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Each egg contains about 7 grams of protein, and each cup of Greek yogurt contains about 15 grams of protein. Rita wants to eat at least 75 grams of protein from eggs and yogurt each day. Which inequality represents this goal, where \\(e\\) is the number of eggs and \\(y\\) is the number of cups of yogurt?</p>",
   "choices": [
-   "\\(15e + 7y \\ge 75\\)",
-   "\\(7e + 15y \\le 75\\)",
+   "\\(7e + 15y \\ge 75\\)",
    "\\(e + y \\ge 75\\)",
-   "\\(7e + 15y \\ge 75\\)"
+   "\\(7e + 15y \\le 75\\)",
+   "\\(15e + 7y \\ge 75\\)"
   ],
-  "answer": 3,
+  "answer": 0,
   "explanation": "Protein from eggs is \\(7e\\) grams and from yogurt \\(15y\\) grams; the total must be at least 75. So the answer is \\(7e + 15y \\ge 75\\)."
  },
  {
@@ -1551,12 +1551,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Raj earns $14 per hour tutoring and $15 per hour as a lifeguard. He can work at most 20 hours per week and wants to earn at least $250 per week. Which system represents this situation, where \\(x\\) is the number of hours tutoring and \\(y\\) is the number of hours lifeguarding?</p>",
   "choices": [
-   "\\(x + y \\ge 20 \\text{ and } 14x + 15y \\le 250\\)",
-   "\\(x + y \\le 20 \\text{ and } 15x + 14y \\ge 250\\)",
    "\\(x + y \\le 20 \\text{ and } 14x + 15y \\ge 250\\)",
-   "\\(14x + 15y \\le 20 \\text{ and } x + y \\ge 250\\)"
+   "\\(x + y \\ge 20 \\text{ and } 14x + 15y \\le 250\\)",
+   "\\(14x + 15y \\le 20 \\text{ and } x + y \\ge 250\\)",
+   "\\(x + y \\le 20 \\text{ and } 15x + 14y \\ge 250\\)"
   ],
-  "answer": 2,
+  "answer": 0,
   "explanation": "Total hours \\(x + y\\) can be at most 20, and total earnings \\(14x + 15y\\) must be at least 250. So the answer is \\(x + y \\le 20 \\text{ and } 14x + 15y \\ge 250\\)."
  },
  {
@@ -2260,12 +2260,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The shaded region shown represents the solutions to which system of inequalities?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><defs><clipPath id='c342'><rect x='22' y='22' width='256' height='256'/></clipPath></defs><line x1='22' y1='278' x2='22' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='40.3' y1='278' x2='40.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='58.6' y1='278' x2='58.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='76.9' y1='278' x2='76.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='95.1' y1='278' x2='95.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='113.4' y1='278' x2='113.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='131.7' y1='278' x2='131.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='150' y1='278' x2='150' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='168.3' y1='278' x2='168.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='186.6' y1='278' x2='186.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='204.9' y1='278' x2='204.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='223.1' y1='278' x2='223.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='241.4' y1='278' x2='241.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='259.7' y1='278' x2='259.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='278' y1='278' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='278' x2='278' y2='278' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='259.7' x2='278' y2='259.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='241.4' x2='278' y2='241.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='223.1' x2='278' y2='223.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='204.9' x2='278' y2='204.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='186.6' x2='278' y2='186.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='168.3' x2='278' y2='168.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='150' x2='278' y2='150' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='131.7' x2='278' y2='131.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='113.4' x2='278' y2='113.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='95.1' x2='278' y2='95.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='76.9' x2='278' y2='76.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='58.6' x2='278' y2='58.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='40.3' x2='278' y2='40.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='22' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='14' y1='150' x2='286' y2='150' stroke='#000' stroke-width='1.3'/><polygon points='290,150 283,153.2 283,146.9' fill='#000'/><polygon points='10,150 17,146.9 17,153.2' fill='#000'/><text x='290' y='139' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>x</tspan></text><line x1='150' y1='286' x2='150' y2='14' stroke='#000' stroke-width='1.3'/><polygon points='150,10 153.2,17 146.9,17' fill='#000'/><polygon points='150,290 146.9,283 153.2,283' fill='#000'/><text x='161' y='10' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>y</tspan></text><line x1='22' y1='147' x2='22' y2='153' stroke='#000' stroke-width='1'/><text x='22' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='40.3' y1='147' x2='40.3' y2='153' stroke='#000' stroke-width='1'/><text x='40.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='58.6' y1='147' x2='58.6' y2='153' stroke='#000' stroke-width='1'/><text x='58.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='76.9' y1='147' x2='76.9' y2='153' stroke='#000' stroke-width='1'/><text x='76.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='95.1' y1='147' x2='95.1' y2='153' stroke='#000' stroke-width='1'/><text x='95.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='113.4' y1='147' x2='113.4' y2='153' stroke='#000' stroke-width='1'/><text x='113.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='131.7' y1='147' x2='131.7' y2='153' stroke='#000' stroke-width='1'/><text x='131.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='168.3' y1='147' x2='168.3' y2='153' stroke='#000' stroke-width='1'/><text x='168.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='186.6' y1='147' x2='186.6' y2='153' stroke='#000' stroke-width='1'/><text x='186.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='204.9' y1='147' x2='204.9' y2='153' stroke='#000' stroke-width='1'/><text x='204.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='223.1' y1='147' x2='223.1' y2='153' stroke='#000' stroke-width='1'/><text x='223.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='241.4' y1='147' x2='241.4' y2='153' stroke='#000' stroke-width='1'/><text x='241.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='259.7' y1='147' x2='259.7' y2='153' stroke='#000' stroke-width='1'/><text x='259.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='278' y1='147' x2='278' y2='153' stroke='#000' stroke-width='1'/><text x='278' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><line x1='147' y1='278' x2='153' y2='278' stroke='#000' stroke-width='1'/><text x='144' y='278' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='147' y1='259.7' x2='153' y2='259.7' stroke='#000' stroke-width='1'/><text x='144' y='259.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='147' y1='241.4' x2='153' y2='241.4' stroke='#000' stroke-width='1'/><text x='144' y='241.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='147' y1='223.1' x2='153' y2='223.1' stroke='#000' stroke-width='1'/><text x='144' y='223.1' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='147' y1='204.9' x2='153' y2='204.9' stroke='#000' stroke-width='1'/><text x='144' y='204.9' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='147' y1='186.6' x2='153' y2='186.6' stroke='#000' stroke-width='1'/><text x='144' y='186.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='147' y1='168.3' x2='153' y2='168.3' stroke='#000' stroke-width='1'/><text x='144' y='168.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='147' y1='131.7' x2='153' y2='131.7' stroke='#000' stroke-width='1'/><text x='144' y='131.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='147' y1='113.4' x2='153' y2='113.4' stroke='#000' stroke-width='1'/><text x='144' y='113.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='147' y1='95.1' x2='153' y2='95.1' stroke='#000' stroke-width='1'/><text x='144' y='95.1' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='147' y1='76.9' x2='153' y2='76.9' stroke='#000' stroke-width='1'/><text x='144' y='76.9' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='147' y1='58.6' x2='153' y2='58.6' stroke='#000' stroke-width='1'/><text x='144' y='58.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='147' y1='40.3' x2='153' y2='40.3' stroke='#000' stroke-width='1'/><text x='144' y='40.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='147' y1='22' x2='153' y2='22' stroke='#000' stroke-width='1'/><text x='144' y='22' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><text x='142' y='161' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>O</tspan></text><g clip-path='url(#c342)'><polygon points='40.3,22 22,22 22,177.4 186.6,95.1' fill='#bdbdbd' fill-opacity='0.55' stroke='none'/><path d='M22 177.4 L23.1 176.9 L24.1 176.4 L25.2 175.8 L26.3 175.3 L27.3 174.8 L28.4 174.2 L29.5 173.7 L30.5 173.2 L31.6 172.6 L32.7 172.1 L33.7 171.6 L34.8 171 L35.9 170.5 L36.9 170 L38 169.4 L39.1 168.9 L40.1 168.4 L41.2 167.8 L42.3 167.3 L43.3 166.8 L44.4 166.2 L45.5 165.7 L46.5 165.2 L47.6 164.6 L48.7 164.1 L49.7 163.6 L50.8 163 L51.9 162.5 L52.9 162 L54 161.4 L55.1 160.9 L56.1 160.4 L57.2 159.8 L58.3 159.3 L59.3 158.8 L60.4 158.2 L61.5 157.7 L62.5 157.2 L63.6 156.6 L64.7 156.1 L65.7 155.6 L66.8 155 L67.9 154.5 L68.9 154 L70 153.4 L71.1 152.9 L72.1 152.4 L73.2 151.8 L74.3 151.3 L75.3 150.8 L76.4 150.2 L77.5 149.7 L78.5 149.2 L79.6 148.6 L80.7 148.1 L81.7 147.6 L82.8 147 L83.9 146.5 L84.9 146 L86 145.4 L87.1 144.9 L88.1 144.4 L89.2 143.8 L90.3 143.3 L91.3 142.8 L92.4 142.2 L93.5 141.7 L94.5 141.2 L95.6 140.6 L96.7 140.1 L97.7 139.6 L98.8 139 L99.9 138.5 L100.9 138 L102 137.4 L103.1 136.9 L104.1 136.4 L105.2 135.8 L106.3 135.3 L107.3 134.8 L108.4 134.2 L109.5 133.7 L110.5 133.2 L111.6 132.6 L112.7 132.1 L113.7 131.6 L114.8 131 L115.9 130.5 L116.9 130 L118 129.4 L119.1 128.9 L120.1 128.4 L121.2 127.8 L122.3 127.3 L123.3 126.8 L124.4 126.2 L125.5 125.7 L126.5 125.2 L127.6 124.6 L128.7 124.1 L129.7 123.6 L130.8 123 L131.9 122.5 L132.9 122 L134 121.4 L135.1 120.9 L136.1 120.4 L137.2 119.8 L138.3 119.3 L139.3 118.8 L140.4 118.2 L141.5 117.7 L142.5 117.2 L143.6 116.6 L144.7 116.1 L145.7 115.6 L146.8 115 L147.9 114.5 L148.9 114 L150 113.4 L151.1 112.9 L152.1 112.4 L153.2 111.8 L154.3 111.3 L155.3 110.8 L156.4 110.2 L157.5 109.7 L158.5 109.2 L159.6 108.6 L160.7 108.1 L161.7 107.6 L162.8 107 L163.9 106.5 L164.9 106 L166 105.4 L167.1 104.9 L168.1 104.4 L169.2 103.8 L170.3 103.3 L171.3 102.8 L172.4 102.2 L173.5 101.7 L174.5 101.2 L175.6 100.6 L176.7 100.1 L177.7 99.6 L178.8 99 L179.9 98.5 L180.9 98 L182 97.4 L183.1 96.9 L184.1 96.4 L185.2 95.8 L186.3 95.3 L187.3 94.8 L188.4 94.2 L189.5 93.7 L190.5 93.2 L191.6 92.6 L192.7 92.1 L193.7 91.6 L194.8 91 L195.9 90.5 L196.9 90 L198 89.4 L199.1 88.9 L200.1 88.4 L201.2 87.8 L202.3 87.3 L203.3 86.8 L204.4 86.2 L205.5 85.7 L206.5 85.2 L207.6 84.6 L208.7 84.1 L209.7 83.6 L210.8 83 L211.9 82.5 L212.9 82 L214 81.4 L215.1 80.9 L216.1 80.4 L217.2 79.8 L218.3 79.3 L219.3 78.8 L220.4 78.2 L221.5 77.7 L222.5 77.2 L223.6 76.6 L224.7 76.1 L225.7 75.6 L226.8 75 L227.9 74.5 L228.9 74 L230 73.4 L231.1 72.9 L232.1 72.4 L233.2 71.8 L234.3 71.3 L235.3 70.8 L236.4 70.2 L237.5 69.7 L238.5 69.2 L239.6 68.6 L240.7 68.1 L241.7 67.6 L242.8 67 L243.9 66.5 L244.9 66 L246 65.4 L247.1 64.9 L248.1 64.4 L249.2 63.8 L250.3 63.3 L251.3 62.8 L252.4 62.2 L253.5 61.7 L254.5 61.2 L255.6 60.6 L256.7 60.1 L257.7 59.6 L258.8 59 L259.9 58.5 L260.9 58 L262 57.4 L263.1 56.9 L264.1 56.4 L265.2 55.8 L266.3 55.3 L267.3 54.8 L268.4 54.2 L269.5 53.7 L270.5 53.2 L271.6 52.6 L272.7 52.1 L273.7 51.6 L274.8 51 L275.9 50.5 L276.9 50 L278 49.4 ' fill='none' stroke='#000' stroke-width='2'/><path d='M22 12.9 L23.1 13.4 L24.1 13.9 L25.2 14.5 L26.3 15 L27.3 15.5 L28.4 16.1 L29.5 16.6 L30.5 17.1 L31.6 17.7 L32.7 18.2 L33.7 18.7 L34.8 19.3 L35.9 19.8 L36.9 20.3 L38 20.9 L39.1 21.4 L40.1 21.9 L41.2 22.5 L42.3 23 L43.3 23.5 L44.4 24.1 L45.5 24.6 L46.5 25.1 L47.6 25.7 L48.7 26.2 L49.7 26.7 L50.8 27.3 L51.9 27.8 L52.9 28.3 L54 28.9 L55.1 29.4 L56.1 29.9 L57.2 30.5 L58.3 31 L59.3 31.5 L60.4 32.1 L61.5 32.6 L62.5 33.1 L63.6 33.7 L64.7 34.2 L65.7 34.7 L66.8 35.3 L67.9 35.8 L68.9 36.3 L70 36.9 L71.1 37.4 L72.1 37.9 L73.2 38.5 L74.3 39 L75.3 39.5 L76.4 40.1 L77.5 40.6 L78.5 41.1 L79.6 41.7 L80.7 42.2 L81.7 42.7 L82.8 43.3 L83.9 43.8 L84.9 44.3 L86 44.9 L87.1 45.4 L88.1 45.9 L89.2 46.5 L90.3 47 L91.3 47.5 L92.4 48.1 L93.5 48.6 L94.5 49.1 L95.6 49.7 L96.7 50.2 L97.7 50.7 L98.8 51.3 L99.9 51.8 L100.9 52.3 L102 52.9 L103.1 53.4 L104.1 53.9 L105.2 54.5 L106.3 55 L107.3 55.5 L108.4 56.1 L109.5 56.6 L110.5 57.1 L111.6 57.7 L112.7 58.2 L113.7 58.7 L114.8 59.3 L115.9 59.8 L116.9 60.3 L118 60.9 L119.1 61.4 L120.1 61.9 L121.2 62.5 L122.3 63 L123.3 63.5 L124.4 64.1 L125.5 64.6 L126.5 65.1 L127.6 65.7 L128.7 66.2 L129.7 66.7 L130.8 67.3 L131.9 67.8 L132.9 68.3 L134 68.9 L135.1 69.4 L136.1 69.9 L137.2 70.5 L138.3 71 L139.3 71.5 L140.4 72.1 L141.5 72.6 L142.5 73.1 L143.6 73.7 L144.7 74.2 L145.7 74.7 L146.8 75.3 L147.9 75.8 L148.9 76.3 L150 76.9 L151.1 77.4 L152.1 77.9 L153.2 78.5 L154.3 79 L155.3 79.5 L156.4 80.1 L157.5 80.6 L158.5 81.1 L159.6 81.7 L160.7 82.2 L161.7 82.7 L162.8 83.3 L163.9 83.8 L164.9 84.3 L166 84.9 L167.1 85.4 L168.1 85.9 L169.2 86.5 L170.3 87 L171.3 87.5 L172.4 88.1 L173.5 88.6 L174.5 89.1 L175.6 89.7 L176.7 90.2 L177.7 90.7 L178.8 91.3 L179.9 91.8 L180.9 92.3 L182 92.9 L183.1 93.4 L184.1 93.9 L185.2 94.5 L186.3 95 L187.3 95.5 L188.4 96.1 L189.5 96.6 L190.5 97.1 L191.6 97.7 L192.7 98.2 L193.7 98.7 L194.8 99.3 L195.9 99.8 L196.9 100.3 L198 100.9 L199.1 101.4 L200.1 101.9 L201.2 102.5 L202.3 103 L203.3 103.5 L204.4 104.1 L205.5 104.6 L206.5 105.1 L207.6 105.7 L208.7 106.2 L209.7 106.7 L210.8 107.3 L211.9 107.8 L212.9 108.3 L214 108.9 L215.1 109.4 L216.1 109.9 L217.2 110.5 L218.3 111 L219.3 111.5 L220.4 112.1 L221.5 112.6 L222.5 113.1 L223.6 113.7 L224.7 114.2 L225.7 114.7 L226.8 115.3 L227.9 115.8 L228.9 116.3 L230 116.9 L231.1 117.4 L232.1 117.9 L233.2 118.5 L234.3 119 L235.3 119.5 L236.4 120.1 L237.5 120.6 L238.5 121.1 L239.6 121.7 L240.7 122.2 L241.7 122.7 L242.8 123.3 L243.9 123.8 L244.9 124.3 L246 124.9 L247.1 125.4 L248.1 125.9 L249.2 126.5 L250.3 127 L251.3 127.5 L252.4 128.1 L253.5 128.6 L254.5 129.1 L255.6 129.7 L256.7 130.2 L257.7 130.7 L258.8 131.3 L259.9 131.8 L260.9 132.3 L262 132.9 L263.1 133.4 L264.1 133.9 L265.2 134.5 L266.3 135 L267.3 135.5 L268.4 136.1 L269.5 136.6 L270.5 137.1 L271.6 137.7 L272.7 138.2 L273.7 138.7 L274.8 139.3 L275.9 139.8 L276.9 140.3 L278 140.9 ' fill='none' stroke='#000' stroke-width='2' stroke-dasharray='6 4'/></g></svg>",
   "choices": [
+   "\\(y \\le \\dfrac{1}{2}x + 2\\)<br>\\(y \\lt  -\\dfrac{1}{2}x + 4\\)",
    "\\(y \\gt  \\dfrac{1}{2}x + 2\\)<br>\\(y \\le -\\dfrac{1}{2}x + 4\\)",
    "\\(y \\ge \\dfrac{1}{2}x + 2\\)<br>\\(y \\lt  -\\dfrac{1}{2}x + 4\\)",
-   "\\(y \\le \\dfrac{1}{2}x + 2\\)<br>\\(y \\lt  -\\dfrac{1}{2}x + 4\\)",
    "\\(y \\ge \\dfrac{1}{2}x + 2\\)<br>\\(y \\gt  -\\dfrac{1}{2}x + 4\\)"
   ],
-  "answer": 1,
+  "answer": 2,
   "explanation": "The line \\(y = \\frac{1}{2}x + 2\\) is solid and the region is above it, giving \\(y \\ge \\frac{1}{2}x + 2\\). The line \\(y = -\\frac{1}{2}x + 4\\) is dashed and the region is below it, giving \\(y \\lt  -\\frac{1}{2}x + 4\\). A solid line means the boundary is included (\\(\\le\\) or \\(\\ge\\))."
  },
  {
@@ -2279,8 +2279,8 @@ window.SAT_QUESTIONS = [
   "choices": [
    "\\(y \\ge -x + 2\\)<br>\\(y \\gt  x + 4\\)",
    "\\(y \\gt  -x + 2\\)<br>\\(y \\ge x + 4\\)",
-   "\\(y \\lt  -x + 2\\)<br>\\(y \\ge x + 4\\)",
-   "\\(y \\gt  -x + 2\\)<br>\\(y \\le x + 4\\)"
+   "\\(y \\gt  -x + 2\\)<br>\\(y \\le x + 4\\)",
+   "\\(y \\lt  -x + 2\\)<br>\\(y \\ge x + 4\\)"
   ],
   "answer": 1,
   "explanation": "The line \\(y = -x + 2\\) is dashed and the region is above it, giving \\(y \\gt  -x + 2\\). The line \\(y = x + 4\\) is solid and the region is above it, giving \\(y \\ge x + 4\\). A solid line means the boundary is included (\\(\\le\\) or \\(\\ge\\))."
@@ -2294,12 +2294,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The shaded region shown represents the solutions to which system of inequalities?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><defs><clipPath id='c342'><rect x='22' y='22' width='256' height='256'/></clipPath></defs><line x1='22' y1='278' x2='22' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='40.3' y1='278' x2='40.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='58.6' y1='278' x2='58.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='76.9' y1='278' x2='76.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='95.1' y1='278' x2='95.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='113.4' y1='278' x2='113.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='131.7' y1='278' x2='131.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='150' y1='278' x2='150' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='168.3' y1='278' x2='168.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='186.6' y1='278' x2='186.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='204.9' y1='278' x2='204.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='223.1' y1='278' x2='223.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='241.4' y1='278' x2='241.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='259.7' y1='278' x2='259.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='278' y1='278' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='278' x2='278' y2='278' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='259.7' x2='278' y2='259.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='241.4' x2='278' y2='241.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='223.1' x2='278' y2='223.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='204.9' x2='278' y2='204.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='186.6' x2='278' y2='186.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='168.3' x2='278' y2='168.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='150' x2='278' y2='150' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='131.7' x2='278' y2='131.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='113.4' x2='278' y2='113.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='95.1' x2='278' y2='95.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='76.9' x2='278' y2='76.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='58.6' x2='278' y2='58.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='40.3' x2='278' y2='40.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='22' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='14' y1='150' x2='286' y2='150' stroke='#000' stroke-width='1.3'/><polygon points='290,150 283,153.2 283,146.9' fill='#000'/><polygon points='10,150 17,146.9 17,153.2' fill='#000'/><text x='290' y='139' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>x</tspan></text><line x1='150' y1='286' x2='150' y2='14' stroke='#000' stroke-width='1.3'/><polygon points='150,10 153.2,17 146.9,17' fill='#000'/><polygon points='150,290 146.9,283 153.2,283' fill='#000'/><text x='161' y='10' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>y</tspan></text><line x1='22' y1='147' x2='22' y2='153' stroke='#000' stroke-width='1'/><text x='22' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='40.3' y1='147' x2='40.3' y2='153' stroke='#000' stroke-width='1'/><text x='40.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='58.6' y1='147' x2='58.6' y2='153' stroke='#000' stroke-width='1'/><text x='58.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='76.9' y1='147' x2='76.9' y2='153' stroke='#000' stroke-width='1'/><text x='76.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='95.1' y1='147' x2='95.1' y2='153' stroke='#000' stroke-width='1'/><text x='95.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='113.4' y1='147' x2='113.4' y2='153' stroke='#000' stroke-width='1'/><text x='113.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='131.7' y1='147' x2='131.7' y2='153' stroke='#000' stroke-width='1'/><text x='131.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='168.3' y1='147' x2='168.3' y2='153' stroke='#000' stroke-width='1'/><text x='168.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='186.6' y1='147' x2='186.6' y2='153' stroke='#000' stroke-width='1'/><text x='186.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='204.9' y1='147' x2='204.9' y2='153' stroke='#000' stroke-width='1'/><text x='204.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='223.1' y1='147' x2='223.1' y2='153' stroke='#000' stroke-width='1'/><text x='223.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='241.4' y1='147' x2='241.4' y2='153' stroke='#000' stroke-width='1'/><text x='241.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='259.7' y1='147' x2='259.7' y2='153' stroke='#000' stroke-width='1'/><text x='259.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='278' y1='147' x2='278' y2='153' stroke='#000' stroke-width='1'/><text x='278' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><line x1='147' y1='278' x2='153' y2='278' stroke='#000' stroke-width='1'/><text x='144' y='278' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='147' y1='259.7' x2='153' y2='259.7' stroke='#000' stroke-width='1'/><text x='144' y='259.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='147' y1='241.4' x2='153' y2='241.4' stroke='#000' stroke-width='1'/><text x='144' y='241.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='147' y1='223.1' x2='153' y2='223.1' stroke='#000' stroke-width='1'/><text x='144' y='223.1' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='147' y1='204.9' x2='153' y2='204.9' stroke='#000' stroke-width='1'/><text x='144' y='204.9' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='147' y1='186.6' x2='153' y2='186.6' stroke='#000' stroke-width='1'/><text x='144' y='186.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='147' y1='168.3' x2='153' y2='168.3' stroke='#000' stroke-width='1'/><text x='144' y='168.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='147' y1='131.7' x2='153' y2='131.7' stroke='#000' stroke-width='1'/><text x='144' y='131.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='147' y1='113.4' x2='153' y2='113.4' stroke='#000' stroke-width='1'/><text x='144' y='113.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='147' y1='95.1' x2='153' y2='95.1' stroke='#000' stroke-width='1'/><text x='144' y='95.1' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='147' y1='76.9' x2='153' y2='76.9' stroke='#000' stroke-width='1'/><text x='144' y='76.9' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='147' y1='58.6' x2='153' y2='58.6' stroke='#000' stroke-width='1'/><text x='144' y='58.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='147' y1='40.3' x2='153' y2='40.3' stroke='#000' stroke-width='1'/><text x='144' y='40.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='147' y1='22' x2='153' y2='22' stroke='#000' stroke-width='1'/><text x='144' y='22' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><text x='142' y='161' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>O</tspan></text><g clip-path='url(#c342)'><polygon points='195.7,159.1 278,76.9 278,22 58.6,22' fill='#bdbdbd' fill-opacity='0.55' stroke='none'/><path d='M22 332.9 L23.1 331.8 L24.1 330.7 L25.2 329.7 L26.3 328.6 L27.3 327.5 L28.4 326.5 L29.5 325.4 L30.5 324.3 L31.6 323.3 L32.7 322.2 L33.7 321.1 L34.8 320.1 L35.9 319 L36.9 317.9 L38 316.9 L39.1 315.8 L40.1 314.7 L41.2 313.7 L42.3 312.6 L43.3 311.5 L44.4 310.5 L45.5 309.4 L46.5 308.3 L47.6 307.3 L48.7 306.2 L49.7 305.1 L50.8 304.1 L51.9 303 L52.9 301.9 L54 300.9 L55.1 299.8 L56.1 298.7 L57.2 297.7 L58.3 296.6 L59.3 295.5 L60.4 294.5 L61.5 293.4 L62.5 292.3 L63.6 291.3 L64.7 290.2 L65.7 289.1 L66.8 288.1 L67.9 287 L68.9 285.9 L70 284.9 L71.1 283.8 L72.1 282.7 L73.2 281.7 L74.3 280.6 L75.3 279.5 L76.4 278.5 L77.5 277.4 L78.5 276.3 L79.6 275.3 L80.7 274.2 L81.7 273.1 L82.8 272.1 L83.9 271 L84.9 269.9 L86 268.9 L87.1 267.8 L88.1 266.7 L89.2 265.7 L90.3 264.6 L91.3 263.5 L92.4 262.5 L93.5 261.4 L94.5 260.3 L95.6 259.3 L96.7 258.2 L97.7 257.1 L98.8 256.1 L99.9 255 L100.9 253.9 L102 252.9 L103.1 251.8 L104.1 250.7 L105.2 249.7 L106.3 248.6 L107.3 247.5 L108.4 246.5 L109.5 245.4 L110.5 244.3 L111.6 243.3 L112.7 242.2 L113.7 241.1 L114.8 240.1 L115.9 239 L116.9 237.9 L118 236.9 L119.1 235.8 L120.1 234.7 L121.2 233.7 L122.3 232.6 L123.3 231.5 L124.4 230.5 L125.5 229.4 L126.5 228.3 L127.6 227.3 L128.7 226.2 L129.7 225.1 L130.8 224.1 L131.9 223 L132.9 221.9 L134 220.9 L135.1 219.8 L136.1 218.7 L137.2 217.7 L138.3 216.6 L139.3 215.5 L140.4 214.5 L141.5 213.4 L142.5 212.3 L143.6 211.3 L144.7 210.2 L145.7 209.1 L146.8 208.1 L147.9 207 L148.9 205.9 L150 204.9 L151.1 203.8 L152.1 202.7 L153.2 201.7 L154.3 200.6 L155.3 199.5 L156.4 198.5 L157.5 197.4 L158.5 196.3 L159.6 195.3 L160.7 194.2 L161.7 193.1 L162.8 192.1 L163.9 191 L164.9 189.9 L166 188.9 L167.1 187.8 L168.1 186.7 L169.2 185.7 L170.3 184.6 L171.3 183.5 L172.4 182.5 L173.5 181.4 L174.5 180.3 L175.6 179.3 L176.7 178.2 L177.7 177.1 L178.8 176.1 L179.9 175 L180.9 173.9 L182 172.9 L183.1 171.8 L184.1 170.7 L185.2 169.7 L186.3 168.6 L187.3 167.5 L188.4 166.5 L189.5 165.4 L190.5 164.3 L191.6 163.3 L192.7 162.2 L193.7 161.1 L194.8 160.1 L195.9 159 L196.9 157.9 L198 156.9 L199.1 155.8 L200.1 154.7 L201.2 153.7 L202.3 152.6 L203.3 151.5 L204.4 150.5 L205.5 149.4 L206.5 148.3 L207.6 147.3 L208.7 146.2 L209.7 145.1 L210.8 144.1 L211.9 143 L212.9 141.9 L214 140.9 L215.1 139.8 L216.1 138.7 L217.2 137.7 L218.3 136.6 L219.3 135.5 L220.4 134.5 L221.5 133.4 L222.5 132.3 L223.6 131.3 L224.7 130.2 L225.7 129.1 L226.8 128.1 L227.9 127 L228.9 125.9 L230 124.9 L231.1 123.8 L232.1 122.7 L233.2 121.7 L234.3 120.6 L235.3 119.5 L236.4 118.5 L237.5 117.4 L238.5 116.3 L239.6 115.3 L240.7 114.2 L241.7 113.1 L242.8 112.1 L243.9 111 L244.9 109.9 L246 108.9 L247.1 107.8 L248.1 106.7 L249.2 105.7 L250.3 104.6 L251.3 103.5 L252.4 102.5 L253.5 101.4 L254.5 100.3 L255.6 99.3 L256.7 98.2 L257.7 97.1 L258.8 96.1 L259.9 95 L260.9 93.9 L262 92.9 L263.1 91.8 L264.1 90.7 L265.2 89.7 L266.3 88.6 L267.3 87.5 L268.4 86.5 L269.5 85.4 L270.5 84.3 L271.6 83.3 L272.7 82.2 L273.7 81.1 L274.8 80.1 L275.9 79 L276.9 77.9 L278 76.9 ' fill='none' stroke='#000' stroke-width='2'/><path d='M22 -14.6 L23.1 -13.5 L24.1 -12.4 L25.2 -11.4 L26.3 -10.3 L27.3 -9.2 L28.4 -8.2 L29.5 -7.1 L30.5 -6 L31.6 -5 L32.7 -3.9 L33.7 -2.8 L34.8 -1.8 L35.9 -0.7 L36.9 0.4 L38 1.4 L39.1 2.5 L40.1 3.6 L41.2 4.6 L42.3 5.7 L43.3 6.8 L44.4 7.8 L45.5 8.9 L46.5 10 L47.6 11 L48.7 12.1 L49.7 13.2 L50.8 14.2 L51.9 15.3 L52.9 16.4 L54 17.4 L55.1 18.5 L56.1 19.6 L57.2 20.6 L58.3 21.7 L59.3 22.8 L60.4 23.8 L61.5 24.9 L62.5 26 L63.6 27 L64.7 28.1 L65.7 29.2 L66.8 30.2 L67.9 31.3 L68.9 32.4 L70 33.4 L71.1 34.5 L72.1 35.6 L73.2 36.6 L74.3 37.7 L75.3 38.8 L76.4 39.8 L77.5 40.9 L78.5 42 L79.6 43 L80.7 44.1 L81.7 45.2 L82.8 46.2 L83.9 47.3 L84.9 48.4 L86 49.4 L87.1 50.5 L88.1 51.6 L89.2 52.6 L90.3 53.7 L91.3 54.8 L92.4 55.8 L93.5 56.9 L94.5 58 L95.6 59 L96.7 60.1 L97.7 61.2 L98.8 62.2 L99.9 63.3 L100.9 64.4 L102 65.4 L103.1 66.5 L104.1 67.6 L105.2 68.6 L106.3 69.7 L107.3 70.8 L108.4 71.8 L109.5 72.9 L110.5 74 L111.6 75 L112.7 76.1 L113.7 77.2 L114.8 78.2 L115.9 79.3 L116.9 80.4 L118 81.4 L119.1 82.5 L120.1 83.6 L121.2 84.6 L122.3 85.7 L123.3 86.8 L124.4 87.8 L125.5 88.9 L126.5 90 L127.6 91 L128.7 92.1 L129.7 93.2 L130.8 94.2 L131.9 95.3 L132.9 96.4 L134 97.4 L135.1 98.5 L136.1 99.6 L137.2 100.6 L138.3 101.7 L139.3 102.8 L140.4 103.8 L141.5 104.9 L142.5 106 L143.6 107 L144.7 108.1 L145.7 109.2 L146.8 110.2 L147.9 111.3 L148.9 112.4 L150 113.4 L151.1 114.5 L152.1 115.6 L153.2 116.6 L154.3 117.7 L155.3 118.8 L156.4 119.8 L157.5 120.9 L158.5 122 L159.6 123 L160.7 124.1 L161.7 125.2 L162.8 126.2 L163.9 127.3 L164.9 128.4 L166 129.4 L167.1 130.5 L168.1 131.6 L169.2 132.6 L170.3 133.7 L171.3 134.8 L172.4 135.8 L173.5 136.9 L174.5 138 L175.6 139 L176.7 140.1 L177.7 141.2 L178.8 142.2 L179.9 143.3 L180.9 144.4 L182 145.4 L183.1 146.5 L184.1 147.6 L185.2 148.6 L186.3 149.7 L187.3 150.8 L188.4 151.8 L189.5 152.9 L190.5 154 L191.6 155 L192.7 156.1 L193.7 157.2 L194.8 158.2 L195.9 159.3 L196.9 160.4 L198 161.4 L199.1 162.5 L200.1 163.6 L201.2 164.6 L202.3 165.7 L203.3 166.8 L204.4 167.8 L205.5 168.9 L206.5 170 L207.6 171 L208.7 172.1 L209.7 173.2 L210.8 174.2 L211.9 175.3 L212.9 176.4 L214 177.4 L215.1 178.5 L216.1 179.6 L217.2 180.6 L218.3 181.7 L219.3 182.8 L220.4 183.8 L221.5 184.9 L222.5 186 L223.6 187 L224.7 188.1 L225.7 189.2 L226.8 190.2 L227.9 191.3 L228.9 192.4 L230 193.4 L231.1 194.5 L232.1 195.6 L233.2 196.6 L234.3 197.7 L235.3 198.8 L236.4 199.8 L237.5 200.9 L238.5 202 L239.6 203 L240.7 204.1 L241.7 205.2 L242.8 206.2 L243.9 207.3 L244.9 208.4 L246 209.4 L247.1 210.5 L248.1 211.6 L249.2 212.6 L250.3 213.7 L251.3 214.8 L252.4 215.8 L253.5 216.9 L254.5 218 L255.6 219 L256.7 220.1 L257.7 221.2 L258.8 222.2 L259.9 223.3 L260.9 224.4 L262 225.4 L263.1 226.5 L264.1 227.6 L265.2 228.6 L266.3 229.7 L267.3 230.8 L268.4 231.8 L269.5 232.9 L270.5 234 L271.6 235 L272.7 236.1 L273.7 237.2 L274.8 238.2 L275.9 239.3 L276.9 240.4 L278 241.4 ' fill='none' stroke='#000' stroke-width='2' stroke-dasharray='6 4'/></g></svg>",
   "choices": [
-   "\\(y \\ge x - 3\\)<br>\\(y \\gt  -x + 2\\)",
+   "\\(y \\ge x - 3\\)<br>\\(y \\lt  -x + 2\\)",
    "\\(y \\le x - 3\\)<br>\\(y \\gt  -x + 2\\)",
    "\\(y \\gt  x - 3\\)<br>\\(y \\ge -x + 2\\)",
-   "\\(y \\ge x - 3\\)<br>\\(y \\lt  -x + 2\\)"
+   "\\(y \\ge x - 3\\)<br>\\(y \\gt  -x + 2\\)"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "The line \\(y = x - 3\\) is solid and the region is above it, giving \\(y \\ge x - 3\\). The line \\(y = -x + 2\\) is dashed and the region is above it, giving \\(y \\gt  -x + 2\\). A solid line means the boundary is included (\\(\\le\\) or \\(\\ge\\))."
  },
  {
@@ -2311,12 +2311,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The shaded region shown represents the solutions to which system of inequalities?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><defs><clipPath id='c342'><rect x='22' y='22' width='256' height='256'/></clipPath></defs><line x1='22' y1='278' x2='22' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='40.3' y1='278' x2='40.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='58.6' y1='278' x2='58.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='76.9' y1='278' x2='76.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='95.1' y1='278' x2='95.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='113.4' y1='278' x2='113.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='131.7' y1='278' x2='131.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='150' y1='278' x2='150' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='168.3' y1='278' x2='168.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='186.6' y1='278' x2='186.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='204.9' y1='278' x2='204.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='223.1' y1='278' x2='223.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='241.4' y1='278' x2='241.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='259.7' y1='278' x2='259.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='278' y1='278' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='278' x2='278' y2='278' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='259.7' x2='278' y2='259.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='241.4' x2='278' y2='241.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='223.1' x2='278' y2='223.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='204.9' x2='278' y2='204.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='186.6' x2='278' y2='186.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='168.3' x2='278' y2='168.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='150' x2='278' y2='150' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='131.7' x2='278' y2='131.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='113.4' x2='278' y2='113.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='95.1' x2='278' y2='95.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='76.9' x2='278' y2='76.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='58.6' x2='278' y2='58.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='40.3' x2='278' y2='40.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='22' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='14' y1='150' x2='286' y2='150' stroke='#000' stroke-width='1.3'/><polygon points='290,150 283,153.2 283,146.9' fill='#000'/><polygon points='10,150 17,146.9 17,153.2' fill='#000'/><text x='290' y='139' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>x</tspan></text><line x1='150' y1='286' x2='150' y2='14' stroke='#000' stroke-width='1.3'/><polygon points='150,10 153.2,17 146.9,17' fill='#000'/><polygon points='150,290 146.9,283 153.2,283' fill='#000'/><text x='161' y='10' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>y</tspan></text><line x1='22' y1='147' x2='22' y2='153' stroke='#000' stroke-width='1'/><text x='22' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='40.3' y1='147' x2='40.3' y2='153' stroke='#000' stroke-width='1'/><text x='40.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='58.6' y1='147' x2='58.6' y2='153' stroke='#000' stroke-width='1'/><text x='58.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='76.9' y1='147' x2='76.9' y2='153' stroke='#000' stroke-width='1'/><text x='76.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='95.1' y1='147' x2='95.1' y2='153' stroke='#000' stroke-width='1'/><text x='95.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='113.4' y1='147' x2='113.4' y2='153' stroke='#000' stroke-width='1'/><text x='113.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='131.7' y1='147' x2='131.7' y2='153' stroke='#000' stroke-width='1'/><text x='131.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='168.3' y1='147' x2='168.3' y2='153' stroke='#000' stroke-width='1'/><text x='168.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='186.6' y1='147' x2='186.6' y2='153' stroke='#000' stroke-width='1'/><text x='186.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='204.9' y1='147' x2='204.9' y2='153' stroke='#000' stroke-width='1'/><text x='204.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='223.1' y1='147' x2='223.1' y2='153' stroke='#000' stroke-width='1'/><text x='223.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='241.4' y1='147' x2='241.4' y2='153' stroke='#000' stroke-width='1'/><text x='241.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='259.7' y1='147' x2='259.7' y2='153' stroke='#000' stroke-width='1'/><text x='259.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='278' y1='147' x2='278' y2='153' stroke='#000' stroke-width='1'/><text x='278' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><line x1='147' y1='278' x2='153' y2='278' stroke='#000' stroke-width='1'/><text x='144' y='278' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='147' y1='259.7' x2='153' y2='259.7' stroke='#000' stroke-width='1'/><text x='144' y='259.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='147' y1='241.4' x2='153' y2='241.4' stroke='#000' stroke-width='1'/><text x='144' y='241.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='147' y1='223.1' x2='153' y2='223.1' stroke='#000' stroke-width='1'/><text x='144' y='223.1' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='147' y1='204.9' x2='153' y2='204.9' stroke='#000' stroke-width='1'/><text x='144' y='204.9' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='147' y1='186.6' x2='153' y2='186.6' stroke='#000' stroke-width='1'/><text x='144' y='186.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='147' y1='168.3' x2='153' y2='168.3' stroke='#000' stroke-width='1'/><text x='144' y='168.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='147' y1='131.7' x2='153' y2='131.7' stroke='#000' stroke-width='1'/><text x='144' y='131.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='147' y1='113.4' x2='153' y2='113.4' stroke='#000' stroke-width='1'/><text x='144' y='113.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='147' y1='95.1' x2='153' y2='95.1' stroke='#000' stroke-width='1'/><text x='144' y='95.1' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='147' y1='76.9' x2='153' y2='76.9' stroke='#000' stroke-width='1'/><text x='144' y='76.9' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='147' y1='58.6' x2='153' y2='58.6' stroke='#000' stroke-width='1'/><text x='144' y='58.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='147' y1='40.3' x2='153' y2='40.3' stroke='#000' stroke-width='1'/><text x='144' y='40.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='147' y1='22' x2='153' y2='22' stroke='#000' stroke-width='1'/><text x='144' y='22' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><text x='142' y='161' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>O</tspan></text><g clip-path='url(#c342)'><polygon points='259.7,22 22,22 22,40.3 131.7,150' fill='#bdbdbd' fill-opacity='0.55' stroke='none'/><path d='M22 259.7 L23.1 258.6 L24.1 257.6 L25.2 256.5 L26.3 255.4 L27.3 254.4 L28.4 253.3 L29.5 252.2 L30.5 251.2 L31.6 250.1 L32.7 249 L33.7 248 L34.8 246.9 L35.9 245.8 L36.9 244.8 L38 243.7 L39.1 242.6 L40.1 241.6 L41.2 240.5 L42.3 239.4 L43.3 238.4 L44.4 237.3 L45.5 236.2 L46.5 235.2 L47.6 234.1 L48.7 233 L49.7 232 L50.8 230.9 L51.9 229.8 L52.9 228.8 L54 227.7 L55.1 226.6 L56.1 225.6 L57.2 224.5 L58.3 223.4 L59.3 222.4 L60.4 221.3 L61.5 220.2 L62.5 219.2 L63.6 218.1 L64.7 217 L65.7 216 L66.8 214.9 L67.9 213.8 L68.9 212.8 L70 211.7 L71.1 210.6 L72.1 209.6 L73.2 208.5 L74.3 207.4 L75.3 206.4 L76.4 205.3 L77.5 204.2 L78.5 203.2 L79.6 202.1 L80.7 201 L81.7 200 L82.8 198.9 L83.9 197.8 L84.9 196.8 L86 195.7 L87.1 194.6 L88.1 193.6 L89.2 192.5 L90.3 191.4 L91.3 190.4 L92.4 189.3 L93.5 188.2 L94.5 187.2 L95.6 186.1 L96.7 185 L97.7 184 L98.8 182.9 L99.9 181.8 L100.9 180.8 L102 179.7 L103.1 178.6 L104.1 177.6 L105.2 176.5 L106.3 175.4 L107.3 174.4 L108.4 173.3 L109.5 172.2 L110.5 171.2 L111.6 170.1 L112.7 169 L113.7 168 L114.8 166.9 L115.9 165.8 L116.9 164.8 L118 163.7 L119.1 162.6 L120.1 161.6 L121.2 160.5 L122.3 159.4 L123.3 158.4 L124.4 157.3 L125.5 156.2 L126.5 155.2 L127.6 154.1 L128.7 153 L129.7 152 L130.8 150.9 L131.9 149.8 L132.9 148.8 L134 147.7 L135.1 146.6 L136.1 145.6 L137.2 144.5 L138.3 143.4 L139.3 142.4 L140.4 141.3 L141.5 140.2 L142.5 139.2 L143.6 138.1 L144.7 137 L145.7 136 L146.8 134.9 L147.9 133.8 L148.9 132.8 L150 131.7 L151.1 130.6 L152.1 129.6 L153.2 128.5 L154.3 127.4 L155.3 126.4 L156.4 125.3 L157.5 124.2 L158.5 123.2 L159.6 122.1 L160.7 121 L161.7 120 L162.8 118.9 L163.9 117.8 L164.9 116.8 L166 115.7 L167.1 114.6 L168.1 113.6 L169.2 112.5 L170.3 111.4 L171.3 110.4 L172.4 109.3 L173.5 108.2 L174.5 107.2 L175.6 106.1 L176.7 105 L177.7 104 L178.8 102.9 L179.9 101.8 L180.9 100.8 L182 99.7 L183.1 98.6 L184.1 97.6 L185.2 96.5 L186.3 95.4 L187.3 94.4 L188.4 93.3 L189.5 92.2 L190.5 91.2 L191.6 90.1 L192.7 89 L193.7 88 L194.8 86.9 L195.9 85.8 L196.9 84.8 L198 83.7 L199.1 82.6 L200.1 81.6 L201.2 80.5 L202.3 79.4 L203.3 78.4 L204.4 77.3 L205.5 76.2 L206.5 75.2 L207.6 74.1 L208.7 73 L209.7 72 L210.8 70.9 L211.9 69.8 L212.9 68.8 L214 67.7 L215.1 66.6 L216.1 65.6 L217.2 64.5 L218.3 63.4 L219.3 62.4 L220.4 61.3 L221.5 60.2 L222.5 59.2 L223.6 58.1 L224.7 57 L225.7 56 L226.8 54.9 L227.9 53.8 L228.9 52.8 L230 51.7 L231.1 50.6 L232.1 49.6 L233.2 48.5 L234.3 47.4 L235.3 46.4 L236.4 45.3 L237.5 44.2 L238.5 43.2 L239.6 42.1 L240.7 41 L241.7 40 L242.8 38.9 L243.9 37.8 L244.9 36.8 L246 35.7 L247.1 34.6 L248.1 33.6 L249.2 32.5 L250.3 31.4 L251.3 30.4 L252.4 29.3 L253.5 28.2 L254.5 27.2 L255.6 26.1 L256.7 25 L257.7 24 L258.8 22.9 L259.9 21.8 L260.9 20.8 L262 19.7 L263.1 18.6 L264.1 17.6 L265.2 16.5 L266.3 15.4 L267.3 14.4 L268.4 13.3 L269.5 12.2 L270.5 11.2 L271.6 10.1 L272.7 9 L273.7 8 L274.8 6.9 L275.9 5.8 L276.9 4.8 L278 3.7 ' fill='none' stroke='#000' stroke-width='2' stroke-dasharray='6 4'/><path d='M22 40.3 L23.1 41.4 L24.1 42.4 L25.2 43.5 L26.3 44.6 L27.3 45.6 L28.4 46.7 L29.5 47.8 L30.5 48.8 L31.6 49.9 L32.7 51 L33.7 52 L34.8 53.1 L35.9 54.2 L36.9 55.2 L38 56.3 L39.1 57.4 L40.1 58.4 L41.2 59.5 L42.3 60.6 L43.3 61.6 L44.4 62.7 L45.5 63.8 L46.5 64.8 L47.6 65.9 L48.7 67 L49.7 68 L50.8 69.1 L51.9 70.2 L52.9 71.2 L54 72.3 L55.1 73.4 L56.1 74.4 L57.2 75.5 L58.3 76.6 L59.3 77.6 L60.4 78.7 L61.5 79.8 L62.5 80.8 L63.6 81.9 L64.7 83 L65.7 84 L66.8 85.1 L67.9 86.2 L68.9 87.2 L70 88.3 L71.1 89.4 L72.1 90.4 L73.2 91.5 L74.3 92.6 L75.3 93.6 L76.4 94.7 L77.5 95.8 L78.5 96.8 L79.6 97.9 L80.7 99 L81.7 100 L82.8 101.1 L83.9 102.2 L84.9 103.2 L86 104.3 L87.1 105.4 L88.1 106.4 L89.2 107.5 L90.3 108.6 L91.3 109.6 L92.4 110.7 L93.5 111.8 L94.5 112.8 L95.6 113.9 L96.7 115 L97.7 116 L98.8 117.1 L99.9 118.2 L100.9 119.2 L102 120.3 L103.1 121.4 L104.1 122.4 L105.2 123.5 L106.3 124.6 L107.3 125.6 L108.4 126.7 L109.5 127.8 L110.5 128.8 L111.6 129.9 L112.7 131 L113.7 132 L114.8 133.1 L115.9 134.2 L116.9 135.2 L118 136.3 L119.1 137.4 L120.1 138.4 L121.2 139.5 L122.3 140.6 L123.3 141.6 L124.4 142.7 L125.5 143.8 L126.5 144.8 L127.6 145.9 L128.7 147 L129.7 148 L130.8 149.1 L131.9 150.2 L132.9 151.2 L134 152.3 L135.1 153.4 L136.1 154.4 L137.2 155.5 L138.3 156.6 L139.3 157.6 L140.4 158.7 L141.5 159.8 L142.5 160.8 L143.6 161.9 L144.7 163 L145.7 164 L146.8 165.1 L147.9 166.2 L148.9 167.2 L150 168.3 L151.1 169.4 L152.1 170.4 L153.2 171.5 L154.3 172.6 L155.3 173.6 L156.4 174.7 L157.5 175.8 L158.5 176.8 L159.6 177.9 L160.7 179 L161.7 180 L162.8 181.1 L163.9 182.2 L164.9 183.2 L166 184.3 L167.1 185.4 L168.1 186.4 L169.2 187.5 L170.3 188.6 L171.3 189.6 L172.4 190.7 L173.5 191.8 L174.5 192.8 L175.6 193.9 L176.7 195 L177.7 196 L178.8 197.1 L179.9 198.2 L180.9 199.2 L182 200.3 L183.1 201.4 L184.1 202.4 L185.2 203.5 L186.3 204.6 L187.3 205.6 L188.4 206.7 L189.5 207.8 L190.5 208.8 L191.6 209.9 L192.7 211 L193.7 212 L194.8 213.1 L195.9 214.2 L196.9 215.2 L198 216.3 L199.1 217.4 L200.1 218.4 L201.2 219.5 L202.3 220.6 L203.3 221.6 L204.4 222.7 L205.5 223.8 L206.5 224.8 L207.6 225.9 L208.7 227 L209.7 228 L210.8 229.1 L211.9 230.2 L212.9 231.2 L214 232.3 L215.1 233.4 L216.1 234.4 L217.2 235.5 L218.3 236.6 L219.3 237.6 L220.4 238.7 L221.5 239.8 L222.5 240.8 L223.6 241.9 L224.7 243 L225.7 244 L226.8 245.1 L227.9 246.2 L228.9 247.2 L230 248.3 L231.1 249.4 L232.1 250.4 L233.2 251.5 L234.3 252.6 L235.3 253.6 L236.4 254.7 L237.5 255.8 L238.5 256.8 L239.6 257.9 L240.7 259 L241.7 260 L242.8 261.1 L243.9 262.2 L244.9 263.2 L246 264.3 L247.1 265.4 L248.1 266.4 L249.2 267.5 L250.3 268.6 L251.3 269.6 L252.4 270.7 L253.5 271.8 L254.5 272.8 L255.6 273.9 L256.7 275 L257.7 276 L258.8 277.1 L259.9 278.2 L260.9 279.2 L262 280.3 L263.1 281.4 L264.1 282.4 L265.2 283.5 L266.3 284.6 L267.3 285.6 L268.4 286.7 L269.5 287.8 L270.5 288.8 L271.6 289.9 L272.7 291 L273.7 292 L274.8 293.1 L275.9 294.2 L276.9 295.2 L278 296.3 ' fill='none' stroke='#000' stroke-width='2'/></g></svg>",
   "choices": [
-   "\\(y \\lt  x + 1\\)<br>\\(y \\ge -x - 1\\)",
-   "\\(y \\ge x + 1\\)<br>\\(y \\gt  -x - 1\\)",
    "\\(y \\gt  x + 1\\)<br>\\(y \\ge -x - 1\\)",
+   "\\(y \\ge x + 1\\)<br>\\(y \\gt  -x - 1\\)",
+   "\\(y \\lt  x + 1\\)<br>\\(y \\ge -x - 1\\)",
    "\\(y \\gt  x + 1\\)<br>\\(y \\le -x - 1\\)"
   ],
-  "answer": 2,
+  "answer": 0,
   "explanation": "The line \\(y = x + 1\\) is dashed and the region is above it, giving \\(y \\gt  x + 1\\). The line \\(y = -x - 1\\) is solid and the region is above it, giving \\(y \\ge -x - 1\\). A solid line means the boundary is included (\\(\\le\\) or \\(\\ge\\))."
  },
  {
@@ -2328,12 +2328,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A car's gas tank holds 15 gallons when full. The car uses 1 gallon of gas for every 25 miles it is driven. Which function gives the number of gallons of gas, \\(g(m)\\), remaining in the tank after the car is driven \\(m\\) miles, starting with a full tank?</p>",
   "choices": [
-   "\\(g(m) = 15 - \\dfrac{m}{25}\\)",
    "\\(g(m) = 25(15 - m)\\)",
-   "\\(g(m) = \\dfrac{15 - m}{25}\\)",
-   "\\(g(m) = 15 - 25m\\)"
+   "\\(g(m) = 15 - \\dfrac{m}{25}\\)",
+   "\\(g(m) = 15 - 25m\\)",
+   "\\(g(m) = \\dfrac{15 - m}{25}\\)"
   ],
-  "answer": 0,
+  "answer": 1,
   "explanation": "Driving \\(m\\) miles uses \\(\\frac{m}{25}\\) gallons, so the amount left is \\(15 - \\frac{m}{25}\\)."
  },
  {
@@ -2345,12 +2345,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A swimming pool contains 12,000 gallons of water. Water is drained from the pool at a constant rate of 15 gallons per minute. Which function gives the number of gallons of water, \\(P(h)\\), in the pool \\(h\\) hours after draining begins?</p>",
   "choices": [
-   "\\(P(h) = 12{,}000 - \\dfrac{15}{60}h\\)",
    "\\(P(h) = 12{,}000 - 15h\\)",
-   "\\(P(h) = 12{,}000 - 900h\\)",
-   "\\(P(h) = 12{,}000 - 75h\\)"
+   "\\(P(h) = 12{,}000 - \\dfrac{15}{60}h\\)",
+   "\\(P(h) = 12{,}000 - 75h\\)",
+   "\\(P(h) = 12{,}000 - 900h\\)"
   ],
-  "answer": 2,
+  "answer": 3,
   "explanation": "In one hour (60 minutes), \\(15 \\times 60 = 900\\) gallons are drained. After \\(h\\) hours, \\(900h\\) gallons have been removed, so \\(P(h) = 12{,}000 - 900h\\)."
  },
  {
@@ -2363,8 +2363,8 @@ window.SAT_QUESTIONS = [
   "stem": "<p>A printer is loaded with 500 sheets of paper and prints at a constant rate of 18 pages per minute, using one sheet per page. Which function gives the number of sheets, \\(p(s)\\), remaining in the printer \\(s\\) seconds after it begins printing?</p>",
   "choices": [
    "\\(p(s) = 500 - \\dfrac{60}{18}s\\)",
-   "\\(p(s) = 500 - 18s\\)",
    "\\(p(s) = 500 - 1080s\\)",
+   "\\(p(s) = 500 - 18s\\)",
    "\\(p(s) = 500 - \\dfrac{3}{10}s\\)"
   ],
   "answer": 3,
@@ -2379,12 +2379,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A car's gas tank holds 14 gallons when full. The car uses 1 gallon of gas for every 28 miles it is driven. Which function gives the number of gallons of gas, \\(g(m)\\), remaining in the tank after the car is driven \\(m\\) miles, starting with a full tank?</p>",
   "choices": [
-   "\\(g(m) = 14 - \\dfrac{m}{28}\\)",
+   "\\(g(m) = \\dfrac{14 - m}{28}\\)",
    "\\(g(m) = 28(14 - m)\\)",
-   "\\(g(m) = 14 - 28m\\)",
-   "\\(g(m) = \\dfrac{14 - m}{28}\\)"
+   "\\(g(m) = 14 - \\dfrac{m}{28}\\)",
+   "\\(g(m) = 14 - 28m\\)"
   ],
-  "answer": 0,
+  "answer": 2,
   "explanation": "Driving \\(m\\) miles uses \\(\\frac{m}{28}\\) gallons, so the amount left is \\(14 - \\frac{m}{28}\\)."
  },
  {
@@ -2559,12 +2559,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A parking garage charges $15 for the first hour and $3 for each additional half hour. Which equation gives the total charge \\(C\\), in dollars, for parking \\(h\\) hours, where \\(h\\) is a whole number greater than or equal to 1?</p>",
   "choices": [
-   "\\(C = 15 + 3(h - 1)\\)",
    "\\(C = 15 + 6(h - 1)\\)",
+   "\\(C = 15h + 6(h - 1)\\)",
    "\\(C = 15 + 6h\\)",
-   "\\(C = 15h + 6(h - 1)\\)"
+   "\\(C = 15 + 3(h - 1)\\)"
   ],
-  "answer": 1,
+  "answer": 0,
   "explanation": "After the first hour there are \\(h - 1\\) additional hours, each containing two half hours at $3, or $6 per hour. So \\(C = 15 + 6(h - 1)\\)."
  },
  {
@@ -2576,12 +2576,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>An electrician charges $72 for the first hour of a job and $15 for each additional 15 minutes. Which expression gives the total charge, in dollars, for a job that lasts \\(h\\) hours, where \\(h\\) is a whole number greater than 1?</p>",
   "choices": [
+   "\\(72 + 60(h - 1)\\)",
    "\\(132h\\)",
    "\\(72 + 60h\\)",
-   "\\(72 + 15(h - 1)\\)",
-   "\\(72 + 60(h - 1)\\)"
+   "\\(72 + 15(h - 1)\\)"
   ],
-  "answer": 3,
+  "answer": 0,
   "explanation": "There are 4 fifteen-minute periods in each additional hour, so each additional hour costs \\(4(15) = 60\\) dollars. For \\(h - 1\\) additional hours the total is \\(72 + 60(h - 1)\\)."
  },
  {
@@ -2593,12 +2593,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A moving company charges $120 for the first 3 miles of a move and $2 for each additional mile. Which expression gives the total charge, in dollars, for a move of \\(d\\) miles, where \\(d\\) is a whole number greater than 3?</p>",
   "choices": [
-   "\\(120d + 2(d - 3)\\)",
    "\\(120 + 6(d - 1)\\)",
-   "\\(120 + 2d\\)",
-   "\\(120 + 2(d - 3)\\)"
+   "\\(120 + 2(d - 3)\\)",
+   "\\(120d + 2(d - 3)\\)",
+   "\\(120 + 2d\\)"
   ],
-  "answer": 3,
+  "answer": 1,
   "explanation": "The first 3 miles cost $120 in total, and each of the remaining \\(d - 3\\) miles costs $2, so the charge is \\(120 + 2(d - 3)\\)."
  },
  {
@@ -2610,12 +2610,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A parking garage charges $10 for the first hour and $2 for each additional half hour. Which equation gives the total charge \\(C\\), in dollars, for parking \\(h\\) hours, where \\(h\\) is a whole number greater than or equal to 1?</p>",
   "choices": [
-   "\\(C = 10h + 4(h - 1)\\)",
-   "\\(C = 10 + 4h\\)",
    "\\(C = 10 + 2(h - 1)\\)",
-   "\\(C = 10 + 4(h - 1)\\)"
+   "\\(C = 10h + 4(h - 1)\\)",
+   "\\(C = 10 + 4(h - 1)\\)",
+   "\\(C = 10 + 4h\\)"
   ],
-  "answer": 3,
+  "answer": 2,
   "explanation": "After the first hour there are \\(h - 1\\) additional hours, each containing two half hours at $2, or $4 per hour. So \\(C = 10 + 4(h - 1)\\)."
  },
  {
@@ -2627,12 +2627,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\((x + 4)(x - 3)\\)?</p>",
   "choices": [
-   "\\(x^2 + x + 12\\)",
    "\\(x^2 + x - 12\\)",
-   "\\(x^2 - 12x + 1\\)",
-   "\\(x^2 - 12\\)"
+   "\\(x^2 + x + 12\\)",
+   "\\(x^2 - 12\\)",
+   "\\(x^2 - 12x + 1\\)"
   ],
-  "answer": 1,
+  "answer": 0,
   "explanation": "\\((x + 4)(x - 3) = x^2 - 3x + 4x - 12 = x^2 + x - 12\\)."
  },
  {
@@ -2644,12 +2644,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\((3x + 2)(x + 4)\\)?</p>",
   "choices": [
-   "\\(3x^2 + 14x + 6\\)",
-   "\\(3x^2 + 12x + 8\\)",
+   "\\(3x^2 + 14x + 8\\)",
    "\\(3x^2 + 6x + 8\\)",
-   "\\(3x^2 + 14x + 8\\)"
+   "\\(3x^2 + 12x + 8\\)",
+   "\\(3x^2 + 14x + 6\\)"
   ],
-  "answer": 3,
+  "answer": 0,
   "explanation": "Use the distributive property: \\(3x(x + 4) + 2(x + 4) = 3x^2 + 12x + 2x + 8\\), which combines to \\(3x^2 + 14x + 8\\)."
  },
  {
@@ -2661,12 +2661,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which of the following is equivalent to \\((x - 6)(x + 1) + 4x\\)?</p>",
   "choices": [
-   "\\(x^2 - x - 6\\)",
    "\\(x^2 - 9x - 6\\)",
+   "\\(x^2 - x - 5\\)",
    "\\(x^2 + 4x - 6\\)",
-   "\\(x^2 - x - 5\\)"
+   "\\(x^2 - x - 6\\)"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "\\((x - 6)(x + 1) = x^2 - 5x - 6\\). Then adding \\(4x\\) gives \\(x^2 - x - 6\\)."
  },
  {
@@ -2679,8 +2679,8 @@ window.SAT_QUESTIONS = [
   "stem": "<p>Which expression is equivalent to \\((x - 7)(x - 4)\\)?</p>",
   "choices": [
    "\\(x^2 - 11x + 28\\)",
-   "\\(x^2 - 11x - 28\\)",
    "\\(x^2 + 28\\)",
+   "\\(x^2 - 11x - 28\\)",
    "\\(x^2 + 28x - 11\\)"
   ],
   "answer": 0,
@@ -2695,12 +2695,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\((9x^2 + 4x - 1) - (3x^2 - 8x - 5)\\)?</p>",
   "choices": [
-   "\\(6x^2 - 4x - 6\\)",
-   "\\(12x^2 - 4x - 6\\)",
    "\\(6x^2 + 12x + 4\\)",
-   "\\(6x^2 + 12x - 6\\)"
+   "\\(6x^2 - 4x - 6\\)",
+   "\\(6x^2 + 12x - 6\\)",
+   "\\(12x^2 - 4x - 6\\)"
   ],
-  "answer": 2,
+  "answer": 0,
   "explanation": "Subtracting a polynomial means subtracting every term: \\(9x^2 + 4x - 1 - 3x^2 + 8x + 5\\). Combining like terms gives \\(6x^2 + 12x + 4\\)."
  },
  {
@@ -2712,9 +2712,9 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\((5y^2 - 2y - 5) - (4y^2 - 8y - 7)\\)?</p>",
   "choices": [
-   "\\(y^2 - 10y - 12\\)",
-   "\\(9y^2 - 10y - 12\\)",
    "\\(y^2 + 6y - 12\\)",
+   "\\(9y^2 - 10y - 12\\)",
+   "\\(y^2 - 10y - 12\\)",
    "\\(y^2 + 6y + 2\\)"
   ],
   "answer": 3,
@@ -2730,9 +2730,9 @@ window.SAT_QUESTIONS = [
   "stem": "<p>Which expression is equivalent to \\(4x(2x + 1) - 9x\\)?</p>",
   "choices": [
    "\\(8x^2 - 5x\\)",
+   "\\(-x^2 + 4x\\)",
    "\\(8x^2 - 8x\\)",
-   "\\(8x - 5\\)",
-   "\\(-x^2 + 4x\\)"
+   "\\(8x - 5\\)"
   ],
   "answer": 0,
   "explanation": "Distribute: \\(4x(2x + 1) = 8x^2 + 4x\\). Combining like terms gives \\(8x^2 - 5x\\)."
@@ -2746,12 +2746,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\((2x^2 - 5x + 5) - (8x^2 + 4x + 1)\\)?</p>",
   "choices": [
-   "\\(-6x^2 - 9x + 4\\)",
-   "\\(-6x^2 - x + 6\\)",
    "\\(-6x^2 - 9x + 6\\)",
-   "\\(10x^2 - x + 6\\)"
+   "\\(-6x^2 - x + 6\\)",
+   "\\(10x^2 - x + 6\\)",
+   "\\(-6x^2 - 9x + 4\\)"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "Subtracting a polynomial means subtracting every term: \\(2x^2 - 5x + 5 - 8x^2 - 4x - 1\\). Combining like terms gives \\(-6x^2 - 9x + 4\\)."
  },
  {
@@ -2765,7 +2765,7 @@ window.SAT_QUESTIONS = [
   "answer": [
    "2"
   ],
-  "explanation": "\\(f(1) = (1)^2 + 2(1) - 1 = 1 + 2 - 1 = 2\\). Note that \\((1)^2 = 1\\)."
+  "explanation": "\\(f(1) = (1)^2 + 2(1) - 1 = 1 + 2 - 1 = 2\\)."
  },
  {
   "id": "adv-eval-quad-v2",
@@ -2778,7 +2778,7 @@ window.SAT_QUESTIONS = [
   "answer": [
    "10"
   ],
-  "explanation": "\\(g(-2) = 2(-2)^2 - 2(-2) - 2 = 8 + 4 - 2 = 10\\). Note that \\((-2)^2 = 4\\)."
+  "explanation": "\\(g(-2) = 2(-2)^2 - 2(-2) - 2 = 8 + 4 - 2 = 10\\). Note that \\((-2)^2 = 4\\), not \\(-4\\)."
  },
  {
   "id": "adv-eval-quad-v3",
@@ -2909,12 +2909,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\(x^2 - 10x + 21\\)?</p>",
   "choices": [
+   "\\((x - 7)(x - 3)\\)",
    "\\((x + 21)(x + 1)\\)",
    "\\((x - 7)(x + 3)\\)",
-   "\\((x - 7)(x - 3)\\)",
    "\\((x + 7)(x + 3)\\)"
   ],
-  "answer": 2,
+  "answer": 0,
   "explanation": "Find two numbers whose product is 21 and whose sum is -10: \\(-7\\) and \\(-3\\). So \\(x^2 - 10x + 21 = (x - 7)(x - 3)\\)."
  },
  {
@@ -2926,12 +2926,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\(n^2 + 2n - 8\\)?</p>",
   "choices": [
-   "\\((n + 4)(n + 2)\\)",
-   "\\((n - 4)(n + 2)\\)",
    "\\((n - 8)(n + 1)\\)",
-   "\\((n + 4)(n - 2)\\)"
+   "\\((n + 4)(n + 2)\\)",
+   "\\((n + 4)(n - 2)\\)",
+   "\\((n - 4)(n + 2)\\)"
   ],
-  "answer": 3,
+  "answer": 2,
   "explanation": "Find two numbers whose product is -8 and whose sum is 2: \\(4\\) and \\(-2\\). So \\(n^2 + 2n - 8 = (n + 4)(n - 2)\\)."
  },
  {
@@ -2960,8 +2960,8 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\(x^2 + 11x + 30\\)?</p>",
   "choices": [
-   "\\((x + 30)(x + 1)\\)",
    "\\((x + 5)(x - 6)\\)",
+   "\\((x + 30)(x + 1)\\)",
    "\\((x - 5)(x - 6)\\)",
    "\\((x + 5)(x + 6)\\)"
   ],
@@ -2978,11 +2978,11 @@ window.SAT_QUESTIONS = [
   "stem": "<p>Which expression is equivalent to \\((2x^{4})(5x^{3})\\)?</p>",
   "choices": [
    "\\(7x^{12}\\)",
-   "\\(7x^{7}\\)",
    "\\(10x^{12}\\)",
-   "\\(10x^{7}\\)"
+   "\\(10x^{7}\\)",
+   "\\(7x^{7}\\)"
   ],
-  "answer": 3,
+  "answer": 2,
   "explanation": "Multiply the coefficients and add the exponents: \\(2\\cdot5 = 10\\) and \\(x^{4}\\cdot x^{3} = x^{7}\\)."
  },
  {
@@ -2995,11 +2995,11 @@ window.SAT_QUESTIONS = [
   "stem": "<p>Which expression is equivalent to \\((4x^{3})^{3}\\)?</p>",
   "choices": [
    "\\(64x^{6}\\)",
-   "\\(64x^{9}\\)",
    "\\(12x^{9}\\)",
-   "\\(4x^{9}\\)"
+   "\\(4x^{9}\\)",
+   "\\(64x^{9}\\)"
   ],
-  "answer": 1,
+  "answer": 3,
   "explanation": "Raise each factor to the power 3: \\(4^{3} = 64\\) and \\((x^{3})^{3} = x^{9}\\)."
  },
  {
@@ -3011,9 +3011,9 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>For \\(x \\ne 0\\), which expression is equivalent to \\(\\frac{15x^{10}}{3x^{2}}\\)?</p>",
   "choices": [
-   "\\(12x^{8}\\)",
    "\\(5x^{12}\\)",
    "\\(5x^{5}\\)",
+   "\\(12x^{8}\\)",
    "\\(5x^{8}\\)"
   ],
   "answer": 3,
@@ -3028,12 +3028,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\((6x^{4})(3x^{6})\\)?</p>",
   "choices": [
-   "\\(9x^{24}\\)",
-   "\\(18x^{24}\\)",
    "\\(9x^{10}\\)",
-   "\\(18x^{10}\\)"
+   "\\(9x^{24}\\)",
+   "\\(18x^{10}\\)",
+   "\\(18x^{24}\\)"
   ],
-  "answer": 3,
+  "answer": 2,
   "explanation": "Multiply the coefficients and add the exponents: \\(6\\cdot3 = 18\\) and \\(x^{4}\\cdot x^{6} = x^{10}\\)."
  },
  {
@@ -3046,11 +3046,11 @@ window.SAT_QUESTIONS = [
   "stem": "<p>The function \\(P(t) = 1{,}200(1.06)^{t}\\) models the population of a town, in people, \\(t\\) years after 2010. What is the best interpretation of \\(1{,}200\\) in this context?</p>",
   "choices": [
    "The maximum population of the town",
-   "The increase in the population each year",
    "The population of the town in 2010",
+   "The increase in the population each year",
    "The population of the town 6 years after 2010"
   ],
-  "answer": 2,
+  "answer": 1,
   "explanation": "When \\(t = 0\\) (the year 2010), \\(P(0) = 1{,}200(1.06)^{0} = 1{,}200\\). So 1{,}200 is the population in 2010."
  },
  {
@@ -3062,12 +3062,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The value of a car, in dollars, \\(t\\) years after it was purchased is modeled by \\(V(t) = 18{,}000(0.88)^{t}\\). What is the best interpretation of \\(0.88\\) in this context?</p>",
   "choices": [
+   "Each year, the value of the car is 88% of its value the previous year.",
    "The value of the car when it was purchased",
    "Each year, the value of the car decreases by 88%.",
-   "Each year, the value of the car decreases by $15,840.",
-   "Each year, the value of the car is 88% of its value the previous year."
+   "Each year, the value of the car decreases by $15,840."
   ],
-  "answer": 3,
+  "answer": 0,
   "explanation": "In an exponential model \\(a(b)^{t}\\), the base \\(b\\) is the factor by which the value is multiplied each year. Multiplying by 0.88 means each year's value is 88% of the previous year's (a decrease of 12%)."
  },
  {
@@ -3079,12 +3079,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A biologist models the number of cells in a culture \\(h\\) hours after observation began with \\(C(h) = 75(2)^{h/3}\\). What is the best interpretation of \\(3\\) in this context?</p>",
   "choices": [
-   "The number of times the cells double each hour",
-   "The number of cells after 1 hour",
    "The number of cells when observation began",
-   "The number of hours it takes for the number of cells to double"
+   "The number of cells after 1 hour",
+   "The number of hours it takes for the number of cells to double",
+   "The number of times the cells double each hour"
   ],
-  "answer": 3,
+  "answer": 2,
   "explanation": "The exponent \\(\\frac{h}{3}\\) increases by 1 each time \\(h\\) increases by 3, so the number of cells doubles every 3 hours."
  },
  {
@@ -3096,12 +3096,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The number of subscribers to a newsletter \\(m\\) months after it launched is modeled by \\(S(m) = 320(1.08)^{m}\\). What is the best interpretation of \\(1.08\\) in this context?</p>",
   "choices": [
-   "The number of subscribers when the newsletter launched",
-   "The number of subscribers increases by 8 each month.",
    "The number of subscribers increases by 8% each month.",
-   "The number of subscribers increases by 108% each month."
+   "The number of subscribers increases by 8 each month.",
+   "The number of subscribers increases by 108% each month.",
+   "The number of subscribers when the newsletter launched"
   ],
-  "answer": 2,
+  "answer": 0,
   "explanation": "Multiplying by \\(1.08 = 1 + 0.08\\) each month means the number of subscribers grows by 8% per month."
  },
  {
@@ -3113,12 +3113,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The graph of the quadratic function \\(f\\) is shown. What is the \\(y\\)-intercept of the graph of \\(y = f(x)\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><defs><clipPath id='c368'><rect x='22' y='22' width='256' height='256'/></clipPath></defs><line x1='22' y1='278' x2='22' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='40.3' y1='278' x2='40.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='58.6' y1='278' x2='58.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='76.9' y1='278' x2='76.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='95.1' y1='278' x2='95.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='113.4' y1='278' x2='113.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='131.7' y1='278' x2='131.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='150' y1='278' x2='150' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='168.3' y1='278' x2='168.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='186.6' y1='278' x2='186.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='204.9' y1='278' x2='204.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='223.1' y1='278' x2='223.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='241.4' y1='278' x2='241.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='259.7' y1='278' x2='259.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='278' y1='278' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='278' x2='278' y2='278' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='263.8' x2='278' y2='263.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='249.6' x2='278' y2='249.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='235.3' x2='278' y2='235.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='221.1' x2='278' y2='221.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='206.9' x2='278' y2='206.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='192.7' x2='278' y2='192.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='178.4' x2='278' y2='178.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='164.2' x2='278' y2='164.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='150' x2='278' y2='150' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='135.8' x2='278' y2='135.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='121.6' x2='278' y2='121.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='107.3' x2='278' y2='107.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='93.1' x2='278' y2='93.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='78.9' x2='278' y2='78.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='64.7' x2='278' y2='64.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='50.4' x2='278' y2='50.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='36.2' x2='278' y2='36.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='22' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='14' y1='150' x2='286' y2='150' stroke='#000' stroke-width='1.3'/><polygon points='290,150 283,153.2 283,146.9' fill='#000'/><polygon points='10,150 17,146.9 17,153.2' fill='#000'/><text x='290' y='139' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>x</tspan></text><line x1='150' y1='286' x2='150' y2='14' stroke='#000' stroke-width='1.3'/><polygon points='150,10 153.2,17 146.9,17' fill='#000'/><polygon points='150,290 146.9,283 153.2,283' fill='#000'/><text x='161' y='10' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>y</tspan></text><line x1='22' y1='147' x2='22' y2='153' stroke='#000' stroke-width='1'/><text x='22' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='40.3' y1='147' x2='40.3' y2='153' stroke='#000' stroke-width='1'/><text x='40.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='58.6' y1='147' x2='58.6' y2='153' stroke='#000' stroke-width='1'/><text x='58.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='76.9' y1='147' x2='76.9' y2='153' stroke='#000' stroke-width='1'/><text x='76.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='95.1' y1='147' x2='95.1' y2='153' stroke='#000' stroke-width='1'/><text x='95.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='113.4' y1='147' x2='113.4' y2='153' stroke='#000' stroke-width='1'/><text x='113.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='131.7' y1='147' x2='131.7' y2='153' stroke='#000' stroke-width='1'/><text x='131.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='168.3' y1='147' x2='168.3' y2='153' stroke='#000' stroke-width='1'/><text x='168.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='186.6' y1='147' x2='186.6' y2='153' stroke='#000' stroke-width='1'/><text x='186.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='204.9' y1='147' x2='204.9' y2='153' stroke='#000' stroke-width='1'/><text x='204.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='223.1' y1='147' x2='223.1' y2='153' stroke='#000' stroke-width='1'/><text x='223.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='241.4' y1='147' x2='241.4' y2='153' stroke='#000' stroke-width='1'/><text x='241.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='259.7' y1='147' x2='259.7' y2='153' stroke='#000' stroke-width='1'/><text x='259.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='278' y1='147' x2='278' y2='153' stroke='#000' stroke-width='1'/><text x='278' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><line x1='147' y1='263.8' x2='153' y2='263.8' stroke='#000' stroke-width='1'/><text x='144' y='263.8' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−8</text><line x1='147' y1='235.3' x2='153' y2='235.3' stroke='#000' stroke-width='1'/><text x='144' y='235.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='147' y1='206.9' x2='153' y2='206.9' stroke='#000' stroke-width='1'/><text x='144' y='206.9' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='147' y1='178.4' x2='153' y2='178.4' stroke='#000' stroke-width='1'/><text x='144' y='178.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='147' y1='121.6' x2='153' y2='121.6' stroke='#000' stroke-width='1'/><text x='144' y='121.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='147' y1='93.1' x2='153' y2='93.1' stroke='#000' stroke-width='1'/><text x='144' y='93.1' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='147' y1='64.7' x2='153' y2='64.7' stroke='#000' stroke-width='1'/><text x='144' y='64.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='147' y1='36.2' x2='153' y2='36.2' stroke='#000' stroke-width='1'/><text x='144' y='36.2' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>8</text><text x='142' y='161' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>O</tspan></text><g clip-path='url(#c368)'><path d='M22 320.7 L23.1 314.1 L24.1 307.6 L25.2 301.2 L26.3 294.9 L27.3 288.7 L28.4 282.6 L29.5 276.6 L30.5 270.7 L31.6 264.9 L32.7 259.1 L33.7 253.5 L34.8 248 L35.9 242.6 L36.9 237.2 L38 232 L39.1 226.9 L40.1 221.8 L41.2 216.9 L42.3 212 L43.3 207.3 L44.4 202.6 L45.5 198.1 L46.5 193.6 L47.6 189.3 L48.7 185 L49.7 180.8 L50.8 176.7 L51.9 172.8 L52.9 168.9 L54 165.1 L55.1 161.4 L56.1 157.8 L57.2 154.3 L58.3 151 L59.3 147.7 L60.4 144.5 L61.5 141.3 L62.5 138.3 L63.6 135.4 L64.7 132.6 L65.7 129.9 L66.8 127.3 L67.9 124.8 L68.9 122.3 L70 120 L71.1 117.8 L72.1 115.6 L73.2 113.6 L74.3 111.6 L75.3 109.8 L76.4 108.1 L77.5 106.4 L78.5 104.8 L79.6 103.4 L80.7 102 L81.7 100.8 L82.8 99.6 L83.9 98.5 L84.9 97.5 L86 96.7 L87.1 95.9 L88.1 95.2 L89.2 94.6 L90.3 94.1 L91.3 93.7 L92.4 93.4 L93.5 93.2 L94.5 93.1 L95.6 93.1 L96.7 93.2 L97.7 93.4 L98.8 93.7 L99.9 94.1 L100.9 94.5 L102 95.1 L103.1 95.8 L104.1 96.5 L105.2 97.4 L106.3 98.4 L107.3 99.4 L108.4 100.6 L109.5 101.8 L110.5 103.2 L111.6 104.6 L112.7 106.2 L113.7 107.8 L114.8 109.5 L115.9 111.4 L116.9 113.3 L118 115.3 L119.1 117.5 L120.1 119.7 L121.2 122 L122.3 124.4 L123.3 126.9 L124.4 129.5 L125.5 132.2 L126.5 135 L127.6 137.9 L128.7 140.9 L129.7 144 L130.8 147.2 L131.9 150.5 L132.9 153.9 L134 157.3 L135.1 160.9 L136.1 164.6 L137.2 168.3 L138.3 172.2 L139.3 176.2 L140.4 180.2 L141.5 184.4 L142.5 188.6 L143.6 193 L144.7 197.4 L145.7 202 L146.8 206.6 L147.9 211.3 L148.9 216.2 L150 221.1 L151.1 226.1 L152.1 231.3 L153.2 236.5 L154.3 241.8 L155.3 247.2 L156.4 252.7 L157.5 258.3 L158.5 264 L159.6 269.8 L160.7 275.7 L161.7 281.7 L162.8 287.8 L163.9 294 L164.9 300.3 L166 306.7 L167.1 313.1 L168.1 319.7 L169.2 326.4 L170.3 333.2 L171.3 340 L172.4 347 L173.5 354 L174.5 361.2 L175.6 368.5 L176.7 375.8 L177.7 383.2 L178.8 390.8 L179.9 398.4 L180.9 406.2 L182 414 L183.1 421.9 L184.1 430 L185.2 438.1 L186.3 446.3 L187.3 454.6 L188.4 463 L189.5 471.5 L190.5 480.1 L191.6 488.9 L192.7 497.7 L193.7 506.6 L194.8 515.5 L195.9 524.6 L196.9 533.8 ' fill='none' stroke='#000' stroke-width='2'/></g></svg>",
   "choices": [
+   "\\((-5, 0)\\)",
    "\\((0, -5)\\)",
    "\\((-3, 4)\\)",
-   "\\((-5, 0)\\)",
    "\\((0, 4)\\)"
   ],
-  "answer": 0,
+  "answer": 1,
   "explanation": "The graph crosses the \\(y\\)-axis at \\((0, -5)\\)."
  },
  {
@@ -3130,12 +3130,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The graph of \\(y = f(x)\\) is shown in the \\(xy\\)-plane. Which of the following are the \\(x\\)-intercepts of the graph?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><defs><clipPath id='c368'><rect x='22' y='22' width='256' height='256'/></clipPath></defs><line x1='22' y1='278' x2='22' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='40.3' y1='278' x2='40.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='58.6' y1='278' x2='58.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='76.9' y1='278' x2='76.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='95.1' y1='278' x2='95.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='113.4' y1='278' x2='113.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='131.7' y1='278' x2='131.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='150' y1='278' x2='150' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='168.3' y1='278' x2='168.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='186.6' y1='278' x2='186.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='204.9' y1='278' x2='204.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='223.1' y1='278' x2='223.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='241.4' y1='278' x2='241.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='259.7' y1='278' x2='259.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='278' y1='278' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='278' x2='278' y2='278' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='263.8' x2='278' y2='263.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='249.6' x2='278' y2='249.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='235.3' x2='278' y2='235.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='221.1' x2='278' y2='221.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='206.9' x2='278' y2='206.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='192.7' x2='278' y2='192.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='178.4' x2='278' y2='178.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='164.2' x2='278' y2='164.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='150' x2='278' y2='150' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='135.8' x2='278' y2='135.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='121.6' x2='278' y2='121.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='107.3' x2='278' y2='107.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='93.1' x2='278' y2='93.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='78.9' x2='278' y2='78.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='64.7' x2='278' y2='64.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='50.4' x2='278' y2='50.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='36.2' x2='278' y2='36.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='22' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='14' y1='150' x2='286' y2='150' stroke='#000' stroke-width='1.3'/><polygon points='290,150 283,153.2 283,146.9' fill='#000'/><polygon points='10,150 17,146.9 17,153.2' fill='#000'/><text x='290' y='139' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>x</tspan></text><line x1='150' y1='286' x2='150' y2='14' stroke='#000' stroke-width='1.3'/><polygon points='150,10 153.2,17 146.9,17' fill='#000'/><polygon points='150,290 146.9,283 153.2,283' fill='#000'/><text x='161' y='10' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>y</tspan></text><line x1='22' y1='147' x2='22' y2='153' stroke='#000' stroke-width='1'/><text x='22' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='40.3' y1='147' x2='40.3' y2='153' stroke='#000' stroke-width='1'/><text x='40.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='58.6' y1='147' x2='58.6' y2='153' stroke='#000' stroke-width='1'/><text x='58.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='76.9' y1='147' x2='76.9' y2='153' stroke='#000' stroke-width='1'/><text x='76.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='95.1' y1='147' x2='95.1' y2='153' stroke='#000' stroke-width='1'/><text x='95.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='113.4' y1='147' x2='113.4' y2='153' stroke='#000' stroke-width='1'/><text x='113.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='131.7' y1='147' x2='131.7' y2='153' stroke='#000' stroke-width='1'/><text x='131.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='168.3' y1='147' x2='168.3' y2='153' stroke='#000' stroke-width='1'/><text x='168.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='186.6' y1='147' x2='186.6' y2='153' stroke='#000' stroke-width='1'/><text x='186.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='204.9' y1='147' x2='204.9' y2='153' stroke='#000' stroke-width='1'/><text x='204.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='223.1' y1='147' x2='223.1' y2='153' stroke='#000' stroke-width='1'/><text x='223.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='241.4' y1='147' x2='241.4' y2='153' stroke='#000' stroke-width='1'/><text x='241.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='259.7' y1='147' x2='259.7' y2='153' stroke='#000' stroke-width='1'/><text x='259.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='278' y1='147' x2='278' y2='153' stroke='#000' stroke-width='1'/><text x='278' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><line x1='147' y1='263.8' x2='153' y2='263.8' stroke='#000' stroke-width='1'/><text x='144' y='263.8' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−8</text><line x1='147' y1='235.3' x2='153' y2='235.3' stroke='#000' stroke-width='1'/><text x='144' y='235.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='147' y1='206.9' x2='153' y2='206.9' stroke='#000' stroke-width='1'/><text x='144' y='206.9' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='147' y1='178.4' x2='153' y2='178.4' stroke='#000' stroke-width='1'/><text x='144' y='178.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='147' y1='121.6' x2='153' y2='121.6' stroke='#000' stroke-width='1'/><text x='144' y='121.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='147' y1='93.1' x2='153' y2='93.1' stroke='#000' stroke-width='1'/><text x='144' y='93.1' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='147' y1='64.7' x2='153' y2='64.7' stroke='#000' stroke-width='1'/><text x='144' y='64.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='147' y1='36.2' x2='153' y2='36.2' stroke='#000' stroke-width='1'/><text x='144' y='36.2' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>8</text><text x='142' y='161' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>O</tspan></text><g clip-path='url(#c368)'><path d='M22 -191.3 L23.1 -183.1 L24.1 -174.9 L25.2 -166.9 L26.3 -158.9 L27.3 -151.1 L28.4 -143.3 L29.5 -135.6 L30.5 -128.1 L31.6 -120.6 L32.7 -113.2 L33.7 -105.9 L34.8 -98.7 L35.9 -91.7 L36.9 -84.7 L38 -77.8 L39.1 -71 L40.1 -64.3 L41.2 -57.7 L42.3 -51.2 L43.3 -44.8 L44.4 -38.5 L45.5 -32.2 L46.5 -26.1 L47.6 -20.1 L48.7 -14.2 L49.7 -8.3 L50.8 -2.6 L51.9 3 L52.9 8.6 L54 14 L55.1 19.3 L56.1 24.6 L57.2 29.7 L58.3 34.8 L59.3 39.8 L60.4 44.6 L61.5 49.4 L62.5 54 L63.6 58.6 L64.7 63.1 L65.7 67.5 L66.8 71.7 L67.9 75.9 L68.9 80 L70 84 L71.1 87.9 L72.1 91.7 L73.2 95.4 L74.3 99 L75.3 102.5 L76.4 105.9 L77.5 109.2 L78.5 112.4 L79.6 115.5 L80.7 118.6 L81.7 121.5 L82.8 124.3 L83.9 127.1 L84.9 129.7 L86 132.2 L87.1 134.7 L88.1 137 L89.2 139.3 L90.3 141.4 L91.3 143.5 L92.4 145.4 L93.5 147.3 L94.5 149 L95.6 150.7 L96.7 152.3 L97.7 153.7 L98.8 155.1 L99.9 156.4 L100.9 157.6 L102 158.7 L103.1 159.7 L104.1 160.5 L105.2 161.3 L106.3 162 L107.3 162.6 L108.4 163.1 L109.5 163.6 L110.5 163.9 L111.6 164.1 L112.7 164.2 L113.7 164.2 L114.8 164.1 L115.9 164 L116.9 163.7 L118 163.3 L119.1 162.9 L120.1 162.3 L121.2 161.7 L122.3 160.9 L123.3 160 L124.4 159.1 L125.5 158.1 L126.5 156.9 L127.6 155.7 L128.7 154.3 L129.7 152.9 L130.8 151.4 L131.9 149.8 L132.9 148 L134 146.2 L135.1 144.3 L136.1 142.3 L137.2 140.2 L138.3 138 L139.3 135.7 L140.4 133.3 L141.5 130.8 L142.5 128.2 L143.6 125.5 L144.7 122.7 L145.7 119.8 L146.8 116.9 L147.9 113.8 L148.9 110.6 L150 107.3 L151.1 104 L152.1 100.5 L153.2 96.9 L154.3 93.3 L155.3 89.5 L156.4 85.7 L157.5 81.7 L158.5 77.7 L159.6 73.5 L160.7 69.3 L161.7 65 L162.8 60.5 L163.9 56 L164.9 51.4 L166 46.7 L167.1 41.8 L168.1 36.9 L169.2 31.9 L170.3 26.8 L171.3 21.6 L172.4 16.3 L173.5 10.9 L174.5 5.4 L175.6 -0.2 L176.7 -5.9 L177.7 -11.7 L178.8 -17.5 L179.9 -23.5 L180.9 -29.6 L182 -35.8 L183.1 -42 L184.1 -48.4 L185.2 -54.9 L186.3 -61.4 L187.3 -68.1 L188.4 -74.9 L189.5 -81.7 L190.5 -88.7 L191.6 -95.7 L192.7 -102.8 L193.7 -110.1 L194.8 -117.4 L195.9 -124.8 L196.9 -132.4 L198 -140 L199.1 -147.7 L200.1 -155.5 L201.2 -163.5 L202.3 -171.5 L203.3 -179.6 L204.4 -187.8 L205.5 -196.1 L206.5 -204.5 L207.6 -213 L208.7 -221.6 L209.7 -230.3 ' fill='none' stroke='#000' stroke-width='2'/></g></svg>",
   "choices": [
-   "\\((3, 0)\\) and \\((1, 0)\\)",
-   "\\((-3, 0)\\) and \\((-1, 0)\\)",
    "\\((-2, 0)\\) and \\((0, 3)\\)",
-   "\\((0, -3)\\) and \\((0, -1)\\)"
+   "\\((3, 0)\\) and \\((1, 0)\\)",
+   "\\((0, -3)\\) and \\((0, -1)\\)",
+   "\\((-3, 0)\\) and \\((-1, 0)\\)"
   ],
-  "answer": 1,
+  "answer": 3,
   "explanation": "The graph crosses the \\(x\\)-axis at \\(x = -3\\) and \\(x = -1\\), so the \\(x\\)-intercepts are \\((-3, 0)\\) and \\((-1, 0)\\)."
  },
  {
@@ -3164,12 +3164,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The graph of the quadratic function \\(f\\) is shown. What is the \\(y\\)-intercept of the graph of \\(y = f(x)\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><defs><clipPath id='c368'><rect x='22' y='22' width='256' height='256'/></clipPath></defs><line x1='22' y1='278' x2='22' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='40.3' y1='278' x2='40.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='58.6' y1='278' x2='58.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='76.9' y1='278' x2='76.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='95.1' y1='278' x2='95.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='113.4' y1='278' x2='113.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='131.7' y1='278' x2='131.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='150' y1='278' x2='150' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='168.3' y1='278' x2='168.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='186.6' y1='278' x2='186.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='204.9' y1='278' x2='204.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='223.1' y1='278' x2='223.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='241.4' y1='278' x2='241.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='259.7' y1='278' x2='259.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='278' y1='278' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='278' x2='278' y2='278' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='263.8' x2='278' y2='263.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='249.6' x2='278' y2='249.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='235.3' x2='278' y2='235.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='221.1' x2='278' y2='221.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='206.9' x2='278' y2='206.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='192.7' x2='278' y2='192.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='178.4' x2='278' y2='178.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='164.2' x2='278' y2='164.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='150' x2='278' y2='150' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='135.8' x2='278' y2='135.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='121.6' x2='278' y2='121.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='107.3' x2='278' y2='107.3' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='93.1' x2='278' y2='93.1' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='78.9' x2='278' y2='78.9' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='64.7' x2='278' y2='64.7' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='50.4' x2='278' y2='50.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='36.2' x2='278' y2='36.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='22' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='14' y1='150' x2='286' y2='150' stroke='#000' stroke-width='1.3'/><polygon points='290,150 283,153.2 283,146.9' fill='#000'/><polygon points='10,150 17,146.9 17,153.2' fill='#000'/><text x='290' y='139' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>x</tspan></text><line x1='150' y1='286' x2='150' y2='14' stroke='#000' stroke-width='1.3'/><polygon points='150,10 153.2,17 146.9,17' fill='#000'/><polygon points='150,290 146.9,283 153.2,283' fill='#000'/><text x='161' y='10' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>y</tspan></text><line x1='22' y1='147' x2='22' y2='153' stroke='#000' stroke-width='1'/><text x='22' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='40.3' y1='147' x2='40.3' y2='153' stroke='#000' stroke-width='1'/><text x='40.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='58.6' y1='147' x2='58.6' y2='153' stroke='#000' stroke-width='1'/><text x='58.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='76.9' y1='147' x2='76.9' y2='153' stroke='#000' stroke-width='1'/><text x='76.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='95.1' y1='147' x2='95.1' y2='153' stroke='#000' stroke-width='1'/><text x='95.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='113.4' y1='147' x2='113.4' y2='153' stroke='#000' stroke-width='1'/><text x='113.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='131.7' y1='147' x2='131.7' y2='153' stroke='#000' stroke-width='1'/><text x='131.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='168.3' y1='147' x2='168.3' y2='153' stroke='#000' stroke-width='1'/><text x='168.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='186.6' y1='147' x2='186.6' y2='153' stroke='#000' stroke-width='1'/><text x='186.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='204.9' y1='147' x2='204.9' y2='153' stroke='#000' stroke-width='1'/><text x='204.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='223.1' y1='147' x2='223.1' y2='153' stroke='#000' stroke-width='1'/><text x='223.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='241.4' y1='147' x2='241.4' y2='153' stroke='#000' stroke-width='1'/><text x='241.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='259.7' y1='147' x2='259.7' y2='153' stroke='#000' stroke-width='1'/><text x='259.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='278' y1='147' x2='278' y2='153' stroke='#000' stroke-width='1'/><text x='278' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><line x1='147' y1='263.8' x2='153' y2='263.8' stroke='#000' stroke-width='1'/><text x='144' y='263.8' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−8</text><line x1='147' y1='235.3' x2='153' y2='235.3' stroke='#000' stroke-width='1'/><text x='144' y='235.3' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='147' y1='206.9' x2='153' y2='206.9' stroke='#000' stroke-width='1'/><text x='144' y='206.9' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='147' y1='178.4' x2='153' y2='178.4' stroke='#000' stroke-width='1'/><text x='144' y='178.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='147' y1='121.6' x2='153' y2='121.6' stroke='#000' stroke-width='1'/><text x='144' y='121.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='147' y1='93.1' x2='153' y2='93.1' stroke='#000' stroke-width='1'/><text x='144' y='93.1' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='147' y1='64.7' x2='153' y2='64.7' stroke='#000' stroke-width='1'/><text x='144' y='64.7' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='147' y1='36.2' x2='153' y2='36.2' stroke='#000' stroke-width='1'/><text x='144' y='36.2' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>8</text><text x='142' y='161' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>O</tspan></text><g clip-path='url(#c368)'><path d='M22 -191.3 L23.1 -183.1 L24.1 -174.9 L25.2 -166.9 L26.3 -158.9 L27.3 -151.1 L28.4 -143.3 L29.5 -135.6 L30.5 -128.1 L31.6 -120.6 L32.7 -113.2 L33.7 -105.9 L34.8 -98.7 L35.9 -91.7 L36.9 -84.7 L38 -77.8 L39.1 -71 L40.1 -64.3 L41.2 -57.7 L42.3 -51.2 L43.3 -44.8 L44.4 -38.5 L45.5 -32.2 L46.5 -26.1 L47.6 -20.1 L48.7 -14.2 L49.7 -8.3 L50.8 -2.6 L51.9 3 L52.9 8.6 L54 14 L55.1 19.3 L56.1 24.6 L57.2 29.7 L58.3 34.8 L59.3 39.8 L60.4 44.6 L61.5 49.4 L62.5 54 L63.6 58.6 L64.7 63.1 L65.7 67.5 L66.8 71.7 L67.9 75.9 L68.9 80 L70 84 L71.1 87.9 L72.1 91.7 L73.2 95.4 L74.3 99 L75.3 102.5 L76.4 105.9 L77.5 109.2 L78.5 112.4 L79.6 115.5 L80.7 118.6 L81.7 121.5 L82.8 124.3 L83.9 127.1 L84.9 129.7 L86 132.2 L87.1 134.7 L88.1 137 L89.2 139.3 L90.3 141.4 L91.3 143.5 L92.4 145.4 L93.5 147.3 L94.5 149 L95.6 150.7 L96.7 152.3 L97.7 153.7 L98.8 155.1 L99.9 156.4 L100.9 157.6 L102 158.7 L103.1 159.7 L104.1 160.5 L105.2 161.3 L106.3 162 L107.3 162.6 L108.4 163.1 L109.5 163.6 L110.5 163.9 L111.6 164.1 L112.7 164.2 L113.7 164.2 L114.8 164.1 L115.9 164 L116.9 163.7 L118 163.3 L119.1 162.9 L120.1 162.3 L121.2 161.7 L122.3 160.9 L123.3 160 L124.4 159.1 L125.5 158.1 L126.5 156.9 L127.6 155.7 L128.7 154.3 L129.7 152.9 L130.8 151.4 L131.9 149.8 L132.9 148 L134 146.2 L135.1 144.3 L136.1 142.3 L137.2 140.2 L138.3 138 L139.3 135.7 L140.4 133.3 L141.5 130.8 L142.5 128.2 L143.6 125.5 L144.7 122.7 L145.7 119.8 L146.8 116.9 L147.9 113.8 L148.9 110.6 L150 107.3 L151.1 104 L152.1 100.5 L153.2 96.9 L154.3 93.3 L155.3 89.5 L156.4 85.7 L157.5 81.7 L158.5 77.7 L159.6 73.5 L160.7 69.3 L161.7 65 L162.8 60.5 L163.9 56 L164.9 51.4 L166 46.7 L167.1 41.8 L168.1 36.9 L169.2 31.9 L170.3 26.8 L171.3 21.6 L172.4 16.3 L173.5 10.9 L174.5 5.4 L175.6 -0.2 L176.7 -5.9 L177.7 -11.7 L178.8 -17.5 L179.9 -23.5 L180.9 -29.6 L182 -35.8 L183.1 -42 L184.1 -48.4 L185.2 -54.9 L186.3 -61.4 L187.3 -68.1 L188.4 -74.9 L189.5 -81.7 L190.5 -88.7 L191.6 -95.7 L192.7 -102.8 L193.7 -110.1 L194.8 -117.4 L195.9 -124.8 L196.9 -132.4 L198 -140 L199.1 -147.7 L200.1 -155.5 L201.2 -163.5 L202.3 -171.5 L203.3 -179.6 L204.4 -187.8 L205.5 -196.1 L206.5 -204.5 L207.6 -213 L208.7 -221.6 L209.7 -230.3 ' fill='none' stroke='#000' stroke-width='2'/></g></svg>",
   "choices": [
-   "\\((3, 0)\\)",
-   "\\((0, -1)\\)",
+   "\\((0, 3)\\)",
    "\\((-2, -1)\\)",
-   "\\((0, 3)\\)"
+   "\\((0, -1)\\)",
+   "\\((3, 0)\\)"
   ],
-  "answer": 3,
+  "answer": 0,
   "explanation": "The graph crosses the \\(y\\)-axis at \\((0, 3)\\)."
  },
  {
@@ -3245,16 +3245,16 @@ window.SAT_QUESTIONS = [
   "tpl": "adv-func-table",
   "domain": "advanced",
   "skill": "Nonlinear functions",
-  "difficulty": 1,
+  "difficulty": 2,
   "type": "mcq",
   "stem": "<p>The table shows several values of \\(x\\) and the corresponding values of \\(f(x)\\).</p><table class='qtable'><thead><tr><th>\\(x\\)</th><th>\\(f(x)\\)</th></tr></thead><tbody><tr><td>\\(0\\)</td><td>\\(-4\\)</td></tr><tr><td>\\(1\\)</td><td>\\(-2\\)</td></tr><tr><td>\\(2\\)</td><td>\\(4\\)</td></tr><tr><td>\\(3\\)</td><td>\\(14\\)</td></tr></tbody></table><p>Which equation could define \\(f\\)?</p>",
   "choices": [
-   "\\(f(x) = 2x^2 - 4\\)",
    "\\(f(x) = 2x - 4\\)",
+   "\\(f(x) = 2x^2 - 4\\)",
    "\\(f(x) = 2x^2 + 4\\)",
    "\\(f(x) = 3x - 4\\)"
   ],
-  "answer": 0,
+  "answer": 1,
   "explanation": "Check each row: \\(f(2) = 2(2)^2 - 4 = 4\\) and \\(f(3) = 14\\). Only \\(f(x) = 2x^2 - 4\\) matches every row."
  },
  {
@@ -3262,16 +3262,16 @@ window.SAT_QUESTIONS = [
   "tpl": "adv-func-table",
   "domain": "advanced",
   "skill": "Nonlinear functions",
-  "difficulty": 1,
+  "difficulty": 2,
   "type": "mcq",
   "stem": "<p>The table shows several values of \\(x\\) and the corresponding values of \\(f(x)\\).</p><table class='qtable'><thead><tr><th>\\(x\\)</th><th>\\(f(x)\\)</th></tr></thead><tbody><tr><td>\\(0\\)</td><td>\\(2\\)</td></tr><tr><td>\\(1\\)</td><td>\\(6\\)</td></tr><tr><td>\\(2\\)</td><td>\\(18\\)</td></tr><tr><td>\\(3\\)</td><td>\\(54\\)</td></tr></tbody></table><p>Which equation could define \\(f\\)?</p>",
   "choices": [
-   "\\(f(x) = 6^{x}\\)",
    "\\(f(x) = 4x + 2\\)",
+   "\\(f(x) = 2(3)^{x}\\)",
    "\\(f(x) = 2x^{3}\\)",
-   "\\(f(x) = 2(3)^{x}\\)"
+   "\\(f(x) = 6^{x}\\)"
   ],
-  "answer": 3,
+  "answer": 1,
   "explanation": "Each time \\(x\\) increases by 1, \\(f(x)\\) is multiplied by 3, and \\(f(0) = 2\\). So \\(f(x) = 2(3)^{x}\\)."
  },
  {
@@ -3279,16 +3279,16 @@ window.SAT_QUESTIONS = [
   "tpl": "adv-func-table",
   "domain": "advanced",
   "skill": "Nonlinear functions",
-  "difficulty": 1,
+  "difficulty": 2,
   "type": "mcq",
   "stem": "<p>The table shows several values of \\(x\\) and the corresponding values of \\(f(x)\\).</p><table class='qtable'><thead><tr><th>\\(x\\)</th><th>\\(f(x)\\)</th></tr></thead><tbody><tr><td>\\(0\\)</td><td>\\(2\\)</td></tr><tr><td>\\(1\\)</td><td>\\(1\\)</td></tr><tr><td>\\(2\\)</td><td>\\(2\\)</td></tr><tr><td>\\(3\\)</td><td>\\(5\\)</td></tr></tbody></table><p>Which equation could define \\(f\\)?</p>",
   "choices": [
-   "\\(f(x) = x^2 + 1\\)",
    "\\(f(x) = (x - 1)^2 - 1\\)",
-   "\\(f(x) = (x + 1)^2 + 1\\)",
-   "\\(f(x) = (x - 1)^2 + 1\\)"
+   "\\(f(x) = x^2 + 1\\)",
+   "\\(f(x) = (x - 1)^2 + 1\\)",
+   "\\(f(x) = (x + 1)^2 + 1\\)"
   ],
-  "answer": 3,
+  "answer": 2,
   "explanation": "Substituting \\(x = 0\\) into \\((x - 1)^2 + 1\\) gives 2, and the other rows also match. The table is symmetric about \\(x = 1\\), where the minimum 1 occurs."
  },
  {
@@ -3296,12 +3296,12 @@ window.SAT_QUESTIONS = [
   "tpl": "adv-func-table",
   "domain": "advanced",
   "skill": "Nonlinear functions",
-  "difficulty": 1,
+  "difficulty": 2,
   "type": "mcq",
   "stem": "<p>The table shows several values of \\(x\\) and the corresponding values of \\(f(x)\\).</p><table class='qtable'><thead><tr><th>\\(x\\)</th><th>\\(f(x)\\)</th></tr></thead><tbody><tr><td>\\(0\\)</td><td>\\(2\\)</td></tr><tr><td>\\(1\\)</td><td>\\(3\\)</td></tr><tr><td>\\(2\\)</td><td>\\(6\\)</td></tr><tr><td>\\(3\\)</td><td>\\(11\\)</td></tr></tbody></table><p>Which equation could define \\(f\\)?</p>",
   "choices": [
-   "\\(f(x) = x + 2\\)",
    "\\(f(x) = x^2 - 2\\)",
+   "\\(f(x) = x + 2\\)",
    "\\(f(x) = 2x + 2\\)",
    "\\(f(x) = x^2 + 2\\)"
   ],
@@ -3317,12 +3317,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which of the following is equivalent to \\(24x^2 + 6x\\)?</p>",
   "choices": [
-   "\\(6x(4x + 6)\\)",
+   "\\(6x(4x + 1)\\)",
    "\\(6(4x^2 + 1)\\)",
-   "\\(x(4x + 1)\\)",
-   "\\(6x(4x + 1)\\)"
+   "\\(6x(4x + 6)\\)",
+   "\\(x(4x + 1)\\)"
   ],
-  "answer": 3,
+  "answer": 0,
   "explanation": "Each term has a factor of \\(6x\\): \\(24x^2 + 6x = 6x(4x + 1)\\)."
  },
  {
@@ -3334,12 +3334,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\(6x^3 + 3x^2\\)?</p>",
   "choices": [
-   "\\(3x^2(2x + 1)\\)",
    "\\(3x^2(2x + 3)\\)",
+   "\\(3x(2x^2 + 1)\\)",
    "\\(3x^3(2x + 1)\\)",
-   "\\(3x(2x^2 + 1)\\)"
+   "\\(3x^2(2x + 1)\\)"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "The greatest common factor of the terms is \\(3x^2\\). Factoring it out gives \\(3x^2(2x + 1)\\)."
  },
  {
@@ -3352,9 +3352,9 @@ window.SAT_QUESTIONS = [
   "stem": "<p>Which of the following is equivalent to \\(8a^2 + 6a\\)?</p>",
   "choices": [
    "\\(2a(4a + 3)\\)",
-   "\\(a(4a + 3)\\)",
+   "\\(2(4a^2 + 3)\\)",
    "\\(2a(4a + 6)\\)",
-   "\\(2(4a^2 + 3)\\)"
+   "\\(a(4a + 3)\\)"
   ],
   "answer": 0,
   "explanation": "Each term has a factor of \\(2a\\): \\(8a^2 + 6a = 2a(4a + 3)\\)."
@@ -3368,12 +3368,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which of the following is equivalent to \\(30x^2 - 18x\\)?</p>",
   "choices": [
-   "\\(6x(5x - 3)\\)",
+   "\\(x(5x - 3)\\)",
    "\\(6(5x^2 - 3)\\)",
    "\\(6x(5x - 18)\\)",
-   "\\(x(5x - 3)\\)"
+   "\\(6x(5x - 3)\\)"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "Each term has a factor of \\(6x\\): \\(30x^2 - 18x = 6x(5x - 3)\\)."
  },
  {
@@ -3381,16 +3381,16 @@ window.SAT_QUESTIONS = [
   "tpl": "adv-abs-eq",
   "domain": "advanced",
   "skill": "Nonlinear equations in one variable and systems of equations in two variables",
-  "difficulty": 1,
+  "difficulty": 2,
   "type": "mcq",
   "stem": "<p>\\(|x - 1| = 6\\)</p><p>What are all the solutions to the given equation?</p>",
   "choices": [
-   "\\(7\\) only",
    "\\(-7\\) and \\(5\\)",
-   "\\(7\\) and \\(-5\\)",
-   "\\(6\\) and \\(-6\\)"
+   "\\(6\\) and \\(-6\\)",
+   "\\(7\\) only",
+   "\\(7\\) and \\(-5\\)"
   ],
-  "answer": 2,
+  "answer": 3,
   "explanation": "The expression inside the absolute value must equal 6 or \\(-6\\). So \\(x = 1 + 6 = 7\\) or \\(x = 1 - 6 = -5\\)."
  },
  {
@@ -3398,12 +3398,12 @@ window.SAT_QUESTIONS = [
   "tpl": "adv-abs-eq",
   "domain": "advanced",
   "skill": "Nonlinear equations in one variable and systems of equations in two variables",
-  "difficulty": 1,
+  "difficulty": 2,
   "type": "mcq",
   "stem": "<p>\\(|x - 2| = 7\\)</p><p>What are all the solutions to the given equation?</p>",
   "choices": [
-   "\\(9\\) only",
    "\\(-9\\) and \\(5\\)",
+   "\\(9\\) only",
    "\\(7\\) and \\(-7\\)",
    "\\(9\\) and \\(-5\\)"
   ],
@@ -3415,7 +3415,7 @@ window.SAT_QUESTIONS = [
   "tpl": "adv-abs-eq",
   "domain": "advanced",
   "skill": "Nonlinear equations in one variable and systems of equations in two variables",
-  "difficulty": 1,
+  "difficulty": 2,
   "type": "mcq",
   "stem": "<p>\\(|x + 4| = 8\\)</p><p>What is the sum of the solutions to the given equation?</p>",
   "choices": [
@@ -3432,12 +3432,12 @@ window.SAT_QUESTIONS = [
   "tpl": "adv-abs-eq",
   "domain": "advanced",
   "skill": "Nonlinear equations in one variable and systems of equations in two variables",
-  "difficulty": 1,
+  "difficulty": 2,
   "type": "mcq",
   "stem": "<p>\\(|x - 2| = 5\\)</p><p>What are all the solutions to the given equation?</p>",
   "choices": [
-   "\\(5\\) and \\(-5\\)",
    "\\(7\\) only",
+   "\\(5\\) and \\(-5\\)",
    "\\(-7\\) and \\(3\\)",
    "\\(7\\) and \\(-3\\)"
   ],
@@ -3509,12 +3509,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\((3x - 3)^2 - 9x^2\\)?</p>",
   "choices": [
-   "\\(9\\)",
    "\\(-18x + 9\\)",
+   "\\(9\\)",
    "\\(-9x + 9\\)",
    "\\(-18x - 9\\)"
   ],
-  "answer": 1,
+  "answer": 0,
   "explanation": "\\((3x - 3)^2 = 9x^2 - 18x + 9\\). Subtracting \\(9x^2\\) leaves \\(-18x + 9\\)."
  },
  {
@@ -3528,8 +3528,8 @@ window.SAT_QUESTIONS = [
   "choices": [
    "\\(4y^2 - 36y + 81\\)",
    "\\(4y^2 - 18y + 81\\)",
-   "\\(2y^2 - 36y + 81\\)",
-   "\\(4y^2 + 81\\)"
+   "\\(4y^2 + 81\\)",
+   "\\(2y^2 - 36y + 81\\)"
   ],
   "answer": 0,
   "explanation": "\\((p + q)^2 = p^2 + 2pq + q^2\\). With \\(p = 2y\\) and \\(q = -9\\): \\(4y^2 - 36y + 81\\)."
@@ -3543,10 +3543,10 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\((6x + 8)^2\\)?</p>",
   "choices": [
-   "\\(36x^2 + 64\\)",
+   "\\(36x^2 + 48x + 64\\)",
    "\\(6x^2 + 96x + 64\\)",
    "\\(36x^2 + 96x + 64\\)",
-   "\\(36x^2 + 48x + 64\\)"
+   "\\(36x^2 + 64\\)"
   ],
   "answer": 2,
   "explanation": "\\((p + q)^2 = p^2 + 2pq + q^2\\). With \\(p = 6x\\) and \\(q = 8\\): \\(36x^2 + 96x + 64\\)."
@@ -3628,12 +3628,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>\\(x^2 + 8x + 6 = 0\\)</p><p>What are the solutions to the given equation?</p>",
   "choices": [
-   "\\(x = 4 \\pm \\sqrt{10}\\)",
+   "\\(x = -8 \\pm \\sqrt{10}\\)",
    "\\(x = -4 \\pm \\sqrt{22}\\)",
-   "\\(x = -4 \\pm \\sqrt{10}\\)",
-   "\\(x = -8 \\pm \\sqrt{10}\\)"
+   "\\(x = 4 \\pm \\sqrt{10}\\)",
+   "\\(x = -4 \\pm \\sqrt{10}\\)"
   ],
-  "answer": 2,
+  "answer": 3,
   "explanation": "By the quadratic formula, \\(x = \\frac{-8 \\pm \\sqrt{64 - 4(6)}}{2} = \\frac{-8 \\pm \\sqrt{40}}{2} = -4 \\pm \\sqrt{10}\\). (Completing the square, \\((x + 4)^2 = 10\\), gives the same result.)"
  },
  {
@@ -3647,8 +3647,8 @@ window.SAT_QUESTIONS = [
   "choices": [
    "\\(x = 2 \\pm \\sqrt{7}\\)",
    "\\(x = 2 \\pm \\sqrt{11}\\)",
-   "\\(x = -2 \\pm \\sqrt{7}\\)",
-   "\\(x = 4 \\pm \\sqrt{7}\\)"
+   "\\(x = 4 \\pm \\sqrt{7}\\)",
+   "\\(x = -2 \\pm \\sqrt{7}\\)"
   ],
   "answer": 0,
   "explanation": "By the quadratic formula, \\(x = \\frac{4 \\pm \\sqrt{16 - 4(-3)}}{2} = \\frac{4 \\pm \\sqrt{28}}{2} = 2 \\pm \\sqrt{7}\\). (Completing the square, \\((x - 2)^2 = 7\\), gives the same result.)"
@@ -3662,12 +3662,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>\\(x^2 + 12x + 2 = 0\\)</p><p>What are the solutions to the given equation?</p>",
   "choices": [
+   "\\(x = -6 \\pm \\sqrt{34}\\)",
    "\\(x = -6 \\pm \\sqrt{38}\\)",
    "\\(x = -12 \\pm \\sqrt{34}\\)",
-   "\\(x = 6 \\pm \\sqrt{34}\\)",
-   "\\(x = -6 \\pm \\sqrt{34}\\)"
+   "\\(x = 6 \\pm \\sqrt{34}\\)"
   ],
-  "answer": 3,
+  "answer": 0,
   "explanation": "By the quadratic formula, \\(x = \\frac{-12 \\pm \\sqrt{144 - 4(2)}}{2} = \\frac{-12 \\pm \\sqrt{136}}{2} = -6 \\pm \\sqrt{34}\\). (Completing the square, \\((x + 6)^2 = 34\\), gives the same result.)"
  },
  {
@@ -3679,12 +3679,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>\\(x^2 + 10x + 4 = 0\\)</p><p>What are the solutions to the given equation?</p>",
   "choices": [
-   "\\(x = -10 \\pm \\sqrt{21}\\)",
    "\\(x = -5 \\pm \\sqrt{29}\\)",
-   "\\(x = 5 \\pm \\sqrt{21}\\)",
-   "\\(x = -5 \\pm \\sqrt{21}\\)"
+   "\\(x = -5 \\pm \\sqrt{21}\\)",
+   "\\(x = -10 \\pm \\sqrt{21}\\)",
+   "\\(x = 5 \\pm \\sqrt{21}\\)"
   ],
-  "answer": 3,
+  "answer": 1,
   "explanation": "By the quadratic formula, \\(x = \\frac{-10 \\pm \\sqrt{100 - 4(4)}}{2} = \\frac{-10 \\pm \\sqrt{84}}{2} = -5 \\pm \\sqrt{21}\\). (Completing the square, \\((x + 5)^2 = 21\\), gives the same result.)"
  },
  {
@@ -3798,9 +3798,9 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A population of fish in a lake \\(t\\) years after a study began is modeled by \\(p(t) = 50(1.2)^{t}\\). Which statement best describes how the population changes each year, according to the model?</p>",
   "choices": [
-   "It increases by 10 fish.",
    "It increases by 120%.",
    "It increases by 1.2%.",
+   "It increases by 10 fish.",
    "It increases by 20%."
   ],
   "answer": 3,
@@ -3832,12 +3832,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A colony of 200 bacteria doubles in size every 3 hours. Which function gives the number of bacteria, \\(P(t)\\), in the colony \\(t\\) hours from now?</p>",
   "choices": [
-   "\\(P(t) = 200(2)^{t/3}\\)",
    "\\(P(t) = 200(3)^{t/2}\\)",
-   "\\(P(t) = 200 + 2^{t/3}\\)",
-   "\\(P(t) = 200(2)^{3t}\\)"
+   "\\(P(t) = 200(2)^{3t}\\)",
+   "\\(P(t) = 200(2)^{t/3}\\)",
+   "\\(P(t) = 200 + 2^{t/3}\\)"
   ],
-  "answer": 0,
+  "answer": 2,
   "explanation": "The number of doublings in \\(t\\) hours is \\(\\frac{t}{3}\\), so \\(P(t) = 200(2)^{t/3}\\). Check: \\(P(3) = 400\\)."
  },
  {
@@ -3866,12 +3866,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A radioactive substance has a half-life of 6 hours, which means that half of the substance decays every 6 hours. A sample initially contains 80 milligrams of the substance. Which function gives the amount, in milligrams, of the substance remaining after \\(t\\) hours?</p>",
   "choices": [
-   "\\(A(t) = 80 - \\dfrac{1}{2}\\left(\\dfrac{t}{6}\\right)\\)",
-   "\\(A(t) = 80\\left(\\dfrac{1}{2}\\right)^{t/6}\\)",
+   "\\(A(t) = \\dfrac{1}{2}(80)^{t/6}\\)",
    "\\(A(t) = 80\\left(\\dfrac{1}{2}\\right)^{6t}\\)",
-   "\\(A(t) = \\dfrac{1}{2}(80)^{t/6}\\)"
+   "\\(A(t) = 80 - \\dfrac{1}{2}\\left(\\dfrac{t}{6}\\right)\\)",
+   "\\(A(t) = 80\\left(\\dfrac{1}{2}\\right)^{t/6}\\)"
   ],
-  "answer": 1,
+  "answer": 3,
   "explanation": "Every 6 hours the amount is multiplied by \\(\\frac{1}{2}\\), and \\(\\frac{t}{6}\\) counts how many half-lives have passed. So \\(A(t) = 80\\left(\\frac{1}{2}\\right)^{t/6}\\)."
  },
  {
@@ -3884,11 +3884,11 @@ window.SAT_QUESTIONS = [
   "stem": "<p>A radioactive substance has a half-life of 8 hours, which means that half of the substance decays every 8 hours. A sample initially contains 200 milligrams of the substance. Which function gives the amount, in milligrams, of the substance remaining after \\(t\\) hours?</p>",
   "choices": [
    "\\(A(t) = \\dfrac{1}{2}(200)^{t/8}\\)",
+   "\\(A(t) = 200 - \\dfrac{1}{2}\\left(\\dfrac{t}{8}\\right)\\)",
    "\\(A(t) = 200\\left(\\dfrac{1}{2}\\right)^{8t}\\)",
-   "\\(A(t) = 200\\left(\\dfrac{1}{2}\\right)^{t/8}\\)",
-   "\\(A(t) = 200 - \\dfrac{1}{2}\\left(\\dfrac{t}{8}\\right)\\)"
+   "\\(A(t) = 200\\left(\\dfrac{1}{2}\\right)^{t/8}\\)"
   ],
-  "answer": 2,
+  "answer": 3,
   "explanation": "Every 8 hours the amount is multiplied by \\(\\frac{1}{2}\\), and \\(\\frac{t}{8}\\) counts how many half-lives have passed. So \\(A(t) = 200\\left(\\frac{1}{2}\\right)^{t/8}\\)."
  },
  {
@@ -3969,11 +3969,11 @@ window.SAT_QUESTIONS = [
   "stem": "<p>For \\(x \\ne -7\\), which expression is equivalent to \\(\\frac{x^2 - 49}{x + 7}\\)?</p>",
   "choices": [
    "\\(x - 49\\)",
-   "\\(x^2 - 7\\)",
+   "\\(x - 7\\)",
    "\\(x + 7\\)",
-   "\\(x - 7\\)"
+   "\\(x^2 - 7\\)"
   ],
-  "answer": 3,
+  "answer": 1,
   "explanation": "Factor the numerator as a difference of squares: \\(x^2 - 49 = (x + 7)(x - 7)\\). Canceling \\(x + 7\\) leaves \\(x - 7\\)."
  },
  {
@@ -3985,12 +3985,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\(\\frac{x^2 + 2x - 3}{x + 3}\\) for \\(x \\ne -3\\)?</p>",
   "choices": [
-   "\\(x - 1\\)",
    "\\(x - 3\\)",
+   "\\(x + 2\\)",
    "\\(x + 1\\)",
-   "\\(x + 2\\)"
+   "\\(x - 1\\)"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "\\(x^2 + 2x - 3 = (x + 3)(x - 1)\\), so the expression simplifies to \\(x - 1\\)."
  },
  {
@@ -4002,12 +4002,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\(\\frac{4}{x + 3} + \\frac{1}{x - 3}\\), where \\(x \\ne 3\\) and \\(x \\ne -3\\)?</p>",
   "choices": [
+   "\\(\\dfrac{5x - 9}{x^2 - 9}\\)",
    "\\(\\dfrac{5}{x^2 - 9}\\)",
-   "\\(\\dfrac{5x + 9}{x^2 - 9}\\)",
    "\\(\\dfrac{5}{2x}\\)",
-   "\\(\\dfrac{5x - 9}{x^2 - 9}\\)"
+   "\\(\\dfrac{5x + 9}{x^2 - 9}\\)"
   ],
-  "answer": 3,
+  "answer": 0,
   "explanation": "Use the common denominator \\((x + 3)(x - 3) = x^2 - 9\\): \\(\\frac{4(x - 3) + (x + 3)}{x^2 - 9} = \\frac{5x - 9}{x^2 - 9}\\)."
  },
  {
@@ -4019,12 +4019,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>For \\(x \\ne -8\\), which expression is equivalent to \\(\\frac{x^2 - 64}{x + 8}\\)?</p>",
   "choices": [
+   "\\(x - 8\\)",
    "\\(x - 64\\)",
    "\\(x + 8\\)",
-   "\\(x^2 - 8\\)",
-   "\\(x - 8\\)"
+   "\\(x^2 - 8\\)"
   ],
-  "answer": 3,
+  "answer": 0,
   "explanation": "Factor the numerator as a difference of squares: \\(x^2 - 64 = (x + 8)(x - 8)\\). Canceling \\(x + 8\\) leaves \\(x - 8\\)."
  },
  {
@@ -4075,10 +4075,10 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The function \\(p\\) is defined by \\(p(x) = (x - 6)(x + 3)(2x - 1)\\). Which of the following is an \\(x\\)-intercept of the graph of \\(y = p(x)\\) in the \\(xy\\)-plane?</p>",
   "choices": [
-   "\\((3, 0)\\)",
+   "\\((-6, 0)\\)",
    "\\((6, 0)\\)",
    "\\((1, 0)\\)",
-   "\\((-6, 0)\\)"
+   "\\((3, 0)\\)"
   ],
   "answer": 1,
   "explanation": "The \\(x\\)-intercepts occur where a factor equals 0: \\(x = 6\\), \\(x = -3\\), and \\(x = \\frac{1}{2}\\). Of the choices, only \\((6, 0)\\) is an \\(x\\)-intercept."
@@ -4094,10 +4094,10 @@ window.SAT_QUESTIONS = [
   "choices": [
    "\\((-5, 0)\\)",
    "\\((4, 0)\\)",
-   "\\((-4, 0)\\)",
-   "\\((-1, 0)\\)"
+   "\\((-1, 0)\\)",
+   "\\((-4, 0)\\)"
   ],
-  "answer": 2,
+  "answer": 3,
   "explanation": "Setting \\(x + 4 = 0\\) gives \\(x = -4\\), so \\((-4, 0)\\) is an \\(x\\)-intercept. The others are not zeros of the polynomial."
  },
  {
@@ -4109,12 +4109,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The function \\(p\\) is defined by \\(p(x) = (x - 6)(x + 2)(2x - 1)\\). Which of the following is an \\(x\\)-intercept of the graph of \\(y = p(x)\\) in the \\(xy\\)-plane?</p>",
   "choices": [
-   "\\((-1, 0)\\)",
    "\\((1, 0)\\)",
-   "\\((-\\dfrac{1}{2}, 0)\\)",
-   "\\((\\dfrac{1}{2}, 0)\\)"
+   "\\((\\dfrac{1}{2}, 0)\\)",
+   "\\((-1, 0)\\)",
+   "\\((-\\dfrac{1}{2}, 0)\\)"
   ],
-  "answer": 3,
+  "answer": 1,
   "explanation": "Setting \\(2x - 1 = 0\\) gives \\(x = \\frac{1}{2}\\). (A common error is to use \\(x = 1\\).)"
  },
  {
@@ -4126,12 +4126,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The function \\(p\\) is defined by \\(p(x) = (x - 5)(x + 6)(2x - 1)\\). Which of the following is an \\(x\\)-intercept of the graph of \\(y = p(x)\\) in the \\(xy\\)-plane?</p>",
   "choices": [
-   "\\((-5, 0)\\)",
+   "\\((5, 0)\\)",
    "\\((1, 0)\\)",
    "\\((6, 0)\\)",
-   "\\((5, 0)\\)"
+   "\\((-5, 0)\\)"
   ],
-  "answer": 3,
+  "answer": 0,
   "explanation": "The \\(x\\)-intercepts occur where a factor equals 0: \\(x = 5\\), \\(x = -6\\), and \\(x = \\frac{1}{2}\\). Of the choices, only \\((5, 0)\\) is an \\(x\\)-intercept."
  },
  {
@@ -4211,12 +4211,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\(\\sqrt[4]{x^{3}}\\), where \\(x \\gt  0\\)?</p>",
   "choices": [
+   "\\(x^{-1}\\)",
    "\\(x^{12}\\)",
    "\\(x^{\\frac{4}{3}}\\)",
-   "\\(x^{\\frac{3}{4}}\\)",
-   "\\(x^{-1}\\)"
+   "\\(x^{\\frac{3}{4}}\\)"
   ],
-  "answer": 2,
+  "answer": 3,
   "explanation": "The \\(n\\)th root of \\(x^p\\) is \\(x^{p/n}\\), so \\(\\sqrt[4]{x^{3}} = x^{\\frac{3}{4}}\\)."
  },
  {
@@ -4228,12 +4228,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>For \\(x \\gt  0\\), which expression is equivalent to \\(x^{\\frac{1}{2}} \\cdot x^{\\frac{1}{3}}\\)?</p>",
   "choices": [
-   "\\(x^{\\frac{1}{6}}\\)",
-   "\\(x^{\\frac{5}{6}}\\)",
    "\\(x^{\\frac{2}{5}}\\)",
-   "\\(x^{\\frac{1}{3}}\\)"
+   "\\(x^{\\frac{1}{6}}\\)",
+   "\\(x^{\\frac{1}{3}}\\)",
+   "\\(x^{\\frac{5}{6}}\\)"
   ],
-  "answer": 1,
+  "answer": 3,
   "explanation": "Add the exponents: \\(\\frac{1}{2} + \\frac{1}{3} = \\frac{5}{6}\\)."
  },
  {
@@ -4245,12 +4245,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\((16x^{8})^{\\frac{1}{4}}\\) for \\(x \\gt  0\\)?</p>",
   "choices": [
-   "\\(2x^{7}\\)",
-   "\\(4x^{2}\\)",
    "\\(2x^{12}\\)",
-   "\\(2x^{2}\\)"
+   "\\(2x^{2}\\)",
+   "\\(4x^{2}\\)",
+   "\\(2x^{7}\\)"
   ],
-  "answer": 3,
+  "answer": 1,
   "explanation": "\\(16^{\\frac{1}{4}} = 2\\) and \\((x^{8})^{\\frac{1}{4}} = x^{2}\\), so the expression equals \\(2x^2\\)."
  },
  {
@@ -4262,12 +4262,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\(\\sqrt[5]{x^{3}}\\), where \\(x \\gt  0\\)?</p>",
   "choices": [
-   "\\(x^{\\frac{3}{5}}\\)",
    "\\(x^{-2}\\)",
+   "\\(x^{\\frac{5}{3}}\\)",
    "\\(x^{15}\\)",
-   "\\(x^{\\frac{5}{3}}\\)"
+   "\\(x^{\\frac{3}{5}}\\)"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "The \\(n\\)th root of \\(x^p\\) is \\(x^{p/n}\\), so \\(\\sqrt[5]{x^{3}} = x^{\\frac{3}{5}}\\)."
  },
  {
@@ -4318,12 +4318,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>For the polynomial function \\(p\\), \\(p(-6) = 0\\) and \\(p(0) = -1\\). Which of the following must be a factor of \\(p(x)\\)?</p>",
   "choices": [
-   "\\(x + 6\\)",
    "\\(x + 1\\)",
+   "\\(x - 1\\)",
    "\\(x - 6\\)",
-   "\\(x - 1\\)"
+   "\\(x + 6\\)"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "If \\(p(-6) = 0\\), then by the factor theorem \\(x - (-6) = x + 6\\) is a factor of \\(p(x)\\). The value \\(p(0) = -1\\) is not a zero, so it does not give a factor."
  },
  {
@@ -4352,12 +4352,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The table shows some values of \\(x\\) and \\(p(x)\\) for the polynomial function \\(p\\).</p><table class='qtable'><thead><tr><th>\\(x\\)</th><th>\\(p(x)\\)</th></tr></thead><tbody><tr><td>\\(-4\\)</td><td>\\(-120\\)</td></tr><tr><td>\\(-2\\)</td><td>\\(-30\\)</td></tr><tr><td>\\(0\\)</td><td>\\(-12\\)</td></tr><tr><td>\\(2\\)</td><td>\\(-18\\)</td></tr><tr><td>\\(4\\)</td><td>\\(0\\)</td></tr></tbody></table><p>Which of the following must be a factor of \\(p(x)\\)?</p>",
   "choices": [
-   "\\(x - 4\\)",
    "\\(x + 4\\)",
+   "\\(x\\)",
    "\\(x + 12\\)",
-   "\\(x\\)"
+   "\\(x - 4\\)"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "The table shows \\(p(4) = 0\\), so \\(x - 4\\) is a factor of \\(p(x)\\) by the factor theorem."
  },
  {
@@ -4386,12 +4386,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The graph of a quadratic function is shown in the \\(xy\\)-plane. Which equation could define the graph?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><defs><clipPath id='c381'><rect x='22' y='22' width='256' height='256'/></clipPath></defs><line x1='22' y1='278' x2='22' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='40.3' y1='278' x2='40.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='58.6' y1='278' x2='58.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='76.9' y1='278' x2='76.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='95.1' y1='278' x2='95.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='113.4' y1='278' x2='113.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='131.7' y1='278' x2='131.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='150' y1='278' x2='150' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='168.3' y1='278' x2='168.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='186.6' y1='278' x2='186.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='204.9' y1='278' x2='204.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='223.1' y1='278' x2='223.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='241.4' y1='278' x2='241.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='259.7' y1='278' x2='259.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='278' y1='278' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='278' x2='278' y2='278' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='265.2' x2='278' y2='265.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='252.4' x2='278' y2='252.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='239.6' x2='278' y2='239.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='226.8' x2='278' y2='226.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='214' x2='278' y2='214' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='201.2' x2='278' y2='201.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='188.4' x2='278' y2='188.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='175.6' x2='278' y2='175.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='162.8' x2='278' y2='162.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='150' x2='278' y2='150' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='137.2' x2='278' y2='137.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='124.4' x2='278' y2='124.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='111.6' x2='278' y2='111.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='98.8' x2='278' y2='98.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='86' x2='278' y2='86' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='73.2' x2='278' y2='73.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='60.4' x2='278' y2='60.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='47.6' x2='278' y2='47.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='34.8' x2='278' y2='34.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='22' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='14' y1='150' x2='286' y2='150' stroke='#000' stroke-width='1.3'/><polygon points='290,150 283,153.2 283,146.9' fill='#000'/><polygon points='10,150 17,146.9 17,153.2' fill='#000'/><text x='290' y='139' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>x</tspan></text><line x1='150' y1='286' x2='150' y2='14' stroke='#000' stroke-width='1.3'/><polygon points='150,10 153.2,17 146.9,17' fill='#000'/><polygon points='150,290 146.9,283 153.2,283' fill='#000'/><text x='161' y='10' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>y</tspan></text><line x1='22' y1='147' x2='22' y2='153' stroke='#000' stroke-width='1'/><text x='22' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='40.3' y1='147' x2='40.3' y2='153' stroke='#000' stroke-width='1'/><text x='40.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='58.6' y1='147' x2='58.6' y2='153' stroke='#000' stroke-width='1'/><text x='58.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='76.9' y1='147' x2='76.9' y2='153' stroke='#000' stroke-width='1'/><text x='76.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='95.1' y1='147' x2='95.1' y2='153' stroke='#000' stroke-width='1'/><text x='95.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='113.4' y1='147' x2='113.4' y2='153' stroke='#000' stroke-width='1'/><text x='113.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='131.7' y1='147' x2='131.7' y2='153' stroke='#000' stroke-width='1'/><text x='131.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='168.3' y1='147' x2='168.3' y2='153' stroke='#000' stroke-width='1'/><text x='168.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='186.6' y1='147' x2='186.6' y2='153' stroke='#000' stroke-width='1'/><text x='186.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='204.9' y1='147' x2='204.9' y2='153' stroke='#000' stroke-width='1'/><text x='204.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='223.1' y1='147' x2='223.1' y2='153' stroke='#000' stroke-width='1'/><text x='223.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='241.4' y1='147' x2='241.4' y2='153' stroke='#000' stroke-width='1'/><text x='241.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='259.7' y1='147' x2='259.7' y2='153' stroke='#000' stroke-width='1'/><text x='259.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='278' y1='147' x2='278' y2='153' stroke='#000' stroke-width='1'/><text x='278' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><line x1='147' y1='278' x2='153' y2='278' stroke='#000' stroke-width='1'/><text x='144' y='278' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−10</text><line x1='147' y1='252.4' x2='153' y2='252.4' stroke='#000' stroke-width='1'/><text x='144' y='252.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−8</text><line x1='147' y1='226.8' x2='153' y2='226.8' stroke='#000' stroke-width='1'/><text x='144' y='226.8' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='147' y1='201.2' x2='153' y2='201.2' stroke='#000' stroke-width='1'/><text x='144' y='201.2' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='147' y1='175.6' x2='153' y2='175.6' stroke='#000' stroke-width='1'/><text x='144' y='175.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='147' y1='124.4' x2='153' y2='124.4' stroke='#000' stroke-width='1'/><text x='144' y='124.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='147' y1='98.8' x2='153' y2='98.8' stroke='#000' stroke-width='1'/><text x='144' y='98.8' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='147' y1='73.2' x2='153' y2='73.2' stroke='#000' stroke-width='1'/><text x='144' y='73.2' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='147' y1='47.6' x2='153' y2='47.6' stroke='#000' stroke-width='1'/><text x='144' y='47.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>8</text><line x1='147' y1='22' x2='153' y2='22' stroke='#000' stroke-width='1'/><text x='144' y='22' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>10</text><text x='142' y='161' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>O</tspan></text><g clip-path='url(#c381)'><path d='M22 -157.2 L23.1 -149.8 L24.1 -142.4 L25.2 -135.2 L26.3 -128 L27.3 -121 L28.4 -114 L29.5 -107.1 L30.5 -100.3 L31.6 -93.5 L32.7 -86.9 L33.7 -80.3 L34.8 -73.9 L35.9 -67.5 L36.9 -61.2 L38 -55 L39.1 -48.9 L40.1 -42.9 L41.2 -36.9 L42.3 -31.1 L43.3 -25.3 L44.4 -19.6 L45.5 -14 L46.5 -8.5 L47.6 -3.1 L48.7 2.2 L49.7 7.5 L50.8 12.6 L51.9 17.7 L52.9 22.7 L54 27.6 L55.1 32.4 L56.1 37.1 L57.2 41.8 L58.3 46.3 L59.3 50.8 L60.4 55.2 L61.5 59.4 L62.5 63.6 L63.6 67.8 L64.7 71.8 L65.7 75.7 L66.8 79.6 L67.9 83.3 L68.9 87 L70 90.6 L71.1 94.1 L72.1 97.5 L73.2 100.8 L74.3 104.1 L75.3 107.2 L76.4 110.3 L77.5 113.3 L78.5 116.2 L79.6 119 L80.7 121.7 L81.7 124.3 L82.8 126.9 L83.9 129.3 L84.9 131.7 L86 134 L87.1 136.2 L88.1 138.3 L89.2 140.3 L90.3 142.3 L91.3 144.1 L92.4 145.9 L93.5 147.5 L94.5 149.1 L95.6 150.6 L96.7 152 L97.7 153.4 L98.8 154.6 L99.9 155.8 L100.9 156.8 L102 157.8 L103.1 158.7 L104.1 159.5 L105.2 160.2 L106.3 160.8 L107.3 161.4 L108.4 161.8 L109.5 162.2 L110.5 162.5 L111.6 162.7 L112.7 162.8 L113.7 162.8 L114.8 162.7 L115.9 162.6 L116.9 162.3 L118 162 L119.1 161.6 L120.1 161.1 L121.2 160.5 L122.3 159.8 L123.3 159 L124.4 158.2 L125.5 157.3 L126.5 156.2 L127.6 155.1 L128.7 153.9 L129.7 152.6 L130.8 151.2 L131.9 149.8 L132.9 148.2 L134 146.6 L135.1 144.9 L136.1 143.1 L137.2 141.2 L138.3 139.2 L139.3 137.1 L140.4 135 L141.5 132.7 L142.5 130.4 L143.6 128 L144.7 125.4 L145.7 122.8 L146.8 120.2 L147.9 117.4 L148.9 114.5 L150 111.6 L151.1 108.6 L152.1 105.5 L153.2 102.2 L154.3 99 L155.3 95.6 L156.4 92.1 L157.5 88.6 L158.5 84.9 L159.6 81.2 L160.7 77.4 L161.7 73.5 L162.8 69.5 L163.9 65.4 L164.9 61.2 L166 57 L167.1 52.7 L168.1 48.2 L169.2 43.7 L170.3 39.1 L171.3 34.4 L172.4 29.7 L173.5 24.8 L174.5 19.9 L175.6 14.8 L176.7 9.7 L177.7 4.5 L178.8 -0.8 L179.9 -6.2 L180.9 -11.6 L182 -17.2 L183.1 -22.8 L184.1 -28.6 L185.2 -34.4 L186.3 -40.3 L187.3 -46.3 L188.4 -52.4 L189.5 -58.5 L190.5 -64.8 L191.6 -71.1 L192.7 -77.6 L193.7 -84.1 L194.8 -90.7 L195.9 -97.4 L196.9 -104.1 L198 -111 L199.1 -118 L200.1 -125 L201.2 -132.1 L202.3 -139.3 L203.3 -146.6 L204.4 -154 L205.5 -161.5 L206.5 -169 L207.6 -176.7 L208.7 -184.4 L209.7 -192.2 L210.8 -200.2 L211.9 -208.1 L212.9 -216.2 L214 -224.4 L215.1 -232.7 ' fill='none' stroke='#000' stroke-width='2'/></g></svg>",
   "choices": [
-   "\\(y = -(x + 3)(x + 1)\\)",
-   "\\(y = -(x - 3)(x - 1)\\)",
+   "\\(y = (x - 3)(x - 1)\\)",
    "\\(y = (x + 3)(x + 1)\\)",
-   "\\(y = (x - 3)(x - 1)\\)"
+   "\\(y = -(x + 3)(x + 1)\\)",
+   "\\(y = -(x - 3)(x - 1)\\)"
   ],
-  "answer": 2,
+  "answer": 1,
   "explanation": "The graph crosses the \\(x\\)-axis at \\(x = -3\\) and \\(x = -1\\), so the factors are \\((x + 3)\\) and \\((x + 1)\\). The parabola opens upward, so the leading coefficient is positive: \\(y = (x + 3)(x + 1)\\)."
  },
  {
@@ -4403,12 +4403,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The graph of a quadratic function is shown in the \\(xy\\)-plane. Which equation could define the graph?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><defs><clipPath id='c381'><rect x='22' y='22' width='256' height='256'/></clipPath></defs><line x1='22' y1='278' x2='22' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='40.3' y1='278' x2='40.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='58.6' y1='278' x2='58.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='76.9' y1='278' x2='76.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='95.1' y1='278' x2='95.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='113.4' y1='278' x2='113.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='131.7' y1='278' x2='131.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='150' y1='278' x2='150' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='168.3' y1='278' x2='168.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='186.6' y1='278' x2='186.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='204.9' y1='278' x2='204.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='223.1' y1='278' x2='223.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='241.4' y1='278' x2='241.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='259.7' y1='278' x2='259.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='278' y1='278' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='278' x2='278' y2='278' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='265.2' x2='278' y2='265.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='252.4' x2='278' y2='252.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='239.6' x2='278' y2='239.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='226.8' x2='278' y2='226.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='214' x2='278' y2='214' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='201.2' x2='278' y2='201.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='188.4' x2='278' y2='188.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='175.6' x2='278' y2='175.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='162.8' x2='278' y2='162.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='150' x2='278' y2='150' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='137.2' x2='278' y2='137.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='124.4' x2='278' y2='124.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='111.6' x2='278' y2='111.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='98.8' x2='278' y2='98.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='86' x2='278' y2='86' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='73.2' x2='278' y2='73.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='60.4' x2='278' y2='60.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='47.6' x2='278' y2='47.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='34.8' x2='278' y2='34.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='22' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='14' y1='150' x2='286' y2='150' stroke='#000' stroke-width='1.3'/><polygon points='290,150 283,153.2 283,146.9' fill='#000'/><polygon points='10,150 17,146.9 17,153.2' fill='#000'/><text x='290' y='139' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>x</tspan></text><line x1='150' y1='286' x2='150' y2='14' stroke='#000' stroke-width='1.3'/><polygon points='150,10 153.2,17 146.9,17' fill='#000'/><polygon points='150,290 146.9,283 153.2,283' fill='#000'/><text x='161' y='10' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>y</tspan></text><line x1='22' y1='147' x2='22' y2='153' stroke='#000' stroke-width='1'/><text x='22' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='40.3' y1='147' x2='40.3' y2='153' stroke='#000' stroke-width='1'/><text x='40.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='58.6' y1='147' x2='58.6' y2='153' stroke='#000' stroke-width='1'/><text x='58.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='76.9' y1='147' x2='76.9' y2='153' stroke='#000' stroke-width='1'/><text x='76.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='95.1' y1='147' x2='95.1' y2='153' stroke='#000' stroke-width='1'/><text x='95.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='113.4' y1='147' x2='113.4' y2='153' stroke='#000' stroke-width='1'/><text x='113.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='131.7' y1='147' x2='131.7' y2='153' stroke='#000' stroke-width='1'/><text x='131.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='168.3' y1='147' x2='168.3' y2='153' stroke='#000' stroke-width='1'/><text x='168.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='186.6' y1='147' x2='186.6' y2='153' stroke='#000' stroke-width='1'/><text x='186.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='204.9' y1='147' x2='204.9' y2='153' stroke='#000' stroke-width='1'/><text x='204.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='223.1' y1='147' x2='223.1' y2='153' stroke='#000' stroke-width='1'/><text x='223.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='241.4' y1='147' x2='241.4' y2='153' stroke='#000' stroke-width='1'/><text x='241.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='259.7' y1='147' x2='259.7' y2='153' stroke='#000' stroke-width='1'/><text x='259.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='278' y1='147' x2='278' y2='153' stroke='#000' stroke-width='1'/><text x='278' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><line x1='147' y1='278' x2='153' y2='278' stroke='#000' stroke-width='1'/><text x='144' y='278' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−10</text><line x1='147' y1='252.4' x2='153' y2='252.4' stroke='#000' stroke-width='1'/><text x='144' y='252.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−8</text><line x1='147' y1='226.8' x2='153' y2='226.8' stroke='#000' stroke-width='1'/><text x='144' y='226.8' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='147' y1='201.2' x2='153' y2='201.2' stroke='#000' stroke-width='1'/><text x='144' y='201.2' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='147' y1='175.6' x2='153' y2='175.6' stroke='#000' stroke-width='1'/><text x='144' y='175.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='147' y1='124.4' x2='153' y2='124.4' stroke='#000' stroke-width='1'/><text x='144' y='124.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='147' y1='98.8' x2='153' y2='98.8' stroke='#000' stroke-width='1'/><text x='144' y='98.8' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='147' y1='73.2' x2='153' y2='73.2' stroke='#000' stroke-width='1'/><text x='144' y='73.2' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='147' y1='47.6' x2='153' y2='47.6' stroke='#000' stroke-width='1'/><text x='144' y='47.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>8</text><line x1='147' y1='22' x2='153' y2='22' stroke='#000' stroke-width='1'/><text x='144' y='22' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>10</text><text x='142' y='161' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>O</tspan></text><g clip-path='url(#c381)'><path d='M22 380.4 L23.1 373.7 L24.1 367.1 L25.2 360.6 L26.3 354.2 L27.3 347.9 L28.4 341.6 L29.5 335.5 L30.5 329.4 L31.6 323.4 L32.7 317.6 L33.7 311.8 L34.8 306 L35.9 300.4 L36.9 294.9 L38 289.4 L39.1 284 L40.1 278.7 L41.2 273.6 L42.3 268.4 L43.3 263.4 L44.4 258.5 L45.5 253.6 L46.5 248.9 L47.6 244.2 L48.7 239.6 L49.7 235.1 L50.8 230.7 L51.9 226.4 L52.9 222.2 L54 218 L55.1 213.9 L56.1 210 L57.2 206.1 L58.3 202.3 L59.3 198.6 L60.4 194.9 L61.5 191.4 L62.5 187.9 L63.6 184.6 L64.7 181.3 L65.7 178.1 L66.8 175 L67.9 172 L68.9 169 L70 166.2 L71.1 163.4 L72.1 160.8 L73.2 158.2 L74.3 155.7 L75.3 153.3 L76.4 151 L77.5 148.7 L78.5 146.6 L79.6 144.5 L80.7 142.6 L81.7 140.7 L82.8 138.9 L83.9 137.2 L84.9 135.5 L86 134 L87.1 132.6 L88.1 131.2 L89.2 129.9 L90.3 128.7 L91.3 127.6 L92.4 126.6 L93.5 125.7 L94.5 124.8 L95.6 124.1 L96.7 123.4 L97.7 122.8 L98.8 122.4 L99.9 121.9 L100.9 121.6 L102 121.4 L103.1 121.3 L104.1 121.2 L105.2 121.2 L106.3 121.4 L107.3 121.6 L108.4 121.8 L109.5 122.2 L110.5 122.7 L111.6 123.2 L112.7 123.9 L113.7 124.6 L114.8 125.4 L115.9 126.3 L116.9 127.3 L118 128.4 L119.1 129.6 L120.1 130.8 L121.2 132.2 L122.3 133.6 L123.3 135.1 L124.4 136.7 L125.5 138.4 L126.5 140.1 L127.6 142 L128.7 144 L129.7 146 L130.8 148.1 L131.9 150.3 L132.9 152.6 L134 155 L135.1 157.5 L136.1 160 L137.2 162.7 L138.3 165.4 L139.3 168.2 L140.4 171.1 L141.5 174.1 L142.5 177.2 L143.6 180.4 L144.7 183.6 L145.7 187 L146.8 190.4 L147.9 193.9 L148.9 197.5 L150 201.2 L151.1 205 L152.1 208.8 L153.2 212.8 L154.3 216.8 L155.3 221 L156.4 225.2 L157.5 229.5 L158.5 233.9 L159.6 238.3 L160.7 242.9 L161.7 247.5 L162.8 252.3 L163.9 257.1 L164.9 262 L166 267 L167.1 272.1 L168.1 277.3 L169.2 282.5 L170.3 287.9 L171.3 293.3 L172.4 298.8 L173.5 304.4 L174.5 310.1 L175.6 315.9 L176.7 321.8 L177.7 327.7 L178.8 333.8 L179.9 339.9 L180.9 346.1 L182 352.4 L183.1 358.8 L184.1 365.3 L185.2 371.8 L186.3 378.5 L187.3 385.2 L188.4 392 L189.5 399 L190.5 406 L191.6 413 L192.7 420.2 L193.7 427.5 L194.8 434.8 L195.9 442.3 L196.9 449.8 L198 457.4 L199.1 465.1 L200.1 472.9 L201.2 480.8 L202.3 488.7 L203.3 496.8 L204.4 504.9 L205.5 513.1 L206.5 521.4 L207.6 529.8 ' fill='none' stroke='#000' stroke-width='2'/></g></svg>",
   "choices": [
-   "\\(y = -(x + 4)(x + 1)\\)",
    "\\(y = -(x - 4)(x - 1)\\)",
    "\\(y = (x - 4)(x - 1)\\)",
-   "\\(y = (x + 4)(x + 1)\\)"
+   "\\(y = (x + 4)(x + 1)\\)",
+   "\\(y = -(x + 4)(x + 1)\\)"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "The graph crosses the \\(x\\)-axis at \\(x = -4\\) and \\(x = -1\\), so the factors are \\((x + 4)\\) and \\((x + 1)\\). The parabola opens downward, so the leading coefficient is negative: \\(y = -(x + 4)(x + 1)\\)."
  },
  {
@@ -4421,9 +4421,9 @@ window.SAT_QUESTIONS = [
   "stem": "<p>The graph of a quadratic function is shown in the \\(xy\\)-plane. Which equation could define the graph?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><defs><clipPath id='c381'><rect x='22' y='22' width='256' height='256'/></clipPath></defs><line x1='22' y1='278' x2='22' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='40.3' y1='278' x2='40.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='58.6' y1='278' x2='58.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='76.9' y1='278' x2='76.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='95.1' y1='278' x2='95.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='113.4' y1='278' x2='113.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='131.7' y1='278' x2='131.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='150' y1='278' x2='150' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='168.3' y1='278' x2='168.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='186.6' y1='278' x2='186.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='204.9' y1='278' x2='204.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='223.1' y1='278' x2='223.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='241.4' y1='278' x2='241.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='259.7' y1='278' x2='259.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='278' y1='278' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='278' x2='278' y2='278' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='265.2' x2='278' y2='265.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='252.4' x2='278' y2='252.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='239.6' x2='278' y2='239.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='226.8' x2='278' y2='226.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='214' x2='278' y2='214' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='201.2' x2='278' y2='201.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='188.4' x2='278' y2='188.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='175.6' x2='278' y2='175.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='162.8' x2='278' y2='162.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='150' x2='278' y2='150' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='137.2' x2='278' y2='137.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='124.4' x2='278' y2='124.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='111.6' x2='278' y2='111.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='98.8' x2='278' y2='98.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='86' x2='278' y2='86' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='73.2' x2='278' y2='73.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='60.4' x2='278' y2='60.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='47.6' x2='278' y2='47.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='34.8' x2='278' y2='34.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='22' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='14' y1='150' x2='286' y2='150' stroke='#000' stroke-width='1.3'/><polygon points='290,150 283,153.2 283,146.9' fill='#000'/><polygon points='10,150 17,146.9 17,153.2' fill='#000'/><text x='290' y='139' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>x</tspan></text><line x1='150' y1='286' x2='150' y2='14' stroke='#000' stroke-width='1.3'/><polygon points='150,10 153.2,17 146.9,17' fill='#000'/><polygon points='150,290 146.9,283 153.2,283' fill='#000'/><text x='161' y='10' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>y</tspan></text><line x1='22' y1='147' x2='22' y2='153' stroke='#000' stroke-width='1'/><text x='22' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='40.3' y1='147' x2='40.3' y2='153' stroke='#000' stroke-width='1'/><text x='40.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='58.6' y1='147' x2='58.6' y2='153' stroke='#000' stroke-width='1'/><text x='58.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='76.9' y1='147' x2='76.9' y2='153' stroke='#000' stroke-width='1'/><text x='76.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='95.1' y1='147' x2='95.1' y2='153' stroke='#000' stroke-width='1'/><text x='95.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='113.4' y1='147' x2='113.4' y2='153' stroke='#000' stroke-width='1'/><text x='113.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='131.7' y1='147' x2='131.7' y2='153' stroke='#000' stroke-width='1'/><text x='131.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='168.3' y1='147' x2='168.3' y2='153' stroke='#000' stroke-width='1'/><text x='168.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='186.6' y1='147' x2='186.6' y2='153' stroke='#000' stroke-width='1'/><text x='186.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='204.9' y1='147' x2='204.9' y2='153' stroke='#000' stroke-width='1'/><text x='204.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='223.1' y1='147' x2='223.1' y2='153' stroke='#000' stroke-width='1'/><text x='223.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='241.4' y1='147' x2='241.4' y2='153' stroke='#000' stroke-width='1'/><text x='241.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='259.7' y1='147' x2='259.7' y2='153' stroke='#000' stroke-width='1'/><text x='259.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='278' y1='147' x2='278' y2='153' stroke='#000' stroke-width='1'/><text x='278' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><line x1='147' y1='278' x2='153' y2='278' stroke='#000' stroke-width='1'/><text x='144' y='278' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−10</text><line x1='147' y1='252.4' x2='153' y2='252.4' stroke='#000' stroke-width='1'/><text x='144' y='252.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−8</text><line x1='147' y1='226.8' x2='153' y2='226.8' stroke='#000' stroke-width='1'/><text x='144' y='226.8' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='147' y1='201.2' x2='153' y2='201.2' stroke='#000' stroke-width='1'/><text x='144' y='201.2' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='147' y1='175.6' x2='153' y2='175.6' stroke='#000' stroke-width='1'/><text x='144' y='175.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='147' y1='124.4' x2='153' y2='124.4' stroke='#000' stroke-width='1'/><text x='144' y='124.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='147' y1='98.8' x2='153' y2='98.8' stroke='#000' stroke-width='1'/><text x='144' y='98.8' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='147' y1='73.2' x2='153' y2='73.2' stroke='#000' stroke-width='1'/><text x='144' y='73.2' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='147' y1='47.6' x2='153' y2='47.6' stroke='#000' stroke-width='1'/><text x='144' y='47.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>8</text><line x1='147' y1='22' x2='153' y2='22' stroke='#000' stroke-width='1'/><text x='144' y='22' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>10</text><text x='142' y='161' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>O</tspan></text><g clip-path='url(#c381)'><path d='M73.2 -226.8 L74.3 -217.6 L75.3 -208.5 L76.4 -199.4 L77.5 -190.5 L78.5 -181.6 L79.6 -172.8 L80.7 -164.2 L81.7 -155.6 L82.8 -147 L83.9 -138.6 L84.9 -130.3 L86 -122 L87.1 -113.8 L88.1 -105.7 L89.2 -97.8 L90.3 -89.8 L91.3 -82 L92.4 -74.3 L93.5 -66.6 L94.5 -59.1 L95.6 -51.6 L96.7 -44.2 L97.7 -36.9 L98.8 -29.7 L99.9 -22.6 L100.9 -15.6 L102 -8.6 L103.1 -1.7 L104.1 5 L105.2 11.7 L106.3 18.3 L107.3 24.8 L108.4 31.3 L109.5 37.6 L110.5 43.9 L111.6 50 L112.7 56.1 L113.7 62.1 L114.8 68 L115.9 73.8 L116.9 79.6 L118 85.2 L119.1 90.8 L120.1 96.2 L121.2 101.6 L122.3 106.9 L123.3 112.1 L124.4 117.2 L125.5 122.3 L126.5 127.2 L127.6 132.1 L128.7 136.8 L129.7 141.5 L130.8 146.1 L131.9 150.6 L132.9 155.1 L134 159.4 L135.1 163.6 L136.1 167.8 L137.2 171.9 L138.3 175.9 L139.3 179.8 L140.4 183.6 L141.5 187.3 L142.5 191 L143.6 194.5 L144.7 198 L145.7 201.4 L146.8 204.6 L147.9 207.9 L148.9 211 L150 214 L151.1 216.9 L152.1 219.8 L153.2 222.6 L154.3 225.2 L155.3 227.8 L156.4 230.4 L157.5 232.8 L158.5 235.1 L159.6 237.4 L160.7 239.5 L161.7 241.6 L162.8 243.6 L163.9 245.5 L164.9 247.3 L166 249 L167.1 250.6 L168.1 252.2 L169.2 253.6 L170.3 255 L171.3 256.3 L172.4 257.5 L173.5 258.6 L174.5 259.7 L175.6 260.6 L176.7 261.4 L177.7 262.2 L178.8 262.9 L179.9 263.5 L180.9 264 L182 264.4 L183.1 264.7 L184.1 265 L185.2 265.1 L186.3 265.2 L187.3 265.2 L188.4 265.1 L189.5 264.9 L190.5 264.6 L191.6 264.2 L192.7 263.8 L193.7 263.2 L194.8 262.6 L195.9 261.9 L196.9 261.1 L198 260.2 L199.1 259.2 L200.1 258.2 L201.2 257 L202.3 255.8 L203.3 254.4 L204.4 253 L205.5 251.5 L206.5 249.9 L207.6 248.3 L208.7 246.5 L209.7 244.7 L210.8 242.7 L211.9 240.7 L212.9 238.6 L214 236.4 L215.1 234.1 L216.1 231.7 L217.2 229.3 L218.3 226.7 L219.3 224.1 L220.4 221.4 L221.5 218.6 L222.5 215.7 L223.6 212.7 L224.7 209.6 L225.7 206.5 L226.8 203.2 L227.9 199.9 L228.9 196.5 L230 193 L231.1 189.4 L232.1 185.7 L233.2 182 L234.3 178.1 L235.3 174.2 L236.4 170.2 L237.5 166 L238.5 161.8 L239.6 157.6 L240.7 153.2 L241.7 148.7 L242.8 144.2 L243.9 139.5 L244.9 134.8 L246 130 L247.1 125.1 L248.1 120.1 L249.2 115 L250.3 109.9 L251.3 104.6 L252.4 99.3 L253.5 93.9 L254.5 88.4 L255.6 82.8 L256.7 77.1 L257.7 71.3 L258.8 65.5 L259.9 59.5 L260.9 53.5 L262 47.4 L263.1 41.2 L264.1 34.9 L265.2 28.5 L266.3 22.1 L267.3 15.5 L268.4 8.9 L269.5 2.1 L270.5 -4.7 L271.6 -11.6 L272.7 -18.6 L273.7 -25.6 L274.8 -32.8 L275.9 -40 L276.9 -47.4 L278 -54.8 ' fill='none' stroke='#000' stroke-width='2'/></g></svg>",
   "choices": [
    "\\(y = (x + 1)(x - 5)\\)",
-   "\\(y = -(x - 1)(x + 5)\\)",
    "\\(y = (x - 1)(x + 5)\\)",
-   "\\(y = -(x + 1)(x - 5)\\)"
+   "\\(y = -(x + 1)(x - 5)\\)",
+   "\\(y = -(x - 1)(x + 5)\\)"
   ],
   "answer": 0,
   "explanation": "The graph crosses the \\(x\\)-axis at \\(x = -1\\) and \\(x = 5\\), so the factors are \\((x + 1)\\) and \\((x - 5)\\). The parabola opens upward, so the leading coefficient is positive: \\(y = (x + 1)(x - 5)\\)."
@@ -4437,12 +4437,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The graph of a quadratic function is shown in the \\(xy\\)-plane. Which equation could define the graph?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><defs><clipPath id='c381'><rect x='22' y='22' width='256' height='256'/></clipPath></defs><line x1='22' y1='278' x2='22' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='40.3' y1='278' x2='40.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='58.6' y1='278' x2='58.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='76.9' y1='278' x2='76.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='95.1' y1='278' x2='95.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='113.4' y1='278' x2='113.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='131.7' y1='278' x2='131.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='150' y1='278' x2='150' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='168.3' y1='278' x2='168.3' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='186.6' y1='278' x2='186.6' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='204.9' y1='278' x2='204.9' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='223.1' y1='278' x2='223.1' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='241.4' y1='278' x2='241.4' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='259.7' y1='278' x2='259.7' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='278' y1='278' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='278' x2='278' y2='278' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='265.2' x2='278' y2='265.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='252.4' x2='278' y2='252.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='239.6' x2='278' y2='239.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='226.8' x2='278' y2='226.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='214' x2='278' y2='214' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='201.2' x2='278' y2='201.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='188.4' x2='278' y2='188.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='175.6' x2='278' y2='175.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='162.8' x2='278' y2='162.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='150' x2='278' y2='150' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='137.2' x2='278' y2='137.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='124.4' x2='278' y2='124.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='111.6' x2='278' y2='111.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='98.8' x2='278' y2='98.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='86' x2='278' y2='86' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='73.2' x2='278' y2='73.2' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='60.4' x2='278' y2='60.4' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='47.6' x2='278' y2='47.6' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='34.8' x2='278' y2='34.8' stroke='#c8c8c8' stroke-width='0.6'/><line x1='22' y1='22' x2='278' y2='22' stroke='#c8c8c8' stroke-width='0.6'/><line x1='14' y1='150' x2='286' y2='150' stroke='#000' stroke-width='1.3'/><polygon points='290,150 283,153.2 283,146.9' fill='#000'/><polygon points='10,150 17,146.9 17,153.2' fill='#000'/><text x='290' y='139' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>x</tspan></text><line x1='150' y1='286' x2='150' y2='14' stroke='#000' stroke-width='1.3'/><polygon points='150,10 153.2,17 146.9,17' fill='#000'/><polygon points='150,290 146.9,283 153.2,283' fill='#000'/><text x='161' y='10' text-anchor='middle' dominant-baseline='middle' fill='#000'><tspan font-style='italic'>y</tspan></text><line x1='22' y1='147' x2='22' y2='153' stroke='#000' stroke-width='1'/><text x='22' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−7</text><line x1='40.3' y1='147' x2='40.3' y2='153' stroke='#000' stroke-width='1'/><text x='40.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='58.6' y1='147' x2='58.6' y2='153' stroke='#000' stroke-width='1'/><text x='58.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−5</text><line x1='76.9' y1='147' x2='76.9' y2='153' stroke='#000' stroke-width='1'/><text x='76.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='95.1' y1='147' x2='95.1' y2='153' stroke='#000' stroke-width='1'/><text x='95.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−3</text><line x1='113.4' y1='147' x2='113.4' y2='153' stroke='#000' stroke-width='1'/><text x='113.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='131.7' y1='147' x2='131.7' y2='153' stroke='#000' stroke-width='1'/><text x='131.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−1</text><line x1='168.3' y1='147' x2='168.3' y2='153' stroke='#000' stroke-width='1'/><text x='168.3' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>1</text><line x1='186.6' y1='147' x2='186.6' y2='153' stroke='#000' stroke-width='1'/><text x='186.6' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='204.9' y1='147' x2='204.9' y2='153' stroke='#000' stroke-width='1'/><text x='204.9' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>3</text><line x1='223.1' y1='147' x2='223.1' y2='153' stroke='#000' stroke-width='1'/><text x='223.1' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='241.4' y1='147' x2='241.4' y2='153' stroke='#000' stroke-width='1'/><text x='241.4' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>5</text><line x1='259.7' y1='147' x2='259.7' y2='153' stroke='#000' stroke-width='1'/><text x='259.7' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='278' y1='147' x2='278' y2='153' stroke='#000' stroke-width='1'/><text x='278' y='162' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>7</text><line x1='147' y1='278' x2='153' y2='278' stroke='#000' stroke-width='1'/><text x='144' y='278' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−10</text><line x1='147' y1='252.4' x2='153' y2='252.4' stroke='#000' stroke-width='1'/><text x='144' y='252.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−8</text><line x1='147' y1='226.8' x2='153' y2='226.8' stroke='#000' stroke-width='1'/><text x='144' y='226.8' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−6</text><line x1='147' y1='201.2' x2='153' y2='201.2' stroke='#000' stroke-width='1'/><text x='144' y='201.2' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−4</text><line x1='147' y1='175.6' x2='153' y2='175.6' stroke='#000' stroke-width='1'/><text x='144' y='175.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>−2</text><line x1='147' y1='124.4' x2='153' y2='124.4' stroke='#000' stroke-width='1'/><text x='144' y='124.4' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>2</text><line x1='147' y1='98.8' x2='153' y2='98.8' stroke='#000' stroke-width='1'/><text x='144' y='98.8' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>4</text><line x1='147' y1='73.2' x2='153' y2='73.2' stroke='#000' stroke-width='1'/><text x='144' y='73.2' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>6</text><line x1='147' y1='47.6' x2='153' y2='47.6' stroke='#000' stroke-width='1'/><text x='144' y='47.6' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>8</text><line x1='147' y1='22' x2='153' y2='22' stroke='#000' stroke-width='1'/><text x='144' y='22' text-anchor='end' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>10</text><text x='142' y='161' text-anchor='middle' dominant-baseline='middle' font-size='11' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>O</tspan></text><g clip-path='url(#c381)'><path d='M62.5 -226.9 L63.6 -218.3 L64.7 -209.8 L65.7 -201.4 L66.8 -193.1 L67.9 -184.8 L68.9 -176.7 L70 -168.6 L71.1 -160.6 L72.1 -152.7 L73.2 -144.9 L74.3 -137.2 L75.3 -129.6 L76.4 -122 L77.5 -114.5 L78.5 -107.2 L79.6 -99.9 L80.7 -92.7 L81.7 -85.6 L82.8 -78.6 L83.9 -71.6 L84.9 -64.8 L86 -58 L87.1 -51.3 L88.1 -44.7 L89.2 -38.2 L90.3 -31.8 L91.3 -25.5 L92.4 -19.2 L93.5 -13.1 L94.5 -7 L95.6 -1 L96.7 4.8 L97.7 10.6 L98.8 16.4 L99.9 22 L100.9 27.5 L102 33 L103.1 38.4 L104.1 43.7 L105.2 48.8 L106.3 54 L107.3 59 L108.4 63.9 L109.5 68.8 L110.5 73.5 L111.6 78.2 L112.7 82.8 L113.7 87.3 L114.8 91.7 L115.9 96 L116.9 100.2 L118 104.4 L119.1 108.5 L120.1 112.4 L121.2 116.3 L122.3 120.1 L123.3 123.8 L124.4 127.5 L125.5 131 L126.5 134.5 L127.6 137.8 L128.7 141.1 L129.7 144.3 L130.8 147.4 L131.9 150.4 L132.9 153.4 L134 156.2 L135.1 159 L136.1 161.6 L137.2 164.2 L138.3 166.7 L139.3 169.1 L140.4 171.4 L141.5 173.7 L142.5 175.8 L143.6 177.9 L144.7 179.8 L145.7 181.7 L146.8 183.5 L147.9 185.2 L148.9 186.9 L150 188.4 L151.1 189.8 L152.1 191.2 L153.2 192.5 L154.3 193.7 L155.3 194.8 L156.4 195.8 L157.5 196.7 L158.5 197.6 L159.6 198.3 L160.7 199 L161.7 199.6 L162.8 200 L163.9 200.5 L164.9 200.8 L166 201 L167.1 201.1 L168.1 201.2 L169.2 201.2 L170.3 201 L171.3 200.8 L172.4 200.6 L173.5 200.2 L174.5 199.7 L175.6 199.2 L176.7 198.5 L177.7 197.8 L178.8 197 L179.9 196.1 L180.9 195.1 L182 194 L183.1 192.8 L184.1 191.6 L185.2 190.2 L186.3 188.8 L187.3 187.3 L188.4 185.7 L189.5 184 L190.5 182.3 L191.6 180.4 L192.7 178.4 L193.7 176.4 L194.8 174.3 L195.9 172.1 L196.9 169.8 L198 167.4 L199.1 164.9 L200.1 162.4 L201.2 159.7 L202.3 157 L203.3 154.2 L204.4 151.3 L205.5 148.3 L206.5 145.2 L207.6 142 L208.7 138.8 L209.7 135.4 L210.8 132 L211.9 128.5 L212.9 124.9 L214 121.2 L215.1 117.4 L216.1 113.6 L217.2 109.6 L218.3 105.6 L219.3 101.4 L220.4 97.2 L221.5 92.9 L222.5 88.5 L223.6 84.1 L224.7 79.5 L225.7 74.9 L226.8 70.1 L227.9 65.3 L228.9 60.4 L230 55.4 L231.1 50.3 L232.1 45.1 L233.2 39.9 L234.3 34.5 L235.3 29.1 L236.4 23.6 L237.5 18 L238.5 12.3 L239.6 6.5 L240.7 0.6 L241.7 -5.3 L242.8 -11.4 L243.9 -17.5 L244.9 -23.7 L246 -30 L247.1 -36.4 L248.1 -42.9 L249.2 -49.4 L250.3 -56.1 L251.3 -62.8 L252.4 -69.6 L253.5 -76.6 L254.5 -83.6 L255.6 -90.6 L256.7 -97.8 L257.7 -105.1 L258.8 -112.4 L259.9 -119.9 L260.9 -127.4 L262 -135 L263.1 -142.7 L264.1 -150.5 L265.2 -158.4 L266.3 -166.3 L267.3 -174.4 L268.4 -182.5 L269.5 -190.7 L270.5 -199 L271.6 -207.4 L272.7 -215.9 L273.7 -224.5 L274.8 -233.1 ' fill='none' stroke='#000' stroke-width='2'/></g></svg>",
   "choices": [
-   "\\(y = (x - 1)(x + 3)\\)",
    "\\(y = (x + 1)(x - 3)\\)",
+   "\\(y = (x - 1)(x + 3)\\)",
    "\\(y = -(x + 1)(x - 3)\\)",
    "\\(y = -(x - 1)(x + 3)\\)"
   ],
-  "answer": 1,
+  "answer": 0,
   "explanation": "The graph crosses the \\(x\\)-axis at \\(x = -1\\) and \\(x = 3\\), so the factors are \\((x + 1)\\) and \\((x - 3)\\). The parabola opens upward, so the leading coefficient is positive: \\(y = (x + 1)(x - 3)\\)."
  },
  {
@@ -4533,12 +4533,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The function \\(f(t) = 500(1.21)^{t}\\) models the number of members of an online forum \\(t\\) years after the forum was created. Which of the following equivalent forms of \\(f(t)\\) shows, as a constant or coefficient, the percent increase in the number of members every half year?</p>",
   "choices": [
-   "\\(f(t) = 500(1.21)^{2t}\\)",
-   "\\(f(t) = 500(1.1)^{\\frac{t}{2}}\\)",
    "\\(f(t) = 500(1.1)^{2t}\\)",
-   "\\(f(t) = 500(0.605)^{2t}\\)"
+   "\\(f(t) = 500(0.605)^{2t}\\)",
+   "\\(f(t) = 500(1.1)^{\\frac{t}{2}}\\)",
+   "\\(f(t) = 500(1.21)^{2t}\\)"
   ],
-  "answer": 2,
+  "answer": 0,
   "explanation": "\\(1.21 = (1.1)^2\\), so \\(f(t) = 500((1.1)^2)^{t} = 500(1.1)^{2t}\\). Here \\(2t\\) counts half-years, and the base 1.1 shows a 10% increase every half year."
  },
  {
@@ -4550,12 +4550,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Which expression is equivalent to \\(3^{2x + 2}\\)?</p>",
   "choices": [
-   "\\(9(9)^{x}\\)",
-   "\\((9)^{x + 2}\\)",
    "\\(9(6)^{x}\\)",
-   "\\((81)^{x}\\)"
+   "\\((81)^{x}\\)",
+   "\\(9(9)^{x}\\)",
+   "\\((9)^{x + 2}\\)"
   ],
-  "answer": 0,
+  "answer": 2,
   "explanation": "\\(3^{2x + 2} = 3^{2} \\cdot 3^{2x} = 9(3^2)^{x} = 9(9)^{x}\\)."
  },
  {
@@ -4569,10 +4569,10 @@ window.SAT_QUESTIONS = [
   "choices": [
    "\\(2{,}000(1.005)^{4t}\\)",
    "\\(2{,}000(1.02)^{\\frac{t}{4}}\\)",
-   "\\(2{,}000\\left(1.02^{\\frac{1}{4}}\\right)^{4t}\\)",
-   "\\(2{,}000(1.08)^{\\frac{t}{4}}\\)"
+   "\\(2{,}000(1.08)^{\\frac{t}{4}}\\)",
+   "\\(2{,}000\\left(1.02^{\\frac{1}{4}}\\right)^{4t}\\)"
   ],
-  "answer": 2,
+  "answer": 3,
   "explanation": "Since \\(\\left(1.02^{\\frac{1}{4}}\\right)^{4t} = 1.02^{t}\\), the first expression is equivalent. Dividing the annual rate by 4, as in \\((1.005)^{4t}\\), gives a slightly different (larger) value, so it is not equivalent."
  },
  {
@@ -4584,12 +4584,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The function \\(f(t) = 500(1.44)^{t}\\) models the number of members of an online forum \\(t\\) years after the forum was created. Which of the following equivalent forms of \\(f(t)\\) shows, as a constant or coefficient, the percent increase in the number of members every half year?</p>",
   "choices": [
-   "\\(f(t) = 500(0.72)^{2t}\\)",
+   "\\(f(t) = 500(1.2)^{2t}\\)",
    "\\(f(t) = 500(1.2)^{\\frac{t}{2}}\\)",
    "\\(f(t) = 500(1.44)^{2t}\\)",
-   "\\(f(t) = 500(1.2)^{2t}\\)"
+   "\\(f(t) = 500(0.72)^{2t}\\)"
   ],
-  "answer": 3,
+  "answer": 0,
   "explanation": "\\(1.44 = (1.2)^2\\), so \\(f(t) = 500((1.2)^2)^{t} = 500(1.2)^{2t}\\). Here \\(2t\\) counts half-years, and the base 1.2 shows a 20% increase every half year."
  },
  {
@@ -4681,12 +4681,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>\\(\\frac{x^2}{x - 5} = \\frac{6x - 5}{x - 5}\\)</p><p>What are all values of \\(x\\) that satisfy the given equation?</p>",
   "choices": [
-   "\\(1\\) and \\(5\\)",
    "\\(1\\) only",
-   "\\(-1\\) and \\(-5\\)",
-   "\\(5\\) only"
+   "\\(1\\) and \\(5\\)",
+   "\\(5\\) only",
+   "\\(-1\\) and \\(-5\\)"
   ],
-  "answer": 1,
+  "answer": 0,
   "explanation": "Multiply both sides by \\(x - 5\\): \\(x^2 = 6x - 5\\), so \\(x^2 - 6x + 5 = 0\\) and \\((x - 1)(x - 5) = 0\\). The value \\(x = 5\\) makes the original denominators zero, so it is not a solution. Only \\(x = 1\\) works."
  },
  {
@@ -4698,12 +4698,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>\\(\\frac{x^2}{x - 5} = \\frac{3x + 10}{x - 5}\\)</p><p>What are all values of \\(x\\) that satisfy the given equation?</p>",
   "choices": [
-   "\\(-2\\) only",
-   "\\(5\\) only",
    "\\(-2\\) and \\(5\\)",
-   "\\(2\\) and \\(-5\\)"
+   "\\(-2\\) only",
+   "\\(2\\) and \\(-5\\)",
+   "\\(5\\) only"
   ],
-  "answer": 0,
+  "answer": 1,
   "explanation": "Multiply both sides by \\(x - 5\\): \\(x^2 = 3x + 10\\), so \\(x^2 - 3x - 10 = 0\\) and \\((x + 2)(x - 5) = 0\\). The value \\(x = 5\\) makes the original denominators zero, so it is not a solution. Only \\(x = -2\\) works."
  },
  {
@@ -4732,12 +4732,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>\\(\\frac{x^2}{x - 5} = \\frac{-x + 30}{x - 5}\\)</p><p>What are all values of \\(x\\) that satisfy the given equation?</p>",
   "choices": [
-   "\\(-6\\) only",
-   "\\(6\\) and \\(-5\\)",
+   "\\(-6\\) and \\(5\\)",
    "\\(5\\) only",
-   "\\(-6\\) and \\(5\\)"
+   "\\(-6\\) only",
+   "\\(6\\) and \\(-5\\)"
   ],
-  "answer": 0,
+  "answer": 2,
   "explanation": "Multiply both sides by \\(x - 5\\): \\(x^2 = -x + 30\\), so \\(x^2 + x - 30 = 0\\) and \\((x + 6)(x - 5) = 0\\). The value \\(x = 5\\) makes the original denominators zero, so it is not a solution. Only \\(x = -6\\) works."
  },
  {
@@ -5211,12 +5211,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The number of insects in a population \\(y\\) years after a study began is modeled by \\(N(y) = 1{,}200(0.49)^{y}\\). Which of the following describes how the population changes every half year, according to the model?</p>",
   "choices": [
-   "It decreases by 30%.",
-   "It decreases by 25.5%.",
    "It decreases by 51%.",
-   "It decreases by 70%."
+   "It decreases by 25.5%.",
+   "It decreases by 70%.",
+   "It decreases by 30%."
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "\\(0.49 = (0.7)^2\\), so \\(N(y) = 1{,}200(0.7)^{2y}\\), and \\(2y\\) counts half-years. Each half year the population is multiplied by 0.7, a decrease of 30%."
  },
  {
@@ -5394,9 +5394,9 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The table summarizes students who chose their favorite sport to watch.</p><table class='qtable'><thead><tr><th></th><th>Basketball</th><th>Soccer</th><th>Tennis</th><th>Total</th></tr></thead><tbody><tr><th>Grade 10</th><td>10</td><td>9</td><td>24</td><td>43</td></tr><tr><th>Grade 11</th><td>26</td><td>28</td><td>18</td><td>72</td></tr><tr><th>Total</th><td>36</td><td>37</td><td>42</td><td>115</td></tr></tbody></table><p>If one of these students is selected at random, what is the probability that the student is in the \"Basketball\" category?</p>",
   "choices": [
-   "\\(\\dfrac{36}{43}\\)",
-   "\\(\\dfrac{5}{18}\\)",
    "\\(\\dfrac{2}{23}\\)",
+   "\\(\\dfrac{5}{18}\\)",
+   "\\(\\dfrac{36}{43}\\)",
    "\\(\\dfrac{36}{115}\\)"
   ],
   "answer": 3,
@@ -5411,12 +5411,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The table summarizes members of a gym, classified by the class they attended and the time of the class.</p><table class='qtable'><thead><tr><th></th><th>Yoga</th><th>Spin</th><th>Pilates</th><th>Total</th></tr></thead><tbody><tr><th>Morning</th><td>32</td><td>35</td><td>24</td><td>91</td></tr><tr><th>Evening</th><td>22</td><td>27</td><td>30</td><td>79</td></tr><tr><th>Total</th><td>54</td><td>62</td><td>54</td><td>170</td></tr></tbody></table><p>If one of these members is selected at random, what is the probability that the member is in the \"Pilates\" category?</p>",
   "choices": [
+   "\\(\\dfrac{4}{9}\\)",
    "\\(\\dfrac{54}{91}\\)",
    "\\(\\dfrac{12}{85}\\)",
-   "\\(\\dfrac{27}{85}\\)",
-   "\\(\\dfrac{4}{9}\\)"
+   "\\(\\dfrac{27}{85}\\)"
   ],
-  "answer": 2,
+  "answer": 3,
   "explanation": "There are 54 in the \"Pilates\" category out of 170 in total, so the probability is \\(\\frac{54}{170} = \\frac{27}{85}\\)."
  },
  {
@@ -5511,8 +5511,8 @@ window.SAT_QUESTIONS = [
   "choices": [
    "Surveying the first 100 students who arrive at school in the morning",
    "Selecting 100 students at random from a list of all students at the school",
-   "Surveying all the students on the school's track team",
-   "Posting a survey online and using the responses of students who choose to answer"
+   "Posting a survey online and using the responses of students who choose to answer",
+   "Surveying all the students on the school's track team"
   ],
   "answer": 1,
   "explanation": "A random sample from the entire student body gives every student the same chance of being selected, so it is most likely to be representative. The other methods select groups whose sleep habits may differ systematically from those of the whole school."
@@ -5526,12 +5526,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A city council wants to know what percent of city residents support building a new public library. Which of the following sampling methods is most appropriate for estimating this percent?</p>",
   "choices": [
-   "Asking 500 people who visit the current library during one week",
    "Randomly selecting 500 residents from a complete list of city residents and asking each one",
    "Asking 500 residents who live on the same street as the proposed library",
-   "Asking the first 500 people who call a phone line advertised in a library newsletter"
+   "Asking the first 500 people who call a phone line advertised in a library newsletter",
+   "Asking 500 people who visit the current library during one week"
   ],
-  "answer": 1,
+  "answer": 0,
   "explanation": "Only a random selection from all residents avoids a systematic bias. People who already use the library or who respond to library advertising are likely to support a new library more than residents in general."
  },
  {
@@ -5543,12 +5543,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A bag contains only 8 red marbles, 7 blue marbles, and 3 green marbles. If one of the marbles is chosen at random, what is the probability that it is <em>not</em> blue?</p>",
   "choices": [
+   "\\(\\dfrac{11}{18}\\)",
    "\\(\\dfrac{4}{9}\\)",
    "\\(\\dfrac{11}{7}\\)",
-   "\\(\\dfrac{11}{18}\\)",
    "\\(\\dfrac{7}{18}\\)"
   ],
-  "answer": 2,
+  "answer": 0,
   "explanation": "There are 18 marbles in total, and 11 of them are not blue. The probability is \\(\\frac{11}{18}\\)."
  },
  {
@@ -5560,12 +5560,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A jar contains only 11 oatmeal cookies, 12 peanut butter cookies, and 10 sugar cookies. If one of the cookies is chosen at random, what is the probability that it is <em>not</em> a peanut butter cookie?</p>",
   "choices": [
+   "\\(\\dfrac{7}{11}\\)",
    "\\(\\dfrac{4}{11}\\)",
    "\\(\\dfrac{1}{3}\\)",
-   "\\(\\dfrac{7}{4}\\)",
-   "\\(\\dfrac{7}{11}\\)"
+   "\\(\\dfrac{7}{4}\\)"
   ],
-  "answer": 3,
+  "answer": 0,
   "explanation": "There are 33 cookies in total, and 21 of them are not peanut butter. The probability is \\(\\frac{21}{33} = \\frac{7}{11}\\)."
  },
  {
@@ -5607,12 +5607,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The table summarizes people at a movie theater, classified by age group and the type of movie they watched.</p><table class='qtable'><thead><tr><th></th><th>Comedy</th><th>Drama</th><th>Animated</th><th>Total</th></tr></thead><tbody><tr><th>Adults</th><td>24</td><td>26</td><td>35</td><td>85</td></tr><tr><th>Children</th><td>13</td><td>18</td><td>19</td><td>50</td></tr><tr><th>Total</th><td>37</td><td>44</td><td>54</td><td>135</td></tr></tbody></table><p>If one of the people in the \"Adults\" row is selected at random, what is the probability that the person is in the \"Drama\" column?</p>",
   "choices": [
-   "\\(\\dfrac{17}{27}\\)",
-   "\\(\\dfrac{26}{85}\\)",
+   "\\(\\dfrac{26}{135}\\)",
    "\\(\\dfrac{13}{22}\\)",
-   "\\(\\dfrac{26}{135}\\)"
+   "\\(\\dfrac{17}{27}\\)",
+   "\\(\\dfrac{26}{85}\\)"
   ],
-  "answer": 1,
+  "answer": 3,
   "explanation": "The selection is only from the \"Adults\" row, which has 85 people. Of these, 26 are in the \"Drama\" column, so the probability is \\(\\frac{26}{85}\\)."
  },
  {
@@ -5626,10 +5626,10 @@ window.SAT_QUESTIONS = [
   "choices": [
    "\\(\\dfrac{1}{2}\\)",
    "\\(\\dfrac{3}{5}\\)",
-   "\\(\\dfrac{3}{28}\\)",
-   "\\(\\dfrac{3}{14}\\)"
+   "\\(\\dfrac{3}{14}\\)",
+   "\\(\\dfrac{3}{28}\\)"
   ],
-  "answer": 3,
+  "answer": 2,
   "explanation": "The selection is only from the \"Plant B\" row, which has 56 parts. Of these, 12 are in the \"Minor defect\" column, so the probability is \\(\\frac{12}{56} = \\frac{3}{14}\\)."
  },
  {
@@ -5701,12 +5701,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The ages, in years, of the 7 members of a book club are 20, 21, 23, 31, 35, 38, 91. If the value 91 is removed from the data, which of the following best describes how the mean and the median change?</p>",
   "choices": [
-   "The mean decreases, and the median stays the same.",
-   "The mean stays the same, and the median stays the same.",
    "The mean stays the same, and the median decreases.",
-   "The mean decreases, and the median decreases."
+   "The mean decreases, and the median decreases.",
+   "The mean stays the same, and the median stays the same.",
+   "The mean decreases, and the median stays the same."
   ],
-  "answer": 3,
+  "answer": 1,
   "explanation": "Removing a value much larger than the others lowers the mean (it drops from about 37.0 to about 28.0). The median goes from 31 to 27, so it decreases."
  },
  {
@@ -5718,12 +5718,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The scatterplot shows the number of hours that each of 12 students studied for a test and the student's score on the test. The line of best fit is also shown. The equation of the line is \\(y = 4x + 55\\).</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 260' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><line x1='50' y1='216' x2='50' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='50' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>0</text><line x1='73.3' y1='216' x2='73.3' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='73.3' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>1</text><line x1='96.5' y1='216' x2='96.5' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='96.5' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>2</text><line x1='119.8' y1='216' x2='119.8' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='119.8' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>3</text><line x1='143.1' y1='216' x2='143.1' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='143.1' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>4</text><line x1='166.4' y1='216' x2='166.4' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='166.4' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>5</text><line x1='189.6' y1='216' x2='189.6' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='189.6' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>6</text><line x1='212.9' y1='216' x2='212.9' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='212.9' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>7</text><line x1='236.2' y1='216' x2='236.2' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='236.2' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>8</text><line x1='259.5' y1='216' x2='259.5' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='259.5' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>9</text><line x1='282.7' y1='216' x2='282.7' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='282.7' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>10</text><line x1='306' y1='216' x2='306' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='306' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>11</text><line x1='50' y1='216' x2='306' y2='216' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='216' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>0</text><line x1='50' y1='195.8' x2='306' y2='195.8' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='195.8' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>10</text><line x1='50' y1='175.6' x2='306' y2='175.6' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='175.6' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>20</text><line x1='50' y1='155.4' x2='306' y2='155.4' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='155.4' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>30</text><line x1='50' y1='135.2' x2='306' y2='135.2' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='135.2' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>40</text><line x1='50' y1='115' x2='306' y2='115' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='115' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>50</text><line x1='50' y1='94.8' x2='306' y2='94.8' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='94.8' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>60</text><line x1='50' y1='74.6' x2='306' y2='74.6' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='74.6' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>70</text><line x1='50' y1='54.4' x2='306' y2='54.4' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='54.4' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>80</text><line x1='50' y1='34.2' x2='306' y2='34.2' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='34.2' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>90</text><line x1='50' y1='14' x2='306' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='14' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>100</text><line x1='50' y1='216' x2='306' y2='216' stroke='#000' stroke-width='1.3'/><line x1='50' y1='216' x2='50' y2='14' stroke='#000' stroke-width='1.3'/><text x='178' y='250' text-anchor='middle' dominant-baseline='middle' font-size='12' fill='#000'>Hours studied</text><text x='13' y='115' text-anchor='middle' dominant-baseline='middle' font-size='12' transform='rotate(-90 13 115)' fill='#000'>Test score</text><path d='M50 104.9 L51.3 104.5 L52.6 104 L53.8 103.6 L55.1 103.1 L56.4 102.7 L57.7 102.2 L59 101.8 L60.2 101.3 L61.5 100.9 L62.8 100.5 L64.1 100 L65.4 99.6 L66.6 99.1 L67.9 98.7 L69.2 98.2 L70.5 97.8 L71.8 97.3 L73 96.9 L74.3 96.5 L75.6 96 L76.9 95.6 L78.2 95.1 L79.4 94.7 L80.7 94.2 L82 93.8 L83.3 93.3 L84.6 92.9 L85.8 92.5 L87.1 92 L88.4 91.6 L89.7 91.1 L91 90.7 L92.2 90.2 L93.5 89.8 L94.8 89.3 L96.1 88.9 L97.4 88.5 L98.6 88 L99.9 87.6 L101.2 87.1 L102.5 86.7 L103.8 86.2 L105 85.8 L106.3 85.3 L107.6 84.9 L108.9 84.5 L110.2 84 L111.4 83.6 L112.7 83.1 L114 82.7 L115.3 82.2 L116.6 81.8 L117.8 81.3 L119.1 80.9 L120.4 80.5 L121.7 80 L123 79.6 L124.2 79.1 L125.5 78.7 L126.8 78.2 L128.1 77.8 L129.4 77.3 L130.6 76.9 L131.9 76.5 L133.2 76 L134.5 75.6 L135.8 75.1 L137 74.7 L138.3 74.2 L139.6 73.8 L140.9 73.3 L142.2 72.9 L143.4 72.5 L144.7 72 L146 71.6 L147.3 71.1 L148.6 70.7 L149.8 70.2 L151.1 69.8 L152.4 69.3 L153.7 68.9 L155 68.5 L156.2 68 L157.5 67.6 L158.8 67.1 L160.1 66.7 L161.4 66.2 L162.6 65.8 L163.9 65.3 L165.2 64.9 L166.5 64.5 L167.8 64 L169 63.6 L170.3 63.1 L171.6 62.7 L172.9 62.2 L174.2 61.8 L175.4 61.3 L176.7 60.9 L178 60.5 L179.3 60 L180.6 59.6 L181.8 59.1 L183.1 58.7 L184.4 58.2 L185.7 57.8 L187 57.3 L188.2 56.9 L189.5 56.5 L190.8 56 L192.1 55.6 L193.4 55.1 L194.6 54.7 L195.9 54.2 L197.2 53.8 L198.5 53.3 L199.8 52.9 L201 52.5 L202.3 52 L203.6 51.6 L204.9 51.1 L206.2 50.7 L207.4 50.2 L208.7 49.8 L210 49.4 L211.3 48.9 L212.6 48.5 L213.8 48 L215.1 47.6 L216.4 47.1 L217.7 46.7 L219 46.2 L220.2 45.8 L221.5 45.4 L222.8 44.9 L224.1 44.5 L225.4 44 L226.6 43.6 L227.9 43.1 L229.2 42.7 L230.5 42.2 L231.8 41.8 L233 41.4 L234.3 40.9 L235.6 40.5 L236.9 40 L238.2 39.6 L239.4 39.1 L240.7 38.7 L242 38.2 L243.3 37.8 L244.6 37.4 L245.8 36.9 L247.1 36.5 L248.4 36 L249.7 35.6 L251 35.1 L252.2 34.7 L253.5 34.2 L254.8 33.8 L256.1 33.4 L257.4 32.9 L258.6 32.5 L259.9 32 L261.2 31.6 L262.5 31.1 L263.8 30.7 L265 30.2 L266.3 29.8 L267.6 29.4 L268.9 28.9 L270.2 28.5 L271.4 28 L272.7 27.6 L274 27.1 L275.3 26.7 L276.6 26.2 L277.8 25.8 L279.1 25.4 L280.4 24.9 L281.7 24.5 L283 24 L284.2 23.6 L285.5 23.1 L286.8 22.7 L288.1 22.2 L289.4 21.8 L290.6 21.4 L291.9 20.9 L293.2 20.5 L294.5 20 L295.8 19.6 L297 19.1 L298.3 18.7 L299.6 18.2 L300.9 17.8 L302.2 17.4 L303.4 16.9 L304.7 16.5 L306 16 ' fill='none' stroke='#000' stroke-width='1.8'/><circle cx='282.7' cy='28.9' r='3.3' fill='#000'/><circle cx='126.8' cy='79.6' r='3.3' fill='#000'/><circle cx='198.9' cy='57.8' r='3.3' fill='#000'/><circle cx='96.5' cy='90.6' r='3.3' fill='#000'/><circle cx='84.9' cy='92.4' r='3.3' fill='#000'/><circle cx='173.3' cy='61.5' r='3.3' fill='#000'/><circle cx='157.1' cy='73.4' r='3.3' fill='#000'/><circle cx='259.5' cy='35.4' r='3.3' fill='#000'/><circle cx='275.7' cy='30.2' r='3.3' fill='#000'/><circle cx='98.9' cy='92.8' r='3.3' fill='#000'/><circle cx='266.4' cy='27.3' r='3.3' fill='#000'/><circle cx='129.1' cy='80.1' r='3.3' fill='#000'/></svg><p>Which of the following is the best interpretation of the slope of the line of best fit in this context?</p>",
   "choices": [
-   "A student who studies 0 hours is predicted to score 4 points.",
    "For each additional point scored, the predicted number of hours studied increases by about 4.",
-   "Each student studied about 4 hours more than the previous student.",
-   "For each additional hour studied, the predicted test score increases by about 4 points."
+   "For each additional hour studied, the predicted test score increases by about 4 points.",
+   "A student who studies 0 hours is predicted to score 4 points.",
+   "Each student studied about 4 hours more than the previous student."
   ],
-  "answer": 3,
+  "answer": 1,
   "explanation": "The slope, \\(4\\), is the predicted change in \\(y\\) (test score) for each increase of 1 in \\(x\\) (hours studied). So: for each additional hour studied, the predicted test score increases by about 4 points."
  },
  {
@@ -5735,12 +5735,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The scatterplot shows the age, in years, and the value, in thousands of dollars, of 12 used cars of the same model. The line of best fit is also shown. The equation of the line is \\(y = -2.5x + 25\\).</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 260' width='100%' style='max-width:320px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><line x1='50' y1='216' x2='50' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='50' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>0</text><line x1='73.3' y1='216' x2='73.3' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='73.3' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>1</text><line x1='96.5' y1='216' x2='96.5' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='96.5' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>2</text><line x1='119.8' y1='216' x2='119.8' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='119.8' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>3</text><line x1='143.1' y1='216' x2='143.1' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='143.1' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>4</text><line x1='166.4' y1='216' x2='166.4' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='166.4' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>5</text><line x1='189.6' y1='216' x2='189.6' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='189.6' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>6</text><line x1='212.9' y1='216' x2='212.9' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='212.9' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>7</text><line x1='236.2' y1='216' x2='236.2' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='236.2' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>8</text><line x1='259.5' y1='216' x2='259.5' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='259.5' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>9</text><line x1='282.7' y1='216' x2='282.7' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='282.7' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>10</text><line x1='306' y1='216' x2='306' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='306' y='228' text-anchor='middle' dominant-baseline='middle' font-size='11' fill='#000'>11</text><line x1='50' y1='216' x2='306' y2='216' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='216' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>0</text><line x1='50' y1='182.3' x2='306' y2='182.3' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='182.3' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>5</text><line x1='50' y1='148.7' x2='306' y2='148.7' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='148.7' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>10</text><line x1='50' y1='115' x2='306' y2='115' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='115' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>15</text><line x1='50' y1='81.3' x2='306' y2='81.3' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='81.3' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>20</text><line x1='50' y1='47.7' x2='306' y2='47.7' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='47.7' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>25</text><line x1='50' y1='14' x2='306' y2='14' stroke='#c8c8c8' stroke-width='0.6'/><text x='45' y='14' text-anchor='end' dominant-baseline='middle' font-size='11' fill='#000'>30</text><line x1='50' y1='216' x2='306' y2='216' stroke='#000' stroke-width='1.3'/><line x1='50' y1='216' x2='50' y2='14' stroke='#000' stroke-width='1.3'/><text x='178' y='250' text-anchor='middle' dominant-baseline='middle' font-size='12' fill='#000'>Age of car (years)</text><text x='13' y='115' text-anchor='middle' dominant-baseline='middle' font-size='12' transform='rotate(-90 13 115)' fill='#000'>Value (thousands of $)</text><path d='M50 47.7 L51.3 48.6 L52.6 49.5 L53.8 50.4 L55.1 51.4 L56.4 52.3 L57.7 53.2 L59 54.1 L60.2 55.1 L61.5 56 L62.8 56.9 L64.1 57.9 L65.4 58.8 L66.6 59.7 L67.9 60.6 L69.2 61.6 L70.5 62.5 L71.8 63.4 L73 64.3 L74.3 65.3 L75.6 66.2 L76.9 67.1 L78.2 68 L79.4 69 L80.7 69.9 L82 70.8 L83.3 71.7 L84.6 72.7 L85.8 73.6 L87.1 74.5 L88.4 75.4 L89.7 76.4 L91 77.3 L92.2 78.2 L93.5 79.1 L94.8 80.1 L96.1 81 L97.4 81.9 L98.6 82.8 L99.9 83.8 L101.2 84.7 L102.5 85.6 L103.8 86.6 L105 87.5 L106.3 88.4 L107.6 89.3 L108.9 90.3 L110.2 91.2 L111.4 92.1 L112.7 93 L114 94 L115.3 94.9 L116.6 95.8 L117.8 96.7 L119.1 97.7 L120.4 98.6 L121.7 99.5 L123 100.4 L124.2 101.4 L125.5 102.3 L126.8 103.2 L128.1 104.1 L129.4 105.1 L130.6 106 L131.9 106.9 L133.2 107.8 L134.5 108.8 L135.8 109.7 L137 110.6 L138.3 111.5 L139.6 112.5 L140.9 113.4 L142.2 114.3 L143.4 115.3 L144.7 116.2 L146 117.1 L147.3 118 L148.6 119 L149.8 119.9 L151.1 120.8 L152.4 121.7 L153.7 122.7 L155 123.6 L156.2 124.5 L157.5 125.4 L158.8 126.4 L160.1 127.3 L161.4 128.2 L162.6 129.1 L163.9 130.1 L165.2 131 L166.5 131.9 L167.8 132.8 L169 133.8 L170.3 134.7 L171.6 135.6 L172.9 136.5 L174.2 137.5 L175.4 138.4 L176.7 139.3 L178 140.3 L179.3 141.2 L180.6 142.1 L181.8 143 L183.1 144 L184.4 144.9 L185.7 145.8 L187 146.7 L188.2 147.7 L189.5 148.6 L190.8 149.5 L192.1 150.4 L193.4 151.4 L194.6 152.3 L195.9 153.2 L197.2 154.1 L198.5 155.1 L199.8 156 L201 156.9 L202.3 157.8 L203.6 158.8 L204.9 159.7 L206.2 160.6 L207.4 161.5 L208.7 162.5 L210 163.4 L211.3 164.3 L212.6 165.2 L213.8 166.2 L215.1 167.1 L216.4 168 L217.7 169 L219 169.9 L220.2 170.8 L221.5 171.7 L222.8 172.7 L224.1 173.6 L225.4 174.5 L226.6 175.4 L227.9 176.4 L229.2 177.3 L230.5 178.2 L231.8 179.1 L233 180.1 L234.3 181 L235.6 181.9 L236.9 182.8 L238.2 183.8 L239.4 184.7 L240.7 185.6 L242 186.5 L243.3 187.5 L244.6 188.4 L245.8 189.3 L247.1 190.2 L248.4 191.2 L249.7 192.1 L251 193 L252.2 193.9 L253.5 194.9 L254.8 195.8 L256.1 196.7 L257.4 197.7 L258.6 198.6 L259.9 199.5 L261.2 200.4 L262.5 201.4 L263.8 202.3 L265 203.2 L266.3 204.1 L267.6 205.1 L268.9 206 L270.2 206.9 L271.4 207.8 L272.7 208.8 L274 209.7 L275.3 210.6 L276.6 211.5 L277.8 212.5 L279.1 213.4 L280.4 214.3 L281.7 215.2 ' fill='none' stroke='#000' stroke-width='1.8'/><circle cx='138.4' cy='121.1' r='3.3' fill='#000'/><circle cx='87.2' cy='90.8' r='3.3' fill='#000'/><circle cx='259.5' cy='195.8' r='3.3' fill='#000'/><circle cx='208.3' cy='175.6' r='3.3' fill='#000'/><circle cx='103.5' cy='95.5' r='3.3' fill='#000'/><circle cx='198.9' cy='168.9' r='3.3' fill='#000'/><circle cx='247.8' cy='173.6' r='3.3' fill='#000'/><circle cx='161.7' cy='123.8' r='3.3' fill='#000'/><circle cx='129.1' cy='95.5' r='3.3' fill='#000'/><circle cx='89.6' cy='88.7' r='3.3' fill='#000'/><circle cx='166.4' cy='121.7' r='3.3' fill='#000'/><circle cx='84.9' cy='71.2' r='3.3' fill='#000'/></svg><p>Which of the following is the best interpretation of the slope of the line of best fit in this context?</p>",
   "choices": [
-   "For each additional year of age, the predicted value of the car decreases by about 2.5 thousand dollars.",
-   "For each decrease of 2.5 thousand dollars in value, the car is predicted to be 1 year newer.",
    "The predicted value of a new car is about 2.5 thousand dollars.",
-   "For each additional year of age, the predicted value of the car increases by about 2.5 thousand dollars."
+   "For each additional year of age, the predicted value of the car increases by about 2.5 thousand dollars.",
+   "For each additional year of age, the predicted value of the car decreases by about 2.5 thousand dollars.",
+   "For each decrease of 2.5 thousand dollars in value, the car is predicted to be 1 year newer."
   ],
-  "answer": 0,
+  "answer": 2,
   "explanation": "The slope, \\(-2.5\\), is the predicted change in \\(y\\) (value (thousands of $)) for each increase of 1 in \\(x\\) (age of car (years)). So: for each additional year of age, the predicted value of the car decreases by about 2.5 thousand dollars."
  },
  {
@@ -5769,12 +5769,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A survey of a random sample of 800 customers of an online store found that 59% of those surveyed are satisfied with the store's delivery times. The margin of error for this estimate is 3%. Which of the following is the most appropriate conclusion?</p>",
   "choices": [
-   "Between 56% and 62% of the people in the sample are satisfied with the store's delivery times.",
    "Exactly 59% of all customers of the online store are satisfied with the store's delivery times.",
    "It is plausible that between 56% and 62% of all customers of the online store are satisfied with the store's delivery times.",
-   "It is plausible that between 56% and 62% of all adults in the country are satisfied with the store's delivery times."
+   "It is plausible that between 56% and 62% of all adults in the country are satisfied with the store's delivery times.",
+   "Between 56% and 62% of the people in the sample are satisfied with the store's delivery times."
   ],
-  "answer": 2,
+  "answer": 1,
   "explanation": "The margin of error gives a range of plausible values for the percent in the population that was sampled (all customers of the online store): 59% ± 3%, or 56% to 62%. The sample percent is exactly 59%, and the result cannot be generalized beyond the population sampled."
  },
  {
@@ -5942,11 +5942,11 @@ window.SAT_QUESTIONS = [
   "stem": "<p>A researcher recruited 300 adult volunteers and randomly assigned half of them to drink a cup of green tea each day and the other half to drink a cup of water each day. After 8 weeks, the green tea group had a significantly lower average blood pressure than the water group. Which of the following conclusions is best supported by the study?</p>",
   "choices": [
    "There is an association between drinking green tea and blood pressure, but no conclusion about cause and effect can be made.",
-   "Drinking green tea daily causes lower blood pressure for adults similar to the volunteers in the study.",
    "Drinking green tea daily causes lower blood pressure for all adults.",
-   "No conclusion can be made, because the participants were volunteers."
+   "No conclusion can be made, because the participants were volunteers.",
+   "Drinking green tea daily causes lower blood pressure for adults similar to the volunteers in the study."
   ],
-  "answer": 1,
+  "answer": 3,
   "explanation": "Because the treatments were randomly assigned, the study supports a cause-and-effect conclusion. Because the participants were volunteers rather than a random sample of all adults, the conclusion applies only to adults similar to those in the study."
  },
  {
@@ -5958,12 +5958,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>In a survey of a random sample of 1,200 adults in a state, those who reported exercising at least three times per week also reported sleeping more hours per night, on average, than those who exercised less. Which of the following is an appropriate conclusion?</p>",
   "choices": [
-   "Among adults in the state, exercising at least three times per week is associated with sleeping more hours per night.",
    "Sleeping more hours per night causes adults in the state to exercise more often.",
+   "Exercising at least three times per week causes adults in the state to sleep more hours per night.",
    "The results cannot be applied to any adults other than the 1,200 who were surveyed.",
-   "Exercising at least three times per week causes adults in the state to sleep more hours per night."
+   "Among adults in the state, exercising at least three times per week is associated with sleeping more hours per night."
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "This is an observational study, so it can show an association but not cause and effect. Because the sample was randomly selected from adults in the state, the association can be generalized to adults in that state."
  },
  {
@@ -6142,8 +6142,8 @@ window.SAT_QUESTIONS = [
   "choices": [
    "The claim is supported, because 43% is within 7 percentage points of 36%.",
    "The claim is not supported, because 43% is above the range of plausible values, 33% to 39%.",
-   "The claim cannot be evaluated, because the survey did not include every adult in the state.",
-   "The claim is supported, because the margin of error shows the true percent could be any value."
+   "The claim is supported, because the margin of error shows the true percent could be any value.",
+   "The claim cannot be evaluated, because the survey did not include every adult in the state."
   ],
   "answer": 1,
   "explanation": "The plausible values for the population percent are 36% ± 3%, that is, 33% to 39%. A value above 43% lies outside this interval, so the survey does not support the claim."
@@ -6157,12 +6157,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>Two researchers each surveyed a different random sample of students at the same university about the number of hours per week they work at a job. Researcher A surveyed 150 students and researcher B surveyed 600 students. Both researchers used the same method to compute a margin of error for the mean number of hours. Which of the following is most likely true?</p>",
   "choices": [
-   "The two margins of error are equal, because the samples come from the same university.",
-   "The margin of error for researcher B is larger than the margin of error for researcher A.",
    "The margin of error for researcher B is smaller than the margin of error for researcher A.",
+   "The margin of error for researcher B is larger than the margin of error for researcher A.",
+   "The two margins of error are equal, because the samples come from the same university.",
    "The margin of error for researcher B is exactly one-fourth of the margin of error for researcher A."
   ],
-  "answer": 2,
+  "answer": 0,
   "explanation": "Larger random samples produce less variability in sample statistics, so the larger sample (researcher B) is likely to have a smaller margin of error. (The margin of error shrinks roughly in proportion to the square root of the sample size, so it would be about half as large, not exactly one-fourth.)"
  },
  {
@@ -6289,12 +6289,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A website asked its visitors to take an online poll about whether they favor a four-day school week. Of the 2,400 visitors who chose to respond, 71% said they favor a four-day school week. Which of the following is the most appropriate conclusion?</p>",
   "choices": [
+   "About 71% of all visitors to the website favor a four-day school week.",
    "About 71% of all people in the country favor a four-day school week.",
    "The results cannot be generalized to a larger population, because the respondents chose whether to participate.",
-   "About 71% of all visitors to the website favor a four-day school week.",
    "Because the sample is large, the results are representative of all parents of school-age children."
   ],
-  "answer": 1,
+  "answer": 2,
   "explanation": "The respondents were self-selected rather than randomly selected, so the sample may be biased. A large sample does not fix this bias, and the results cannot be reliably generalized even to all visitors of the website."
  },
  {
@@ -6306,9 +6306,9 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A researcher selected a random sample of 50 orange trees from a large orchard. Half of the selected trees were randomly assigned to receive a new fertilizer, and the other half received the current fertilizer. The trees that received the new fertilizer produced significantly more oranges. Which of the following statements is best supported by this study?</p>",
   "choices": [
+   "The new fertilizer causes an increase in production for any type of fruit tree in the orchard.",
    "The new fertilizer causes an increase in orange production for all orange trees.",
    "The new fertilizer is associated with greater orange production, but it does not cause the increase.",
-   "The new fertilizer causes an increase in production for any type of fruit tree in the orchard.",
    "The new fertilizer causes an increase in orange production for trees in this orchard."
   ],
   "answer": 3,
@@ -6324,9 +6324,9 @@ window.SAT_QUESTIONS = [
   "stem": "<p>A data set consists of 9 numbers with a mean of 24. A new data set is formed by adding the number 24 to the original data set. Which of the following must be true about the new data set, compared with the original data set?</p>",
   "choices": [
    "The mean is the same.",
-   "The range is greater.",
+   "The standard deviation is greater.",
    "The median is the same.",
-   "The standard deviation is greater."
+   "The range is greater."
   ],
   "answer": 0,
   "explanation": "The new sum is \\(9(24) + 24 = 10(24)\\), so the new mean is 24, unchanged. The median may change (it depends on the other values), the range cannot increase because 24 lies between the minimum and maximum, and adding a value at the mean cannot increase the standard deviation."
@@ -6524,8 +6524,8 @@ window.SAT_QUESTIONS = [
   "choices": [
    "\\(\\dfrac{3}{4}\\)",
    "\\(\\dfrac{3}{5}\\)",
-   "\\(\\dfrac{4}{5}\\)",
-   "\\(\\dfrac{5}{3}\\)"
+   "\\(\\dfrac{5}{3}\\)",
+   "\\(\\dfrac{4}{5}\\)"
   ],
   "answer": 1,
   "explanation": "\\(\\sin A\\) is the length of the side opposite angle \\(A\\) divided by the length of the hypotenuse: \\(\\frac{BC}{AB} = \\frac{3}{5}\\)."
@@ -6540,9 +6540,9 @@ window.SAT_QUESTIONS = [
   "stem": "<p>In right triangle \\(ABC\\) shown, what is the value of \\(\\cos B\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 118' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><line x1='230' y1='88' x2='30' y2='29.7' stroke='#000' stroke-width='1.6'/><line x1='30' y1='29.7' x2='30' y2='88' stroke='#000' stroke-width='1.6'/><line x1='30' y1='88' x2='230' y2='88' stroke='#000' stroke-width='1.6'/><polyline points='41,88 41,77 30,77' fill='none' stroke='#000' stroke-width='1.2'/><text x='17' y='58.8' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>7</text><text x='130' y='101' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>24</text><text x='133.6' y='46.4' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>25</text><text x='242.9' y='89.9' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='18.8' y='23.1' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='17.5' y='91.6' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>C</text></svg>",
   "choices": [
    "\\(\\dfrac{25}{24}\\)",
-   "\\(\\dfrac{24}{25}\\)",
+   "\\(\\dfrac{24}{7}\\)",
    "\\(\\dfrac{7}{25}\\)",
-   "\\(\\dfrac{24}{7}\\)"
+   "\\(\\dfrac{24}{25}\\)"
   ],
   "answer": 2,
   "explanation": "\\(\\cos B\\) is the length of the side adjacent to angle \\(B\\) divided by the hypotenuse: \\(\\frac{BC}{AB} = \\frac{7}{25}\\)."
@@ -6554,7 +6554,7 @@ window.SAT_QUESTIONS = [
   "skill": "Lines, angles, and triangles",
   "difficulty": 1,
   "type": "spr",
-  "stem": "<p>In the figure, line \\(\\ell\\) is parallel to line \\(m\\). What is the value of \\(x\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 280 190' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><line x1='58.3' y1='67.5' x2='221.7' y2='67.5' stroke='#000' stroke-width='1.6'/><line x1='58.3' y1='122.5' x2='221.7' y2='122.5' stroke='#000' stroke-width='1.6'/><line x1='170.3' y1='30' x2='109.7' y2='160' stroke='#000' stroke-width='1.6'/><text x='117.7' y='89.8' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>65°</text><path d='M139.8 67.5 A13 13 0 0 0 147.4 79.2' fill='none' stroke='#000' stroke-width='1'/><text x='92' y='144.9' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>x</tspan>°</text><path d='M114.2 122.5 A13 13 0 0 0 121.7 134.3' fill='none' stroke='#000' stroke-width='1'/><text x='231.7' y='67.5' text-anchor='middle' dominant-baseline='middle' font-size='14' fill='#000'><tspan font-style='italic'>ℓ</tspan></text><text x='231.7' y='122.5' text-anchor='middle' dominant-baseline='middle' font-size='14' fill='#000'><tspan font-style='italic'>m</tspan></text></svg>",
+  "stem": "<p>In the figure, line \\(\\ell\\) is parallel to line \\(m\\). What is the value of \\(x\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 290 250' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><line x1='47.4' y1='72' x2='242.6' y2='72' stroke='#000' stroke-width='1.6'/><line x1='47.4' y1='178' x2='242.6' y2='178' stroke='#000' stroke-width='1.6'/><line x1='189.3' y1='30' x2='100.7' y2='220' stroke='#000' stroke-width='1.6'/><text x='134.6' y='94.4' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>65°</text><path d='M156.7 72 A13 13 0 0 0 164.2 83.8' fill='none' stroke='#000' stroke-width='1'/><text x='85.2' y='200.4' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>x</tspan>°</text><path d='M107.3 178 A13 13 0 0 0 114.8 189.8' fill='none' stroke='#000' stroke-width='1'/><text x='252.6' y='72' text-anchor='middle' dominant-baseline='middle' font-size='14' fill='#000'><tspan font-style='italic'>ℓ</tspan></text><text x='252.6' y='178' text-anchor='middle' dominant-baseline='middle' font-size='14' fill='#000'><tspan font-style='italic'>m</tspan></text></svg>",
   "answer": [
    "65"
   ],
@@ -6567,11 +6567,11 @@ window.SAT_QUESTIONS = [
   "skill": "Lines, angles, and triangles",
   "difficulty": 1,
   "type": "spr",
-  "stem": "<p>In the figure, line \\(\\ell\\) is parallel to line \\(m\\). What is the value of \\(x\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 280 190' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><line x1='65.8' y1='68.4' x2='214.2' y2='68.4' stroke='#000' stroke-width='1.6'/><line x1='65.8' y1='121.6' x2='214.2' y2='121.6' stroke='#000' stroke-width='1.6'/><line x1='158.6' y1='30' x2='121.4' y2='160' stroke='#000' stroke-width='1.6'/><text x='117.1' y='91.4' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>74°</text><path d='M134.6 68.4 A13 13 0 0 0 144 80.9' fill='none' stroke='#000' stroke-width='1'/><text x='113.5' y='96.6' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>x</tspan>°</text><path d='M136 109.1 A13 13 0 0 0 119.4 121.6' fill='none' stroke='#000' stroke-width='1'/><text x='224.2' y='68.4' text-anchor='middle' dominant-baseline='middle' font-size='14' fill='#000'><tspan font-style='italic'>ℓ</tspan></text><text x='224.2' y='121.6' text-anchor='middle' dominant-baseline='middle' font-size='14' fill='#000'><tspan font-style='italic'>m</tspan></text></svg>",
+  "stem": "<p>In the figure, line \\(\\ell\\) is parallel to line \\(m\\). What is the value of \\(x\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 290 250' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><line x1='34.1' y1='70.2' x2='255.9' y2='70.2' stroke='#000' stroke-width='1.6'/><line x1='34.1' y1='179.8' x2='255.9' y2='179.8' stroke='#000' stroke-width='1.6'/><line x1='206.7' y1='30' x2='83.3' y2='220' stroke='#000' stroke-width='1.6'/><text x='140.5' y='92' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>57°</text><path d='M167.6 70.2 A13 13 0 0 0 173.5 81.1' fill='none' stroke='#000' stroke-width='1'/><text x='123.4' y='205.6' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>x</tspan>°</text><path d='M102.3 190.7 A13 13 0 0 0 122.4 179.8' fill='none' stroke='#000' stroke-width='1'/><text x='265.9' y='70.2' text-anchor='middle' dominant-baseline='middle' font-size='14' fill='#000'><tspan font-style='italic'>ℓ</tspan></text><text x='265.9' y='179.8' text-anchor='middle' dominant-baseline='middle' font-size='14' fill='#000'><tspan font-style='italic'>m</tspan></text></svg>",
   "answer": [
-   "106"
+   "123"
   ],
-  "explanation": "When parallel lines are cut by a transversal, every acute angle formed is supplementary to every obtuse angle formed. One of the marked angles is acute and the other obtuse, so \\(x = 180 - 74 = 106\\)."
+  "explanation": "When parallel lines are cut by a transversal, every acute angle formed is supplementary to every obtuse angle formed. One of the marked angles is acute and the other obtuse, so \\(x = 180 - 57 = 123\\)."
  },
  {
   "id": "geo-cylinder-volume-v1",
@@ -6647,8 +6647,8 @@ window.SAT_QUESTIONS = [
   "stem": "<p>The equation of a circle in the \\(xy\\)-plane is \\((x - 2)^2 + (y + 5)^2 = 49\\). What are the coordinates of the center of the circle?</p>",
   "choices": [
    "\\((-2, -5)\\)",
-   "\\((-2, 5)\\)",
    "\\((-5, 2)\\)",
+   "\\((-2, 5)\\)",
    "\\((2, -5)\\)"
   ],
   "answer": 3,
@@ -6742,12 +6742,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>In right triangle \\(ABC\\) shown, what is the length of \\(\\overline{AC}\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 170' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><line x1='225.3' y1='140' x2='34.7' y2='30' stroke='#000' stroke-width='1.6'/><line x1='34.7' y1='30' x2='34.7' y2='140' stroke='#000' stroke-width='1.6'/><line x1='34.7' y1='140' x2='225.3' y2='140' stroke='#000' stroke-width='1.6'/><polyline points='45.7,140 45.7,129 34.7,129' fill='none' stroke='#000' stroke-width='1.2'/><text x='157.6' y='121.9' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>30°</text><path d='M214 133.5 A13 13 0 0 0 212.3 140' fill='none' stroke='#000' stroke-width='1'/><text x='136.5' y='73.7' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>10</text><text x='237.8' y='143.6' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='26.2' y='20.2' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='23.5' y='146.5' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>C</text></svg>",
   "choices": [
-   "\\(10\\sqrt{3}\\)",
    "\\(5\\sqrt{2}\\)",
+   "\\(5\\sqrt{3}\\)",
    "\\(5\\)",
-   "\\(5\\sqrt{3}\\)"
+   "\\(10\\sqrt{3}\\)"
   ],
-  "answer": 3,
+  "answer": 1,
   "explanation": "In a 30-60-90 triangle, the side opposite the \\(30^\\circ\\) angle is half the hypotenuse (5), and the side opposite the \\(60^\\circ\\) angle is \\(\\sqrt{3}\\) times that: \\(AC = 5\\sqrt{3}\\)."
  },
  {
@@ -6759,12 +6759,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>In right triangle \\(ABC\\) shown, what is the length of \\(\\overline{BC}\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 170' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><line x1='225.3' y1='140' x2='34.7' y2='30' stroke='#000' stroke-width='1.6'/><line x1='34.7' y1='30' x2='34.7' y2='140' stroke='#000' stroke-width='1.6'/><line x1='34.7' y1='140' x2='225.3' y2='140' stroke='#000' stroke-width='1.6'/><polyline points='45.7,140 45.7,129 34.7,129' fill='none' stroke='#000' stroke-width='1.2'/><text x='157.6' y='121.9' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>30°</text><path d='M214 133.5 A13 13 0 0 0 212.3 140' fill='none' stroke='#000' stroke-width='1'/><text x='136.5' y='73.7' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>14</text><text x='237.8' y='143.6' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='26.2' y='20.2' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='23.5' y='146.5' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>C</text></svg>",
   "choices": [
-   "\\(7\\)",
-   "\\(28\\)",
+   "\\(7\\sqrt{3}\\)",
    "\\(14\\sqrt{2}\\)",
-   "\\(7\\sqrt{3}\\)"
+   "\\(7\\)",
+   "\\(28\\)"
   ],
-  "answer": 0,
+  "answer": 2,
   "explanation": "\\(\\overline{BC}\\) is opposite the \\(30^\\circ\\) angle, so it is half the hypotenuse: \\(\\frac{14}{2} = 7\\)."
  },
  {
@@ -6776,12 +6776,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>A square has a side length of 3 centimeters. What is the length, in centimeters, of a diagonal of the square?</p>",
   "choices": [
+   "\\(3\\sqrt{2}\\)",
    "\\(9\\)",
-   "\\(3\\sqrt{3}\\)",
    "\\(6\\)",
-   "\\(3\\sqrt{2}\\)"
+   "\\(3\\sqrt{3}\\)"
   ],
-  "answer": 3,
+  "answer": 0,
   "explanation": "A diagonal divides the square into two 45-45-90 triangles, whose hypotenuse is \\(\\sqrt{2}\\) times a leg: \\(3\\sqrt{2}\\)."
  },
  {
@@ -6791,7 +6791,7 @@ window.SAT_QUESTIONS = [
   "skill": "Circles",
   "difficulty": 2,
   "type": "mcq",
-  "stem": "<p>In the circle shown, \\(O\\) is the center and the radius is 9. The central angle \\(AOB\\) measures \\(150^\\circ\\). What is the length of minor arc \\(AB\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='120' cy='120' r='94' fill='none' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='214' y2='120' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='38.6' y2='73' stroke='#000' stroke-width='1.6'/><text x='127.1' y='93.3' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>150°</text><path d='M133 120 A13 13 0 0 0 108.7 113.5' fill='none' stroke='#000' stroke-width='1'/><text x='167' y='133' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>9</text><circle cx='120' cy='120' r='2.8' fill='#000'/><circle cx='214' cy='120' r='2.8' fill='#000'/><circle cx='38.6' cy='73' r='2.8' fill='#000'/><text x='227' y='120' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='27.3' y='66.5' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='129' y='131' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>O</text></svg>",
+  "stem": "<p>In the circle shown, \\(O\\) is the center and the radius is 9. The central angle \\(AOB\\) measures \\(150^\\circ\\). What is the length of minor arc \\(AB\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='120' cy='120' r='94' fill='none' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='214' y2='120' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='38.6' y2='73' stroke='#000' stroke-width='1.6'/><text x='127.1' y='93.3' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>150°</text><path d='M133 120 A13 13 0 0 0 108.7 113.5' fill='none' stroke='#000' stroke-width='1'/><text x='167' y='133' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>9</text><circle cx='120' cy='120' r='2.8' fill='#000'/><circle cx='214' cy='120' r='2.8' fill='#000'/><circle cx='38.6' cy='73' r='2.8' fill='#000'/><text x='227' y='120' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='27.3' y='66.5' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='116.6' y='132.6' text-anchor='middle' dominant-baseline='middle' font-size='13' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>O</text></svg>",
   "choices": [
    "\\(\\dfrac{15\\pi}{4}\\)",
    "\\(\\dfrac{15\\pi}{2}\\)",
@@ -6808,7 +6808,7 @@ window.SAT_QUESTIONS = [
   "skill": "Circles",
   "difficulty": 2,
   "type": "mcq",
-  "stem": "<p>In the circle shown, \\(O\\) is the center and the radius is 5. The central angle \\(AOB\\) measures \\(135^\\circ\\). What is the length of minor arc \\(AB\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='120' cy='120' r='94' fill='none' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='214' y2='120' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='53.5' y2='53.5' stroke='#000' stroke-width='1.6'/><text x='130.9' y='93.8' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>135°</text><path d='M133 120 A13 13 0 0 0 110.8 110.8' fill='none' stroke='#000' stroke-width='1'/><text x='167' y='133' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>5</text><circle cx='120' cy='120' r='2.8' fill='#000'/><circle cx='214' cy='120' r='2.8' fill='#000'/><circle cx='53.5' cy='53.5' r='2.8' fill='#000'/><text x='227' y='120' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='44.3' y='44.3' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='129' y='131' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>O</text></svg>",
+  "stem": "<p>In the circle shown, \\(O\\) is the center and the radius is 5. The central angle \\(AOB\\) measures \\(135^\\circ\\). What is the length of minor arc \\(AB\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='120' cy='120' r='94' fill='none' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='214' y2='120' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='53.5' y2='53.5' stroke='#000' stroke-width='1.6'/><text x='130.9' y='93.8' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>135°</text><path d='M133 120 A13 13 0 0 0 110.8 110.8' fill='none' stroke='#000' stroke-width='1'/><text x='167' y='133' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>5</text><circle cx='120' cy='120' r='2.8' fill='#000'/><circle cx='214' cy='120' r='2.8' fill='#000'/><circle cx='53.5' cy='53.5' r='2.8' fill='#000'/><text x='227' y='120' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='44.3' y='44.3' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='115' y='132' text-anchor='middle' dominant-baseline='middle' font-size='13' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>O</text></svg>",
   "choices": [
    "\\(\\dfrac{15\\pi}{8}\\)",
    "\\(\\dfrac{15\\pi}{4}\\)",
@@ -6924,9 +6924,9 @@ window.SAT_QUESTIONS = [
   "stem": "<p>A circle in the \\(xy\\)-plane has its center at \\((-1, -1)\\) and passes through the point \\((5, -9)\\). Which of the following is an equation of the circle?</p>",
   "choices": [
    "\\((x + 1)^2 + (y + 1)^2 = 100\\)",
+   "\\((x - 1)^2 + (y - 1)^2 = 100\\)",
    "\\((x - 1)^2 + (y - 1)^2 = 10\\)",
-   "\\((x + 1)^2 + (y + 1)^2 = 10\\)",
-   "\\((x - 1)^2 + (y - 1)^2 = 100\\)"
+   "\\((x + 1)^2 + (y + 1)^2 = 10\\)"
   ],
   "answer": 0,
   "explanation": "The radius squared is the squared distance from the center to \\((5, -9)\\): \\((5 - (-1))^2 + (-9 - (-1))^2 = 36 + 64 = 100\\). So the equation is \\((x + 1)^2 + (y + 1)^2 = 100\\)."
@@ -6940,12 +6940,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>In the \\(xy\\)-plane, the points \\((-11, -8)\\) and \\((-1, 16)\\) are the endpoints of a diameter of a circle. Which of the following is an equation of the circle?</p>",
   "choices": [
-   "\\((x + 6)^2 + (y - 4)^2 = 13\\)",
-   "\\((x + 6)^2 + (y - 4)^2 = 169\\)",
+   "\\((x - 6)^2 + (y + 4)^2 = 13\\)",
    "\\((x - 6)^2 + (y + 4)^2 = 169\\)",
-   "\\((x - 6)^2 + (y + 4)^2 = 13\\)"
+   "\\((x + 6)^2 + (y - 4)^2 = 169\\)",
+   "\\((x + 6)^2 + (y - 4)^2 = 13\\)"
   ],
-  "answer": 1,
+  "answer": 2,
   "explanation": "The center is the midpoint of the diameter, \\((-6, 4)\\). The radius squared is the squared distance from the center to \\((-11, -8)\\): \\((-11 - (-6))^2 + (-8 - 4)^2 = 25 + 144 = 169\\). So the equation is \\((x + 6)^2 + (y - 4)^2 = 169\\)."
  },
  {
@@ -7066,7 +7066,7 @@ window.SAT_QUESTIONS = [
   "skill": "Circles",
   "difficulty": 2,
   "type": "spr",
-  "stem": "<p>Points \\(A\\), \\(B\\), and \\(C\\) lie on the circle with center \\(O\\) shown. What is the value of \\(x\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='120' cy='120' r='94' fill='none' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='211.6' y2='141.1' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='137.9' y2='27.7' stroke='#000' stroke-width='1.6'/><line x1='37' y1='164.1' x2='211.6' y2='141.1' stroke='#000' stroke-width='1.6'/><line x1='37' y1='164.1' x2='137.9' y2='27.7' stroke='#000' stroke-width='1.6'/><text x='148.2' y='101.7' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>92°</text><path d='M132.7 122.9 A13 13 0 0 0 122.5 107.2' fill='none' stroke='#000' stroke-width='1'/><text x='83.1' y='137' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>x</tspan>°</text><path d='M49.9 162.4 A13 13 0 0 0 44.7 153.7' fill='none' stroke='#000' stroke-width='1'/><circle cx='120' cy='120' r='2.8' fill='#000'/><circle cx='211.6' cy='141.1' r='2.8' fill='#000'/><circle cx='137.9' cy='27.7' r='2.8' fill='#000'/><circle cx='37' cy='164.1' r='2.8' fill='#000'/><text x='224.3' y='144.1' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='140.4' y='15' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='25.5' y='170.2' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>C</text><text x='129' y='131' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>O</text></svg>",
+  "stem": "<p>Points \\(A\\), \\(B\\), and \\(C\\) lie on the circle with center \\(O\\) shown. What is the value of \\(x\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='120' cy='120' r='94' fill='none' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='211.6' y2='141.1' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='137.9' y2='27.7' stroke='#000' stroke-width='1.6'/><line x1='37' y1='164.1' x2='211.6' y2='141.1' stroke='#000' stroke-width='1.6'/><line x1='37' y1='164.1' x2='137.9' y2='27.7' stroke='#000' stroke-width='1.6'/><text x='148.2' y='101.7' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>92°</text><path d='M132.7 122.9 A13 13 0 0 0 122.5 107.2' fill='none' stroke='#000' stroke-width='1'/><text x='83.1' y='137' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>x</tspan>°</text><path d='M49.9 162.4 A13 13 0 0 0 44.7 153.7' fill='none' stroke='#000' stroke-width='1'/><circle cx='120' cy='120' r='2.8' fill='#000'/><circle cx='211.6' cy='141.1' r='2.8' fill='#000'/><circle cx='137.9' cy='27.7' r='2.8' fill='#000'/><circle cx='37' cy='164.1' r='2.8' fill='#000'/><text x='224.3' y='144.1' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='140.4' y='15' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='25.5' y='170.2' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>C</text><text x='109.1' y='127.1' text-anchor='middle' dominant-baseline='middle' font-size='13' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>O</text></svg>",
   "answer": [
    "46"
   ],
@@ -7079,7 +7079,7 @@ window.SAT_QUESTIONS = [
   "skill": "Circles",
   "difficulty": 2,
   "type": "spr",
-  "stem": "<p>Points \\(A\\), \\(B\\), and \\(C\\) lie on the circle with center \\(O\\) shown. What is the value of \\(x\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='120' cy='120' r='94' fill='none' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='213.6' y2='128.2' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='86.3' y2='32.2' stroke='#000' stroke-width='1.6'/><line x1='64.7' y1='196' x2='213.6' y2='128.2' stroke='#000' stroke-width='1.6'/><line x1='64.7' y1='196' x2='86.3' y2='32.2' stroke='#000' stroke-width='1.6'/><text x='138.1' y='96' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>x</tspan>°</text><path d='M133 121.1 A13 13 0 0 0 115.3 107.9' fill='none' stroke='#000' stroke-width='1'/><text x='91.6' y='159.8' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>58°</text><path d='M76.6 190.7 A13 13 0 0 0 66.4 183.2' fill='none' stroke='#000' stroke-width='1'/><circle cx='120' cy='120' r='2.8' fill='#000'/><circle cx='213.6' cy='128.2' r='2.8' fill='#000'/><circle cx='86.3' cy='32.2' r='2.8' fill='#000'/><circle cx='64.7' cy='196' r='2.8' fill='#000'/><text x='226.6' y='129.3' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='81.7' y='20.1' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='57.1' y='206.6' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>C</text><text x='129' y='131' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>O</text></svg>",
+  "stem": "<p>Points \\(A\\), \\(B\\), and \\(C\\) lie on the circle with center \\(O\\) shown. What is the value of \\(x\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='120' cy='120' r='94' fill='none' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='213.6' y2='128.2' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='86.3' y2='32.2' stroke='#000' stroke-width='1.6'/><line x1='64.7' y1='196' x2='213.6' y2='128.2' stroke='#000' stroke-width='1.6'/><line x1='64.7' y1='196' x2='86.3' y2='32.2' stroke='#000' stroke-width='1.6'/><text x='138.1' y='96' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'><tspan font-style='italic'>x</tspan>°</text><path d='M133 121.1 A13 13 0 0 0 115.3 107.9' fill='none' stroke='#000' stroke-width='1'/><text x='91.6' y='159.8' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>58°</text><path d='M76.6 190.7 A13 13 0 0 0 66.4 183.2' fill='none' stroke='#000' stroke-width='1'/><circle cx='120' cy='120' r='2.8' fill='#000'/><circle cx='213.6' cy='128.2' r='2.8' fill='#000'/><circle cx='86.3' cy='32.2' r='2.8' fill='#000'/><circle cx='64.7' cy='196' r='2.8' fill='#000'/><text x='226.6' y='129.3' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='81.7' y='20.1' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='57.1' y='206.6' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>C</text><text x='112.2' y='130.4' text-anchor='middle' dominant-baseline='middle' font-size='13' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>O</text></svg>",
   "answer": [
    "116"
   ],
@@ -7167,7 +7167,7 @@ window.SAT_QUESTIONS = [
    "\\(5\\pi\\)"
   ],
   "answer": 1,
-  "explanation": "For a central angle \\(\\theta\\) in radians, arc length is \\(s = r\\theta\\). So \\(\\theta = \\frac{5\\pi}{4} = \\frac{5\\pi}{4}\\)."
+  "explanation": "For a central angle \\(\\theta\\) in radians, arc length is \\(s = r\\theta\\). So \\(\\theta = \\frac{5\\pi}{4}\\)."
  },
  {
   "id": "geo-arc-radians-v2",
@@ -7227,7 +7227,7 @@ window.SAT_QUESTIONS = [
   "skill": "Circles",
   "difficulty": 3,
   "type": "spr",
-  "stem": "<p>In the figure, \\(\\overline{PA}\\) is tangent to the circle with center \\(O\\) at point \\(A\\). If \\(OA = 6\\) and \\(OP = 10\\), what is the length of \\(\\overline{PA}\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 193' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='96.5' cy='96.5' r='70.5' fill='none' stroke='#000' stroke-width='1.6'/><line x1='96.5' y1='96.5' x2='138.8' y2='40.1' stroke='#000' stroke-width='1.6'/><line x1='138.8' y1='40.1' x2='214' y2='96.5' stroke='#000' stroke-width='1.6'/><line x1='96.5' y1='96.5' x2='214' y2='96.5' stroke='#000' stroke-width='1.6'/><polyline points='132.2,48.9 141,55.5 147.6,46.7' fill='none' stroke='#000' stroke-width='1.2'/><text x='128.1' y='76.1' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>6</text><text x='155.3' y='83.5' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>10</text><circle cx='96.5' cy='96.5' r='2.8' fill='#000'/><circle cx='138.8' cy='40.1' r='2.8' fill='#000'/><text x='146.6' y='29.7' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='227' y='96.5' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>P</text><text x='105.5' y='107.5' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>O</text></svg><p class='fignote'><em>Note: Figure not drawn to scale.</em></p>",
+  "stem": "<p>In the figure, \\(\\overline{PA}\\) is tangent to the circle with center \\(O\\) at point \\(A\\). If \\(OA = 6\\) and \\(OP = 10\\), what is the length of \\(\\overline{PA}\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 193' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='96.5' cy='96.5' r='70.5' fill='none' stroke='#000' stroke-width='1.6'/><line x1='96.5' y1='96.5' x2='138.8' y2='40.1' stroke='#000' stroke-width='1.6'/><line x1='138.8' y1='40.1' x2='214' y2='96.5' stroke='#000' stroke-width='1.6'/><line x1='96.5' y1='96.5' x2='214' y2='96.5' stroke='#000' stroke-width='1.6'/><polyline points='132.2,48.9 141,55.5 147.6,46.7' fill='none' stroke='#000' stroke-width='1.2'/><text x='107.3' y='60.5' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>6</text><text x='155.3' y='109.5' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>10</text><circle cx='96.5' cy='96.5' r='2.8' fill='#000'/><circle cx='138.8' cy='40.1' r='2.8' fill='#000'/><text x='146.6' y='29.7' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='227' y='96.5' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>P</text><text x='84.9' y='102.3' text-anchor='middle' dominant-baseline='middle' font-size='13' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>O</text></svg><p class='fignote'><em>Note: Figure not drawn to scale.</em></p>",
   "answer": [
    "8"
   ],
@@ -7240,7 +7240,7 @@ window.SAT_QUESTIONS = [
   "skill": "Circles",
   "difficulty": 3,
   "type": "spr",
-  "stem": "<p>In the figure, \\(\\overline{PA}\\) is tangent to the circle with center \\(O\\) at point \\(A\\). The radius of the circle is 8 and \\(PA = 15\\). What is the distance from point \\(P\\) to the nearest point on the circle?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 172' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='86.2' cy='85.8' r='60.2' fill='none' stroke='#000' stroke-width='1.6'/><line x1='86.2' y1='85.8' x2='114.5' y2='32.8' stroke='#000' stroke-width='1.6'/><line x1='114.5' y1='32.8' x2='214' y2='85.8' stroke='#000' stroke-width='1.6'/><line x1='86.2' y1='85.8' x2='214' y2='85.8' stroke='#000' stroke-width='1.6'/><polyline points='109.3,42.5 119,47.6 124.2,37.9' fill='none' stroke='#000' stroke-width='1.2'/><text x='111.8' y='65.4' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>8</text><text x='170.4' y='47.8' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>15</text><circle cx='86.2' cy='85.8' r='2.8' fill='#000'/><circle cx='114.5' cy='32.8' r='2.8' fill='#000'/><text x='120.6' y='21.3' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='227' y='85.8' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>P</text><text x='95.2' y='96.8' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>O</text></svg><p class='fignote'><em>Note: Figure not drawn to scale.</em></p>",
+  "stem": "<p>In the figure, \\(\\overline{PA}\\) is tangent to the circle with center \\(O\\) at point \\(A\\). The radius of the circle is 8 and \\(PA = 15\\). What is the distance from point \\(P\\) to the nearest point on the circle?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 172' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='86.2' cy='85.8' r='60.2' fill='none' stroke='#000' stroke-width='1.6'/><line x1='86.2' y1='85.8' x2='114.5' y2='32.8' stroke='#000' stroke-width='1.6'/><line x1='114.5' y1='32.8' x2='214' y2='85.8' stroke='#000' stroke-width='1.6'/><line x1='86.2' y1='85.8' x2='214' y2='85.8' stroke='#000' stroke-width='1.6'/><polyline points='109.3,42.5 119,47.6 124.2,37.9' fill='none' stroke='#000' stroke-width='1.2'/><text x='88.8' y='53.2' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>8</text><text x='170.4' y='47.8' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>15</text><circle cx='86.2' cy='85.8' r='2.8' fill='#000'/><circle cx='114.5' cy='32.8' r='2.8' fill='#000'/><text x='120.6' y='21.3' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='227' y='85.8' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>P</text><text x='75' y='92.5' text-anchor='middle' dominant-baseline='middle' font-size='13' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>O</text></svg><p class='fignote'><em>Note: Figure not drawn to scale.</em></p>",
   "answer": [
    "9"
   ],
@@ -7323,12 +7323,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The figure shows a circle inscribed in a square with side length 12. The circle touches each side of the square. What is the area of the shaded region?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><rect x='30' y='30' width='140' height='140' fill='#c4c4c4'/><circle cx='100' cy='100' r='70' fill='#fff' stroke='#000' stroke-width='1.6'/><line x1='30' y1='170' x2='170' y2='170' stroke='#000' stroke-width='1.6'/><line x1='170' y1='170' x2='170' y2='30' stroke='#000' stroke-width='1.6'/><line x1='170' y1='30' x2='30' y2='30' stroke='#000' stroke-width='1.6'/><line x1='30' y1='30' x2='30' y2='170' stroke='#000' stroke-width='1.6'/><text x='100' y='183' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>12</text></svg>",
   "choices": [
-   "\\(144 - 36\\pi\\)",
-   "\\(48 - 36\\pi\\)",
+   "\\(144 - 12\\pi\\)",
    "\\(144 - 144\\pi\\)",
-   "\\(144 - 12\\pi\\)"
+   "\\(48 - 36\\pi\\)",
+   "\\(144 - 36\\pi\\)"
   ],
-  "answer": 0,
+  "answer": 3,
   "explanation": "The square has area \\(12^2 = 144\\). The circle's diameter equals the side of the square, so its radius is 6 and its area is \\(36\\pi\\). The shaded area is \\(144 - 36\\pi\\)."
  },
  {
@@ -7338,7 +7338,7 @@ window.SAT_QUESTIONS = [
   "skill": "Area and volume",
   "difficulty": 3,
   "type": "mcq",
-  "stem": "<p>Square \\(ABCD\\) is inscribed in a circle with center \\(O\\) and radius 8, as shown. What is the area of the region inside the circle but outside the square?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='120' cy='120' r='94' fill='none' stroke='#000' stroke-width='1.6'/><line x1='186.5' y1='53.5' x2='53.5' y2='53.5' stroke='#000' stroke-width='1.6'/><line x1='53.5' y1='53.5' x2='53.5' y2='186.5' stroke='#000' stroke-width='1.6'/><line x1='53.5' y1='186.5' x2='186.5' y2='186.5' stroke='#000' stroke-width='1.6'/><line x1='186.5' y1='186.5' x2='186.5' y2='53.5' stroke='#000' stroke-width='1.6'/><circle cx='120' cy='120' r='2.8' fill='#000'/><circle cx='186.5' cy='53.5' r='2.8' fill='#000'/><circle cx='53.5' cy='53.5' r='2.8' fill='#000'/><circle cx='53.5' cy='186.5' r='2.8' fill='#000'/><circle cx='186.5' cy='186.5' r='2.8' fill='#000'/><text x='195.7' y='44.3' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='44.3' y='44.3' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='44.3' y='195.7' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>C</text><text x='195.7' y='195.7' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>D</text><text x='129' y='131' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>O</text></svg>",
+  "stem": "<p>Square \\(ABCD\\) is inscribed in a circle with center \\(O\\) and radius 8, as shown. What is the area of the region inside the circle but outside the square?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='120' cy='120' r='94' fill='none' stroke='#000' stroke-width='1.6'/><line x1='186.5' y1='53.5' x2='53.5' y2='53.5' stroke='#000' stroke-width='1.6'/><line x1='53.5' y1='53.5' x2='53.5' y2='186.5' stroke='#000' stroke-width='1.6'/><line x1='53.5' y1='186.5' x2='186.5' y2='186.5' stroke='#000' stroke-width='1.6'/><line x1='186.5' y1='186.5' x2='186.5' y2='53.5' stroke='#000' stroke-width='1.6'/><circle cx='120' cy='120' r='2.8' fill='#000'/><circle cx='186.5' cy='53.5' r='2.8' fill='#000'/><circle cx='53.5' cy='53.5' r='2.8' fill='#000'/><circle cx='53.5' cy='186.5' r='2.8' fill='#000'/><circle cx='186.5' cy='186.5' r='2.8' fill='#000'/><text x='195.7' y='44.3' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='44.3' y='44.3' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='44.3' y='195.7' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>C</text><text x='195.7' y='195.7' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>D</text><text x='110.8' y='110.8' text-anchor='middle' dominant-baseline='middle' font-size='13' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>O</text></svg>",
   "choices": [
    "\\(64\\pi - 64\\)",
    "\\(16\\pi - 128\\)",
@@ -7387,12 +7387,12 @@ window.SAT_QUESTIONS = [
   "type": "mcq",
   "stem": "<p>The height of an equilateral triangle is \\(6\\sqrt{3}\\). What is the area of the triangle?</p>",
   "choices": [
-   "\\(36\\)",
-   "\\(36\\sqrt{3}\\)",
+   "\\(108\\)",
    "\\(72\\sqrt{3}\\)",
-   "\\(108\\)"
+   "\\(36\\)",
+   "\\(36\\sqrt{3}\\)"
   ],
-  "answer": 1,
+  "answer": 3,
   "explanation": "In a 30-60-90 triangle the height is \\(\\sqrt{3}\\) times half the side, so half the side is 6 and the side is 12. The area is \\(\\frac{1}{2}(12)(6\\sqrt{3}) = 36\\sqrt{3}\\)."
  },
  {
@@ -7449,7 +7449,7 @@ window.SAT_QUESTIONS = [
   "skill": "Lines, angles, and triangles",
   "difficulty": 3,
   "type": "spr",
-  "stem": "<p>In the figure, line \\(\\ell\\) is parallel to line \\(m\\). What is the value of \\(x\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 280 190' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><line x1='46.7' y1='65.8' x2='233.3' y2='65.8' stroke='#000' stroke-width='1.6'/><line x1='46.7' y1='124.2' x2='233.3' y2='124.2' stroke='#000' stroke-width='1.6'/><line x1='185.5' y1='30' x2='94.5' y2='160' stroke='#000' stroke-width='1.6'/><text x='147' y='40' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>(3<tspan font-style='italic'>x</tspan> + 62)°</text><path d='M167.9 55.2 A13 13 0 0 0 147.4 65.8' fill='none' stroke='#000' stroke-width='1'/><text x='133' y='150' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>(6<tspan font-style='italic'>x</tspan> − 1)°</text><path d='M112.1 134.8 A13 13 0 0 0 132.6 124.2' fill='none' stroke='#000' stroke-width='1'/><text x='243.3' y='65.8' text-anchor='middle' dominant-baseline='middle' font-size='14' fill='#000'><tspan font-style='italic'>ℓ</tspan></text><text x='243.3' y='124.2' text-anchor='middle' dominant-baseline='middle' font-size='14' fill='#000'><tspan font-style='italic'>m</tspan></text></svg><p class='fignote'><em>Note: Figure not drawn to scale.</em></p>",
+  "stem": "<p>In the figure, line \\(\\ell\\) is parallel to line \\(m\\). What is the value of \\(x\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 290 250' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><line x1='30.2' y1='69.7' x2='259.8' y2='69.7' stroke='#000' stroke-width='1.6'/><line x1='30.2' y1='180.3' x2='259.8' y2='180.3' stroke='#000' stroke-width='1.6'/><line x1='211.5' y1='30' x2='78.5' y2='220' stroke='#000' stroke-width='1.6'/><text x='170.3' y='43.8' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>(3<tspan font-style='italic'>x</tspan> + 62)°</text><path d='M191.2 59 A13 13 0 0 0 170.7 69.7' fill='none' stroke='#000' stroke-width='1'/><text x='119.7' y='206.2' text-anchor='middle' dominant-baseline='middle' font-size='12' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>(6<tspan font-style='italic'>x</tspan> − 1)°</text><path d='M98.8 191 A13 13 0 0 0 119.3 180.3' fill='none' stroke='#000' stroke-width='1'/><text x='269.8' y='69.7' text-anchor='middle' dominant-baseline='middle' font-size='14' fill='#000'><tspan font-style='italic'>ℓ</tspan></text><text x='269.8' y='180.3' text-anchor='middle' dominant-baseline='middle' font-size='14' fill='#000'><tspan font-style='italic'>m</tspan></text></svg><p class='fignote'><em>Note: Figure not drawn to scale.</em></p>",
   "answer": [
    "21"
   ],
@@ -7462,7 +7462,7 @@ window.SAT_QUESTIONS = [
   "skill": "Circles",
   "difficulty": 3,
   "type": "mcq",
-  "stem": "<p>In the circle shown with center \\(O\\) and radius 13, chord \\(\\overline{AB}\\) is 12 units from the center (\\(OM = 12\\)). What is the length of chord \\(\\overline{AB}\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='120' cy='120' r='94' fill='none' stroke='#000' stroke-width='1.6'/><line x1='206.8' y1='156.2' x2='206.8' y2='83.8' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='206.8' y2='120' stroke='#000' stroke-width='1.6' stroke-dasharray='5 4'/><line x1='120' y1='120' x2='206.8' y2='156.2' stroke='#000' stroke-width='1.6'/><polyline points='195.8,120 195.8,109 206.8,109' fill='none' stroke='#000' stroke-width='1.2'/><circle cx='120' cy='120' r='2.8' fill='#000'/><circle cx='206.8' cy='156.2' r='2.8' fill='#000'/><circle cx='206.8' cy='83.8' r='2.8' fill='#000'/><text x='218.8' y='161.2' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='218.8' y='78.8' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='219.8' y='120' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>M</text><text x='129' y='131' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>O</text></svg><p class='fignote'><em>Note: Figure not drawn to scale.</em></p>",
+  "stem": "<p>In the circle shown with center \\(O\\) and radius 13, chord \\(\\overline{AB}\\) is 12 units from the center (\\(OM = 12\\)). What is the length of chord \\(\\overline{AB}\\)?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='120' cy='120' r='94' fill='none' stroke='#000' stroke-width='1.6'/><line x1='206.8' y1='156.2' x2='206.8' y2='83.8' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='206.8' y2='120' stroke='#000' stroke-width='1.6' stroke-dasharray='5 4'/><line x1='120' y1='120' x2='206.8' y2='156.2' stroke='#000' stroke-width='1.6'/><polyline points='195.8,120 195.8,109 206.8,109' fill='none' stroke='#000' stroke-width='1.2'/><circle cx='120' cy='120' r='2.8' fill='#000'/><circle cx='206.8' cy='156.2' r='2.8' fill='#000'/><circle cx='206.8' cy='83.8' r='2.8' fill='#000'/><text x='218.8' y='161.2' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='218.8' y='78.8' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='219.8' y='120' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>M</text><text x='107.3' y='117.5' text-anchor='middle' dominant-baseline='middle' font-size='13' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>O</text></svg><p class='fignote'><em>Note: Figure not drawn to scale.</em></p>",
   "choices": [
    "\\(5\\)",
    "\\(10\\)",
@@ -7479,7 +7479,7 @@ window.SAT_QUESTIONS = [
   "skill": "Circles",
   "difficulty": 3,
   "type": "mcq",
-  "stem": "<p>In the circle shown with center \\(O\\), chord \\(\\overline{AB}\\) has length 24 and segment \\(\\overline{OM}\\) is perpendicular to \\(\\overline{AB}\\) with \\(OM = 5\\). What is the radius of the circle?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='120' cy='120' r='94' fill='none' stroke='#000' stroke-width='1.6'/><line x1='156.2' y1='206.8' x2='156.2' y2='33.2' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='156.2' y2='120' stroke='#000' stroke-width='1.6' stroke-dasharray='5 4'/><line x1='120' y1='120' x2='156.2' y2='206.8' stroke='#000' stroke-width='1.6'/><polyline points='145.2,120 145.2,109 156.2,109' fill='none' stroke='#000' stroke-width='1.2'/><circle cx='120' cy='120' r='2.8' fill='#000'/><circle cx='156.2' cy='206.8' r='2.8' fill='#000'/><circle cx='156.2' cy='33.2' r='2.8' fill='#000'/><text x='161.2' y='218.8' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='161.2' y='21.2' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='169.2' y='120' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>M</text><text x='129' y='131' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>O</text></svg><p class='fignote'><em>Note: Figure not drawn to scale.</em></p>",
+  "stem": "<p>In the circle shown with center \\(O\\), chord \\(\\overline{AB}\\) has length 24 and segment \\(\\overline{OM}\\) is perpendicular to \\(\\overline{AB}\\) with \\(OM = 5\\). What is the radius of the circle?</p><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='100%' style='max-width:300px;display:block;margin:8px auto;background:#fff' font-family='system-ui, -apple-system, Segoe UI, Roboto, sans-serif' font-size='13' role='img'><circle cx='120' cy='120' r='94' fill='none' stroke='#000' stroke-width='1.6'/><line x1='156.2' y1='206.8' x2='156.2' y2='33.2' stroke='#000' stroke-width='1.6'/><line x1='120' y1='120' x2='156.2' y2='120' stroke='#000' stroke-width='1.6' stroke-dasharray='5 4'/><line x1='120' y1='120' x2='156.2' y2='206.8' stroke='#000' stroke-width='1.6'/><polyline points='145.2,120 145.2,109 156.2,109' fill='none' stroke='#000' stroke-width='1.2'/><circle cx='120' cy='120' r='2.8' fill='#000'/><circle cx='156.2' cy='206.8' r='2.8' fill='#000'/><circle cx='156.2' cy='33.2' r='2.8' fill='#000'/><text x='161.2' y='218.8' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>A</text><text x='161.2' y='21.2' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>B</text><text x='169.2' y='120' text-anchor='middle' dominant-baseline='middle' font-size='13' fill='#000'>M</text><text x='109.2' y='112.8' text-anchor='middle' dominant-baseline='middle' font-size='13' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' fill='#000'>O</text></svg><p class='fignote'><em>Note: Figure not drawn to scale.</em></p>",
   "choices": [
    "\\(12\\)",
    "\\(13\\)",
@@ -7488,6 +7488,222 @@ window.SAT_QUESTIONS = [
   ],
   "answer": 1,
   "explanation": "\\(\\overline{OM}\\) bisects the chord, so \\(AM = 12\\). The radius is \\(OA = \\sqrt{5^2 + 12^2} = 13\\)."
+ },
+ {
+  "id": "hand-shipping-rate-v1",
+  "tpl": "hand-shipping-rate",
+  "domain": "algebra",
+  "skill": "Linear functions",
+  "difficulty": 3,
+  "type": "spr",
+  "stem": "<p>A shipping company charges a fixed fee plus a constant rate per pound to ship a package. Shipping a 4-pound package costs $13.20, and shipping a 10-pound package costs $22.80. What is the cost, in dollars, of shipping a 15-pound package?</p>",
+  "answer": [
+   "154/5",
+   "30.8"
+  ],
+  "explanation": "The rate is \\(\\frac{22.80 - 13.20}{10 - 4} = 1.6\\) dollars per pound. The fixed fee is \\(13.20 - 1.6(4) = 6.80\\) dollars. A 15-pound package costs \\(6.80 + 1.6(15) = 30.80\\) dollars."
+ },
+ {
+  "id": "hand-slope-description-v1",
+  "tpl": "hand-slope-description",
+  "domain": "algebra",
+  "skill": "Linear functions",
+  "difficulty": 3,
+  "type": "mcq",
+  "stem": "<p>The graph of the linear function \\(f\\) passes through the point \\((2, 5)\\) in the \\(xy\\)-plane. For every increase of 3 in the value of \\(x\\), the value of \\(f(x)\\) decreases by 4. Which equation defines \\(f\\)?</p>",
+  "choices": [
+   "\\(f(x) = -\\dfrac{4}{3}x + \\dfrac{23}{3}\\)",
+   "\\(f(x) = -\\dfrac{4}{3}x + 5\\)",
+   "\\(f(x) = -\\dfrac{3}{4}x + \\dfrac{13}{2}\\)",
+   "\\(f(x) = \\dfrac{4}{3}x + \\dfrac{7}{3}\\)"
+  ],
+  "answer": 0,
+  "explanation": "The slope is \\(\\frac{-4}{3}\\). Then \\(5 = -\\frac{4}{3}(2) + b\\), so \\(b = 5 + \\frac{8}{3} = \\frac{23}{3}\\). Therefore \\(f(x) = -\\frac{4}{3}x + \\frac{23}{3}\\)."
+ },
+ {
+  "id": "hand-origin-solution-v1",
+  "tpl": "hand-origin-solution",
+  "domain": "algebra",
+  "skill": "Linear inequalities in one or two variables",
+  "difficulty": 3,
+  "type": "mcq",
+  "stem": "<p>\\(y \\lt -2x + a\\)<br>\\(y \\gt 2x + b\\)</p><p>In the given system of inequalities, \\(a\\) and \\(b\\) are constants. If \\((0, 0)\\) is a solution to the system, which of the following must be true?</p>",
+  "choices": [
+   "\\(a = -b\\)",
+   "\\(a \\gt b\\)",
+   "\\(a + b \\gt 0\\)",
+   "\\(a \\lt b\\)"
+  ],
+  "answer": 1,
+  "explanation": "Substituting \\((0, 0)\\) gives \\(0 \\lt a\\) and \\(0 \\gt b\\). So \\(a\\) is positive and \\(b\\) is negative, which means \\(a \\gt b\\). The other statements depend on the particular values (for example, \\(a = 1\\) and \\(b = -5\\) make \\(a + b \\gt 0\\) false)."
+ },
+ {
+  "id": "hand-budget-system-v1",
+  "tpl": "hand-budget-system",
+  "domain": "algebra",
+  "skill": "Linear inequalities in one or two variables",
+  "difficulty": 3,
+  "type": "mcq",
+  "stem": "<p>Kayla will buy \\(x\\) notebooks that cost $2.50 each and \\(y\\) pens that cost $1.25 each. She wants to spend at most $60, and she wants to buy at least 3 times as many pens as notebooks. Which ordered pair \\((x, y)\\) satisfies both conditions?</p>",
+  "choices": [
+   "\\((8, 24)\\)",
+   "\\((9, 26)\\)",
+   "\\((6, 40)\\)",
+   "\\((10, 28)\\)"
+  ],
+  "answer": 0,
+  "explanation": "The conditions are \\(2.5x + 1.25y \\le 60\\) and \\(y \\ge 3x\\). For \\((8, 24)\\): \\(20 + 30 = 50 \\le 60\\) and \\(24 \\ge 24\\). The pair \\((10, 28)\\) fails \\(y \\ge 3x\\), \\((6, 40)\\) costs $65, and \\((9, 26)\\) fails \\(y \\ge 3x\\)."
+ },
+ {
+  "id": "hand-complete-square-value-v1",
+  "tpl": "hand-complete-square-value",
+  "domain": "advanced",
+  "skill": "Equivalent expressions",
+  "difficulty": 3,
+  "type": "spr",
+  "stem": "<p>If \\(x^2 - 4x = 3\\), what is the value of \\((x - 2)^2\\)?</p>",
+  "answer": [
+   "7"
+  ],
+  "explanation": "\\((x - 2)^2 = x^2 - 4x + 4\\). Since \\(x^2 - 4x = 3\\), \\((x - 2)^2 = 3 + 4 = 7\\). There is no need to solve for \\(x\\)."
+ },
+ {
+  "id": "hand-zeros-apart-v1",
+  "tpl": "hand-zeros-apart",
+  "domain": "advanced",
+  "skill": "Nonlinear functions",
+  "difficulty": 3,
+  "type": "mcq",
+  "stem": "<p>The function \\(f\\) is defined by \\(f(x) = (x - 3)^2 + k\\), where \\(k\\) is a constant. The graph of \\(y = f(x)\\) in the \\(xy\\)-plane crosses the \\(x\\)-axis at two points that are 10 units apart. What is the value of \\(k\\)?</p>",
+  "choices": [
+   "\\(-100\\)",
+   "\\(-25\\)",
+   "\\(-5\\)",
+   "\\(25\\)"
+  ],
+  "answer": 1,
+  "explanation": "The zeros are symmetric about the axis of symmetry \\(x = 3\\), so they are 5 units from it: \\(x = -2\\) and \\(x = 8\\). Then \\(f(8) = 5^2 + k = 0\\), so \\(k = -25\\)."
+ },
+ {
+  "id": "hand-exp-shift-factor-v1",
+  "tpl": "hand-exp-shift-factor",
+  "domain": "advanced",
+  "skill": "Nonlinear functions",
+  "difficulty": 3,
+  "type": "spr",
+  "stem": "<p>The function \\(g\\) is defined by \\(g(x) = 5^{x}\\). For every real number \\(a\\), \\(g(a + 3) = c \\cdot g(a)\\), where \\(c\\) is a constant. What is the value of \\(c\\)?</p>",
+  "answer": [
+   "125"
+  ],
+  "explanation": "\\(g(a + 3) = 5^{a + 3} = 5^{3} \\cdot 5^{a} = 125 \\cdot g(a)\\), so \\(c = 125\\)."
+ },
+ {
+  "id": "hand-no-real-solution-v1",
+  "tpl": "hand-no-real-solution",
+  "domain": "advanced",
+  "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+  "difficulty": 3,
+  "type": "mcq",
+  "stem": "<p>Which of the following equations has no real solution?</p>",
+  "choices": [
+   "\\(x^2 + 4x + 3 = 0\\)",
+   "\\(x^2 + 4x + 4 = 0\\)",
+   "\\(x^2 - 4x - 5 = 0\\)",
+   "\\(x^2 + 4x + 5 = 0\\)"
+  ],
+  "answer": 3,
+  "explanation": "A quadratic equation has no real solution when its discriminant \\(b^2 - 4ac\\) is negative. For \\(x^2 + 4x + 5 = 0\\), \\(4^2 - 4(1)(5) = -4\\). The other discriminants are 0, 4, and 36, so those equations have real solutions."
+ },
+ {
+  "id": "hand-double-root-v1",
+  "tpl": "hand-double-root",
+  "domain": "advanced",
+  "skill": "Nonlinear functions",
+  "difficulty": 3,
+  "type": "spr",
+  "stem": "<p>The function \\(p\\) is defined by \\(p(x) = (x^2 - 9)(x + k)\\), where \\(k\\) is a positive constant. The graph of \\(y = p(x)\\) in the \\(xy\\)-plane has exactly two distinct \\(x\\)-intercepts. What is the value of \\(k\\)?</p>",
+  "answer": [
+   "3"
+  ],
+  "explanation": "\\(p(x) = (x - 3)(x + 3)(x + k)\\) has zeros \\(3\\), \\(-3\\), and \\(-k\\). For only two distinct \\(x\\)-intercepts, \\(-k\\) must equal 3 or \\(-3\\). Since \\(k \\gt 0\\), \\(-k = -3\\) and \\(k = 3\\)."
+ },
+ {
+  "id": "hand-neg-exponents-v1",
+  "tpl": "hand-neg-exponents",
+  "domain": "advanced",
+  "skill": "Equivalent expressions",
+  "difficulty": 3,
+  "type": "mcq",
+  "stem": "<p>For positive values of \\(x\\) and \\(y\\), which expression is equivalent to \\(\\frac{x^{-2}y^{\\frac{1}{2}}}{x^{\\frac{1}{3}}y^{-1}}\\)?</p>",
+  "choices": [
+   "\\(x^{-\\frac{7}{3}}y^{\\frac{3}{2}}\\)",
+   "\\(x^{-\\frac{5}{3}}y^{\\frac{3}{2}}\\)",
+   "\\(x^{-\\frac{2}{3}}y^{-\\frac{1}{2}}\\)",
+   "\\(x^{-\\frac{7}{3}}y^{-\\frac{1}{2}}\\)"
+  ],
+  "answer": 0,
+  "explanation": "Subtract exponents of like bases: \\(x^{-2 - \\frac{1}{3}} = x^{-\\frac{7}{3}}\\) and \\(y^{\\frac{1}{2} - (-1)} = y^{\\frac{3}{2}}\\)."
+ },
+ {
+  "id": "hand-shift-top-half-v1",
+  "tpl": "hand-shift-top-half",
+  "domain": "psda",
+  "skill": "One-variable data: Distributions and measures of center and spread",
+  "difficulty": 3,
+  "type": "mcq",
+  "stem": "<p>A data set consists of 20 different numbers. The mean of the data set is 50, and the median is 48. Each of the 10 greatest numbers in the data set is increased by 6. What are the mean and the median of the new data set?</p>",
+  "choices": [
+   "The mean is 53, and the median is 48.",
+   "The mean is 53, and the median is 51.",
+   "The mean is 56, and the median is 54.",
+   "The mean is 53, and the median is 54."
+  ],
+  "answer": 1,
+  "explanation": "The sum increases by \\(10 \\times 6 = 60\\), so the mean increases by \\(\\frac{60}{20} = 3\\), to 53. The median is the average of the 10th and 11th values. Only the 11th value is among the 10 greatest, so it increases by 6 while the 10th does not change: the median increases by \\(\\frac{6}{2} = 3\\), to 51."
+ },
+ {
+  "id": "hand-neither-language-v1",
+  "tpl": "hand-neither-language",
+  "domain": "psda",
+  "skill": "Probability and conditional probability",
+  "difficulty": 3,
+  "type": "spr",
+  "stem": "<p>In a group of 80 students, 45 study Spanish, 30 study French, and 12 study both Spanish and French. If one student from the group is selected at random, what is the probability that the student studies neither Spanish nor French? (Express your answer as a fraction or decimal.)</p>",
+  "answer": [
+   "17/80",
+   ".2125"
+  ],
+  "explanation": "The number who study at least one of the languages is \\(45 + 30 - 12 = 63\\) (students who study both are counted twice in \\(45 + 30\\)). So \\(80 - 63 = 17\\) study neither, and the probability is \\(\\frac{17}{80}\\)."
+ },
+ {
+  "id": "hand-legs-sum-v1",
+  "tpl": "hand-legs-sum",
+  "domain": "geometry",
+  "skill": "Right triangles and trigonometry",
+  "difficulty": 3,
+  "type": "mcq",
+  "stem": "<p>A right triangle has legs of lengths \\(a\\) and \\(b\\) and a hypotenuse of length 13. The area of the triangle is 30. What is the value of \\(a + b\\)?</p>",
+  "choices": [
+   "\\(7\\)",
+   "\\(13\\)",
+   "\\(17\\)",
+   "\\(289\\)"
+  ],
+  "answer": 2,
+  "explanation": "\\(a^2 + b^2 = 169\\) and \\(\\frac{1}{2}ab = 30\\), so \\(ab = 60\\). Then \\((a + b)^2 = a^2 + b^2 + 2ab = 169 + 120 = 289\\), and since \\(a + b\\) is positive, \\(a + b = 17\\). (The legs are 5 and 12.)"
+ },
+ {
+  "id": "hand-tangent-line-k-v1",
+  "tpl": "hand-tangent-line-k",
+  "domain": "geometry",
+  "skill": "Circles",
+  "difficulty": 3,
+  "type": "spr",
+  "stem": "<p>In the \\(xy\\)-plane, the graph of \\(y = x + k\\), where \\(k\\) is a positive constant, is tangent to the circle with equation \\(x^2 + y^2 = 50\\). What is the value of \\(k\\)?</p>",
+  "answer": [
+   "10"
+  ],
+  "explanation": "Substitute \\(y = x + k\\): \\(x^2 + (x + k)^2 = 50\\), or \\(2x^2 + 2kx + k^2 - 50 = 0\\). Tangency means exactly one solution, so the discriminant is 0: \\((2k)^2 - 4(2)(k^2 - 50) = 0\\), which gives \\(-4k^2 + 400 = 0\\) and \\(k = 10\\)."
  }
 ];
 if (typeof module !== 'undefined' && module.exports) module.exports = window.SAT_QUESTIONS;

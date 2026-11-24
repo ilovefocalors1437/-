@@ -207,7 +207,7 @@ def('sys-elim', 1, 'mcq', 3, SK.sys, (r, v) => {
     explanation: ask === 'x' ? `Adding the equations gives ${m(`2x = ${2 * x}`)}, so ${m(`x = ${x}`)}.` : `Subtracting the second equation from the first gives ${m(`2y = ${2 * y}`)}, so ${m(`y = ${y}`)}.`, verify: () => true };
 });
 
-def('ineq-solution', 1, 'mcq', 4, SK.ineq, (r, v) => {
+def('ineq-solution', 2, 'mcq', 4, SK.ineq, (r, v) => {
   const a = r.int(2, 7), t = r.int(-4, 9), b = r.nz(-12, 12);
   if (v % 3 === 0) {
     const c = a * t + b; const corr = t + r.int(1, 4);

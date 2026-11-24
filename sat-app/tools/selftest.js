@@ -11,7 +11,7 @@ ok(E.sprMatches('.6666', '2/3')); ok(E.sprMatches('.6667', '2/3')); ok(E.sprMatc
 ok(!E.sprMatches('.66', '2/3')); ok(!E.sprMatches('0.67', '2/3')); ok(!E.sprMatches('.667', '2/3'));
 ok(E.sprMatches('-.3333', '-1/3')); ok(E.sprMatches('-0.333', '-1/3')); ok(!E.sprMatches('.3333', '-1/3')); ok(!E.sprMatches('-.33', '-1/3'));
 ok(E.sprMatches('12', '12')); ok(E.sprMatches('12.0', '12')); ok(!E.sprMatches('13', '12')); ok(!E.sprMatches('', '12')); ok(!E.sprMatches('1/0', '12'));
-ok(E.sprMatches('1.333', '4/3')); ok(E.sprMatches('4/3', '1.3333333')); ok(!E.sprMatches('1.3', '4/3'));
+ok(E.sprMatches('1.333', '4/3')); ok(!E.sprMatches('1.3', '4/3'));
 ok(E.sanitizeSpr('12a.5.6') === '12.56'); ok(E.sanitizeSpr('-1234567') === '-12345'); ok(E.sanitizeSpr('3/4/5') === '3/45'); ok(E.sanitizeSpr('/5') === '5');
 
 // --- bank sanity

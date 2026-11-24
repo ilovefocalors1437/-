@@ -33,9 +33,12 @@ function circleFig(R, pts, opts = {}) {
   for (const [k, ang] of Object.entries(pts)) P[k] = [R * Math.cos(rad(ang)), R * Math.sin(rad(ang))];
   Object.assign(P, opts.extraPts || {});
   return figure({ pts: P, bounds: [[-R, R], [-R, R]], center: [0, 0], segs: opts.segs || [], labels: opts.labels || Object.fromEntries(Object.keys(pts).map((k) => [k, k])), dots: ['O', ...Object.keys(pts)],
-    angleLabels: opts.angles || [], sideLabels: opts.sides || [], right: opts.right || [], W: 240, H: 240, pad: 26,
+    angleLabels: opts.angles || [], sideLabels: opts.sides || [], right: opts.right || [], W: 240, H: 240, pad: 26, labelCenter: opts.labelCenter,
     under: (X, Y, s) => `<circle cx='${L.dot ? Math.round(X(0) * 10) / 10 : 0}' cy='${Math.round(Y(0) * 10) / 10}' r='${Math.round(R * s * 10) / 10}' fill='none' stroke='#000' stroke-width='1.6'/>` + (opts.under ? opts.under(X, Y, s) : ''),
-    extra: (X, Y) => txt(X(0) + 9, Y(0) + 11, 'O', { size: 13 }) + (opts.extra ? opts.extra(X, Y) : '') });
+    extra: (X, Y) => { // put the O label opposite the average direction of the segments drawn from O
+      let dx = 0, dy = 0; for (const sg of opts.segs || []) { const o = sg[0] === 'O' ? sg[1] : sg[1] === 'O' ? sg[0] : null; if (!o) continue; const L0 = Math.hypot(P[o][0], P[o][1]); dx += P[o][0] / L0; dy += P[o][1] / L0; }
+      let L1 = Math.hypot(dx, dy); if (L1 < 0.3) { dx = 1; dy = -1; L1 = Math.SQRT2; }
+      return txt(X(0) - dx / L1 * 13, Y(0) + dy / L1 * 13, 'O', { size: 13, halo: true }) + (opts.extra ? opts.extra(X, Y) : ''); } });
 }
 
 /* ============================ EASY ============================ */
@@ -112,24 +115,25 @@ def('sin-ratio', 1, 'mcq', 2, SK.rt, (r, v) => {
 /* parallel lines cut by a transversal; regions: ur, ul, ll, lr at top (P) or bottom (Q) */
 function parallelFig(phi, labP, labQ) {
   const dir = [Math.cos(rad(phi)), Math.sin(rad(phi))];
-  const P = [0, 1.6], Q = [-1.6 / Math.tan(rad(phi)), 0];
+  const sep = 3.2; const P = [0, sep], Q = [-sep / Math.tan(rad(phi)), 0];
   const pts = { P, Q };
   const add = (name, base, d, k) => { pts[name] = [base[0] + d[0] * k, base[1] + d[1] * k]; };
-  for (const [nm, B] of [['P', P], ['Q', Q]]) { add(nm + 'r', B, [1, 0], 1.8); add(nm + 'l', B, [-1, 0], 1.8); add(nm + 'u', B, dir, 1.2); add(nm + 'd', B, dir, -1.2); }
+  for (const [nm, B] of [['P', P], ['Q', Q]]) { add(nm + 'r', B, [1, 0], 2); add(nm + 'l', B, [-1, 0], 2); add(nm + 'u', B, dir, 1.4); add(nm + 'd', B, dir, -1.4); }
   const ray = { ur: ['r', 'u'], ul: ['u', 'l'], ll: ['l', 'd'], lr: ['d', 'r'] };
   const al = [];
   if (labP) al.push([`P${ray[labP[0]][0]}`, 'P', `P${ray[labP[0]][1]}`, labP[1], 24]);
   if (labQ) al.push([`Q${ray[labQ[0]][0]}`, 'Q', `Q${ray[labQ[0]][1]}`, labQ[1], 24]);
   const left = Math.min(pts.Pl[0], pts.Ql[0]) - 0.2, right = Math.max(pts.Pr[0], pts.Qr[0]) + 0.2;
-  pts.A1 = [left, 1.6]; pts.A2 = [right, 1.6]; pts.B1 = [left, 0]; pts.B2 = [right, 0];
-  return figure({ pts, segs: [['A1', 'A2'], ['B1', 'B2'], ['Pu', 'Qd']], angleLabels: al, W: 280, H: 190, arcs: true,
-    extra: (X, Y) => txt(X(right) + 10, Y(1.6), it('ℓ'), { size: 14 }) + txt(X(right) + 10, Y(0), it('m'), { size: 14 }) });
+  pts.A1 = [left, sep]; pts.A2 = [right, sep]; pts.B1 = [left, 0]; pts.B2 = [right, 0];
+  return figure({ pts, segs: [['A1', 'A2'], ['B1', 'B2'], ['Pu', 'Qd']], angleLabels: al, W: 290, H: 250, arcs: true,
+    extra: (X, Y) => txt(X(right) + 10, Y(sep), it('ℓ'), { size: 14 }) + txt(X(right) + 10, Y(0), it('m'), { size: 14 }) });
 }
+const facing = (rp, rq) => (rp === 'll' && rq === 'ul') || (rp === 'lr' && rq === 'ur');
 const regionMeasure = (reg, phi) => ({ ur: phi, ll: phi, ul: 180 - phi, lr: 180 - phi }[reg]);
 
 def('parallel-transversal', 1, 'spr', 2, SK.lat, (r, v) => {
   const phi = r.int(50, 75); const regs = ['ur', 'ul', 'll', 'lr'];
-  const rp = r.pick(regs), rq = r.pick(regs.filter((x) => x !== rp || true));
+  const rp = r.pick(regs), rq = r.pick(regs); need(!facing(rp, rq));
   const given = regionMeasure(rp, phi), ans = regionMeasure(rq, phi);
   need(v === 0 ? given === ans : given !== ans);
   const svg = parallelFig(phi, [rp, D(given)], [rq, `${it('x')}°`]);
@@ -339,7 +343,7 @@ def('trig-similar', 3, 'spr', 2, SK.rt, (r, v) => {
 def('arc-radians', 3, 'mcq', 2, SK.cir, (r, v) => {
   if (v === 0) { const rr = r.int(3, 12), k = r.pick([F(1, 3), F(2, 3), F(3, 4), F(5, 6), F(1, 4), F(5, 4)]); const arc = k.mul(rr); need(arc.d <= 2);
     return { stem: `<p>A circle has a radius of ${rr} centimeters. An arc of the circle has a length of ${m(piTex(arc))} centimeters. What is the measure, in radians, of the central angle that intercepts this arc?</p>`, ...numCh([k, k.mul(2), F(k.d, k.n), arc], (x) => m(piTex(x))),
-      explanation: `For a central angle ${m('\\theta')} in radians, arc length is ${m('s = r\\theta')}. So ${m(`\\theta = \\frac{${piTex(arc)}}{${rr}}${arc.d === 1 ? ` = ${piTex(k)}` : ''}`)}.`, verify: () => close(arc.val() * Math.PI / rr, k.val() * Math.PI) }; }
+      explanation: `For a central angle ${m('\\theta')} in radians, arc length is ${m('s = r\\theta')}. So ${m(`\\theta = \\frac{${piTex(arc)}}{${rr}}${`\\frac{${piTex(arc)}}{${rr}}` === piTex(k) ? '' : ` = ${piTex(k)}`}`)}.`, verify: () => close(arc.val() * Math.PI / rr, k.val() * Math.PI) }; }
   const rr = r.int(4, 18), k = r.pick([F(5, 6), F(2, 3), F(3, 4), F(5, 3), F(7, 6)]); const arc = k.mul(rr); need(arc.d <= 2);
   const sector = k.mul(rr * rr).div(2);
   return { stem: `<p>In a circle with center ${m('O')} and radius ${rr}, central angle ${m('AOB')} has a measure of ${m(piTex(k))} radians. What is the length of the arc ${m('AB')} intercepted by angle ${m('AOB')}?</p>`, ...numCh([arc, k.mul(2 * rr), sector, F(rr).mul(k.d).div(k.n)], (x) => m(piTex(x))),
@@ -363,7 +367,8 @@ def('tangent', 3, 'spr', 2, SK.cir, (r, v) => {
   const P = { O: [0, 0], A: [a * Math.cos(rad(ang)), a * Math.sin(rad(ang))], Pp: [c, 0] };
   void P;
   const svg = circleFig(a, { A: ang }, { extraPts: { P: [c, 0] }, segs: [['O', 'A'], ['A', 'P'], ['O', 'P']], labels: { A: 'A', P: 'P' }, right: [['O', 'A', 'P']],
-    sides: v === 0 ? [['O', 'A', String(a), 'in'], ['O', 'P', String(c)]] : [['O', 'A', String(a), 'in'], ['A', 'P', String(b)]] });
+    labelCenter: [(a * Math.cos(rad(ang)) + c) / 3, a * Math.sin(rad(ang)) / 3],
+    sides: v === 0 ? [['O', 'A', String(a)], ['O', 'P', String(c)]] : [['O', 'A', String(a)], ['A', 'P', String(b)]] });
   if (v === 0) return { stem: `<p>In the figure, ${m('\\overline{PA}')} is tangent to the circle with center ${m('O')} at point ${m('A')}. If ${m(`OA = ${a}`)} and ${m(`OP = ${c}`)}, what is the length of ${m('\\overline{PA}')}?</p>` + svg + NOTE, answer: spr(b),
     explanation: `A tangent line is perpendicular to the radius at the point of tangency, so triangle ${m('OAP')} has a right angle at ${m('A')}. Then ${m(`PA = \\sqrt{${c}^2 - ${a}^2} = \\sqrt{${c * c - a * a}} = ${b}`)}.`, verify: () => a * a + b * b === c * c };
   return { stem: `<p>In the figure, ${m('\\overline{PA}')} is tangent to the circle with center ${m('O')} at point ${m('A')}. The radius of the circle is ${a} and ${m(`PA = ${b}`)}. What is the distance from point ${m('P')} to the nearest point on the circle?</p>` + svg + NOTE, answer: spr(c - a),
@@ -447,7 +452,7 @@ def('similar-solids', 3, 'mcq', 2, SK.av, (r, v) => {
 def('parallel-algebra', 3, 'spr', 1, SK.lat, (r, v) => {
   const phi = r.int(50, 70);
   const regs = ['ur', 'ul', 'll', 'lr'];
-  const rp = r.pick(regs), rq = r.pick(regs);
+  const rp = r.pick(regs), rq = r.pick(regs); need(!facing(rp, rq));
   const mp = regionMeasure(rp, phi), mq = regionMeasure(rq, phi);
   const same = mp === mq; need(v === 0 ? same : !same);
   // choose expressions: a x + b = mp, c x + d = mq with integer x

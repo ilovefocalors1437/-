@@ -70,7 +70,7 @@ def('eval-quad', 1, 'spr', 3, SK.nf, (r, v) => {
   const val = a * k * k + b * k + c;
   const name = v % 3 === 0 ? 'f' : 'g';
   return { stem: `<p>The function ${m(name)} is defined by ${m(`${name}(x) = ${f}`)}. What is the value of ${m(`${name}(${k})`)}?</p>`, answer: spr(val),
-    explanation: `${m(`${name}(${k}) = ${a === 1 ? '' : a === -1 ? '-' : a}(${k})^2 ${b > 0 ? '+' : '-'} ${Math.abs(b)}(${k}) ${c > 0 ? '+' : '-'} ${Math.abs(c)} = ${a * k * k} ${b * k >= 0 ? '+' : '-'} ${Math.abs(b * k)} ${c > 0 ? '+' : '-'} ${Math.abs(c)} = ${val}`)}. Note that ${m(`(${k})^2 = ${k * k}`)}.`, verify: () => close(texEval(f, { x: k }), val) };
+    explanation: `${m(`${name}(${k}) = ${a === 1 ? '' : a === -1 ? '-' : a}(${k})^2 ${b > 0 ? '+' : '-'} ${Math.abs(b)}(${k}) ${c > 0 ? '+' : '-'} ${Math.abs(c)} = ${a * k * k} ${b * k >= 0 ? '+' : '-'} ${Math.abs(b * k)} ${c > 0 ? '+' : '-'} ${Math.abs(c)} = ${val}`)}.${k < 0 ? ` Note that ${m(`(${k})^2 = ${k * k}`)}, not ${m(-k * k)}.` : ''}`, verify: () => close(texEval(f, { x: k }), val) };
 });
 
 def('exp-eval', 1, 'mcq', 4, SK.nf, (r, v) => {
@@ -164,7 +164,7 @@ def('radical-eq', 1, 'mcq', 4, SK.ne, (r, v) => {
   return { stem: `<p>${m(eq)}</p><p>What value of ${m('x')} satisfies the equation above?</p>`, ...numCh([x, ...ds]), explanation: ex, verify: () => eqHolds(eq, { x }) };
 });
 
-def('func-table', 1, 'mcq', 4, SK.nf, (r, v) => {
+def('func-table', 2, 'mcq', 4, SK.nf, (r, v) => {
   const c = r.nz(-6, 6), a = r.pick([1, 2, 3]);
   const xs = [0, 1, 2, 3];
   let f, opts, ex;
@@ -190,7 +190,7 @@ def('gcf', 1, 'mcq', 4, SK.eq, (r, v) => {
     explanation: `Each term has a factor of ${m(`${g}${vv}`)}: ${m(`${t} = ${g}${vv}(${lin(p, q, vv)})`)}.` };
 });
 
-def('abs-eq', 1, 'mcq', 4, SK.ne, (r, v) => {
+def('abs-eq', 2, 'mcq', 4, SK.ne, (r, v) => {
   const a = r.nz(-8, 8), b = r.int(2, 9);
   const s1 = a + b, s2 = a - b; need(s1 !== 0 && s2 !== 0 && -s1 !== s2);
   const eq = `|x ${a > 0 ? '-' : '+'} ${Math.abs(a)}| = ${b}`;
